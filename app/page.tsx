@@ -1,21 +1,12 @@
-import { Carousel } from 'components/carousel';
-import { ThreeItemGrid } from 'components/grid/three-items';
-import Footer from 'components/layout/footer';
+import FullScreenSlider from "components/home/FullScreenSlider";
 
 export const metadata = {
-  description:
-    'High-performance ecommerce store built with Next.js, Vercel, and Shopify.',
+  description: "Luxury jewelry and engagement rings.",
   openGraph: {
-    type: 'website'
-  }
+    type: "website",
+  },
 };
 
 export default function HomePage() {
-  return (
-    <>
-      <ThreeItemGrid />
-      <Carousel />
-      <Footer />
-    </>
-  );
+  return <FullScreenSlider />;
 }
