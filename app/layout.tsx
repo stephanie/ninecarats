@@ -1,8 +1,9 @@
 import { CartProvider } from "components/cart/cart-context";
+import Banner from "components/layout/Banner";
 import { Navbar } from "components/layout/navbar";
-import { GeistSans } from "geist/font/sans";
 import { getCart } from "lib/shopify";
 import { baseUrl } from "lib/utils";
+import { Jost } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
 
@@ -20,6 +21,11 @@ export const metadata = {
   },
 };
 
+const bodyFont = Jost({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+});
+
 export default async function RootLayout({
   children,
 }: {
@@ -29,9 +35,10 @@ export default async function RootLayout({
   const cart = getCart();
 
   return (
-    <html lang="en" className={GeistSans.variable}>
+    <html lang="en" className={bodyFont.className}>
       <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
         <CartProvider cartPromise={cart}>
+          <Banner />
           <Navbar />
           <main>{children}</main>
         </CartProvider>

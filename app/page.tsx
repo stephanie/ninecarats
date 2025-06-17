@@ -1,4 +1,5 @@
 import FullScreenSlider from "components/home/FullScreenSlider";
+import TwoColumnFeature from "components/home/TwoColumnFeature";
 
 export const metadata = {
   description: "Luxury jewelry and engagement rings.",
@@ -8,5 +9,28 @@ export const metadata = {
 };
 
 export default function HomePage() {
-  return <FullScreenSlider />;
+  return (
+    <>
+      <div className="relative w-full">
+        <FullScreenSlider />
+      </div>
+      <div
+        className="relative z-10"
+        style={{ transform: "translateY(-100px)" }}
+      >
+        <TwoColumnFeature
+          productImage="/images/bracelet.webp"
+          productName="Signature tennis bracelet"
+          material="18k gold, 12ct"
+          price="$3,500"
+          sliderIndex={0}
+          sliderTotal={5}
+          buttonText="More creations"
+          buttonLink="#"
+          rightImage="/images/diamonds.avif"
+          rightImageAlt="Model wearing jewelry"
+        />
+      </div>
+    </>
+  );
 }

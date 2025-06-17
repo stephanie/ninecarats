@@ -15,14 +15,14 @@ interface Slide {
 const slides: Slide[] = [
   {
     type: "image",
-    src: "/images/slider/engagement-rings.webp",
+    src: "/images/slider/rings3.webp",
     alt: "Engagement Rings",
     link: "/collections/engagement-rings",
     heading: "Engagement Rings",
   },
   {
     type: "image",
-    src: "/images/slider/earrings.webp",
+    src: "/images/slider/heroBanner.webp",
     alt: "Earrings",
     link: "/collections/earrings",
     heading: "Earrings",
@@ -135,7 +135,10 @@ export default function FullScreenSlider() {
   const currentHeading = slides[currentSlide]!.heading || "";
 
   return (
-    <div className="fixed inset-0 h-screen w-full">
+    <div
+      className="relative w-full"
+      style={{ height: "calc(100vh - 40px)", transform: "translateY(-100px)" }}
+    >
       {slides.map((slide, index) => (
         <div
           key={index}
@@ -169,7 +172,7 @@ export default function FullScreenSlider() {
 
       {/* Navigation and Heading */}
       <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center">
-        <div className="relative mb-6 flex h-8 w-[600px] items-center justify-center">
+        <div className="relative mb-6 flex h-16 w-[15rem] items-center justify-center">
           <div className="absolute left-0 transform text-white transition-transform duration-500 ease-in-out hover:opacity-70">
             <button
               onClick={previousSlide}
@@ -181,7 +184,7 @@ export default function FullScreenSlider() {
           </div>
           <div className="absolute left-1/2 -translate-x-1/2 transform">
             <h2
-              className={`whitespace-nowrap text-lg font-light tracking-[0.2em] text-white transition-all duration-500 uppercase ${
+              className={`whitespace-nowrap text-xl font-light text-white transition-all duration-500 ${
                 headingVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-4"
@@ -202,7 +205,7 @@ export default function FullScreenSlider() {
         </div>
 
         {/* Progress bar */}
-        <div className="h-0.5 w-full bg-neutral-800">
+        <div className="h-1 w-full bg-neutral-800">
           <div
             className="h-full bg-white transition-all duration-50 ease-linear"
             style={{ width: `${progress}%` }}
