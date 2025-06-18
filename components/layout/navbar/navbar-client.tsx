@@ -60,8 +60,16 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
     >
       {/* Banner */}
       <div className="w-full bg-[#000000] text-white flex items-center justify-center px-6 py-3">
-        <span className="mx-auto text-sm xs:text-base text-center">
-          Explore our sparkling new collections.{" "}
+        {/* Mobile Banner Content */}
+        <span className="mx-auto text-sm xs:text-base text-center flex md:hidden gap-1">
+          Explore our new collections.
+          <a href="#" className="underline cursor-pointer">
+            Sign up for 10% off.
+          </a>
+        </span>
+        {/* Desktop Banner Content */}
+        <span className="mx-auto text-sm xs:text-base text-center hidden md:flex gap-1">
+          Explore our sparkling new Nine Carats collections.
           <a href="#" className="underline cursor-pointer">
             Sign up for 10% off.
           </a>

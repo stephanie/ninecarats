@@ -4,6 +4,36 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
+// Custom hook to handle mobile viewport height
+function useViewportHeight() {
+  const [viewportHeight, setViewportHeight] = useState(0);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      // Get the actual viewport height
+      const vh = window.innerHeight;
+      setViewportHeight(vh);
+
+      // Set CSS custom property for use in CSS
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
+
+    // Set initial height
+    updateHeight();
+
+    // Update on resize and orientation change
+    window.addEventListener("resize", updateHeight);
+    window.addEventListener("orientationchange", updateHeight);
+
+    return () => {
+      window.removeEventListener("resize", updateHeight);
+      window.removeEventListener("orientationchange", updateHeight);
+    };
+  }, []);
+
+  return viewportHeight;
+}
+
 interface Slide {
   type: "image" | "video";
   src: string;
@@ -64,6 +94,7 @@ export default function FullScreenSlider() {
   const [progress, setProgress] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [headingVisible, setHeadingVisible] = useState(true);
+  const viewportHeight = useViewportHeight();
 
   const nextSlide = useCallback(() => {
     if (isTransitioning) return;
@@ -137,7 +168,12 @@ export default function FullScreenSlider() {
   return (
     <div
       className="relative w-full"
-      style={{ height: "calc(100vh - 20px)", transform: "translateY(-100px)" }}
+      style={{
+        height: viewportHeight
+          ? `calc(${viewportHeight}px - 20px)`
+          : "calc(100vh - 20px)",
+        transform: "translateY(-100px)",
+      }}
     >
       {slides.map((slide, index) => (
         <div

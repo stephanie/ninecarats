@@ -4,6 +4,10 @@
 @plugin "@tailwindcss/typography";
 
 @layer base {
+  :root {
+    --vh: 100vh;
+  }
+  
   *,
   ::after,
   ::before,
