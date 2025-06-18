@@ -14,7 +14,13 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Menu } from "lib/shopify/types";
 import Search, { SearchSkeleton } from "./search";
 
-export default function MobileMenu({ menu }: { menu: Menu[] }) {
+export default function MobileMenu({
+  menu,
+  textColor,
+}: {
+  menu: Menu[];
+  textColor: string;
+}) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +46,7 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
       <button
         onClick={openMobileMenu}
         aria-label="Open mobile menu"
-        className={`mr-4 transition-colors duration-300 text-white cursor-pointer`}
+        className={`mr-4 transition-colors duration-300 cursor-pointer ${textColor}`}
       >
         <svg
           width="24"

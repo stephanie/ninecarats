@@ -1,12 +1,14 @@
 export default function OpenCart({
-  className,
   quantity,
+  textColor,
 }: {
-  className?: string;
   quantity?: number;
+  textColor: string;
 }) {
   return (
-    <div className="relative flex tems-center justify-center text-white transition-colors dark:text-white">
+    <div
+      className={`relative flex items-center justify-center transition-colors ${textColor}`}
+    >
       <svg
         width="24px"
         height="24px"

@@ -22,6 +22,10 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const textColor = isScrolled
+    ? "text-black/90 hover:text-black"
+    : "text-white/90 hover:text-white";
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -57,7 +61,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
       {/* Banner */}
       <div className="w-full bg-[#000000] text-white flex items-center justify-center px-6 py-3">
         <span className="mx-auto text-sm xs:text-base text-center">
-          Explore our sparkling new Nine Carats collections.{" "}
+          Explore our sparkling new collections.{" "}
           <a href="#" className="underline cursor-pointer">
             Sign up for 10% off.
           </a>
@@ -74,7 +78,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
           <div className="flex justify-start lg:w-1/3">
             <div className="flex lg:hidden">
               <Suspense fallback={null}>
-                <MobileMenu menu={menu} />
+                <MobileMenu menu={menu} textColor={textColor} />
               </Suspense>
             </div>
             <button
@@ -133,11 +137,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
                       <Link
                         href={item.path}
                         prefetch={true}
-                        className={`underline-offset-4 hover:underline transition-colors duration-300 ${
-                          isScrolled
-                            ? "text-black/90 hover:text-black"
-                            : "text-white/90 hover:text-white"
-                        }`}
+                        className={`underline-offset-4 hover:underline transition-colors duration-300 ${textColor}`}
                       >
                         {item.title}
                       </Link>
@@ -149,9 +149,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
           </div>
           <div className="flex justify-center w-full lg:w-1/3">
             <span
-              className={`text-xl lg:text-5xl tracking-wide select-none tracking-wider uppercase transition-colors duration-300 ${
-                isScrolled ? "text-black" : "text-white"
-              }`}
+              className={`text-xl lg:text-5xl tracking-wide select-none tracking-wider uppercase transition-colors duration-300 ${textColor}`}
             >
               {siteName}
             </span>
@@ -160,9 +158,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
           <div className="flex justify-end lg:w-1/3 gap-6">
             {/* Currency/Location Dropdown */}
             <button
-              className={`flex items-center text-sm gap-1 transition-colors duration-300 hidden lg:flex ${
-                isScrolled ? "text-black" : "text-white"
-              }`}
+              className={`flex items-center text-sm gap-1 transition-colors duration-300 hidden lg:flex ${textColor}`}
             >
               (HKD HK$) - HK
               <svg
@@ -179,9 +175,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
             {/* Location Icon */}
             <button
               aria-label="Location"
-              className={`transition-colors duration-300 hidden lg:flex ${
-                isScrolled ? "text-black" : "text-white"
-              }`}
+              className={`transition-colors duration-300 hidden lg:flex ${textColor}`}
             >
               <svg
                 width="24px"
@@ -210,9 +204,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
             {/* Phone Icon */}
             <button
               aria-label="Phone"
-              className={`transition-colors duration-300 hidden lg:flex ${
-                isScrolled ? "text-black" : "text-white"
-              }`}
+              className={`transition-colors duration-300 hidden lg:flex ${textColor}`}
             >
               <svg
                 width="24px"
@@ -235,9 +227,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
             {/* User Icon */}
             <button
               aria-label="User"
-              className={`transition-colors duration-300 hidden lg:flex ${
-                isScrolled ? "text-black" : "text-white"
-              }`}
+              className={`transition-colors duration-300 hidden lg:flex ${textColor}`}
             >
               <svg
                 width="24px"
@@ -265,7 +255,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
               </svg>
             </button>
             {/* Shopping Bag Icon (opens CartModal) */}
-            <CartModal />
+            <CartModal textColor={textColor} />
           </div>
         </div>
       </div>
