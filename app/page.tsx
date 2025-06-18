@@ -1,4 +1,5 @@
 import FullScreenSlider from "components/home/FullScreenSlider";
+import FullWidthTextSection from "components/home/FullWidthTextSection";
 import TwoColumnFeature from "components/home/TwoColumnFeature";
 
 export const metadata = {
@@ -25,11 +26,17 @@ export default function HomePage() {
           price="$3,500"
           sliderIndex={0}
           sliderTotal={5}
-          buttonText="More creations"
+          buttonText="Explore our classics"
           buttonLink="#"
           rightImage="/images/diamonds.avif"
           rightImageAlt="Model wearing jewelry"
         />
+      </div>
+      <div
+        className="relative z-10"
+        style={{ transform: "translateY(-100px)" }}
+      >
+        <FullWidthTextSection />
       </div>
     </>
   );

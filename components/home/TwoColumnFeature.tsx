@@ -56,7 +56,7 @@ export default function TwoColumnFeature({
         </div>
         <a
           href={buttonLink}
-          className="mt-2 px-4 py-2 border-b border-neutral-400 text-neutral-800 text-sm tracking-wide hover:border-black transition"
+          className="mt-2 px-2 py-2 border-b border-neutral-400 text-neutral-800 text-sm tracking-wide hover:border-black transition"
         >
           {buttonText}
         </a>
@@ -70,6 +70,12 @@ export default function TwoColumnFeature({
           className="object-cover object-center md:rounded-none rounded-b-2xl"
           priority
         />
+        <a
+          href="#"
+          className="absolute top-10 right-10 px-2 py-2 border-b border-neutral-400 text-white text-sm tracking-wide hover:border-white transition"
+        >
+          Why we only use the highest grade diamonds
+        </a>
       </div>
     </section>
   );

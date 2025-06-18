@@ -1,5 +1,4 @@
 import { CartProvider } from "components/cart/cart-context";
-import Banner from "components/layout/Banner";
 import { Navbar } from "components/layout/navbar";
 import { getCart } from "lib/shopify";
 import { baseUrl } from "lib/utils";
@@ -38,9 +37,8 @@ export default async function RootLayout({
     <html lang="en" className={bodyFont.className}>
       <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
         <CartProvider cartPromise={cart}>
-          <Banner />
           <Navbar />
-          <main>{children}</main>
+          <main className="pt-[120px]">{children}</main>
         </CartProvider>
       </body>
     </html>
