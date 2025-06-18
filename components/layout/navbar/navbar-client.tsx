@@ -70,34 +70,34 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
           isScrolled ? "bg-white shadow-md" : "bg-transparent"
         }`}
       >
-        <div className="block flex-none md:hidden">
-          <Suspense fallback={null}>
-            <MobileMenu menu={menu} />
-          </Suspense>
-        </div>
         <div className="flex w-full items-center">
-          <button
-            aria-label="Open menu"
-            className={`mr-4 transition-colors duration-300 ${
-              isScrolled ? "text-black" : "text-white"
-            }`}
-          >
-            <svg
-              width="24"
-              height="24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              viewBox="0 0 24 24"
+          <div className="flex justify-start lg:w-1/3">
+            <div className="flex lg:hidden">
+              <Suspense fallback={null}>
+                <MobileMenu menu={menu} />
+              </Suspense>
+            </div>
+            <button
+              aria-label="Open menu"
+              className={`mr-4 transition-colors duration-300 hidden lg:flex ${
+                isScrolled ? "text-black" : "text-white"
+              }`}
             >
-              <line x1="4" y1="6" x2="20" y2="6" />
-              <line x1="4" y1="12" x2="20" y2="12" />
-              <line x1="4" y1="18" x2="20" y2="18" />
-            </svg>
-          </button>
-          <div className="flex w-full md:w-1/3">
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                viewBox="0 0 24 24"
+              >
+                <line x1="4" y1="6" x2="20" y2="6" />
+                <line x1="4" y1="12" x2="20" y2="12" />
+                <line x1="4" y1="18" x2="20" y2="18" />
+              </svg>
+            </button>
             <div
-              className={`flex items-center gap-2 transition-colors duration-300 ${
+              className={`flex items-center gap-2 transition-colors duration-300 hidden lg:flex ${
                 isScrolled ? "text-black" : "text-white"
               }`}
             >
@@ -126,30 +126,30 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
                   SEARCH
               </span>
               )} */}
+              {menu.length ? (
+                <ul className="hidden gap-6 text-sm lg:flex lg:items-center">
+                  {menu.map((item: Menu) => (
+                    <li key={item.title}>
+                      <Link
+                        href={item.path}
+                        prefetch={true}
+                        className={`underline-offset-4 hover:underline transition-colors duration-300 ${
+                          isScrolled
+                            ? "text-black/90 hover:text-black"
+                            : "text-white/90 hover:text-white"
+                        }`}
+                      >
+                        {item.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </div>
-            {menu.length ? (
-              <ul className="hidden gap-6 text-sm md:flex md:items-center">
-                {menu.map((item: Menu) => (
-                  <li key={item.title}>
-                    <Link
-                      href={item.path}
-                      prefetch={true}
-                      className={`underline-offset-4 hover:underline transition-colors duration-300 ${
-                        isScrolled
-                          ? "text-black/90 hover:text-black"
-                          : "text-white/90 hover:text-white"
-                      }`}
-                    >
-                      {item.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
           </div>
-          <div className="hidden justify-center md:flex md:w-1/3">
+          <div className="flex justify-center w-full lg:w-1/3">
             <span
-              className={`text-5xl tracking-wide select-none tracking-wider uppercase transition-colors duration-300 ${
+              className={`text-xl lg:text-5xl tracking-wide select-none tracking-wider uppercase transition-colors duration-300 ${
                 isScrolled ? "text-black" : "text-white"
               }`}
             >
@@ -157,10 +157,10 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
             </span>
           </div>
           {/* Right Section */}
-          <div className="flex justify-end md:w-1/3 gap-6">
+          <div className="flex justify-end lg:w-1/3 gap-6">
             {/* Currency/Location Dropdown */}
             <button
-              className={`flex items-center text-sm gap-1 transition-colors duration-300 ${
+              className={`flex items-center text-sm gap-1 transition-colors duration-300 hidden lg:flex ${
                 isScrolled ? "text-black" : "text-white"
               }`}
             >
@@ -179,7 +179,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
             {/* Location Icon */}
             <button
               aria-label="Location"
-              className={`transition-colors duration-300 ${
+              className={`transition-colors duration-300 hidden lg:flex ${
                 isScrolled ? "text-black" : "text-white"
               }`}
             >
@@ -210,7 +210,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
             {/* Phone Icon */}
             <button
               aria-label="Phone"
-              className={`transition-colors duration-300 ${
+              className={`transition-colors duration-300 hidden lg:flex ${
                 isScrolled ? "text-black" : "text-white"
               }`}
             >
@@ -235,7 +235,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
             {/* User Icon */}
             <button
               aria-label="User"
-              className={`transition-colors duration-300 ${
+              className={`transition-colors duration-300 hidden lg:flex ${
                 isScrolled ? "text-black" : "text-white"
               }`}
             >

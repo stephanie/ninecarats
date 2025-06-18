@@ -35,7 +35,7 @@ export default function TwoColumnFeature({
             alt={productName}
             width={220}
             height={220}
-            className="mx-auto object-contain"
+            className="mx-auto object-center object-cover"
           />
         </div>
         <h2 className="text-lg md:text-xl text-center mb-2">{productName}</h2>
@@ -67,12 +67,12 @@ export default function TwoColumnFeature({
           src={rightImage}
           alt={rightImageAlt || "Some alt text"}
           fill
-          className="object-cover object-center md:rounded-none rounded-b-2xl"
+          className="object-cover object-center"
           priority
         />
         <a
           href="#"
-          className="absolute top-10 right-10 px-2 py-2 border-b border-neutral-400 text-white text-sm tracking-wide hover:border-white transition"
+          className="absolute top-4 right-4 md:top-10 md:right-10 px-2 py-2 border-b border-neutral-400 text-white text-sm tracking-wide hover:border-white transition"
         >
           Why we only use the highest grade diamonds
         </a>

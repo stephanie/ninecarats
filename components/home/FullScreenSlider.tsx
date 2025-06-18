@@ -137,7 +137,7 @@ export default function FullScreenSlider() {
   return (
     <div
       className="relative w-full"
-      style={{ height: "calc(100vh - 40px)", transform: "translateY(-100px)" }}
+      style={{ height: "calc(100vh - 20px)", transform: "translateY(-100px)" }}
     >
       {slides.map((slide, index) => (
         <div
