@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import FullWidthProductSlider from "@/components/home/FullWidthProductSlider";
 import { GridTileImage } from "components/grid/tile";
+import FullWidthProductSlider from "components/home/FullWidthProductSlider";
 import Footer from "components/layout/footer";
 import { Gallery } from "components/product/gallery";
 import { ProductProvider } from "components/product/product-context";
