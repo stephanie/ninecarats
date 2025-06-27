@@ -68,7 +68,7 @@ export default function FullWidthProductSlider() {
   };
 
   return (
-    <section className="w-full px-4 py-20 bg-white">
+    <section className="w-full px-4 lg:px-8 py-20 bg-white">
       <div className="max-w-6xl mx-auto flex flex-col items-center">
         <div className="mb-8 text-center">
           <div className="text-xs tracking-widest text-neutral-500 mb-4 uppercase">
@@ -85,7 +85,7 @@ export default function FullWidthProductSlider() {
         </div>
         <div className="relative w-full mb-8 overflow-hidden">
           <div
-            className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full transition-all duration-500 ease-in-out ${
+            className={`grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 w-full transition-all duration-500 ease-in-out ${
               isTransitioning ? "opacity-50 scale-95" : "opacity-100 scale-100"
             }`}
           >
