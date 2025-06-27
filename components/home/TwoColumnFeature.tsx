@@ -1,65 +1,114 @@
-import Image from "next/image";
+"use client";
 
-interface TwoColumnFeatureProps {
+import Image from "next/image";
+import { useState } from "react";
+
+interface Product {
   productImage: string;
   productName: string;
   material: string;
   price: string;
-  sliderIndex: number;
-  sliderTotal: number;
   buttonText: string;
   buttonLink: string;
+}
+
+interface TwoColumnFeatureProps {
+  products: Product[];
   rightImage: string;
   rightImageAlt?: string;
 }
 
 export default function TwoColumnFeature({
-  productImage,
-  productName,
-  material,
-  price,
-  sliderIndex,
-  sliderTotal,
-  buttonText,
-  buttonLink,
+  products,
   rightImage,
   rightImageAlt,
 }: TwoColumnFeatureProps) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const handleDotClick = (slideIndex: number) => {
+    if (slideIndex === currentSlide || isTransitioning || !products[slideIndex])
+      return;
+
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentSlide(slideIndex);
+      setIsTransitioning(false);
+    }, 300);
+  };
+
+  const currentProduct = products[currentSlide];
+
+  // If no products or current product doesn't exist, don't render
+  if (!products.length || !currentProduct) {
+    return null;
+  }
+
   return (
     <section className="w-full flex flex-col md:flex-row min-h-[100vh]">
       {/* Left: Product Info */}
       <div className="flex-1 flex flex-col items-center justify-center py-12 px-4 bg-white gap-2">
-        <div className="mb-8">
-          <Image
-            src={productImage}
-            alt={productName}
-            width={220}
-            height={220}
-            className="mx-auto object-center object-cover"
-          />
+        <div
+          className={`mb-8 transition-all duration-500 ease-in-out ${
+            isTransitioning ? "opacity-50 scale-95" : "opacity-100 scale-100"
+          }`}
+        >
+          <div className="w-[220px] h-[220px] relative mx-auto">
+            <Image
+              src={currentProduct.productImage}
+              alt={currentProduct.productName}
+              fill
+              className="object-contain"
+            />
+          </div>
         </div>
-        <h2 className="text-lg md:text-xl text-center mb-2">{productName}</h2>
-        <div className="text-sm text-neutral-500 text-center mb-1">
-          {material}
-        </div>
-        <div className="text-base text-neutral-700 text-center mb-6">
-          {price}
+        <div
+          className={`text-center transition-all duration-500 ease-in-out ${
+            isTransitioning
+              ? "opacity-50 translate-y-4"
+              : "opacity-100 translate-y-0"
+          }`}
+        >
+          <h2 className="text-lg md:text-xl text-center mb-2 text-black">
+            {currentProduct.productName}
+          </h2>
+          <div className="text-sm text-neutral-500 text-center mb-1">
+            {currentProduct.material}
+          </div>
+          <div className="text-base text-neutral-700 text-center mb-6">
+            {currentProduct.price}
+          </div>
         </div>
         {/* Slider dots */}
         <div className="flex items-center justify-center gap-2 mb-8">
-          {Array.from({ length: sliderTotal }).map((_, i) => (
-            <span
+          {Array.from({ length: products.length }).map((_, i) => (
+            <button
               key={i}
-              className={`block h-2 w-2 rounded-full ${i === sliderIndex ? "bg-neutral-800" : "bg-neutral-300"}`}
+              onClick={() => handleDotClick(i)}
+              disabled={isTransitioning}
+              className={`h-2 w-2 rounded-full transition-all duration-200 cursor-pointer ${
+                i === currentSlide
+                  ? "bg-neutral-800 scale-110"
+                  : "bg-neutral-300 hover:bg-neutral-400 hover:scale-110"
+              } ${isTransitioning ? "opacity-50" : "opacity-100"}`}
+              aria-label={`Go to slide ${i + 1}`}
             />
           ))}
         </div>
-        <a
-          href={buttonLink}
-          className="mt-2 px-2 py-2 border-b border-neutral-400 text-neutral-800 text-sm tracking-wide hover:border-black transition"
+        <div
+          className={`transition-all duration-500 ease-in-out ${
+            isTransitioning
+              ? "opacity-50 translate-y-4"
+              : "opacity-100 translate-y-0"
+          }`}
         >
-          {buttonText}
-        </a>
+          <a
+            href={currentProduct.buttonLink}
+            className="mt-2 px-2 py-2 border-b border-neutral-400 text-neutral-800 text-sm tracking-wide hover:border-black transition"
+          >
+            {currentProduct.buttonText}
+          </a>
+        </div>
       </div>
       {/* Right: Model Image */}
       <div className="flex-1 min-h-[320px] relative">

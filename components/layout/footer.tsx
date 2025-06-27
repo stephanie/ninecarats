@@ -1,69 +1,88 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import FooterMenu from 'components/layout/footer-menu';
-import LogoSquare from 'components/logo-square';
-import { getMenu } from 'lib/shopify';
-import { Suspense } from 'react';
+const navLinks = ["Contact Us", "Join Our Maison", "Services", "FAQs"];
 
-const { COMPANY_NAME, SITE_NAME } = process.env;
+const socialLinks = ["Instagram", "Facebook", "YouTube", "LinkedIn"];
 
-export default async function Footer() {
-  const currentYear = new Date().getFullYear();
-  const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : '');
-  const skeleton = 'w-full h-6 animate-pulse rounded-sm bg-neutral-200 dark:bg-neutral-700';
-  const menu = await getMenu('next-js-frontend-footer-menu');
-  const copyrightName = COMPANY_NAME || SITE_NAME || '';
+const legalLinks = [
+  "Legal",
+  "Privacy Policy",
+  "Cookie Policy",
+  "Conditions of Sale",
+  "Site Map",
+];
 
+export default function Footer() {
   return (
-    <footer className="text-sm text-neutral-500 dark:text-neutral-400">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
-        <div>
-          <Link className="flex items-center gap-2 text-black md:pt-1 dark:text-white" href="/">
-            <LogoSquare size="sm" />
-            <span className="uppercase">{SITE_NAME}</span>
-          </Link>
-        </div>
-        <Suspense
-          fallback={
-            <div className="flex h-[188px] w-[200px] flex-col gap-2">
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-            </div>
-          }
-        >
-          <FooterMenu menu={menu} />
-        </Suspense>
-        <div className="md:ml-auto">
-          <a
-            className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white"
-            aria-label="Deploy on Vercel"
-            href="https://vercel.com/templates/next.js/nextjs-commerce"
+    <footer className="w-full bg-neutral-50 pt-12 pb-6 text-neutral-800">
+      {/* Newsletter Signup */}
+      <div className="max-w-3xl mx-auto flex flex-col items-center mb-32 px-4">
+        <p className="text-center text-base md:text-lg mb-8">
+          Subscribe for insider access to discover our new collections,
+          <br />
+          exclusive events and more.
+        </p>
+        <form className="w-full flex flex-col sm:flex-row items-center justify-center gap-2">
+          <div className="border-b border-neutral-400 w-full sm:w-2/3 px-2.5 py-2.5 text-center">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="newsletter-input bg-transparent w-full sm:w-2/3 text-center transition"
+            />
+          </div>
+          <button
+            type="submit"
+            className="mt-2 px-2 py-2 border-b border-neutral-400 text-neutral-800 text-sm tracking-wide hover:border-black transition"
           >
-            <span className="px-3">▲</span>
-            <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
-            <span className="px-3">Deploy</span>
-          </a>
-        </div>
+            Subscribe
+          </button>
+        </form>
       </div>
-      <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
-          <p>
-            &copy; {copyrightDate} {copyrightName}
-            {copyrightName.length && !copyrightName.endsWith('.') ? '.' : ''} All rights reserved.
-          </p>
-          <hr className="mx-4 hidden h-4 w-[1px] border-l border-neutral-400 md:inline-block" />
-          <p>
-            <a href="https://github.com/vercel/commerce">View the source</a>
-          </p>
-          <p className="md:ml-auto">
-            <a href="https://vercel.com" className="text-black dark:text-white">
-              Created by ▲ Vercel
-            </a>
-          </p>
+
+      {/* Main Footer Grid - Centered Nav Links */}
+      <div className="max-w-6xl mx-auto flex flex-col items-center gap-4 px-4 mb-8">
+        <nav className="w-full flex flex-wrap justify-center gap-x-10 gap-y-2 mb-2">
+          {navLinks.map((label, idx) => (
+            <Link
+              key={label}
+              href="#"
+              className="uppercase tracking-widest text-xs md:text-sm text-neutral-500 hover:text-neutral-700 transition"
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+        <nav className="w-full flex flex-wrap justify-center gap-x-8 gap-y-2 pb-8">
+          {socialLinks.map((label) => (
+            <Link
+              key={label}
+              href="#"
+              className="uppercase tracking-widest text-xs md:text-sm text-neutral-400 hover:text-neutral-700 transition"
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      </div>
+
+      {/* Divider */}
+      <div className="border-t border-neutral-200 my-6" />
+
+      {/* Bottom Bar */}
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 text-xs text-neutral-400 gap-2">
+        <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-1 mb-2 md:mb-0">
+          {legalLinks.map((label) => (
+            <Link
+              key={label}
+              href="#"
+              className="hover:text-neutral-700 transition"
+            >
+              {label}
+            </Link>
+          ))}
+        </div>
+        <div className="tracking-wide text-neutral-500 mt-2 md:mt-0">
+          © NINE CARATS 2025
         </div>
       </div>
     </footer>

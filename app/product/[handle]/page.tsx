@@ -1,16 +1,17 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-import { GridTileImage } from 'components/grid/tile';
-import Footer from 'components/layout/footer';
-import { Gallery } from 'components/product/gallery';
-import { ProductProvider } from 'components/product/product-context';
-import { ProductDescription } from 'components/product/product-description';
-import { HIDDEN_PRODUCT_TAG } from 'lib/constants';
-import { getProduct, getProductRecommendations } from 'lib/shopify';
-import { Image } from 'lib/shopify/types';
-import Link from 'next/link';
-import { Suspense } from 'react';
+import FullWidthProductSlider from "@/components/home/FullWidthProductSlider";
+import { GridTileImage } from "components/grid/tile";
+import Footer from "components/layout/footer";
+import { Gallery } from "components/product/gallery";
+import { ProductProvider } from "components/product/product-context";
+import { ProductDescription } from "components/product/product-description";
+import { HIDDEN_PRODUCT_TAG } from "lib/constants";
+import { getProduct, getProductRecommendations } from "lib/shopify";
+import { Image } from "lib/shopify/types";
+import Link from "next/link";
+import { Suspense } from "react";
 
 export async function generateMetadata(props: {
   params: Promise<{ handle: string }>;
@@ -31,8 +32,8 @@ export async function generateMetadata(props: {
       follow: indexable,
       googleBot: {
         index: indexable,
-        follow: indexable
-      }
+        follow: indexable,
+      },
     },
     openGraph: url
       ? {
@@ -41,35 +42,37 @@ export async function generateMetadata(props: {
               url,
               width,
               height,
-              alt
-            }
-          ]
+              alt,
+            },
+          ],
         }
-      : null
+      : null,
   };
 }
 
-export default async function ProductPage(props: { params: Promise<{ handle: string }> }) {
+export default async function ProductPage(props: {
+  params: Promise<{ handle: string }>;
+}) {
   const params = await props.params;
   const product = await getProduct(params.handle);
 
   if (!product) return notFound();
 
   const productJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
+    "@context": "https://schema.org",
+    "@type": "Product",
     name: product.title,
     description: product.description,
     image: product.featuredImage.url,
     offers: {
-      '@type': 'AggregateOffer',
+      "@type": "AggregateOffer",
       availability: product.availableForSale
-        ? 'https://schema.org/InStock'
-        : 'https://schema.org/OutOfStock',
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
       priceCurrency: product.priceRange.minVariantPrice.currencyCode,
       highPrice: product.priceRange.maxVariantPrice.amount,
-      lowPrice: product.priceRange.minVariantPrice.amount
-    }
+      lowPrice: product.priceRange.minVariantPrice.amount,
+    },
   };
 
   return (
@@ -77,7 +80,7 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(productJsonLd)
+          __html: JSON.stringify(productJsonLd),
         }}
       />
       <div className="mx-auto max-w-(--breakpoint-2xl) px-4">
@@ -91,7 +94,7 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
               <Gallery
                 images={product.images.slice(0, 5).map((image: Image) => ({
                   src: image.url,
-                  altText: image.altText
+                  altText: image.altText,
                 }))}
               />
             </Suspense>
@@ -104,6 +107,7 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
           </div>
         </div>
         <RelatedProducts id={product.id} />
+        <FullWidthProductSlider />
       </div>
       <Footer />
     </ProductProvider>
@@ -134,7 +138,7 @@ async function RelatedProducts({ id }: { id: string }) {
                 label={{
                   title: product.title,
                   amount: product.priceRange.maxVariantPrice.amount,
-                  currencyCode: product.priceRange.maxVariantPrice.currencyCode
+                  currencyCode: product.priceRange.maxVariantPrice.currencyCode,
                 }}
                 src={product.featuredImage?.url}
                 fill
