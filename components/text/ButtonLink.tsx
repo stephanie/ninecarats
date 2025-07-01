@@ -1,12 +1,16 @@
 import Link from "next/link";
 
-interface LabelProps {
+interface ButtonLinkProps {
   href: string;
   children: React.ReactNode;
   className?: string;
 }
 
-export default function Label({ href, children, className = "" }: LabelProps) {
+export default function ButtonLink({
+  href,
+  children,
+  className = "",
+}: ButtonLinkProps) {
   return (
     <Link
       href={href}

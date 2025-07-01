@@ -1,5 +1,6 @@
 "use client";
 
+import ButtonLink from "components/text/ButtonLink";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -69,13 +70,10 @@ export default function TwoColumnFeature({
               : "opacity-100 translate-y-0"
           }`}
         >
-          <h2 className="text-lg md:text-xl text-center mb-2 text-black">
+          <h2 className="text-sm md:text-base font-light text-center mb-2">
             {currentProduct.productName}
           </h2>
-          <div className="text-sm text-neutral-500 text-center mb-1">
-            {currentProduct.material}
-          </div>
-          <div className="text-base text-neutral-700 text-center mb-6">
+          <div className="text-sm md:text-base font-light text-neutral-500 text-center mb-6">
             {currentProduct.price}
           </div>
         </div>
@@ -102,12 +100,9 @@ export default function TwoColumnFeature({
               : "opacity-100 translate-y-0"
           }`}
         >
-          <a
-            href={currentProduct.buttonLink}
-            className="mt-2 px-2 py-2 border-b border-neutral-400 text-neutral-800 text-sm tracking-wide hover:border-black transition"
-          >
+          <ButtonLink href={currentProduct.buttonLink}>
             {currentProduct.buttonText}
-          </a>
+          </ButtonLink>
         </div>
       </div>
       {/* Right: Model Image */}
@@ -119,12 +114,12 @@ export default function TwoColumnFeature({
           className="object-cover object-center"
           priority
         />
-        <a
+        <ButtonLink
           href="#"
-          className="absolute top-4 right-4 md:top-10 md:right-10 px-2 py-2 border-b border-neutral-400 text-white text-sm tracking-wide hover:border-white transition"
+          className="absolute top-4 right-4 md:top-10 md:right-10 text-white hover:border-white"
         >
           Why we only use the highest grade diamonds
-        </a>
+        </ButtonLink>
       </div>
     </section>
   );

@@ -69,14 +69,12 @@ export default function FullWidthProductSlider() {
 
   return (
     <section className="w-full px-4 lg:px-8 py-20 bg-white">
-      <div className="max-w-6xl mx-auto flex flex-col items-center">
+      <div className="max-w-[82vw] mx-auto flex flex-col items-center">
         <div className="mb-8 text-center">
-          <div className="text-xs tracking-widest text-neutral-500 mb-4 uppercase">
+          <div className="text-xs tracking-widest text-neutral-500 mb-6 uppercase">
             Day Jewelry
           </div>
-          <h2 className="text-3xl md:text-4xl font-light mb-10">
-            Our classic collection
-          </h2>
+          <h2 className="text-2xl md:text-4xl mb-8">Our classic collection</h2>
           <p className="max-w-2xl mx-auto text-base md:text-lg text-neutral-700 mb-10">
             These fine bracelets offer a wide variety of forms to embellish the
             wrist. Juxtaposed in elegant combinations, they create a wealth of
@@ -85,7 +83,7 @@ export default function FullWidthProductSlider() {
         </div>
         <div className="relative w-full mb-8 overflow-hidden">
           <div
-            className={`grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 w-full transition-all duration-500 ease-in-out ${
+            className={`grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 w-full transition-all duration-500 ease-in-out ${
               isTransitioning ? "opacity-50 scale-95" : "opacity-100 scale-100"
             }`}
           >
@@ -114,10 +112,10 @@ export default function FullWidthProductSlider() {
                   </div>
                 </div>
                 <div className="text-center flex flex-col">
-                  <div className="text-sm md:text-base font-light mb-1">
+                  <div className="text-sm md:text-base font-light mb-2">
                     {product.name}
                   </div>
-                  <div className="text-xs md:text-sm text-neutral-500">
+                  <div className="text-sm md:text-base font-light text-neutral-500">
                     {product.price}
                   </div>
                 </div>

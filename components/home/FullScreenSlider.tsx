@@ -1,5 +1,7 @@
 "use client";
 
+import ButtonLink from "components/text/ButtonLink";
+import CenteredTextSection from "components/text/CenteredTextSection";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
@@ -40,6 +42,9 @@ interface Slide {
   alt?: string;
   link?: string;
   heading?: string;
+  tagline?: string;
+  buttonText?: string;
+  buttonLink?: string;
 }
 
 const slides: Slide[] = [
@@ -48,14 +53,20 @@ const slides: Slide[] = [
     src: "/images/slider/rings3.webp",
     alt: "Engagement Rings",
     link: "/collections/engagement-rings",
+    tagline: "Wedding Jewelry",
     heading: "Engagement Rings",
+    buttonText: "Explore all",
+    buttonLink: "/collections/engagement-rings",
   },
   {
     type: "image",
     src: "/images/slider/heroBanner.webp",
     alt: "Earrings",
     link: "/collections/earrings",
+    tagline: "Jewelry",
     heading: "Earrings",
+    buttonText: "Explore all",
+    buttonLink: "/collections/earrings",
   },
 ];
 
@@ -208,7 +219,7 @@ export default function FullScreenSlider() {
 
       {/* Navigation and Heading */}
       <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center">
-        <div className="relative mb-6 flex h-16 w-[15rem] items-center justify-center">
+        <div className="relative mb-6 flex h-50 w-[25rem] items-center justify-center">
           <div className="absolute left-0 transform text-white transition-transform duration-500 ease-in-out hover:opacity-70">
             <button
               onClick={previousSlide}
@@ -219,15 +230,24 @@ export default function FullScreenSlider() {
             </button>
           </div>
           <div className="absolute left-1/2 -translate-x-1/2 transform">
-            <h2
-              className={`whitespace-nowrap text-xl font-light text-white transition-all duration-500 ${
+            <CenteredTextSection
+              className={`whitespace-nowrap transition-all duration-500 ${
                 headingVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-4"
               }`}
+              tagline={slides[currentSlide]!.tagline || ""}
+              button={
+                <ButtonLink
+                  href={slides[currentSlide]!.buttonLink || "#"}
+                  className="text-white hover:border-white"
+                >
+                  {slides[currentSlide]!.buttonText || ""}
+                </ButtonLink>
+              }
             >
               {currentHeading}
-            </h2>
+            </CenteredTextSection>
           </div>
           <div className="absolute right-0 transform text-white transition-transform duration-500 ease-in-out hover:opacity-70">
             <button
