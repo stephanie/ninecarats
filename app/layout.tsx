@@ -1,5 +1,5 @@
 import { CartProvider } from "components/cart/cart-context";
-import Footer from "components/layout/footer";
+import Footer from "components/layout/Footer";
 import { Navbar } from "components/layout/navbar";
 import { getCart } from "lib/shopify";
 import { baseUrl } from "lib/utils";
