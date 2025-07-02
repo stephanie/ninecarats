@@ -14,7 +14,7 @@ export default function FullWidthTextSection() {
         playsInline
       />
       {/* Optional overlay for readability */}
-      <div className="absolute inset-0 bg-black/10 z-0" />
+      <div className="absolute inset-0 bg-black/20 z-0" />
       <div className="relative z-10">
         <TextHeaderFull
           tagline="Meet NINE CARATS"
