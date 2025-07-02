@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { GridTileImage } from "components/grid/tile";
-import FullWidthProductSlider from "components/home/FullWidthProductSlider";
 import Footer from "components/layout/footer";
 import { Gallery } from "components/product/gallery";
 import { ProductProvider } from "components/product/product-context";
@@ -107,7 +106,6 @@ export default async function ProductPage(props: {
           </div>
         </div>
         <RelatedProducts id={product.id} />
-        <FullWidthProductSlider />
       </div>
       <Footer />
     </ProductProvider>
