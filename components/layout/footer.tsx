@@ -14,20 +14,19 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-neutral-50 pt-12 pb-6 text-neutral-800">
+    <footer className="w-full pt-12 pb-6 text-neutral-800">
       {/* Newsletter Signup */}
       <div className="max-w-3xl mx-auto flex flex-col items-center mb-32 px-4">
-        <p className="text-center text-base md:text-lg mb-8">
+        <p className="text-center text-sm md:text-lg mb-8 max-w-[20rem] md:max-w-[25rem]">
           Subscribe for insider access to discover our new collections,
-          <br />
           exclusive events and more.
         </p>
-        <form className="w-full flex flex-col sm:flex-row items-center justify-center gap-2">
-          <div className="border-b border-neutral-400 w-full sm:w-2/3 px-2.5 py-2.5 text-center">
+        <form className="w-full flex flex-col flex-row items-center justify-center gap-2">
+          <div className="border-b border-neutral-400 w-[15rem] md:w-[20rem] px-2.5 py-2.5 text-center">
             <input
               type="email"
               placeholder="Enter your email"
-              className="newsletter-input bg-transparent w-full sm:w-2/3 text-center transition"
+              className="newsletter-input bg-transparent w-full text-center transition text-sm"
             />
           </div>
           <button

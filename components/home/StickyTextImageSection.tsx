@@ -17,7 +17,7 @@ export default function StickyTextImageSection({
   imageAlt = "",
 }: StickyTextImageSectionProps) {
   return (
-    <section className="relative w-full md:min-h-[90vh] min-h-[60vh] flex items-stretch overflow-visible">
+    <section className="relative w-full md:min-h-[90vh] min-h-[70vh] flex items-stretch overflow-visible">
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full -z-10">
         <Image

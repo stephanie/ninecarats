@@ -1,7 +1,7 @@
 "use client";
 
 import ButtonLink from "components/text/ButtonLink";
-import CenteredTextSection from "components/text/TextHeaderFull";
+import TextHeaderFull from "components/text/TextHeaderFull";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
@@ -213,7 +213,7 @@ export default function FullScreenSlider() {
 
       {/* Navigation and Heading */}
       <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center">
-        <div className="relative mb-6 flex h-50 w-[18rem] md:w-[25rem] items-center justify-center">
+        <div className="relative flex h-50 w-[18rem] md:w-[25rem] items-center justify-center">
           <div className="absolute left-0 transform text-white transition-transform duration-500 ease-in-out hover:opacity-70">
             <button
               onClick={previousSlide}
@@ -224,7 +224,7 @@ export default function FullScreenSlider() {
             </button>
           </div>
           <div className="absolute left-1/2 -translate-x-1/2 transform">
-            <CenteredTextSection
+            <TextHeaderFull
               className={`whitespace-nowrap transition-all duration-500 ${
                 headingVisible
                   ? "opacity-100 translate-y-0"
@@ -241,7 +241,7 @@ export default function FullScreenSlider() {
               }
             >
               {currentHeading}
-            </CenteredTextSection>
+            </TextHeaderFull>
           </div>
           <div className="absolute right-0 transform text-white transition-transform duration-500 ease-in-out hover:opacity-70">
             <button
