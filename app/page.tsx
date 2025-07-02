@@ -10,6 +10,49 @@ export const metadata = {
   },
 };
 
+const sliderProducts = [
+  {
+    name: "Classic Tennis Bracelet 1",
+    price: "$3,500",
+    image: "/images/bracelet.webp",
+  },
+  {
+    name: "Classic Tennis Bracelet 2",
+    price: "$3,500",
+    image: "/images/bracelet.webp",
+  },
+  {
+    name: "Classic Tennis Bracelet 3",
+    price: "$3,500",
+    image: "/images/bracelet.webp",
+  },
+  {
+    name: "Classic Tennis Bracelet 4",
+    price: "$3,500",
+    image: "/images/bracelet.webp",
+  },
+  {
+    name: "Classic Tennis Bracelet 5",
+    price: "$3,500",
+    image: "/images/bracelet.webp",
+  },
+  {
+    name: "Classic Tennis Bracelet 6",
+    price: "$3,500",
+    image: "/images/bracelet.webp",
+  },
+  {
+    name: "Classic Tennis Bracelet 7",
+    price: "$3,500",
+    image: "/images/bracelet.webp",
+  },
+  {
+    name: "Classic Tennis Bracelet 8",
+    price: "$3,500",
+    image: "/images/bracelet.webp",
+  },
+];
+
 export default function HomePage() {
   const products = [
     {
@@ -17,7 +60,7 @@ export default function HomePage() {
       productName: "Signature tennis bracelet",
       material: "18k gold, 12ct",
       price: "$3,500",
-      buttonText: "Explore bracelets",
+      buttonText: "Explore our signature collection",
       buttonLink: "#",
     },
     {
@@ -25,7 +68,23 @@ export default function HomePage() {
       productName: "Diamond engagement ring",
       material: "Platinum, 2.5ct",
       price: "$8,500",
-      buttonText: "Explore engagement rings",
+      buttonText: "View engagement rings",
+      buttonLink: "#",
+    },
+    {
+      productImage: "/images/bracelet.webp",
+      productName: "Classic tennis bracelet",
+      material: "White gold, 8ct",
+      price: "$4,200",
+      buttonText: "Shop tennis bracelets",
+      buttonLink: "#",
+    },
+    {
+      productImage: "/images/bracelet.webp",
+      productName: "Sapphire ring",
+      material: "Yellow gold, 3ct",
+      price: "$6,800",
+      buttonText: "Discover colored stones",
       buttonLink: "#",
     },
     {
@@ -63,7 +122,12 @@ export default function HomePage() {
         className="relative z-10"
         style={{ transform: "translateY(-100px)" }}
       >
-        <FullWidthProductSlider />
+        <FullWidthProductSlider
+          products={sliderProducts}
+          tagline="Day Jewelry"
+          heading="Bracelets"
+          sectionDescription="These fine bracelets offer a wide variety of forms to embellish the wrist. Juxtaposed in elegant combinations, they create a wealth of delicate possibilities."
+        />
       </div>
     </>
   );

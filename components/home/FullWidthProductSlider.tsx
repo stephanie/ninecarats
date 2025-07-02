@@ -6,50 +6,25 @@ import Image from "next/image";
 import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
-const products = [
-  {
-    name: "Classic Tennis Bracelet 1",
-    price: "$3,500",
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 2",
-    price: "$3,500",
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 3",
-    price: "$3,500",
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 4",
-    price: "$3,500",
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 5",
-    price: "$3,500",
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 6",
-    price: "$3,500",
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 7",
-    price: "$3,500",
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 8",
-    price: "$3,500",
-    image: "/images/bracelet.webp",
-  },
-];
+interface Product {
+  name: string;
+  price?: string;
+  image: string;
+}
 
-export default function FullWidthProductSlider() {
+interface FullWidthProductSliderProps {
+  products: Product[];
+  tagline?: string;
+  heading: string;
+  sectionDescription?: string;
+}
+
+export default function FullWidthProductSlider({
+  products,
+  tagline,
+  heading,
+  sectionDescription,
+}: FullWidthProductSliderProps) {
   const isMobile = useIsMobile();
   const [currentPage, setCurrentPage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -118,9 +93,11 @@ export default function FullWidthProductSlider() {
                 <div className="text-sm md:text-base font-light mb-1">
                   {product.name}
                 </div>
-                <div className="text-xs md:text-sm text-neutral-500">
-                  {product.price}
-                </div>
+                {product.price && (
+                  <div className="text-xs md:text-sm text-neutral-500">
+                    {product.price}
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -168,9 +145,11 @@ export default function FullWidthProductSlider() {
                   <div className="text-sm md:text-base font-light mb-1">
                     {product.name}
                   </div>
-                  <div className="text-xs md:text-sm text-neutral-500">
-                    {product.price}
-                  </div>
+                  {product.price && (
+                    <div className="text-xs md:text-sm text-neutral-500">
+                      {product.price}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -186,17 +165,19 @@ export default function FullWidthProductSlider() {
         {...swipeHandlers}
       >
         <div className="mb-8 text-center px-8 lg:px-16">
-          <div className="text-xs tracking-widest text-neutral-500 mb-2 md:mb-4 uppercase">
-            Day Jewelry
-          </div>
+          {tagline && (
+            <div className="text-xs tracking-widest text-neutral-500 mb-2 md:mb-4 uppercase">
+              {tagline}
+            </div>
+          )}
           <h2 className="text-3xl md:text-4xl font-light mb-2 md:mb-8">
-            Our classic collection
+            {heading}
           </h2>
-          <p className="max-w-2xl mx-auto text-base md:text-lg text-neutral-700 mb-10 hidden md:flex">
-            These fine bracelets offer a wide variety of forms to embellish the
-            wrist. Juxtaposed in elegant combinations, they create a wealth of
-            delicate possibilities.
-          </p>
+          {sectionDescription && (
+            <p className="max-w-2xl mx-auto text-base md:text-lg text-neutral-700 mb-10 hidden md:flex">
+              {sectionDescription}
+            </p>
+          )}
         </div>
         {sliderContent}
         <SliderDots
