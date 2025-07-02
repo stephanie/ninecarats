@@ -1,7 +1,7 @@
 "use client";
 
 import ButtonLink from "components/text/ButtonLink";
-import CenteredTextSection from "components/text/CenteredTextSection";
+import CenteredTextSection from "components/text/TextHeaderFull";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";

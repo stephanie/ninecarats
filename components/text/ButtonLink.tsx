@@ -14,7 +14,7 @@ export default function ButtonLink({
   return (
     <Link
       href={href}
-      className={`mt-1 px-2 py-1 border-b border-neutral-400 text-neutral-800 text-sm tracking-wide hover:border-black transition ${className}`}
+      className={`mt-1 px-0 py-1 border-b border-neutral-400 text-neutral-800 text-sm tracking-wide hover:border-black transition ${className}`}
     >
       {children}
     </Link>

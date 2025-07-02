@@ -164,7 +164,7 @@ export default function FullWidthProductSlider({
         className="max-w-[100vw] mx-auto flex flex-col items-center"
         {...swipeHandlers}
       >
-        <div className="mb-8 text-center px-8 lg:px-16">
+        <div className="mb-4 text-center px-8 lg:px-16">
           {tagline && (
             <div className="text-xs tracking-widest text-neutral-500 mb-2 md:mb-4 uppercase">
               {tagline}

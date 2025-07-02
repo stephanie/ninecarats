@@ -69,7 +69,7 @@ export default function TwoColumnFeature({
   }
 
   return (
-    <section className="w-full flex flex-col md:flex-row min-h-[100vh]">
+    <section className="w-full flex flex-col md:flex-row min-h-[90vh]">
       {/* Left: Product Info */}
       <div
         className="flex-1 flex flex-col items-center justify-center py-12 px-4 bg-white gap-2"

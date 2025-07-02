@@ -1,0 +1,46 @@
+import TextHeaderFull from "components/text/TextHeaderFull";
+import Image from "next/image";
+
+interface StickyTextImageSectionProps {
+  tagline: string;
+  heading: React.ReactNode;
+  button?: React.ReactNode;
+  image: string;
+  imageAlt?: string;
+}
+
+export default function StickyTextImageSection({
+  tagline,
+  heading,
+  button,
+  image,
+  imageAlt = "",
+}: StickyTextImageSectionProps) {
+  return (
+    <section className="relative w-full md:min-h-[90vh] min-h-[60vh] flex items-stretch overflow-visible">
+      {/* Background Image */}
+      <div className="absolute inset-0 w-full h-full -z-10">
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          className="object-cover object-center"
+          priority
+        />
+      </div>
+      {/* Sticky Text */}
+      <div className="w-full max-w-xl">
+        <div className="sticky top-24 pt-16 z-10 pl-4 pb-16">
+          <TextHeaderFull
+            tagline={tagline}
+            button={button}
+            align="left"
+            className="text-black"
+          >
+            {heading}
+          </TextHeaderFull>
+        </div>
+      </div>
+    </section>
+  );
+}
