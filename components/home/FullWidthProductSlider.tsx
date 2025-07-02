@@ -50,15 +50,14 @@ const products = [
 ];
 
 export default function FullWidthProductSlider() {
+  const isMobile = useIsMobile();
   const [currentPage, setCurrentPage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const isMobile = useIsMobile();
-  const productsPerPage = isMobile ? 2 : 4;
+  const productsPerPage = isMobile ? 1 : 4;
   const totalPages = Math.ceil(products.length / productsPerPage);
 
   const handleDotClick = (pageIndex: number) => {
     if (pageIndex === currentPage || isTransitioning) return;
-
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentPage(pageIndex);
@@ -87,37 +86,61 @@ export default function FullWidthProductSlider() {
     preventScrollOnSwipe: true,
   });
 
-  const getCurrentPageProducts = () => {
-    const startIndex = currentPage * productsPerPage;
-    return products.slice(startIndex, startIndex + productsPerPage);
-  };
-
-  return (
-    <section className="w-full px-4 lg:px-8 py-20 bg-white">
-      <div
-        className="max-w-[82vw] mx-auto flex flex-col items-center"
-        {...swipeHandlers}
-      >
-        <div className="mb-8 text-center">
-          <div className="text-xs tracking-widest text-neutral-500 mb-4 md:mb-6 uppercase">
-            Day Jewelry
-          </div>
-          <h2 className="text-2xl md:text-4xl mb-2 md:mb-8">
-            Our classic collection
-          </h2>
-          <p className="max-w-2xl mx-auto text-base md:text-lg text-neutral-700 mb-10 hidden md:flex">
-            These fine bracelets offer a wide variety of forms to embellish the
-            wrist. Juxtaposed in elegant combinations, they create a wealth of
-            delicate possibilities.
-          </p>
+  // For mobile, show one product per page, with the next product peeking in
+  let sliderContent;
+  if (isMobile) {
+    sliderContent = (
+      <div className="relative w-full mb-8 overflow-x-hidden">
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{
+            transform: `translateX(calc(-${currentPage * 80}vw + 10vw))`,
+          }}
+        >
+          {products.map((product, idx) => (
+            <div
+              key={idx}
+              className="flex-shrink-0 w-[80vw] max-w-[340px] flex flex-col mb-8"
+            >
+              <div className="flex flex-col items-center p-3">
+                <div className="w-full aspect-[3/4] relative mb-6">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-contain bg-neutral-100"
+                    sizes="80vw"
+                    priority={idx === 0}
+                  />
+                </div>
+              </div>
+              <div className="text-center flex flex-col">
+                <div className="text-sm md:text-base font-light mb-1">
+                  {product.name}
+                </div>
+                <div className="text-xs md:text-sm text-neutral-500">
+                  {product.price}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="relative w-full mb-8 overflow-hidden">
-          <div
-            className={`grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 w-full transition-all duration-500 ease-in-out ${
-              isTransitioning ? "opacity-50 scale-95" : "opacity-100 scale-100"
-            }`}
-          >
-            {getCurrentPageProducts().map((product, idx) => (
+      </div>
+    );
+  } else {
+    sliderContent = (
+      <div className="relative w-full mb-8 overflow-hidden px-8">
+        <div
+          className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full transition-all duration-500 ease-in-out ${
+            isTransitioning ? "opacity-50 scale-95" : "opacity-100 scale-100"
+          }`}
+        >
+          {products
+            .slice(
+              currentPage * productsPerPage,
+              currentPage * productsPerPage + productsPerPage
+            )
+            .map((product, idx) => (
               <div
                 className="flex flex-col gap-4 mb-8 transform transition-all duration-500 ease-out"
                 key={`${currentPage}-${idx}`}
@@ -142,18 +165,40 @@ export default function FullWidthProductSlider() {
                   </div>
                 </div>
                 <div className="text-center flex flex-col">
-                  <div className="text-sm md:text-base font-light mb-2">
+                  <div className="text-sm md:text-base font-light mb-1">
                     {product.name}
                   </div>
-                  <div className="text-sm md:text-base font-light text-neutral-500">
+                  <div className="text-xs md:text-sm text-neutral-500">
                     {product.price}
                   </div>
                 </div>
               </div>
             ))}
-          </div>
         </div>
-        {/* Pagination dots */}
+      </div>
+    );
+  }
+
+  return (
+    <section className="w-full py-20 bg-white">
+      <div
+        className="max-w-[100vw] mx-auto flex flex-col items-center"
+        {...swipeHandlers}
+      >
+        <div className="mb-8 text-center px-8 lg:px-16">
+          <div className="text-xs tracking-widest text-neutral-500 mb-4 md:mb-6 uppercase">
+            Day Jewelry
+          </div>
+          <h2 className="text-3xl md:text-4xl font-light mb-4 md:mb-10">
+            Our classic collection
+          </h2>
+          <p className="max-w-2xl mx-auto text-base md:text-lg text-neutral-700 mb-10 hidden md:flex">
+            These fine bracelets offer a wide variety of forms to embellish the
+            wrist. Juxtaposed in elegant combinations, they create a wealth of
+            delicate possibilities.
+          </p>
+        </div>
+        {sliderContent}
         <SliderDots
           total={totalPages}
           selected={currentPage}
