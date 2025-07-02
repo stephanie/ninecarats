@@ -90,7 +90,7 @@ export default function FullWidthProductSlider() {
   let sliderContent;
   if (isMobile) {
     sliderContent = (
-      <div className="relative w-full mb-8 overflow-x-hidden">
+      <div className="relative w-full mb-4 overflow-x-hidden">
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{
@@ -186,10 +186,10 @@ export default function FullWidthProductSlider() {
         {...swipeHandlers}
       >
         <div className="mb-8 text-center px-8 lg:px-16">
-          <div className="text-xs tracking-widest text-neutral-500 mb-4 md:mb-6 uppercase">
+          <div className="text-xs tracking-widest text-neutral-500 mb-2 md:mb-4 uppercase">
             Day Jewelry
           </div>
-          <h2 className="text-3xl md:text-4xl font-light mb-4 md:mb-10">
+          <h2 className="text-3xl md:text-4xl font-light mb-2 md:mb-8">
             Our classic collection
           </h2>
           <p className="max-w-2xl mx-auto text-base md:text-lg text-neutral-700 mb-10 hidden md:flex">
