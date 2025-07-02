@@ -1,8 +1,10 @@
 "use client";
 
+import SliderDots from "components/slider/SliderDots";
 import ButtonLink from "components/text/ButtonLink";
 import Image from "next/image";
 import { useState } from "react";
+import { useSwipeable } from "react-swipeable";
 
 interface Product {
   productImage: string;
@@ -38,6 +40,27 @@ export default function TwoColumnFeature({
     }, 300);
   };
 
+  const nextProduct = () => {
+    if (isTransitioning) return;
+    if (currentSlide < products.length - 1) {
+      handleDotClick(currentSlide + 1);
+    }
+  };
+
+  const prevProduct = () => {
+    if (isTransitioning) return;
+    if (currentSlide > 0) {
+      handleDotClick(currentSlide - 1);
+    }
+  };
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: nextProduct,
+    onSwipedRight: prevProduct,
+    trackMouse: false,
+    preventScrollOnSwipe: true,
+  });
+
   const currentProduct = products[currentSlide];
 
   // If no products or current product doesn't exist, don't render
@@ -48,7 +71,10 @@ export default function TwoColumnFeature({
   return (
     <section className="w-full flex flex-col md:flex-row min-h-[100vh]">
       {/* Left: Product Info */}
-      <div className="flex-1 flex flex-col items-center justify-center py-12 px-4 bg-white gap-2">
+      <div
+        className="flex-1 flex flex-col items-center justify-center py-12 px-4 bg-white gap-2"
+        {...swipeHandlers}
+      >
         <div
           className={`mb-8 transition-all duration-500 ease-in-out ${
             isTransitioning ? "opacity-50 scale-95" : "opacity-100 scale-100"
@@ -78,21 +104,13 @@ export default function TwoColumnFeature({
           </div>
         </div>
         {/* Slider dots */}
-        <div className="flex items-center justify-center gap-2 mb-8">
-          {Array.from({ length: products.length }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => handleDotClick(i)}
-              disabled={isTransitioning}
-              className={`h-2 w-2 rounded-full transition-all duration-200 cursor-pointer ${
-                i === currentSlide
-                  ? "bg-neutral-800 scale-110"
-                  : "bg-neutral-300 hover:bg-neutral-400 hover:scale-110"
-              } ${isTransitioning ? "opacity-50" : "opacity-100"}`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
-        </div>
+        <SliderDots
+          total={products.length}
+          selected={currentSlide}
+          onSelect={handleDotClick}
+          disabled={isTransitioning}
+          className="mb-8"
+        />
         <div
           className={`transition-all duration-500 ease-in-out ${
             isTransitioning

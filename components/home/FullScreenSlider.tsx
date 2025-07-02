@@ -5,32 +5,18 @@ import CenteredTextSection from "components/text/CenteredTextSection";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { useSwipeable } from "react-swipeable";
 
 // Custom hook to handle mobile viewport height
 function useViewportHeight() {
   const [viewportHeight, setViewportHeight] = useState(0);
 
   useEffect(() => {
-    const updateHeight = () => {
-      // Get the actual viewport height
-      const vh = window.innerHeight;
-      setViewportHeight(vh);
-
-      // Set CSS custom property for use in CSS
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
-    };
-
-    // Set initial height
-    updateHeight();
-
-    // Update on resize and orientation change
-    window.addEventListener("resize", updateHeight);
-    window.addEventListener("orientationchange", updateHeight);
-
-    return () => {
-      window.removeEventListener("resize", updateHeight);
-      window.removeEventListener("orientationchange", updateHeight);
-    };
+    // Get the actual viewport height only once on mount
+    const vh = window.innerHeight;
+    setViewportHeight(vh);
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+    // No resize/orientationchange listeners
   }, []);
 
   return viewportHeight;
@@ -129,6 +115,13 @@ export default function FullScreenSlider() {
     setProgress(0);
   }, [isTransitioning]);
 
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: nextSlide,
+    onSwipedRight: previousSlide,
+    trackMouse: false,
+    preventScrollOnSwipe: true,
+  });
+
   useEffect(() => {
     let animationFrameId: number;
 
@@ -185,6 +178,7 @@ export default function FullScreenSlider() {
           : "calc(100vh - 20px)",
         transform: "translateY(-100px)",
       }}
+      {...swipeHandlers}
     >
       {slides.map((slide, index) => (
         <div
@@ -219,7 +213,7 @@ export default function FullScreenSlider() {
 
       {/* Navigation and Heading */}
       <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center">
-        <div className="relative mb-6 flex h-50 w-[25rem] items-center justify-center">
+        <div className="relative mb-6 flex h-50 w-[18rem] md:w-[25rem] items-center justify-center">
           <div className="absolute left-0 transform text-white transition-transform duration-500 ease-in-out hover:opacity-70">
             <button
               onClick={previousSlide}

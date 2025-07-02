@@ -1,7 +1,10 @@
 "use client";
 
+import SliderDots from "components/slider/SliderDots";
+import { useIsMobile } from "hooks/useIsMobile";
 import Image from "next/image";
 import { useState } from "react";
+import { useSwipeable } from "react-swipeable";
 
 const products = [
   {
@@ -49,7 +52,8 @@ const products = [
 export default function FullWidthProductSlider() {
   const [currentPage, setCurrentPage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const productsPerPage = 4;
+  const isMobile = useIsMobile();
+  const productsPerPage = isMobile ? 2 : 4;
   const totalPages = Math.ceil(products.length / productsPerPage);
 
   const handleDotClick = (pageIndex: number) => {
@@ -62,6 +66,27 @@ export default function FullWidthProductSlider() {
     }, 300);
   };
 
+  const nextPage = () => {
+    if (isTransitioning) return;
+    if (currentPage < totalPages - 1) {
+      handleDotClick(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (isTransitioning) return;
+    if (currentPage > 0) {
+      handleDotClick(currentPage - 1);
+    }
+  };
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: nextPage,
+    onSwipedRight: prevPage,
+    trackMouse: false,
+    preventScrollOnSwipe: true,
+  });
+
   const getCurrentPageProducts = () => {
     const startIndex = currentPage * productsPerPage;
     return products.slice(startIndex, startIndex + productsPerPage);
@@ -69,13 +94,18 @@ export default function FullWidthProductSlider() {
 
   return (
     <section className="w-full px-4 lg:px-8 py-20 bg-white">
-      <div className="max-w-[82vw] mx-auto flex flex-col items-center">
+      <div
+        className="max-w-[82vw] mx-auto flex flex-col items-center"
+        {...swipeHandlers}
+      >
         <div className="mb-8 text-center">
-          <div className="text-xs tracking-widest text-neutral-500 mb-6 uppercase">
+          <div className="text-xs tracking-widest text-neutral-500 mb-4 md:mb-6 uppercase">
             Day Jewelry
           </div>
-          <h2 className="text-2xl md:text-4xl mb-8">Our classic collection</h2>
-          <p className="max-w-2xl mx-auto text-base md:text-lg text-neutral-700 mb-10">
+          <h2 className="text-2xl md:text-4xl mb-2 md:mb-8">
+            Our classic collection
+          </h2>
+          <p className="max-w-2xl mx-auto text-base md:text-lg text-neutral-700 mb-10 hidden md:flex">
             These fine bracelets offer a wide variety of forms to embellish the
             wrist. Juxtaposed in elegant combinations, they create a wealth of
             delicate possibilities.
@@ -124,21 +154,12 @@ export default function FullWidthProductSlider() {
           </div>
         </div>
         {/* Pagination dots */}
-        <div className="flex items-center gap-2">
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index}
-              onClick={() => handleDotClick(index)}
-              disabled={isTransitioning}
-              className={`h-2 w-2 rounded-full transition-all duration-200 cursor-pointer ${
-                index === currentPage
-                  ? "bg-neutral-800 scale-110"
-                  : "bg-neutral-300 hover:bg-neutral-400 hover:scale-110"
-              } ${isTransitioning ? "opacity-50" : "opacity-100"}`}
-              aria-label={`Go to page ${index + 1}`}
-            />
-          ))}
-        </div>
+        <SliderDots
+          total={totalPages}
+          selected={currentPage}
+          onSelect={handleDotClick}
+          disabled={isTransitioning}
+        />
       </div>
     </section>
   );
