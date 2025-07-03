@@ -52,7 +52,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
             <div className="flex justify-start lg:w-1/3 pl-4 md:p-4 items-center md:items-start">
               <button
                 aria-label="Open menu"
-                className={`mr-4 transition-colors duration-300 hidden lg:flex ${
+                className={`mr-4 transition-colors duration-100 hidden lg:flex ${
                   scrolled ? "text-black" : "text-white"
                 }`}
               >
@@ -70,13 +70,13 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 </svg>
               </button>
               <div
-                className={`flex gap-2 transition-colors duration-300 hidden lg:flex ${
+                className={`flex gap-2 transition-colors duration-100 hidden lg:flex ${
                   scrolled ? "text-black" : "text-white"
                 }`}
               >
                 <svg
-                  width="20"
-                  height="20"
+                  width="24"
+                  height="24"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="1.5"
@@ -106,7 +106,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                         <Link
                           href={item.path}
                           prefetch={true}
-                          className={`underline-offset-4 hover:underline transition-colors duration-300 ${scrolled ? "text-black" : "text-white"}`}
+                          className={`underline-offset-4 hover:underline transition-colors duration-100 ${scrolled ? "text-black" : "text-white"}`}
                         >
                           {item.title}
                         </Link>
@@ -124,7 +124,9 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               {" "}
               <span
                 className={`font-header transition-all duration-500 ${
-                  scrolled ? "text-base md:text-3xl" : "text-[8vw]"
+                  scrolled
+                    ? "text-base md:text-3xl pt-1 text-black"
+                    : "text-[10vw] md:pt-4 text-white"
                 } tracking-widest select-none drop-shadow-lg uppercase`}
               >
                 NineCarats
@@ -149,7 +151,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 </svg>
               </button> */}
               {/* Location Icon */}
-              <button
+              {/* <button
                 aria-label="Location"
                 className={`transition-colors duration-300 hidden lg:flex ${scrolled ? "text-black" : "text-white"}`}
               >
@@ -176,11 +178,11 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                     strokeLinejoin="round"
                   ></path>
                 </svg>
-              </button>
+              </button> */}
               {/* Phone Icon */}
               <button
                 aria-label="Phone"
-                className={`transition-colors duration-300 hidden lg:flex ${scrolled ? "text-black" : "text-white"}`}
+                className={`transition-colors duration-100 hidden lg:flex ${scrolled ? "text-black" : "text-white"}`}
               >
                 <svg
                   width="24px"
@@ -203,7 +205,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               {/* User Icon */}
               <button
                 aria-label="User"
-                className={`transition-colors duration-300 hidden lg:flex ${scrolled ? "text-black" : "text-white"}`}
+                className={`transition-colors duration-100 hidden lg:flex ${scrolled ? "text-black" : "text-white"}`}
               >
                 <svg
                   width="24px"

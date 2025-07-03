@@ -25,11 +25,11 @@ export default function TextHeaderFull({
     <div
       className={`max-w-2xl mx-auto flex flex-col ${alignment} px-4 ${className}`}
     >
-      <div className="text-xs uppercase tracking-widest mb-4 font-body">
+      <div className="text-xs uppercase tracking-widest mb-2 md:mb-4 font-body">
         {tagline}
       </div>
       <h2
-        className={`${headerClassName ? headerClassName : "text-2xl md:text-4xl"} mb-2 font-header`}
+        className={`${headerClassName ? headerClassName : "text-2xl md:text-4xl"} mb-1 md:mb-2 font-header`}
       >
         {children}
       </h2>

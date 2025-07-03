@@ -15,7 +15,7 @@ interface ThreeImageSectionProps {
 
 export default function ThreeImageSection({ cards }: ThreeImageSectionProps) {
   return (
-    <section className="w-full md:pt-4 pb-4">
+    <section className="w-full md:pt-4 pb-4 bg-white">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full mx-auto">
         {cards.map((card, idx) => (
           <div

@@ -106,7 +106,7 @@ export default function FullWidthProductSlider({
     );
   } else {
     sliderContent = (
-      <div className="relative w-full mb-8 overflow-hidden px-4">
+      <div className="relative w-full overflow-hidden px-4 mb-2">
         <div
           className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full transition-all duration-500 ease-in-out ${
             isTransitioning ? "opacity-50 scale-95" : "opacity-100 scale-100"
@@ -130,7 +130,7 @@ export default function FullWidthProductSlider({
                 }}
               >
                 <div className="flex flex-col items-center bg-neutral-100 p-2">
-                  <div className="w-full aspect-[3/4] relative mb-8">
+                  <div className="w-full aspect-[3/4] max-h-[40vh] relative mb-8">
                     <Image
                       src={product.image}
                       alt={product.name}
@@ -162,11 +162,12 @@ export default function FullWidthProductSlider({
         className="max-w-[100vw] mx-auto flex flex-col items-center"
         {...swipeHandlers}
       >
-        <div className="mb-8 text-center px-8 lg:px-16">
+        <div className="mb-8 text-center p-2 lg:p-10">
           <TextHeaderFull
             tagline={tagline}
             description={sectionDescription}
             button={<ButtonLink href="/shop">Shop</ButtonLink>}
+            className="text-black"
           >
             {heading}
           </TextHeaderFull>
@@ -177,6 +178,7 @@ export default function FullWidthProductSlider({
           selected={currentPage}
           onSelect={handleDotClick}
           disabled={isTransitioning}
+          className="mb-2 md:mb-4"
         />
       </div>
     </section>

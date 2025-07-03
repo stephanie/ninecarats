@@ -16,7 +16,7 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className="w-full pt-12 pb-2 text-neutral-800">
+    <footer className="w-full pt-12 pb-2 text-neutral-800 bg-white">
       <NewsletterSignup />
       <div className="md:hidden">
         <MobileFooter />
