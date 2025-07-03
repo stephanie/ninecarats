@@ -211,7 +211,7 @@ export default function FullScreenSlider() {
 
       {/* Navigation and Heading */}
       <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center">
-        <div className="relative flex h-[16rem] w-[18rem] md:w-[25rem] items-center justify-center">
+        <div className="relative flex h-[12rem] md:h-[16rem] w-[18rem] md:w-[25rem] items-center justify-center">
           {/* <div className="absolute left-0 transform text-white transition-transform duration-500 ease-in-out hover:opacity-70">
             <button
               onClick={previousSlide}
@@ -240,7 +240,7 @@ export default function FullScreenSlider() {
               {currentHeading}
             </TextHeaderFull>
           </div>
-          <div className="absolute bottom-10">
+          <div className="absolute md:bottom-10 bottom-6">
             <SliderDots
               total={slides.length}
               selected={currentSlide}

@@ -148,7 +148,7 @@ export default function HomePage() {
       </div>
       <FullWidthProductSlider
         products={sliderProducts1}
-        tagline="Day Jewelry"
+        tagline="Jewelry"
         heading="Bracelets"
         sectionDescription="Juxtaposed in elegant combinations, these fine bracelets offer a wide variety of forms to embellish the wrist."
       />
@@ -164,10 +164,10 @@ export default function HomePage() {
       </div> */}
       <FullWidthTextSection />
       <FullWidthProductSlider
-        products={sliderProducts1}
-        tagline="Day Jewelry"
-        heading="Bracelets"
-        sectionDescription="Juxtaposed in elegant combinations, these fine bracelets offer a wide variety of forms to embellish the wrist."
+        products={sliderProducts2}
+        tagline="Wedding"
+        heading="Engagement Rings"
+        sectionDescription="Juxtaposed in elegant combinations, these fine rings offer a wide variety of forms to embellish the hand."
       />
       <StickyTextImageSection
         tagline="Day Jewelry"
@@ -180,10 +180,10 @@ export default function HomePage() {
         }
       />
       <FullWidthProductSlider
-        products={sliderProducts2}
-        tagline="Day Jewelry"
-        heading="Rings"
-        sectionDescription="Juxtaposed in elegant combinations, these fine rings offer a wide variety of forms to embellish the hand."
+        products={sliderProducts1}
+        tagline="Jewelry"
+        heading="Bracelets"
+        sectionDescription="Juxtaposed in elegant combinations, these fine bracelets offer a wide variety of forms to embellish the wrist."
       />
       <ThreeImageSection cards={cards2} />
     </>
