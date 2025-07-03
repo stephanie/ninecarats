@@ -1,7 +1,8 @@
 import React from "react";
 
 interface TextHeaderFullProps {
-  tagline: string;
+  tagline?: string;
+  description?: string;
   button?: React.ReactNode;
   children: React.ReactNode;
   className?: string;
@@ -10,6 +11,7 @@ interface TextHeaderFullProps {
 
 export default function TextHeaderFull({
   tagline,
+  description,
   button,
   children,
   className = "",
@@ -21,10 +23,15 @@ export default function TextHeaderFull({
     <div
       className={`max-w-2xl mx-auto flex flex-col ${alignment} px-4 ${className}`}
     >
-      <div className="text-white text-xs uppercase tracking-widest mb-4">
+      <div className="text-xs uppercase tracking-widest mb-4 font-body">
         {tagline}
       </div>
-      <h2 className="text-white text-2xl md:text-4xl mb-4">{children}</h2>
+      <h2 className="text-2xl md:text-4xl mb-2 font-header">{children}</h2>
+      {description && (
+        <p className="text-base text-neutral-700 hidden md:flex p-4 w-[30rem]">
+          {description}
+        </p>
+      )}
       {button}
     </div>
   );

@@ -2,7 +2,7 @@ import FullScreenSlider from "components/home/FullScreenSlider";
 import FullWidthProductSlider from "components/home/FullWidthProductSlider";
 import FullWidthTextSection from "components/home/FullWidthTextSection";
 import StickyTextImageSection from "components/home/StickyTextImageSection";
-import TwoColumnFeature from "components/home/TwoColumnFeature";
+import ThreeImageSection from "components/home/ThreeImageSection";
 import ButtonLink from "components/text/ButtonLink";
 
 export const metadata = {
@@ -98,56 +98,62 @@ const sliderProducts2 = [
   },
 ];
 
-export default function HomePage() {
-  const products = [
-    {
-      productImage: "/images/bracelet.webp",
-      productName: "Signature tennis bracelet",
-      material: "18k gold, 12ct",
-      price: "$3,500",
-      buttonText: "Explore our signature collection",
-      buttonLink: "#",
-    },
-    {
-      productImage: "/images/bracelet.webp",
-      productName: "Diamond engagement ring",
-      material: "Platinum, 2.5ct",
-      price: "$8,500",
-      buttonText: "View engagement rings",
-      buttonLink: "#",
-    },
-    {
-      productImage: "/images/bracelet.webp",
-      productName: "Classic tennis bracelet",
-      material: "White gold, 8ct",
-      price: "$4,200",
-      buttonText: "Shop tennis bracelets",
-      buttonLink: "#",
-    },
-    {
-      productImage: "/images/bracelet.webp",
-      productName: "Sapphire ring",
-      material: "Yellow gold, 3ct",
-      price: "$6,800",
-      buttonText: "Discover colored stones",
-      buttonLink: "#",
-    },
-    {
-      productImage: "/images/bracelet.webp",
-      productName: "Eternity band",
-      material: "Rose gold, 1.5ct",
-      price: "$2,900",
-      buttonText: "Explore eternity bands",
-      buttonLink: "#",
-    },
-  ];
+const cards = [
+  {
+    image: "/images/engagement-rings.webp",
+    heading: "High Summer",
+    buttonText: "Shop now",
+    link: "#",
+  },
+  {
+    image: "/images/earrings.webp",
+    heading: "Earrings",
+    buttonText: "Shop now",
+    link: "#",
+  },
+  {
+    image: "/images/diamonds.avif",
+    heading: "Diamonds",
+    buttonText: "Learn more",
+    link: "#",
+  },
+];
 
+const cards2 = [
+  {
+    image: "/images/engagement-rings.webp",
+    heading: "Visit us",
+    buttonText: "Book an appointment",
+    link: "#",
+  },
+  {
+    image: "/images/earrings.webp",
+    heading: "Sustainable luxury",
+    buttonText: "Learn about our values",
+    link: "#",
+  },
+  {
+    image: "/images/diamonds.avif",
+    heading: "Our diamonds",
+    buttonText: "Why we only use the highest grade diamonds",
+    link: "#",
+  },
+];
+
+export default function HomePage() {
   return (
     <>
       <div className="relative w-full">
         <FullScreenSlider />
       </div>
-      <div
+      <ThreeImageSection cards={cards} />
+      <FullWidthProductSlider
+        products={sliderProducts1}
+        tagline="Day Jewelry"
+        heading="Bracelets"
+        sectionDescription="Juxtaposed in elegant combinations, these fine bracelets offer a wide variety of forms to embellish the wrist."
+      />
+      {/* <div
         className="relative z-10"
         style={{ transform: "translateY(-100px)" }}
       >
@@ -156,50 +162,31 @@ export default function HomePage() {
           rightImage="/images/diamonds.avif"
           rightImageAlt="Model wearing jewelry"
         />
-      </div>
-      <div
-        className="relative z-10"
-        style={{ transform: "translateY(-100px)" }}
-      >
-        <FullWidthTextSection />
-      </div>
-      <div
-        className="relative z-10"
-        style={{ transform: "translateY(-100px)" }}
-      >
-        <FullWidthProductSlider
-          products={sliderProducts1}
-          tagline="Day Jewelry"
-          heading="Bracelets"
-          sectionDescription="These fine bracelets offer a wide variety of forms to embellish the wrist. Juxtaposed in elegant combinations, they create a wealth of delicate possibilities."
-        />
-      </div>
-      <div
-        className="relative z-10"
-        style={{ transform: "translateY(-100px)" }}
-      >
-        <StickyTextImageSection
-          tagline="Day Jewelry"
-          heading="Necklaces"
-          image="/images/full-width-jewelry.webp"
-          button={
-            <ButtonLink href="#" className="text-white hover:border-white">
-              Explore all
-            </ButtonLink>
-          }
-        />
-      </div>
-      <div
-        className="relative z-10"
-        style={{ transform: "translateY(-100px)" }}
-      >
-        <FullWidthProductSlider
-          products={sliderProducts2}
-          tagline="Day Jewelry"
-          heading="Rings"
-          sectionDescription="These fine rings offer a wide variety of forms to embellish the hand. Juxtaposed in elegant combinations, they create a wealth of delicate possibilities."
-        />
-      </div>
+      </div> */}
+      <FullWidthTextSection />
+      <FullWidthProductSlider
+        products={sliderProducts1}
+        tagline="Day Jewelry"
+        heading="Bracelets"
+        sectionDescription="Juxtaposed in elegant combinations, these fine bracelets offer a wide variety of forms to embellish the wrist."
+      />
+      <StickyTextImageSection
+        tagline="Day Jewelry"
+        heading="Necklaces"
+        image="/images/full-width-jewelry.webp"
+        button={
+          <ButtonLink href="#" className="text-white hover:border-white">
+            Explore all
+          </ButtonLink>
+        }
+      />
+      <FullWidthProductSlider
+        products={sliderProducts2}
+        tagline="Day Jewelry"
+        heading="Rings"
+        sectionDescription="Juxtaposed in elegant combinations, these fine rings offer a wide variety of forms to embellish the hand."
+      />
+      <ThreeImageSection cards={cards2} />
     </>
   );
 }

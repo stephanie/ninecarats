@@ -1,3 +1,7 @@
+"use client";
+
+import { useIsMobile } from "hooks/useIsMobile";
+
 export default function OpenCart({
   quantity,
   textColor,
@@ -5,13 +9,12 @@ export default function OpenCart({
   quantity?: number;
   textColor: string;
 }) {
+  const isMobile = useIsMobile();
   return (
-    <div
-      className={`relative flex items-center justify-center transition-colors ${textColor}`}
-    >
+    <div className={`relative flex transition-colors ${textColor}`}>
       <svg
-        width="24px"
-        height="24px"
+        width={isMobile ? "18px" : "24px"}
+        height={isMobile ? "18px" : "24px"}
         strokeWidth="1.2"
         viewBox="0 0 24 24"
         fill="none"

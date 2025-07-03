@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 @import 'tailwindcss';
 
 @plugin "@tailwindcss/container-queries";
@@ -27,6 +28,112 @@
   img[loading='lazy'] {
     clip-path: inset(0.6px);
   }
+}
+
+/* Hellix Thin */
+@font-face {
+  font-family: 'Hellix';
+  src: url('/fonts/Hellix-Thin.woff2') format('woff2'),
+       url('/fonts/Hellix-Thin.woff') format('woff'),
+       url('/fonts/Hellix-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Hellix';
+  src: url('/fonts/Hellix-ThinItalic.woff2') format('woff2'),
+       url('/fonts/Hellix-ThinItalic.woff') format('woff'),
+       url('/fonts/Hellix-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Hellix Light */
+@font-face {
+  font-family: 'Hellix';
+  src: url('/fonts/Hellix-Light.woff2') format('woff2'),
+       url('/fonts/Hellix-Light.woff') format('woff'),
+       url('/fonts/Hellix-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Hellix';
+  src: url('/fonts/Hellix-LightItalic.woff2') format('woff2'),
+       url('/fonts/Hellix-LightItalic.woff') format('woff'),
+       url('/fonts/Hellix-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Hellix Regular */
+@font-face {
+  font-family: 'Hellix';
+  src: url('/fonts/Hellix-Regular.woff2') format('woff2'),
+       url('/fonts/Hellix-Regular.woff') format('woff'),
+       url('/fonts/Hellix-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Hellix';
+  src: url('/fonts/Hellix-RegularItalic.woff2') format('woff2'),
+       url('/fonts/Hellix-RegularItalic.woff') format('woff'),
+       url('/fonts/Hellix-RegularItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Hellix Medium */
+@font-face {
+  font-family: 'Hellix';
+  src: url('/fonts/Hellix-Medium.woff2') format('woff2'),
+       url('/fonts/Hellix-Medium.woff') format('woff'),
+       url('/fonts/Hellix-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Hellix';
+  src: url('/fonts/Hellix-MediumItalic.woff2') format('woff2'),
+       url('/fonts/Hellix-MediumItalic.woff') format('woff'),
+       url('/fonts/Hellix-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bagnard';
+  src: url('/fonts/Bagnard.eot');
+  src: url('/fonts/Bagnard.eot?#iefix') format('embedded-opentype'),
+      url('/fonts/Bagnard.woff2') format('woff2'),
+      url('/fonts/Bagnard.woff') format('woff'),
+      url('/fonts/Bagnard.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LibreBaskerville';
+  src: url('/fonts/LibreBaskerville-Regular.woff2') format('woff2'),
+       url('/fonts/LibreBaskerville-Regular.woff') format('woff'),
+       url('/fonts/LibreBaskerville-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-header: "LibreBaskerville", "sans-serif";
+  --font-body: "Hellix", "sans-serif";
 }
 
 a,

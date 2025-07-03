@@ -1,7 +1,7 @@
 export default function NewsletterSignup() {
   return (
     <div className="max-w-3xl mx-auto flex flex-col items-center mb-12 md:mb-32 px-4">
-      <p className="text-center text-sm md:text-lg mb-8 max-w-[20rem] md:max-w-[25rem]">
+      <p className="text-center text-sm md:text-base mb-8 max-w-[20rem] md:max-w-[25rem]">
         Subscribe for insider access to discover our new collections, exclusive
         events and more.
       </p>

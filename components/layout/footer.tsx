@@ -65,7 +65,7 @@ export default function Footer() {
             ))}
           </div>
           <div className="tracking-wide text-neutral-500 mt-2 md:mt-0">
-            © NINE CARATS 2025
+            © NINECARATS 2025
           </div>
         </div>
       </div>

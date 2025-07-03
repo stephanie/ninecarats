@@ -1,6 +1,8 @@
 "use client";
 
 import SliderDots from "components/slider/SliderDots";
+import ButtonLink from "components/text/ButtonLink";
+import TextHeaderFull from "components/text/TextHeaderFull";
 import { useIsMobile } from "hooks/useIsMobile";
 import Image from "next/image";
 import { useState } from "react";
@@ -77,7 +79,7 @@ export default function FullWidthProductSlider({
               key={idx}
               className="flex-shrink-0 w-[80vw] max-w-[340px] flex flex-col mb-8"
             >
-              <div className="flex flex-col items-center p-3">
+              <div className="flex flex-col items-center p-2">
                 <div className="w-full aspect-[3/4] relative mb-6">
                   <Image
                     src={product.image}
@@ -106,9 +108,9 @@ export default function FullWidthProductSlider({
     );
   } else {
     sliderContent = (
-      <div className="relative w-full mb-8 overflow-hidden px-8">
+      <div className="relative w-full mb-8 overflow-hidden px-4">
         <div
-          className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full transition-all duration-500 ease-in-out ${
+          className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full transition-all duration-500 ease-in-out ${
             isTransitioning ? "opacity-50 scale-95" : "opacity-100 scale-100"
           }`}
         >
@@ -129,8 +131,8 @@ export default function FullWidthProductSlider({
                   opacity: isTransitioning ? 0 : 1,
                 }}
               >
-                <div className="flex flex-col items-center bg-neutral-100 p-6">
-                  <div className="w-full aspect-[3/4] relative mb-6">
+                <div className="flex flex-col items-center bg-neutral-100 p-2">
+                  <div className="w-full aspect-[3/4] relative mb-8">
                     <Image
                       src={product.image}
                       alt={product.name}
@@ -142,11 +144,9 @@ export default function FullWidthProductSlider({
                   </div>
                 </div>
                 <div className="text-center flex flex-col">
-                  <div className="text-sm md:text-base font-light mb-1">
-                    {product.name}
-                  </div>
+                  <div className="text-sm mb-1">{product.name}</div>
                   {product.price && (
-                    <div className="text-xs md:text-sm text-neutral-500">
+                    <div className="text-sm text-neutral-400">
                       {product.price}
                     </div>
                   )}
@@ -159,25 +159,19 @@ export default function FullWidthProductSlider({
   }
 
   return (
-    <section className="w-full py-20 bg-white">
+    <section className="w-full py-8 bg-white">
       <div
         className="max-w-[100vw] mx-auto flex flex-col items-center"
         {...swipeHandlers}
       >
-        <div className="mb-4 text-center px-8 lg:px-16">
-          {tagline && (
-            <div className="text-xs tracking-widest text-neutral-500 mb-2 md:mb-4 uppercase">
-              {tagline}
-            </div>
-          )}
-          <h2 className="text-3xl md:text-4xl font-light mb-2 md:mb-8">
+        <div className="mb-8 text-center px-8 lg:px-16">
+          <TextHeaderFull
+            tagline={tagline}
+            description={sectionDescription}
+            button={<ButtonLink href="/shop">Shop</ButtonLink>}
+          >
             {heading}
-          </h2>
-          {sectionDescription && (
-            <p className="max-w-2xl mx-auto text-base md:text-lg text-neutral-700 mb-10 hidden md:flex">
-              {sectionDescription}
-            </p>
-          )}
+          </TextHeaderFull>
         </div>
         {sliderContent}
         <SliderDots

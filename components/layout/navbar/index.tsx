@@ -1,6 +1,6 @@
 import { getMenu } from "lib/shopify";
 import { Suspense } from "react";
-import NavbarClient from "./navbar-client";
+import LargeNavHeader from "./LargeNavHeader";
 
 const { SITE_NAME } = process.env;
 
@@ -9,7 +9,7 @@ export async function Navbar() {
 
   return (
     <Suspense fallback={<NavbarLoadingSkeleton />}>
-      <NavbarClient menu={menu} siteName={SITE_NAME} />
+      <LargeNavHeader menu={menu} />
     </Suspense>
   );
 }

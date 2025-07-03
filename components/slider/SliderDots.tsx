@@ -3,6 +3,8 @@ interface SliderDotsProps {
   selected: number;
   onSelect?: (index: number) => void;
   className?: string;
+  selectedDotClassName?: string;
+  dotClassName?: string;
   disabled?: boolean;
 }
 
@@ -11,6 +13,8 @@ export default function SliderDots({
   selected,
   onSelect,
   className = "",
+  selectedDotClassName = "",
+  dotClassName = "",
   disabled = false,
 }: SliderDotsProps) {
   return (
@@ -24,8 +28,8 @@ export default function SliderDots({
           aria-label={`Go to slide ${i + 1}`}
           className={`transition-all duration-300 flex items-center justify-center focus:outline-none ${
             i === selected
-              ? "w-5 h-2 bg-black rounded-full" // pill/elongated
-              : "w-2 h-2 bg-gray-400 rounded-full hover:bg-gray-500"
+              ? `w-5 h-2 bg-black rounded-full ${selectedDotClassName}` // pill/elongated
+              : `w-2 h-2 bg-gray-400 rounded-full hover:bg-gray-500 ${dotClassName}`
           } ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
         />
       ))}

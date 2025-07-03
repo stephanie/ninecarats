@@ -1,5 +1,6 @@
 "use client";
 
+import SliderDots from "components/slider/SliderDots";
 import ButtonLink from "components/text/ButtonLink";
 import TextHeaderFull from "components/text/TextHeaderFull";
 import Image from "next/image";
@@ -173,10 +174,7 @@ export default function FullScreenSlider() {
     <div
       className="relative w-full"
       style={{
-        height: viewportHeight
-          ? `calc(${viewportHeight}px - 20px)`
-          : "calc(100vh - 20px)",
-        transform: "translateY(-100px)",
+        height: viewportHeight ? `calc(${viewportHeight}px)` : "calc(100vh)",
       }}
       {...swipeHandlers}
     >
@@ -213,8 +211,8 @@ export default function FullScreenSlider() {
 
       {/* Navigation and Heading */}
       <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center">
-        <div className="relative flex h-50 w-[18rem] md:w-[25rem] items-center justify-center">
-          <div className="absolute left-0 transform text-white transition-transform duration-500 ease-in-out hover:opacity-70">
+        <div className="relative flex h-[20rem] w-[18rem] md:w-[25rem] items-center justify-center">
+          {/* <div className="absolute left-0 transform text-white transition-transform duration-500 ease-in-out hover:opacity-70">
             <button
               onClick={previousSlide}
               aria-label="Previous slide"
@@ -222,10 +220,10 @@ export default function FullScreenSlider() {
             >
               <LeftCaret />
             </button>
-          </div>
+          </div> */}
           <div className="absolute left-1/2 -translate-x-1/2 transform">
             <TextHeaderFull
-              className={`whitespace-nowrap transition-all duration-500 ${
+              className={`whitespace-nowrap transition-all duration-500 text-white ${
                 headingVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-4"
@@ -243,7 +241,17 @@ export default function FullScreenSlider() {
               {currentHeading}
             </TextHeaderFull>
           </div>
-          <div className="absolute right-0 transform text-white transition-transform duration-500 ease-in-out hover:opacity-70">
+          <div className="absolute bottom-12">
+            <SliderDots
+              total={slides.length}
+              selected={currentSlide}
+              onSelect={setCurrentSlide}
+              disabled={isTransitioning}
+              selectedDotClassName="bg-white"
+              dotClassName="bg-neutral-300 hover:bg-neutral-400"
+            />
+          </div>
+          {/* <div className="absolute right-0 transform text-white transition-transform duration-500 ease-in-out hover:opacity-70">
             <button
               onClick={nextSlide}
               aria-label="Next slide"
@@ -251,13 +259,13 @@ export default function FullScreenSlider() {
             >
               <RightCaret />
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* Progress bar */}
-        <div className="h-1 w-full bg-neutral-800">
+        <div className="h-2 w-full bg-white">
           <div
-            className="h-full bg-white transition-all duration-50 ease-linear"
+            className="h-full bg-black transition-all duration-50 ease-linear"
             style={{ width: `${progress}%` }}
           />
         </div>

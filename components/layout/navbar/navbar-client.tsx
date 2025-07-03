@@ -2,15 +2,9 @@
 
 import CartModal from "components/cart/modal";
 import { Menu } from "lib/shopify/types";
-import { Julius_Sans_One } from "next/font/google";
 import Link from "next/link";
 import { Suspense, useEffect, useState } from "react";
 import MobileMenu from "./mobile-menu";
-
-const headerFont = Julius_Sans_One({
-  weight: "400",
-  subsets: ["latin"],
-});
 
 interface NavbarClientProps {
   menu: Menu[];
@@ -157,7 +151,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
           </div>
           <div className="flex justify-center w-full lg:w-1/3">
             <span
-              className={`text-xl lg:text-5xl tracking-wide select-none tracking-wider uppercase transition-colors duration-300 ${textColor}`}
+              className={`text-xl lg:text-5xl tracking-wide select-none tracking-wider uppercase transition-colors duration-300 font-header ${textColor}`}
             >
               {siteName}
             </span>

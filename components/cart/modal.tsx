@@ -49,7 +49,7 @@ export default function CartModal({ textColor }: { textColor: string }) {
 
   return (
     <>
-      <button aria-label="Open cart" onClick={openCart}>
+      <button aria-label="Open cart" onClick={openCart} className="flex">
         <OpenCart quantity={cart?.totalQuantity} textColor={textColor} />
       </button>
       <Transition show={isOpen}>

@@ -49,8 +49,8 @@ export default function MobileMenu({
         className={`mr-4 transition-colors duration-300 cursor-pointer ${textColor}`}
       >
         <svg
-          width="24"
-          height="24"
+          width="18"
+          height="18"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.5"

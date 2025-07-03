@@ -3,7 +3,6 @@ import Footer from "components/layout/Footer";
 import { Navbar } from "components/layout/navbar";
 import { getCart } from "lib/shopify";
 import { baseUrl } from "lib/utils";
-import { Jost } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
 
@@ -21,11 +20,6 @@ export const metadata = {
   },
 };
 
-const bodyFont = Jost({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-});
-
 export default async function RootLayout({
   children,
 }: {
@@ -35,11 +29,11 @@ export default async function RootLayout({
   const cart = getCart();
 
   return (
-    <html lang="en" className={bodyFont.className}>
-      <body className="text-black selection:bg-neutral-200 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
+    <html lang="en">
+      <body className="font-body">
         <CartProvider cartPromise={cart}>
           <Navbar />
-          <main className="pt-[120px]">{children}</main>
+          <main>{children}</main>
         </CartProvider>
         <Footer />
       </body>

@@ -3,10 +3,10 @@ import TextHeaderFull from "components/text/TextHeaderFull";
 
 export default function FullWidthTextSection() {
   return (
-    <section className="relative w-full md:min-h-[60vh] min-h-[320px] bg-black py-24 px-4 overflow-hidden flex flex-col justify-center">
+    <section className="relative w-full md:min-h-[60vh] min-h-[320px] bg-white py-24 px-4 overflow-hidden flex flex-col justify-center">
       {/* Background Video */}
       <video
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        className="absolute inset-0 w-full h-full object-cover z-0 p-4"
         src="/videos/sky.mov"
         autoPlay
         loop
@@ -14,9 +14,10 @@ export default function FullWidthTextSection() {
         playsInline
       />
       {/* Optional overlay for readability */}
-      <div className="absolute inset-0 bg-black/20 z-0" />
+      <div className="absolute inset-0 z-0" />
       <div className="relative z-10">
         <TextHeaderFull
+          className="text-white"
           tagline="Meet NINE CARATS"
           button={
             <ButtonLink href="#" className="text-white hover:border-white">

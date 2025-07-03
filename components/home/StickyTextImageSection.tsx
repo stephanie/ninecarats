@@ -24,18 +24,18 @@ export default function StickyTextImageSection({
           src={image}
           alt={imageAlt}
           fill
-          className="object-cover object-center"
+          className="object-cover object-center p-4"
           priority
         />
       </div>
       {/* Sticky Text */}
       <div className="w-full max-w-xl">
-        <div className="sticky top-24 pt-16 z-10 pl-4 pb-16">
+        <div className="sticky top-24 pt-16 z-10 pl-12 pb-16">
           <TextHeaderFull
             tagline={tagline}
             button={button}
             align="left"
-            className="text-black"
+            className="text-white"
           >
             {heading}
           </TextHeaderFull>
