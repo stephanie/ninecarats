@@ -67,7 +67,7 @@ export default function FullWidthProductSlider({
   let sliderContent;
   if (isMobile) {
     sliderContent = (
-      <div className="relative w-full mb-4 overflow-x-hidden">
+      <div className="relative w-full overflow-x-hidden">
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{
@@ -92,11 +92,9 @@ export default function FullWidthProductSlider({
                 </div>
               </div>
               <div className="text-center flex flex-col">
-                <div className="text-sm md:text-base font-light mb-1">
-                  {product.name}
-                </div>
+                <div className="text-sm md:text-base mb-1">{product.name}</div>
                 {product.price && (
-                  <div className="text-xs md:text-sm text-neutral-500">
+                  <div className="text-sm md:text-base text-neutral-400">
                     {product.price}
                   </div>
                 )}
@@ -121,7 +119,7 @@ export default function FullWidthProductSlider({
             )
             .map((product, idx) => (
               <div
-                className="flex flex-col gap-4 mb-8 transform transition-all duration-500 ease-out"
+                className="flex flex-col gap-4 mb-2 transform transition-all duration-500 ease-out"
                 key={`${currentPage}-${idx}`}
                 style={{
                   animationDelay: `${idx * 100}ms`,

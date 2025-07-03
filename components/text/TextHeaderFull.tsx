@@ -6,6 +6,7 @@ interface TextHeaderFullProps {
   button?: React.ReactNode;
   children: React.ReactNode;
   className?: string;
+  headerClassName?: string;
   align?: "center" | "left";
 }
 
@@ -15,6 +16,7 @@ export default function TextHeaderFull({
   button,
   children,
   className = "",
+  headerClassName = "",
   align = "center",
 }: TextHeaderFullProps) {
   const alignment =
@@ -26,7 +28,11 @@ export default function TextHeaderFull({
       <div className="text-xs uppercase tracking-widest mb-4 font-body">
         {tagline}
       </div>
-      <h2 className="text-2xl md:text-4xl mb-2 font-header">{children}</h2>
+      <h2
+        className={`${headerClassName ? headerClassName : "text-2xl md:text-4xl"} mb-2 font-header`}
+      >
+        {children}
+      </h2>
       {description && (
         <p className="text-base text-neutral-700 hidden md:flex p-4 w-[30rem]">
           {description}

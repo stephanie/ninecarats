@@ -146,7 +146,6 @@ export default function HomePage() {
       <div className="relative w-full">
         <FullScreenSlider />
       </div>
-      <ThreeImageSection cards={cards} />
       <FullWidthProductSlider
         products={sliderProducts1}
         tagline="Day Jewelry"

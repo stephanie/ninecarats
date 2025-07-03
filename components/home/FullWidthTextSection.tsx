@@ -18,6 +18,7 @@ export default function FullWidthTextSection() {
       <div className="relative z-10">
         <TextHeaderFull
           className="text-white"
+          headerClassName="text-1xl md:text-4xl"
           tagline="Meet NINE CARATS"
           button={
             <ButtonLink href="#" className="text-white hover:border-white">

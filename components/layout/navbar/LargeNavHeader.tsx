@@ -29,16 +29,27 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
       >
         {/* Navbar Content */}
         <div className="relative left-0 right-0 flex justify-between transition-all duration-300 ease-in-out w-full">
-          <div className="flex w-full">
+          <div
+            className={`flex w-full ${
+              scrolled && isMobile ? "flex-row-reverse" : "flex-col"
+            } md:flex-row`}
+          >
+            <div
+              className={`flex lg:hidden items-center ${
+                scrolled
+                  ? "justify-start p-2 pr-4"
+                  : "justify-between w-full p-4 pt-2"
+              }`}
+            >
+              <Suspense fallback={null}>
+                <MobileMenu
+                  menu={menu}
+                  textColor={scrolled ? "text-black" : "text-white"}
+                />
+              </Suspense>
+              <CartModal textColor={scrolled ? "text-black" : "text-white"} />
+            </div>
             <div className="flex justify-start lg:w-1/3 pl-4 md:p-4 items-center md:items-start">
-              <div className="flex lg:hidden">
-                <Suspense fallback={null}>
-                  <MobileMenu
-                    menu={menu}
-                    textColor={scrolled ? "text-black" : "text-white"}
-                  />
-                </Suspense>
-              </div>
               <button
                 aria-label="Open menu"
                 className={`mr-4 transition-colors duration-300 hidden lg:flex ${
@@ -105,7 +116,11 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 ) : null}
               </div>
             </div>
-            <div className="flex justify-center w-full lg:w-1/3 pb-0 items-center">
+            <div
+              className={`flex w-full lg:w-1/3 pb-0 items-center ${
+                scrolled && isMobile ? "justify-start pl-4" : "justify-center"
+              }`}
+            >
               {" "}
               <span
                 className={`font-header transition-all duration-500 ${
@@ -116,7 +131,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               </span>
             </div>
             {/* Right Section */}
-            <div className="flex justify-end lg:w-1/3 gap-6 pr-4 md:p-4 items-center md:items-start">
+            <div className="flex justify-end lg:w-1/3 gap-6 pr-4 md:p-4 items-center md:items-start hidden md:flex">
               {/* Currency/Location Dropdown */}
               {/* <button
                 className={`flex text-sm gap-1 transition-colors duration-300 hidden lg:flex ${scrolled ? "text-black" : "text-white"}`}
