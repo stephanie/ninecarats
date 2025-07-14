@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { GridTileImage } from "components/grid/tile";
-import Footer from "components/layout/Footer";
 import { Gallery } from "components/product/gallery";
 import { ProductProvider } from "components/product/product-context";
 import { ProductDescription } from "components/product/product-description";
@@ -82,24 +81,23 @@ export default async function ProductPage(props: {
           __html: JSON.stringify(productJsonLd),
         }}
       />
-      <div className="mx-auto max-w-(--breakpoint-2xl) px-4">
-        <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 md:p-12 lg:flex-row lg:gap-8 dark:border-neutral-800 dark:bg-black">
-          <div className="h-full w-full basis-full lg:basis-4/6">
-            <Suspense
-              fallback={
-                <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden" />
-              }
-            >
-              <Gallery
-                images={product.images.slice(0, 5).map((image: Image) => ({
-                  src: image.url,
-                  altText: image.altText,
-                }))}
-              />
-            </Suspense>
-          </div>
-
-          <div className="basis-full lg:basis-2/6">
+      <div className="w-full flex flex-col gap-4">
+        {/* Full width gallery section */}
+        <div className="w-full">
+          <Suspense
+            fallback={<div className="relative w-full bg-neutral-100" />}
+          >
+            <Gallery
+              images={product.images.slice(0, 1).map((image: Image) => ({
+                src: image.url,
+                altText: image.altText,
+              }))}
+            />
+          </Suspense>
+        </div>
+        {/* Product details section */}
+        <div className="flex w-full px-12">
+          <div className="basis-full">
             <Suspense fallback={null}>
               <ProductDescription product={product} />
             </Suspense>
@@ -107,7 +105,6 @@ export default async function ProductPage(props: {
         </div>
         <RelatedProducts id={product.id} />
       </div>
-      <Footer />
     </ProductProvider>
   );
 }

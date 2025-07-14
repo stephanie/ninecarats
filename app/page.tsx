@@ -1,8 +1,8 @@
 import FullScreenSlider from "components/home/FullScreenSlider";
 import FullWidthProductSlider from "components/home/FullWidthProductSlider";
 import FullWidthTextSection from "components/home/FullWidthTextSection";
+import MultiImageSection from "components/home/MultiImageSection";
 import StickyTextImageSection from "components/home/StickyTextImageSection";
-import ThreeImageSection from "components/home/ThreeImageSection";
 import ButtonLink from "components/text/ButtonLink";
 
 export const metadata = {
@@ -127,12 +127,6 @@ const cards2 = [
     link: "#",
   },
   {
-    image: "/images/earrings.webp",
-    heading: "Sustainable luxury",
-    buttonText: "Learn about our values",
-    link: "#",
-  },
-  {
     image: "/images/diamonds.avif",
     heading: "Our diamonds",
     buttonText: "Why we only use the highest grade diamonds",
@@ -185,7 +179,7 @@ export default function HomePage() {
         heading="Bracelets"
         sectionDescription="Juxtaposed in elegant combinations, these fine bracelets offer a wide variety of forms to embellish the wrist."
       />
-      <ThreeImageSection cards={cards2} />
+      <MultiImageSection cards={cards2} columns={2} />
     </>
   );
 }

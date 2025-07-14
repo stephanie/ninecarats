@@ -4,10 +4,19 @@ import { FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 
 const menu = [
-  { title: "Customer Care", items: [] },
-  { title: "Client Services", items: [] },
-  { title: "Our Company", items: [] },
-  { title: "Legal & Privacy", items: [] },
+  {
+    title: "Customer Care",
+    items: ["Contact Us", "FAQ", "Shipping & Returns"],
+  },
+  {
+    title: "Client Services",
+    items: ["My Account", "Order Tracking", "Wishlist"],
+  },
+  { title: "Our Company", items: ["About Us", "Careers", "Press"] },
+  {
+    title: "Legal & Privacy",
+    items: ["Terms of Service", "Privacy Policy", "Cookie Policy"],
+  },
 ];
 
 export default function MobileFooter() {
@@ -39,12 +48,14 @@ export default function MobileFooter() {
                 </svg>
               </span>
             </button>
-            {/* Example: You can add menu items here if needed */}
-            {/* {open === idx && (
-              <div className="px-6 pb-4 text-sm text-neutral-600">
-                {section.items.map(item => <div key={item}>{item}</div>)}
+            {/* Menu items */}
+            {open === idx && (
+              <div className="pb-2 text-sm text-neutral-600 gap-2">
+                {section.items.map((item) => (
+                  <div key={item}>{item}</div>
+                ))}
               </div>
-            )} */}
+            )}
           </div>
         ))}
       </div>
@@ -67,7 +78,7 @@ export default function MobileFooter() {
           </a>
         </div>
         <div className="text-center text-neutral-400 text-xs">
-          © NINE CARATS 2025
+          © NINECARATS 2025
         </div>
       </div>
     </div>

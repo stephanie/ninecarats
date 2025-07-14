@@ -16,7 +16,7 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className="w-full pt-12 pb-2 text-neutral-800 bg-white">
+    <footer className="w-full pt-24 pb-2 text-neutral-800 bg-white">
       <NewsletterSignup />
       <div className="md:hidden">
         <MobileFooter />
@@ -64,7 +64,7 @@ export default function Footer() {
               </Link>
             ))}
           </div>
-          <div className="tracking-wide text-neutral-500 mt-2 md:mt-0">
+          <div className="text-neutral-400 mt-2 md:mt-0">
             © NINECARATS 2025
           </div>
         </div>

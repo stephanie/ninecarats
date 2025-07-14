@@ -3,28 +3,40 @@ import CartModal from "components/cart/modal";
 import { useIsMobile } from "hooks/useIsMobile";
 import { Menu } from "lib/shopify/types";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import MobileMenu from "./mobile-menu";
 
 export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const [scrolled, setScrolled] = useState(false);
   const isMobile = useIsMobile();
+  const pathname = usePathname();
+
+  // Determine if we're on the homepage
+  const isHome = pathname === "/";
+
+  // New: Track if we should use the small logo/text size
+  const [forceSmall, setForceSmall] = useState(false);
 
   useEffect(() => {
+    setForceSmall(!isHome);
+    // Set initial scrolled state if not on home
+    // setScrolled(!isHome);
     function onScroll() {
-      setScrolled(window.scrollY > 40);
+      // Always set scrolled to true if scrolled, but if not on home, keep small size
+      setScrolled(window.scrollY > 40 || !isHome);
     }
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHome]);
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 transition-all duration-500">
       <div
-        className={`relative flex flex-col justify-center w-full transition-all duration-500 ${
+        className={`relative flex flex-col justify-center w-full transition-all duration-800 ${
           scrolled
-            ? "bg-white/95 backdrop-blur text-black shadow-md py-2"
-            : "bg-transparent text-white py-2"
+            ? "bg-white text-black py-2 sm:py-0"
+            : "bg-transparent text-white py-2 sm:py-0"
         }`}
       >
         {/* Navbar Content */}
@@ -32,10 +44,10 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
           <div
             className={`flex w-full ${
               scrolled && isMobile ? "flex-row-reverse" : "flex-col"
-            } md:flex-row`}
+            } sm:flex-row`}
           >
             <div
-              className={`flex lg:hidden items-center ${
+              className={`flex sm:hidden items-center ${
                 scrolled
                   ? "justify-start p-2 pr-4"
                   : "justify-between w-full p-4 pt-2"
@@ -44,16 +56,20 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               <Suspense fallback={null}>
                 <MobileMenu
                   menu={menu}
-                  textColor={scrolled ? "text-black" : "text-white"}
+                  textColor={
+                    scrolled || forceSmall ? "text-black" : "text-white"
+                  }
                 />
               </Suspense>
-              <CartModal textColor={scrolled ? "text-black" : "text-white"} />
+              <CartModal
+                textColor={scrolled || forceSmall ? "text-black" : "text-white"}
+              />
             </div>
-            <div className="flex justify-start lg:w-1/3 pl-4 md:p-4 items-center md:items-start">
+            <div className="flex justify-start sm:w-1/3 pl-4 sm:p-4 items-center sm:items-start">
               <button
                 aria-label="Open menu"
-                className={`mr-4 transition-colors duration-100 hidden lg:flex ${
-                  scrolled ? "text-black" : "text-white"
+                className={`mr-4 transition-colors duration-100 hidden sm:flex ${
+                  scrolled || forceSmall ? "text-black" : "text-white"
                 }`}
               >
                 <svg
@@ -70,8 +86,8 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 </svg>
               </button>
               <div
-                className={`flex gap-2 transition-colors duration-100 hidden lg:flex ${
-                  scrolled ? "text-black" : "text-white"
+                className={`flex gap-2 transition-colors duration-100 hidden sm:flex ${
+                  scrolled || forceSmall ? "text-black" : "text-white"
                 }`}
               >
                 <svg
@@ -100,7 +116,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               </span>
               )} */}
                 {menu.length ? (
-                  <ul className="hidden gap-6 text-sm lg:flex lg:items-center">
+                  <ul className="hidden gap-6 text-sm sm:flex sm:items-center">
                     {menu.map((item: Menu) => (
                       <li key={item.title}>
                         <Link
@@ -117,23 +133,25 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               </div>
             </div>
             <div
-              className={`flex w-full lg:w-1/3 pb-0 items-center ${
+              className={`flex w-full sm:w-1/3 pb-0 items-center ${
                 scrolled && isMobile ? "justify-start pl-4" : "justify-center"
               }`}
             >
               {" "}
               <span
                 className={`font-header transition-all duration-500 ${
-                  scrolled
-                    ? "text-base md:text-3xl pt-1 text-black"
-                    : "text-[10vw] md:pt-4 text-white"
+                  !isHome && !scrolled && isMobile
+                    ? "text-2xl text-black"
+                    : scrolled || !isHome
+                      ? "text-base sm:text-lg pt-1 text-black"
+                      : "text-[10vw] sm:pt-8 text-white"
                 } tracking-widest select-none drop-shadow-lg uppercase`}
               >
                 NineCarats
               </span>
             </div>
             {/* Right Section */}
-            <div className="flex justify-end lg:w-1/3 gap-6 pr-4 md:p-4 items-center md:items-start hidden md:flex">
+            <div className="flex justify-end sm:w-1/3 gap-6 pr-4 sm:p-4 items-center sm:items-start hidden sm:flex">
               {/* Currency/Location Dropdown */}
               {/* <button
                 className={`flex text-sm gap-1 transition-colors duration-300 hidden lg:flex ${scrolled ? "text-black" : "text-white"}`}
@@ -182,7 +200,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               {/* Phone Icon */}
               <button
                 aria-label="Phone"
-                className={`transition-colors duration-100 hidden lg:flex ${scrolled ? "text-black" : "text-white"}`}
+                className={`transition-colors duration-100 hidden sm:flex ${scrolled || forceSmall ? "text-black" : "text-white"}`}
               >
                 <svg
                   width="24px"
@@ -205,7 +223,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               {/* User Icon */}
               <button
                 aria-label="User"
-                className={`transition-colors duration-100 hidden lg:flex ${scrolled ? "text-black" : "text-white"}`}
+                className={`transition-colors duration-100 hidden sm:flex ${scrolled || forceSmall ? "text-black" : "text-white"}`}
               >
                 <svg
                   width="24px"
@@ -233,7 +251,9 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 </svg>
               </button>
               {/* Shopping Bag Icon (opens CartModal) */}
-              <CartModal textColor={scrolled ? "text-black" : "text-white"} />
+              <CartModal
+                textColor={scrolled || forceSmall ? "text-black" : "text-white"}
+              />
             </div>
           </div>
         </div>
