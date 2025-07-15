@@ -28,31 +28,33 @@ export function ProductDescription({ product }: { product: Product }) {
   ];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mx-auto p-8 w-full">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mx-auto p-4 lg:p-8 w-full">
       {/* Left Column - Product Description */}
-      <div className="space-y-8">
+      <div className="space-y-2 lg:space-y-8">
         <div>
-          <h2 className="text-lg text-black mb-2">{product.title}</h2>
-          <div className="text-lg text-neutral-500 mb-8">
+          <h2 className="text-md sm:text-lg text-black mb-2 hidden lg:block">
+            {product.title}
+          </h2>
+          <div className="text-md sm:text-lg text-neutral-500 mb-8 hidden lg:block">
             <Price
               amount={product.priceRange.maxVariantPrice.amount}
               currencyCode={product.priceRange.maxVariantPrice.currencyCode}
             />
           </div>
-          <div className="mb-10">
+          <div className="mb-10 hidden lg:block">
             <VariantSelector
               options={product.options}
               variants={product.variants}
             />
           </div>
-          <p className="text-base leading-relaxed text-black">
+          <p className="text-sm sm:text-base leading-relaxed text-black">
             {product.description}
           </p>
         </div>
 
         {/* Collapsible sections */}
-        <div className="space-y-4">
-          <div className="divide-y divide-neutral-200 py-5">
+        <div className="space-y-2">
+          <div className="divide-y divide-neutral-200 py-2 lg:py-5">
             {menu.map((section, idx) => (
               <div key={section.title}>
                 <button
@@ -91,7 +93,7 @@ export function ProductDescription({ product }: { product: Product }) {
       </div>
 
       {/* Right Column - Add to Cart */}
-      <div className="space-y-4 flex justify-end">
+      <div className="space-y-4 justify-end hidden lg:flex">
         <div className="flex flex-col gap-4">
           <AddToCart product={product} />
 

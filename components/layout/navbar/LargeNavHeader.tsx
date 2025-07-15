@@ -50,7 +50,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               className={`flex sm:hidden items-center ${
                 scrolled
                   ? "justify-start p-2 pr-4"
-                  : "justify-between w-full p-4 pt-2"
+                  : "justify-between w-full px-4 pt-2"
               }`}
             >
               <Suspense fallback={null}>
@@ -137,14 +137,13 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 scrolled && isMobile ? "justify-start pl-4" : "justify-center"
               }`}
             >
-              {" "}
               <span
                 className={`font-header transition-all duration-500 ${
                   !isHome && !scrolled && isMobile
-                    ? "text-2xl text-black"
+                    ? "text-lg text-black"
                     : scrolled || !isHome
-                      ? "text-base sm:text-lg pt-1 text-black"
-                      : "text-[10vw] sm:pt-8 text-white"
+                      ? "text-sm sm:text-lg pt-1 text-black"
+                      : "text-[8vw] sm:pt-8 text-white"
                 } tracking-widest select-none drop-shadow-lg uppercase`}
               >
                 NineCarats

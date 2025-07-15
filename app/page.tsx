@@ -145,6 +145,11 @@ export default function HomePage() {
         tagline="Jewelry"
         heading="Bracelets"
         sectionDescription="Juxtaposed in elegant combinations, these fine bracelets offer a wide variety of forms to embellish the wrist."
+        button={
+          <ButtonLink href="#" className="text-black hover:border-black">
+            Shop
+          </ButtonLink>
+        }
       />
       {/* <div
         className="relative z-10"
@@ -162,6 +167,11 @@ export default function HomePage() {
         tagline="Wedding"
         heading="Engagement Rings"
         sectionDescription="Juxtaposed in elegant combinations, these fine rings offer a wide variety of forms to embellish the hand."
+        button={
+          <ButtonLink href="#" className="text-black hover:border-black">
+            Shop
+          </ButtonLink>
+        }
       />
       <StickyTextImageSection
         tagline="Day Jewelry"
@@ -178,6 +188,11 @@ export default function HomePage() {
         tagline="Jewelry"
         heading="Bracelets"
         sectionDescription="Juxtaposed in elegant combinations, these fine bracelets offer a wide variety of forms to embellish the wrist."
+        button={
+          <ButtonLink href="#" className="text-black hover:border-black">
+            Shop
+          </ButtonLink>
+        }
       />
       <MultiImageSection cards={cards2} columns={2} />
     </>

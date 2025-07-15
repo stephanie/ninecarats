@@ -1,7 +1,6 @@
 "use client";
 
 import SliderDots from "components/slider/SliderDots";
-import ButtonLink from "components/text/ButtonLink";
 import TextHeaderFull from "components/text/TextHeaderFull";
 import { useIsMobile } from "hooks/useIsMobile";
 import Image from "next/image";
@@ -17,8 +16,9 @@ interface Product {
 interface FullWidthProductSliderProps {
   products: Product[];
   tagline?: string;
-  heading: string;
+  heading?: string;
   sectionDescription?: string;
+  button?: React.ReactNode;
 }
 
 export default function FullWidthProductSlider({
@@ -26,6 +26,7 @@ export default function FullWidthProductSlider({
   tagline,
   heading,
   sectionDescription,
+  button,
 }: FullWidthProductSliderProps) {
   const isMobile = useIsMobile();
   const [currentPage, setCurrentPage] = useState(0);
@@ -159,21 +160,23 @@ export default function FullWidthProductSlider({
   }
 
   return (
-    <section className="w-full py-14 bg-white">
+    <section className="w-full mb-8 sm:mb-16 bg-white">
       <div
         className="max-w-[100vw] mx-auto flex flex-col items-center"
         {...swipeHandlers}
       >
-        <div className="mb-8 text-center lg:p-10">
-          <TextHeaderFull
-            tagline={tagline}
-            description={sectionDescription}
-            button={<ButtonLink href="/shop">Shop</ButtonLink>}
-            className="text-black"
-          >
-            {heading}
-          </TextHeaderFull>
-        </div>
+        {heading && (
+          <div className="text-center p-8 sm:p-16">
+            <TextHeaderFull
+              tagline={tagline}
+              description={sectionDescription}
+              button={button}
+              className="text-black"
+            >
+              {heading}
+            </TextHeaderFull>
+          </div>
+        )}
         {sliderContent}
         <SliderDots
           total={totalPages}
