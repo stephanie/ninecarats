@@ -137,7 +137,9 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 scrolled && isMobile ? "justify-start pl-4" : "justify-center"
               }`}
             >
-              <span
+              <Link
+                href="/"
+                prefetch={true}
                 className={`font-header transition-all duration-500 ${
                   !isHome && !scrolled && isMobile
                     ? "text-lg text-black"
@@ -147,7 +149,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 } tracking-widest select-none drop-shadow-lg uppercase`}
               >
                 NineCarats
-              </span>
+              </Link>
             </div>
             {/* Right Section */}
             <div className="flex justify-end sm:w-1/3 gap-6 pr-4 sm:p-4 items-center sm:items-start hidden sm:flex">

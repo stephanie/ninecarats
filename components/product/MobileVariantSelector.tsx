@@ -1,6 +1,11 @@
 "use client";
 
-import { Dialog, Transition } from "@headlessui/react";
+import {
+  Dialog,
+  DialogPanel,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 import clsx from "clsx";
 import { useProduct, useUpdateURL } from "components/product/product-context";
 import { ProductOption, ProductVariant } from "lib/shopify/types";
@@ -41,7 +46,7 @@ export function MobileVariantSelector({
   }));
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full border-b border-neutral-200">
       {options.map((option) => {
         const optionNameLowerCase = option.name.toLowerCase();
         const selectedValue = state[optionNameLowerCase];
@@ -54,7 +59,7 @@ export function MobileVariantSelector({
               )}
               onClick={() => setOpenSheet(option.name)}
             >
-              Select {option.name}
+              Select {option.name.toLowerCase()}
               <span className="font-semibold">{selectedValue || "-"}</span>
             </button>
             <Transition
@@ -63,7 +68,7 @@ export function MobileVariantSelector({
               onClose={() => setOpenSheet(null)}
             >
               <div className="fixed inset-0 z-50 flex items-end justify-center">
-                <Transition.Child
+                <TransitionChild
                   as="div"
                   enter="transition-opacity duration-200"
                   enterFrom="opacity-0"
@@ -77,8 +82,8 @@ export function MobileVariantSelector({
                     aria-hidden="true"
                     onClick={() => setOpenSheet(null)}
                   />
-                </Transition.Child>
-                <Transition.Child
+                </TransitionChild>
+                <TransitionChild
                   as="div"
                   className="w-full"
                   enter="transition-transform duration-300"
@@ -88,12 +93,12 @@ export function MobileVariantSelector({
                   leaveFrom="translate-y-0"
                   leaveTo="translate-y-full"
                 >
-                  <Dialog.Panel className="w-full mx-auto bg-white shadow-xl p-6 pb-12 relative">
+                  <DialogPanel className="w-full mx-auto bg-white shadow-xl p-6 pb-6 relative">
                     <div className="flex justify-between items-center mb-6">
                       <div className="flex gap-4 w-full">
                         <button
-                          className={clsx("text-sm pt-1 mr-4")}
-                        >{`Select ${option.name}`}</button>
+                          className={clsx("text-base pt-1 mr-4")}
+                        >{`Select ${option.name.toLowerCase()}`}</button>
                       </div>
                       <button
                         className="absolute right-6 top-6 text-xl"
@@ -129,19 +134,8 @@ export function MobileVariantSelector({
                         const isActive = selectedValue === value;
                         return (
                           <li key={value}>
-                            <button
-                              className={clsx(
-                                "w-full flex justify-between items-center p-4 text-sm",
-                                isActive
-                                  ? "font-bold bg-neutral-100"
-                                  : "font-normal",
-                                isAvailableForSale
-                                  ? "text-black"
-                                  : "text-neutral-400 cursor-not-allowed"
-                              )}
-                              disabled={!isAvailableForSale}
-                              aria-disabled={!isAvailableForSale}
-                              onClick={() => {
+                            <form
+                              action={() => {
                                 if (!isAvailableForSale) return;
                                 const newState = updateOption(
                                   optionNameLowerCase,
@@ -151,14 +145,29 @@ export function MobileVariantSelector({
                                 setOpenSheet(null);
                               }}
                             >
-                              <span>{value}</span>
-                            </button>
+                              <button
+                                type="submit"
+                                className={clsx(
+                                  "w-full flex justify-between items-center p-4 text-sm",
+                                  isActive
+                                    ? "font-semibold bg-neutral-100"
+                                    : "font-normal",
+                                  isAvailableForSale
+                                    ? "text-black"
+                                    : "text-neutral-400 cursor-not-allowed"
+                                )}
+                                disabled={!isAvailableForSale}
+                                aria-disabled={!isAvailableForSale}
+                              >
+                                <span>{value}</span>
+                              </button>
+                            </form>
                           </li>
                         );
                       })}
                     </ul>
-                  </Dialog.Panel>
-                </Transition.Child>
+                  </DialogPanel>
+                </TransitionChild>
               </div>
             </Transition>
           </div>

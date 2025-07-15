@@ -15,7 +15,7 @@ function SubmitButton({
   selectedVariantId: string | undefined;
 }) {
   const buttonClasses =
-    "w-full bg-black text-white py-4 px-6 flex items-center justify-center gap-2 uppercase cursor-pointer";
+    "w-full bg-black text-white text-base tracking-wide py-4 px-6 gap-2 flex items-center justify-center uppercase cursor-pointer opacity-90 hover:opacity-100";
   const disabledClasses = "opacity-50 cursor-not-allowed";
   const svg = (
     <svg
