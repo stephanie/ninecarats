@@ -184,13 +184,13 @@ export default async function ProductPage(props: {
             ))}
           </div>
         </section>
-        <div className="w-full text-center text-md sm:text-xl pt-14 pb-4">
+        <div className="w-full text-center text-lg sm:text-xl pt-14 pb-2">
           You may also like
         </div>
         <FullWidthProductSlider products={sliderProducts} />
         {/* <RelatedProducts id={product.id} /> */}
         {/* Breadcrumb section */}
-        <div className="w-full border-b border-neutral-200 pb-4 sm:pl-14 pl-4">
+        <div className="w-full border-b border-neutral-200 pb-6 sm:pl-14 pl-4">
           <nav className="text-sm text-neutral-700" aria-label="Breadcrumb">
             <ol className="list-none p-0 inline-flex gap-1">
               <li className="flex items-center">

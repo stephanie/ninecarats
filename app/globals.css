@@ -142,6 +142,13 @@ button {
   @apply focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-neutral-600 dark:focus-visible:ring-offset-neutral-900;
 }
 
+/* Override focus styles for search input */
+input.search-input:focus-visible {
+  outline: none !important;
+  ring: none !important;
+  box-shadow: none !important;
+}
+
 /* Override focus styles for newsletter input */
 .newsletter-input:focus-visible {
   outline: none !important;

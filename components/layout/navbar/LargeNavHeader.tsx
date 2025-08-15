@@ -4,31 +4,63 @@ import { useIsMobile } from "hooks/useIsMobile";
 import { Menu } from "lib/shopify/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import MobileMenu from "./mobile-menu";
+import Search, { SearchSkeleton } from "./search";
 
 export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const [scrolled, setScrolled] = useState(false);
+  const [searchActive, setSearchActive] = useState(false);
   const isMobile = useIsMobile();
   const pathname = usePathname();
 
   // Determine if we're on the homepage
-  const isHome = pathname === "/";
+  const startWithLargeNav = pathname === "/" || pathname.includes("/search");
 
   // New: Track if we should use the small logo/text size
   const [forceSmall, setForceSmall] = useState(false);
+  const [textColor, setTextColor] = useState("text-white");
+  const overlayRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    setForceSmall(!isHome);
+    setForceSmall(!startWithLargeNav);
     // Set initial scrolled state if not on home
-    // setScrolled(!isHome);
+    // setScrolled(!startWithLargeNav);
     function onScroll() {
       // Always set scrolled to true if scrolled, but if not on home, keep small size
-      setScrolled(window.scrollY > 40 || !isHome);
+      setScrolled(window.scrollY > 40);
     }
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, [isHome]);
+  }, [startWithLargeNav]);
+
+  // Update text color when pathname changes
+  useEffect(() => {
+    const newPageTextColor = pathname === "/" ? "text-white" : "text-black";
+    setTextColor(newPageTextColor);
+  }, [pathname]);
+
+  useEffect(() => {
+    function handleDocumentClick(event: MouseEvent) {
+      if (!searchActive) return;
+      const target = event.target as Node;
+      if (overlayRef.current && !overlayRef.current.contains(target)) {
+        setSearchActive(false);
+        setScrolled(false);
+      }
+    }
+
+    if (searchActive) {
+      document.addEventListener("mousedown", handleDocumentClick);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleDocumentClick);
+    };
+  }, [searchActive]);
+
+  const getTextColor = (isScrolled: boolean) => {
+    return isScrolled || forceSmall ? "text-black" : textColor;
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 transition-all duration-500">
@@ -36,7 +68,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
         className={`relative flex flex-col justify-center w-full transition-all duration-800 ${
           scrolled
             ? "bg-white text-black py-2 sm:py-0"
-            : "bg-transparent text-white py-2 sm:py-0"
+            : `bg-transparent ${textColor} py-2 sm:py-0`
         }`}
       >
         {/* Navbar Content */}
@@ -56,21 +88,17 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               <Suspense fallback={null}>
                 <MobileMenu
                   menu={menu}
-                  textColor={
-                    scrolled || forceSmall ? "text-black" : "text-white"
-                  }
+                  textColor={scrolled || forceSmall ? "text-black" : textColor}
                 />
               </Suspense>
               <CartModal
-                textColor={scrolled || forceSmall ? "text-black" : "text-white"}
+                textColor={scrolled || forceSmall ? "text-black" : textColor}
               />
             </div>
             <div className="flex justify-start sm:w-1/3 pl-4 sm:p-4 items-center sm:items-start">
               <button
                 aria-label="Open menu"
-                className={`mr-4 transition-colors duration-100 hidden sm:flex ${
-                  scrolled || forceSmall ? "text-black" : "text-white"
-                }`}
+                className={`mr-4 transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled || forceSmall)}`}
               >
                 <svg
                   width="24"
@@ -86,35 +114,27 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 </svg>
               </button>
               <div
-                className={`flex gap-2 transition-colors duration-100 hidden sm:flex ${
-                  scrolled || forceSmall ? "text-black" : "text-white"
-                }`}
+                className={`flex gap-2 transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled || forceSmall)}`}
               >
-                <svg
-                  width="24"
-                  height="24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  viewBox="0 0 24 24"
-                >
-                  <circle cx="11" cy="11" r="7" />
-                  <line x1="16.5" y1="16.5" x2="21" y2="21" />
-                </svg>
-                {/* {searchActive ? (
-                <div className="w-32">
-                  <Suspense fallback={<SearchSkeleton />}>
-                    <Search />
-                  </Suspense>
-                </div>
-              ) : (
                 <span
-                  className="text-sm text-neutral-700 cursor-pointer select-none"
-                  onClick={() => setSearchActive(true)}
+                  className="text-sm cursor-pointer select-none"
+                  onClick={() => {
+                    setSearchActive(true);
+                    setScrolled(true);
+                  }}
                 >
-                  SEARCH
-              </span>
-              )} */}
+                  <svg
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle cx="11" cy="11" r="7" />
+                    <line x1="16.5" y1="16.5" x2="21" y2="21" />
+                  </svg>
+                </span>
                 {menu.length ? (
                   <ul className="hidden gap-6 text-sm sm:flex sm:items-center">
                     {menu.map((item: Menu) => (
@@ -122,7 +142,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                         <Link
                           href={item.path}
                           prefetch={true}
-                          className={`underline-offset-4 hover:underline transition-colors duration-100 ${scrolled ? "text-black" : "text-white"}`}
+                          className={`underline-offset-4 hover:underline transition-colors duration-100 ${getTextColor(scrolled)}`}
                         >
                           {item.title}
                         </Link>
@@ -139,16 +159,15 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
             >
               <Link
                 href="/"
-                prefetch={true}
-                className={`font-header transition-all duration-500 ${
-                  !isHome && !scrolled && isMobile
+                className={`font-body transition-all duration-500 ${
+                  !startWithLargeNav && !scrolled && isMobile
                     ? "text-lg text-black"
-                    : scrolled || !isHome
+                    : scrolled || !startWithLargeNav
                       ? "text-sm sm:text-lg pt-1 text-black"
-                      : "text-[8vw] sm:pt-8 text-white"
-                } tracking-widest select-none drop-shadow-lg uppercase`}
+                      : `text-[5vw] sm:pt-8 ${textColor}`
+                } tracking-[.25em] select-none uppercase font-medium whitespace-nowrap`}
               >
-                NineCarats
+                Shine Stella
               </Link>
             </div>
             {/* Right Section */}
@@ -201,7 +220,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               {/* Phone Icon */}
               <button
                 aria-label="Phone"
-                className={`transition-colors duration-100 hidden sm:flex ${scrolled || forceSmall ? "text-black" : "text-white"}`}
+                className={`transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled || forceSmall)}`}
               >
                 <svg
                   width="24px"
@@ -224,7 +243,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               {/* User Icon */}
               <button
                 aria-label="User"
-                className={`transition-colors duration-100 hidden sm:flex ${scrolled || forceSmall ? "text-black" : "text-white"}`}
+                className={`transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled || forceSmall)}`}
               >
                 <svg
                   width="24px"
@@ -252,12 +271,110 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 </svg>
               </button>
               {/* Shopping Bag Icon (opens CartModal) */}
-              <CartModal
-                textColor={scrolled || forceSmall ? "text-black" : "text-white"}
-              />
+              <CartModal textColor={getTextColor(scrolled || forceSmall)} />
             </div>
           </div>
         </div>
+
+        {/* Backdrop to capture outside clicks */}
+        {searchActive && (
+          <div className="fixed inset-0 z-30" aria-hidden="true"></div>
+        )}
+
+        {/* Search Overlay Section */}
+        {searchActive && (
+          <div className="absolute top-full left-0 w-full bg-white border-t border-gray-200 shadow-lg z-40">
+            <div
+              ref={overlayRef}
+              className="w-full max-w-6xl mx-auto px-8 py-8"
+            >
+              <div className="flex justify-between items-start">
+                {/* Left Section - Search Input and Popular */}
+                <div className="flex-1 max-w-lg">
+                  {/* Search Input */}
+                  <Suspense fallback={<SearchSkeleton />}>
+                    <Search
+                      onSubmitted={() => {
+                        setSearchActive(false);
+                        setScrolled(false);
+                      }}
+                    />
+                  </Suspense>
+
+                  {/* Popular Section */}
+                  <div>
+                    <h3 className="text-lg font-medium text-black mb-4">
+                      Trending
+                    </h3>
+                    <div className="flex flex-wrap gap-3">
+                      {[
+                        "gifts",
+                        "necklaces",
+                        "bracelets",
+                        "rings",
+                        "earrings",
+                      ].map((term) => (
+                        <button
+                          key={term}
+                          className="px-4 py-2 bg-gray-100 text-black text-sm hover:bg-gray-200 transition-colors duration-200 rounded"
+                        >
+                          {term}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Section - Discover */}
+                <div className="ml-16">
+                  <h3 className="text-lg font-medium text-black mb-4">
+                    Discover
+                  </h3>
+                  <ul className="space-y-2">
+                    <li>
+                      <Link
+                        href="/collections/jewelry"
+                        className="text-black hover:text-gray-600 transition-colors duration-200"
+                      >
+                        Jewelry
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/collections/gifts"
+                        className="text-black hover:text-gray-600 transition-colors duration-200"
+                      >
+                        Gifts
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Close Button */}
+                <button
+                  onClick={() => {
+                    setSearchActive(false);
+                    setScrolled(false);
+                  }}
+                  className="ml-8 text-black hover:text-gray-600 transition-colors duration-200 cursor-pointer"
+                  aria-label="Close search"
+                >
+                  <svg
+                    width="32"
+                    height="32"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

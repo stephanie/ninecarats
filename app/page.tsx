@@ -147,7 +147,7 @@ export default function HomePage() {
         sectionDescription="Juxtaposed in elegant combinations, these fine bracelets offer a wide variety of forms to embellish the wrist."
         button={
           <ButtonLink href="#" className="text-black hover:border-black">
-            Shop
+            Shop our collection
           </ButtonLink>
         }
       />
@@ -169,7 +169,7 @@ export default function HomePage() {
         sectionDescription="Juxtaposed in elegant combinations, these fine rings offer a wide variety of forms to embellish the hand."
         button={
           <ButtonLink href="#" className="text-black hover:border-black">
-            Shop
+            Shop our collection
           </ButtonLink>
         }
       />
@@ -179,7 +179,7 @@ export default function HomePage() {
         image="/images/full-width-jewelry.webp"
         button={
           <ButtonLink href="#" className="text-white hover:border-white">
-            Explore all
+            Shop our collection
           </ButtonLink>
         }
       />
@@ -190,7 +190,7 @@ export default function HomePage() {
         sectionDescription="Juxtaposed in elegant combinations, these fine bracelets offer a wide variety of forms to embellish the wrist."
         button={
           <ButtonLink href="#" className="text-black hover:border-black">
-            Shop
+            Shop our collection
           </ButtonLink>
         }
       />

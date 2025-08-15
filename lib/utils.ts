@@ -49,3 +49,11 @@ export const validateEnvironmentVariables = () => {
     );
   }
 };
+
+export const formatPrice = (price: number, currencyCode: string) => {
+  return price.toLocaleString("en-US", {
+    style: "currency",
+    currency: currencyCode,
+    minimumFractionDigits: 0,
+  });
+};

@@ -37,7 +37,7 @@ export default function MultiImageSection({
             />
             {/* Sticky Text */}
             <div className="w-full max-w-xl">
-              <div className="sticky bottom-8 top-12 pt-4 pb-6 px-2 md:p-8 md:top-16">
+              <div className="sticky bottom-8 top-12 pt-6 pb-6 px-2 md:p-8 md:top-16">
                 <TextHeaderFull
                   className="text-white"
                   align="left"

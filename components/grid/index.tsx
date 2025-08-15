@@ -1,18 +1,16 @@
-import clsx from 'clsx';
-
-function Grid(props: React.ComponentProps<'ul'>) {
+function Grid(props: React.ComponentProps<"div">) {
   return (
-    <ul {...props} className={clsx('grid grid-flow-row gap-4', props.className)}>
+    <div {...props} className={props.className}>
       {props.children}
-    </ul>
+    </div>
   );
 }
 
-function GridItem(props: React.ComponentProps<'li'>) {
+function GridItem(props: React.ComponentProps<"div">) {
   return (
-    <li {...props} className={clsx('aspect-square transition-opacity', props.className)}>
+    <div {...props} className={props.className}>
       {props.children}
-    </li>
+    </div>
   );
 }
 

@@ -209,6 +209,24 @@ export default function FullScreenSlider() {
         </div>
       ))}
 
+      {/* Text Overlay */}
+      <div className="absolute inset-0 flex items-center justify-between pointer-events-none max-w-screen-xl mx-auto px-8">
+        <div className="text-left">
+          <h2 className="text-white text-4xl tracking-wide drop-shadow-lg">
+            Shine Stella,
+            <br />
+            shine bright.
+          </h2>
+        </div>
+        {/* <div className="text-right">
+          <h2 className="text-white text-4xl tracking-wide drop-shadow-lg">
+            Shine Stella,
+            <br />
+            shine bright.
+          </h2>
+        </div> */}
+      </div>
+
       {/* Navigation and Heading */}
       <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center">
         <div className="relative flex h-[12rem] md:h-[16rem] w-[18rem] md:w-[25rem] items-center justify-center">
@@ -262,9 +280,9 @@ export default function FullScreenSlider() {
         </div>
 
         {/* Progress bar */}
-        <div className="h-2 w-full bg-white">
+        <div className="h-2 w-full bg-black">
           <div
-            className="h-full bg-black transition-all duration-50 ease-linear"
+            className="h-full bg-white transition-all duration-50 ease-linear"
             style={{ width: `${progress}%` }}
           />
         </div>
