@@ -14,13 +14,12 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const isMobile = useIsMobile();
   const pathname = usePathname();
 
-  // Determine if we're on the homepage
   const startWithLargeNav = pathname === "/" || pathname.includes("/search");
 
-  // New: Track if we should use the small logo/text size
   const [forceSmall, setForceSmall] = useState(false);
   const [textColor, setTextColor] = useState("text-white");
   const overlayRef = useRef<HTMLDivElement | null>(null);
+  const pageTextColor = pathname === "/" ? "text-white" : "text-black";
 
   useEffect(() => {
     setForceSmall(!startWithLargeNav);
@@ -36,8 +35,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
 
   // Update text color when pathname changes
   useEffect(() => {
-    const newPageTextColor = pathname === "/" ? "text-white" : "text-black";
-    setTextColor(newPageTextColor);
+    setTextColor(pageTextColor);
   }, [pathname]);
 
   useEffect(() => {
@@ -46,7 +44,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
       const target = event.target as Node;
       if (overlayRef.current && !overlayRef.current.contains(target)) {
         setSearchActive(false);
-        setScrolled(false);
+        resetNav();
       }
     }
 
@@ -60,6 +58,11 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
 
   const getTextColor = (isScrolled: boolean) => {
     return isScrolled || forceSmall ? "text-black" : textColor;
+  };
+
+  const resetNav = () => {
+    setSearchActive(false);
+    setScrolled(window.scrollY > 40);
   };
 
   return (
@@ -352,10 +355,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
 
                 {/* Close Button */}
                 <button
-                  onClick={() => {
-                    setSearchActive(false);
-                    setScrolled(false);
-                  }}
+                  onClick={() => resetNav()}
                   className="ml-8 text-black hover:text-gray-600 transition-colors duration-200 cursor-pointer"
                   aria-label="Close search"
                 >
