@@ -20,7 +20,7 @@ export default function SearchLayout({
           </div>
           {/* <div className="order-none flex-none md:order-last md:w-[125px]">
           <FilterList list={sorting} title="Sort by" />
-        </div> */}
+          </div> */}
         </div>
       </div>
     </>
