@@ -11,6 +11,7 @@ import Search, { SearchSkeleton } from "./search";
 export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const [scrolled, setScrolled] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const isMobile = useIsMobile();
   const pathname = usePathname();
 
@@ -20,6 +21,10 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const [textColor, setTextColor] = useState("text-white");
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const pageTextColor = pathname === "/" ? "text-white" : "text-black";
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     setForceSmall(!startWithLargeNav);
@@ -75,7 +80,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
         }`}
       >
         {/* Navbar Content */}
-        <div className="relative left-0 right-0 flex justify-between transition-all duration-300 ease-in-out w-full">
+        <div className="relative left-0 right-0 flex justify-between transition-all duration-300 ease-in-out w-full z-30">
           <div
             className={`flex w-full ${
               scrolled && isMobile ? "flex-row-reverse" : "flex-col"
@@ -281,12 +286,16 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
 
         {/* Backdrop to capture outside clicks */}
         {searchActive && (
-          <div className="fixed inset-0 z-30" aria-hidden="true"></div>
+          <div className="fixed inset-0 z-10" aria-hidden="true"></div>
         )}
 
         {/* Search Overlay Section */}
-        {searchActive && (
-          <div className="absolute top-full left-0 w-full bg-white border-t border-gray-200 shadow-lg z-40">
+        {mounted && (
+          <div
+            className={`fixed left-0 w-full bg-white shadow-lg z-20 transition-all duration-500 ease-in-out ${
+              searchActive ? "top-14" : "-top-full"
+            }`}
+          >
             <div
               ref={overlayRef}
               className="w-full max-w-6xl mx-auto px-8 py-8"
