@@ -1,10 +1,12 @@
 "use client";
 import CartModal from "components/cart/modal";
+import { useCustomer } from "components/customer/CustomerContext";
 import { useIsMobile } from "hooks/useIsMobile";
 import { Menu } from "lib/shopify/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
+import CustomerLoginSidebar from "./CustomerLoginSidebar";
 import MobileMenu from "./mobile-menu";
 import Search, { SearchSkeleton } from "./search";
 
@@ -12,8 +14,10 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const [scrolled, setScrolled] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isLoginSidebarOpen, setIsLoginSidebarOpen] = useState(false);
   const isMobile = useIsMobile();
   const pathname = usePathname();
+  const { customer, logout } = useCustomer();
 
   const startWithLargeNav = pathname === "/" || pathname.includes("/search");
 
@@ -68,6 +72,17 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const resetNav = () => {
     setSearchActive(false);
     setScrolled(window.scrollY > 40);
+  };
+
+  const handleUserIconClick = () => {
+    if (customer) {
+      // If logged in, show user menu or profile
+      // For now, just open the sidebar to show user info
+      setIsLoginSidebarOpen(true);
+    } else {
+      // If not logged in, open login sidebar
+      setIsLoginSidebarOpen(true);
+    }
   };
 
   return (
@@ -250,33 +265,63 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               </button>
               {/* User Icon */}
               <button
-                aria-label="User"
+                aria-label={customer ? "Account" : "Sign in"}
+                onClick={handleUserIconClick}
                 className={`transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled || forceSmall)}`}
               >
-                <svg
-                  width="24px"
-                  height="24px"
-                  strokeWidth="1.2"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  color="currentColor"
-                >
-                  <path
-                    d="M5 20V19C5 15.134 8.13401 12 12 12V12C15.866 12 19 15.134 19 19V20"
-                    stroke="currentColor"
+                {customer ? (
+                  // Show filled user icon when logged in
+                  <svg
+                    width="24px"
+                    height="24px"
                     strokeWidth="1.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></path>
-                  <path
-                    d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z"
-                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    color="currentColor"
+                  >
+                    <path
+                      d="M5 20V19C5 15.134 8.13401 12 12 12V12C15.866 12 19 15.134 19 19V20"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                    <path
+                      d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                  </svg>
+                ) : (
+                  // Show outline user icon when not logged in
+                  <svg
+                    width="24px"
+                    height="24px"
                     strokeWidth="1.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></path>
-                </svg>
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    color="currentColor"
+                  >
+                    <path
+                      d="M5 20V19C5 15.134 8.13401 12 12 12V12C15.866 12 19 15.134 19 19V20"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                    <path
+                      d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                  </svg>
+                )}
               </button>
               {/* Shopping Bag Icon (opens CartModal) */}
               <CartModal textColor={getTextColor(scrolled || forceSmall)} />
@@ -384,6 +429,12 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
             </div>
           </div>
         )}
+
+        {/* Customer Login Sidebar */}
+        <CustomerLoginSidebar
+          isOpen={isLoginSidebarOpen}
+          onClose={() => setIsLoginSidebarOpen(false)}
+        />
       </div>
     </header>
   );

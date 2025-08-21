@@ -57,7 +57,7 @@ export default function CartModal({ textColor }: { textColor: string }) {
         title="Shopping Bag"
         zIndex={50}
         position="right"
-        width="w-[390px]"
+        width="w-[500px]"
       >
         {!cart || cart.lines.length === 0 ? (
           <div className="flex w-full flex-col overflow-hidden">
@@ -89,10 +89,7 @@ export default function CartModal({ textColor }: { textColor: string }) {
                   );
 
                   return (
-                    <li
-                      key={i}
-                      className="flex w-full flex-col border-b border-neutral-300 dark:border-neutral-700"
-                    >
+                    <li key={i} className="flex w-full flex-col">
                       <div className="relative flex w-full flex-row justify-between px-1 py-4">
                         <div className="absolute z-40 -ml-1 -mt-2">
                           <DeleteItemButton
@@ -101,7 +98,7 @@ export default function CartModal({ textColor }: { textColor: string }) {
                           />
                         </div>
                         <div className="flex flex-row">
-                          <div className="relative h-16 w-16 overflow-hidden rounded-md border border-neutral-300 bg-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800">
+                          <div className="relative h-20 w-16 overflow-hidden bg-neutral-300">
                             <Image
                               className="h-full w-full object-cover"
                               width={64}
@@ -116,27 +113,29 @@ export default function CartModal({ textColor }: { textColor: string }) {
                           <Link
                             href={merchandiseUrl}
                             onClick={closeCart}
-                            className="z-30 ml-2 flex flex-row space-x-4"
+                            className="z-30 ml-4 flex flex-row space-x-4"
                           >
                             <div className="flex flex-1 flex-col text-base">
                               <span className="leading-tight">
                                 {item.merchandise.product.title}
                               </span>
                               {item.merchandise.title !== DEFAULT_OPTION ? (
-                                <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                                <p className="text-sm text-neutral-500">
                                   {item.merchandise.title}
                                 </p>
                               ) : null}
+                              <Price
+                                className="flex flex-3 space-y-2 text-left text-sm mt-4"
+                                amount={item.cost.totalAmount.amount}
+                                currencyCode={
+                                  item.cost.totalAmount.currencyCode
+                                }
+                              />
                             </div>
                           </Link>
                         </div>
-                        <div className="flex h-16 flex-col justify-between">
-                          <Price
-                            className="flex justify-end space-y-2 text-right text-sm"
-                            amount={item.cost.totalAmount.amount}
-                            currencyCode={item.cost.totalAmount.currencyCode}
-                          />
-                          <div className="ml-auto flex h-9 flex-row items-center rounded-full border border-neutral-200 dark:border-neutral-700">
+                        <div className="flex flex-col justify-end">
+                          <div className="ml-auto flex h-9 flex-row items-center rounded-full border border-neutral-200">
                             <EditItemQuantityButton
                               item={item}
                               type="minus"
@@ -159,23 +158,23 @@ export default function CartModal({ textColor }: { textColor: string }) {
                   );
                 })}
             </ul>
-            <div className="py-4 text-sm text-neutral-500 dark:text-neutral-400">
-              <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 dark:border-neutral-700">
+            <div className="py-4 text-sm text-neutral-500 border-t border-neutral-200">
+              <div className="mb-3 flex items-center justify-between">
                 <p>Taxes</p>
                 <Price
-                  className="text-right text-base text-black dark:text-white"
+                  className="text-right text-base text-black"
                   amount={cart.cost.totalTaxAmount.amount}
                   currencyCode={cart.cost.totalTaxAmount.currencyCode}
                 />
               </div>
-              <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
+              <div className="mb-2 flex items-center justify-between">
                 <p>Shipping</p>
-                <p className="text-right">Calculated at checkout</p>
+                <p className="text-right text-sm">Calculated at checkout</p>
               </div>
-              <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
+              <div className="mb-2 flex items-center justify-between">
                 <p>Total</p>
                 <Price
-                  className="text-right text-base text-black dark:text-white"
+                  className="text-right text-base text-black"
                   amount={cart.cost.totalAmount.amount}
                   currencyCode={cart.cost.totalAmount.currencyCode}
                 />
@@ -196,7 +195,7 @@ function CheckoutButton() {
 
   return (
     <button
-      className="w-full bg-black text-white text-sm tracking-wide py-4 px-6 flex items-center justify-center uppercase cursor-pointer opacity-90 hover:opacity-100"
+      className="w-full bg-black text-white text-sm tracking-wide py-4 px-6 flex items-center justify-center uppercase cursor-pointer opacity-90 hover:opacity-100 min-h-14"
       type="submit"
       disabled={pending}
     >

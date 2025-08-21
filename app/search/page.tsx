@@ -17,8 +17,12 @@ export default async function SearchPage(props: {
   const { sortKey, reverse } =
     sorting.find((item) => item.slug === sort) || defaultSort;
 
-  const products = await getProducts({ sortKey, reverse, query: searchValue });
-  const collections = await getCollections();
+  // Fetch data at the Server Component level
+  const [products, collections] = await Promise.all([
+    getProducts({ sortKey, reverse, query: searchValue }),
+    getCollections(),
+  ]);
+
   const resultsText = products.length > 1 ? "results" : "result";
 
   return (

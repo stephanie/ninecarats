@@ -10,7 +10,7 @@ export default function NewsletterSignup() {
           <input
             type="email"
             placeholder="Enter your email"
-            className="newsletter-input bg-transparent w-full text-center transition text-sm"
+            className="borderless-input bg-transparent w-full text-center transition text-sm"
           />
         </div>
         <button
