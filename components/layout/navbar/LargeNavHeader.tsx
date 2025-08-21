@@ -6,6 +6,7 @@ import { Menu } from "lib/shopify/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
+import ContactSidebar from "./ContactSidebar";
 import CustomerLoginSidebar from "./CustomerLoginSidebar";
 import MobileMenu from "./mobile-menu";
 import Search, { SearchSkeleton } from "./search";
@@ -15,6 +16,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const [searchActive, setSearchActive] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isLoginSidebarOpen, setIsLoginSidebarOpen] = useState(false);
+  const [isContactSidebarOpen, setIsContactSidebarOpen] = useState(false);
   const isMobile = useIsMobile();
   const pathname = usePathname();
   const { customer, logout } = useCustomer();
@@ -112,6 +114,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 <MobileMenu
                   menu={menu}
                   textColor={scrolled || forceSmall ? "text-black" : textColor}
+                  onContactClick={() => setIsContactSidebarOpen(true)}
                 />
               </Suspense>
               <CartModal
@@ -243,6 +246,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               {/* Phone Icon */}
               <button
                 aria-label="Phone"
+                onClick={() => setIsContactSidebarOpen(true)}
                 className={`transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled || forceSmall)}`}
               >
                 <svg
@@ -265,63 +269,34 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               </button>
               {/* User Icon */}
               <button
-                aria-label={customer ? "Account" : "Sign in"}
+                aria-label="user icon"
                 onClick={handleUserIconClick}
                 className={`transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled || forceSmall)}`}
               >
-                {customer ? (
-                  // Show filled user icon when logged in
-                  <svg
-                    width="24px"
-                    height="24px"
+                <svg
+                  width="24px"
+                  height="24px"
+                  strokeWidth="1.2"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  color="currentColor"
+                >
+                  <path
+                    d="M5 20V19C5 15.134 8.13401 12 12 12V12C15.866 12 19 15.134 19 19V20"
+                    stroke="currentColor"
                     strokeWidth="1.2"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                    color="currentColor"
-                  >
-                    <path
-                      d="M5 20V19C5 15.134 8.13401 12 12 12V12C15.866 12 19 15.134 19 19V20"
-                      stroke="currentColor"
-                      strokeWidth="1.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></path>
-                    <path
-                      d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z"
-                      stroke="currentColor"
-                      strokeWidth="1.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></path>
-                  </svg>
-                ) : (
-                  // Show outline user icon when not logged in
-                  <svg
-                    width="24px"
-                    height="24px"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                  <path
+                    d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z"
+                    stroke="currentColor"
                     strokeWidth="1.2"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    color="currentColor"
-                  >
-                    <path
-                      d="M5 20V19C5 15.134 8.13401 12 12 12V12C15.866 12 19 15.134 19 19V20"
-                      stroke="currentColor"
-                      strokeWidth="1.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></path>
-                    <path
-                      d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z"
-                      stroke="currentColor"
-                      strokeWidth="1.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></path>
-                  </svg>
-                )}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                </svg>
               </button>
               {/* Shopping Bag Icon (opens CartModal) */}
               <CartModal textColor={getTextColor(scrolled || forceSmall)} />
@@ -434,6 +409,12 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
         <CustomerLoginSidebar
           isOpen={isLoginSidebarOpen}
           onClose={() => setIsLoginSidebarOpen(false)}
+        />
+
+        {/* Contact Sidebar */}
+        <ContactSidebar
+          isOpen={isContactSidebarOpen}
+          onClose={() => setIsContactSidebarOpen(false)}
         />
       </div>
     </header>

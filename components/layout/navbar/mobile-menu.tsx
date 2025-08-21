@@ -17,9 +17,11 @@ import Search, { SearchSkeleton } from "./search";
 export default function MobileMenu({
   menu,
   textColor,
+  onContactClick,
 }: {
   menu: Menu[];
   textColor: string;
+  onContactClick: () => void;
 }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -116,6 +118,19 @@ export default function MobileMenu({
                     ))}
                   </ul>
                 ) : null}
+                
+                {/* Contact Link */}
+                <div className="mt-6 pt-6 border-t border-neutral-200">
+                  <button
+                    onClick={() => {
+                      closeMobileMenu();
+                      onContactClick();
+                    }}
+                    className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
+                  >
+                    Contact Us
+                  </button>
+                </div>
               </div>
             </DialogPanel>
           </TransitionChild>

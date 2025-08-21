@@ -2,7 +2,7 @@ import NewsletterSignup from "components/layout/NewsletterSignup";
 import Link from "next/link";
 import MobileFooter from "./MobileFooter";
 
-const navLinks = ["Contact Us", "Join Our Maison", "Services", "FAQs"];
+const navLinks = ["Contact us", "Join Our Maison", "Services", "FAQs"];
 
 const socialLinks = ["Instagram", "Facebook", "YouTube", "LinkedIn"];
 

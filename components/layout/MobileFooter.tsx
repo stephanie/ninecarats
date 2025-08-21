@@ -6,7 +6,7 @@ import { FaInstagram } from "react-icons/fa6";
 const menu = [
   {
     title: "Customer Care",
-    items: ["Contact Us", "FAQ", "Shipping & Returns"],
+    items: ["Contact us", "FAQ", "Shipping & Returns"],
   },
   {
     title: "Client Services",

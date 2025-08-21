@@ -1,10 +1,12 @@
 "use server";
 
 import {
-  createCustomer,
+  customerCreate,
   customerLogin,
   customerLogout,
   getCustomer,
+  getCustomerAddresses,
+  getCustomerOrders,
 } from "lib/shopify/customer";
 
 // Server actions for customer operations
@@ -18,11 +20,19 @@ export async function serverCreateCustomer(
   firstName?: string,
   lastName?: string
 ) {
-  return await createCustomer(email, password, firstName, lastName);
+  return await customerCreate(email, password, firstName, lastName);
 }
 
 export async function serverGetCustomer(accessToken: string) {
   return await getCustomer(accessToken);
+}
+
+export async function serverGetCustomerAddresses(accessToken: string) {
+  return await getCustomerAddresses(accessToken);
+}
+
+export async function serverGetCustomerOrders(accessToken: string) {
+  return await getCustomerOrders(accessToken);
 }
 
 export async function serverCustomerLogout(accessToken: string) {

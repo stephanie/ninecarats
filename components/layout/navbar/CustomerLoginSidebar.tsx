@@ -37,6 +37,8 @@ export default function CustomerLoginSidebar({
         setPassword("");
         setFirstName("");
         setLastName("");
+        // Redirect to account page
+        window.location.href = "/account";
       } else {
         setError(result.error || "Login failed. Please try again.");
       }
@@ -103,30 +105,27 @@ export default function CustomerLoginSidebar({
           <div className="space-y-3">
             <button
               onClick={() => {
-                // TODO: Navigate to profile page
-                console.log("Navigate to profile");
+                window.location.href = "/account";
               }}
               className="w-full py-3 px-4 border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200 rounded-none"
             >
-              My Profile
+              Your profile
             </button>
             <button
               onClick={() => {
-                // TODO: Navigate to orders page
-                console.log("Navigate to orders");
+                window.location.href = "/account?tab=orders";
               }}
               className="w-full py-3 px-4 border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200 rounded-none"
             >
-              My Orders
+              Your orders
             </button>
             <button
               onClick={() => {
-                // TODO: Navigate to addresses page
-                console.log("Navigate to addresses");
+                window.location.href = "/account?tab=addresses";
               }}
               className="w-full py-3 px-4 border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200 rounded-none"
             >
-              My Addresses
+              Your addresses
             </button>
           </div>
 
@@ -150,7 +149,7 @@ export default function CustomerLoginSidebar({
     <Sidebar
       isOpen={isOpen}
       onClose={onClose}
-      title={isLogin ? "Sign in" : "Create ac            count"}
+      title={isLogin ? "Sign in" : "Create account"}
       zIndex={50}
       position="right"
       width="w-[500px]"
@@ -170,7 +169,7 @@ export default function CustomerLoginSidebar({
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="borderless-input w-full py-2 border-b border-g ray-300 focus:border-gray-900 focus:outline-none transition-colors text-sm"
+                className="borderless-input w-full py-2 border-b border-gray-300 focus:border-gray-900 focus:outline-none transition-colors text-sm"
                 placeholder="Email"
                 required
                 disabled={isLoading}
@@ -182,7 +181,7 @@ export default function CustomerLoginSidebar({
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="borderless-input w-full py-2 border-b border-gray-300 focus:border-gray-900 focus:outline-none transition-colors text-small"
+                className="borderless-input w-full py-2 border-b border-gray-300 focus:border-gray-900 focus:outline-none transition-colors text-sm"
                 placeholder="Password"
                 required
                 disabled={isLoading}

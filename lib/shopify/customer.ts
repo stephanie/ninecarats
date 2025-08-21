@@ -98,10 +98,10 @@ export async function customerLogin(email: string, password: string) {
   }
 }
 
-export async function createCustomer(
-  email: string, 
-  password: string, 
-  firstName?: string, 
+export async function customerCreate(
+  email: string,
+  password: string,
+  firstName?: string,
   lastName?: string
 ) {
   try {
@@ -167,10 +167,92 @@ export async function getCustomer(accessToken: string) {
         }
       `,
     });
-
+    
     return response.body.data.customer;
   } catch (error) {
     console.error('Get customer error:', error);
+    throw error;
+  }
+}
+
+export async function getCustomerAddresses(accessToken: string) {
+  try {
+    const response = await shopifyFetch<{ data: { customer: any } }>({
+      query: `
+        query {
+          customer(customerAccessToken: "${accessToken}") {
+            addresses(first: 10) {
+              id
+              firstName
+              lastName
+              address1
+              address2
+              city
+              province
+              country
+              zip
+              phone
+              company
+            }
+          }
+        }
+      `,
+    });
+
+    return response.body.data.customer.addresses;
+  } catch (error) {
+    console.error('Get customer addresses error:', error);
+    throw error;
+  }
+}
+
+export async function getCustomerOrders(accessToken: string) {
+  try {
+    const response = await shopifyFetch<{ data: { customer: any } }>({
+      query: `
+        query {
+          customer(customerAccessToken: "${accessToken}") {
+            orders(first: 50) {
+              edges {
+                node {
+                  id
+                  name
+                  processedAt
+                  fulfillmentStatus
+                  financialStatus
+                  totalPrice {
+                    amount
+                    currencyCode
+                  }
+                  lineItems(first: 10) {
+                    edges {
+                      node {
+                        title
+                        quantity
+                        variant {
+                          image {
+                            url
+                            altText
+                          }
+                          price {
+                            amount
+                            currencyCode
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+    });
+
+    return response.body.data.customer.orders.edges.map((edge: any) => edge.node);
+  } catch (error) {
+    console.error('Get customer orders error:', error);
     throw error;
   }
 }
