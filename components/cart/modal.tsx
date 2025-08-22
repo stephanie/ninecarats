@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
+import { useCustomer } from "../customer/CustomerContext";
 import { createCartAndSetCookie, redirectToCheckout } from "./actions";
 import { useCart } from "./cart-context";
 import { DeleteItemButton } from "./delete-item-button";
@@ -21,6 +22,7 @@ type MerchandiseSearchParams = {
 
 export default function CartModal({ textColor }: { textColor: string }) {
   const { cart, updateCartItem } = useCart();
+  const { customer } = useCustomer();
   const [isOpen, setIsOpen] = useState(false);
   const quantityRef = useRef(cart?.totalQuantity);
   const openCart = () => setIsOpen(true);
@@ -180,7 +182,40 @@ export default function CartModal({ textColor }: { textColor: string }) {
                 />
               </div>
             </div>
-            <form action={redirectToCheckout}>
+            <form
+              action={async () => {
+                // Prepare customer information for checkout prefilling
+                const customerInfo: any = {};
+
+                if (customer?.email) {
+                  customerInfo.email = customer.email;
+                }
+
+                // Get default address if available
+                if (customer?.defaultAddress) {
+                  const defaultAddress = customer.defaultAddress;
+                  if (defaultAddress) {
+                    customerInfo.address = {
+                      firstName: defaultAddress.firstName,
+                      lastName: defaultAddress.lastName,
+                      address1: defaultAddress.address1,
+                      address2: defaultAddress.address2,
+                      city: defaultAddress.city,
+                      province: defaultAddress.province,
+                      country: defaultAddress.country,
+                      zip: defaultAddress.zip,
+                      phone: defaultAddress.phone,
+                    };
+                  }
+                }
+
+                await redirectToCheckout(
+                  Object.keys(customerInfo).length > 0
+                    ? customerInfo
+                    : undefined
+                );
+              }}
+            >
               <CheckoutButton />
             </form>
           </div>
