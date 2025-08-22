@@ -22,8 +22,8 @@ export default function MobileMenu({
 }: {
   menu: Menu[];
   textColor: string;
-  onContactClick: () => void;
-  onCategoriesClick: () => void;
+  onContactClick?: () => void;
+  onCategoriesClick?: () => void;
 }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -126,7 +126,7 @@ export default function MobileMenu({
                   <button
                     onClick={() => {
                       closeMobileMenu();
-                      onContactClick();
+                      onContactClick?.();
                     }}
                     className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
                   >
@@ -139,7 +139,7 @@ export default function MobileMenu({
                   <button
                     onClick={() => {
                       closeMobileMenu();
-                      onCategoriesClick();
+                      onCategoriesClick?.();
                     }}
                     className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
                   >
