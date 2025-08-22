@@ -22,7 +22,7 @@ export default function FilterSortSidebar({
       title="Filter & Sort"
       zIndex={50}
       position="right"
-      width="w-[350px]"
+      width="w-[400px]"
     >
       <div className="space-y-8">
         {/* Sort Options */}

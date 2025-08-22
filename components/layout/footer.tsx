@@ -8,10 +8,10 @@ const socialLinks = ["Instagram", "Facebook", "YouTube", "LinkedIn"];
 
 const legalLinks = [
   "Legal",
-  "Privacy Policy",
-  "Cookie Policy",
-  "Conditions of Sale",
-  "Site Map",
+  "Privacy policy",
+  "Cookie policy",
+  "Conditions of sale",
+  "Site map",
 ];
 
 export default function Footer() {

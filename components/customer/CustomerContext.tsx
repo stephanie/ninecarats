@@ -13,6 +13,7 @@ import {
   serverCustomerLogin,
   serverCustomerLogout,
   serverGetCustomer,
+  serverGetCustomerAddresses,
   serverGetCustomerOrders,
 } from "./CustomerServerActions";
 
@@ -23,16 +24,8 @@ interface Customer {
   email: string;
   acceptsMarketing?: boolean;
   phone?: string;
-  defaultAddress?: {
-    firstName: string;
-    lastName: string;
-    address1: string;
-    address2?: string;
-    city: string;
-    province: string;
-    country: string;
-    zip: string;
-  };
+  numberOfOrders?: number;
+  defaultAddress?: CustomerAddress;
 }
 
 interface CustomerAddress {
@@ -169,8 +162,8 @@ export function CustomerProvider({ children }: { children: ReactNode }) {
     if (!accessToken || typeof window === "undefined") return;
 
     try {
-      // const addressesData = await serverGetCustomerAddresses(accessToken);
-      setAddresses([]);
+      const addressesData = await serverGetCustomerAddresses(accessToken);
+      setAddresses(addressesData || []);
     } catch (error) {
       console.error("Failed to refresh addresses:", error);
     }
@@ -218,8 +211,8 @@ export function CustomerProvider({ children }: { children: ReactNode }) {
 
         // Get addresses and orders
         try {
-          // const addressesData = await serverGetCustomerAddresses(token);
-          setAddresses([]);
+          const addressesData = await serverGetCustomerAddresses(token);
+          setAddresses(addressesData || []);
         } catch (error) {
           console.error("Failed to refresh addresses:", error);
         }

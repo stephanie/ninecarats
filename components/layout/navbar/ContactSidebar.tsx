@@ -15,10 +15,10 @@ export default function ContactSidebar({
     <Sidebar
       isOpen={isOpen}
       onClose={onClose}
-      title="Contact Us"
+      title="Contact us"
       zIndex={50}
       position="right"
-      width="w-[500px]"
+      width="w-[400px]"
     >
       <div className="space-y-6 mt-4">
         {/* Contact Information */}

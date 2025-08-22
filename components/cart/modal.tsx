@@ -54,7 +54,7 @@ export default function CartModal({ textColor }: { textColor: string }) {
       <Sidebar
         isOpen={isOpen}
         onClose={closeCart}
-        title="Shopping Bag"
+        title="Shopping bag"
         zIndex={50}
         position="right"
         width="w-[500px]"
@@ -199,7 +199,7 @@ function CheckoutButton() {
       type="submit"
       disabled={pending}
     >
-      {pending ? <LoadingDots className="bg-white" /> : "Proceed to Checkout"}
+      {pending ? <LoadingDots className="bg-white" /> : "Checkout"}
     </button>
   );
 }

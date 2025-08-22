@@ -256,7 +256,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
                 ></path>
               </svg>
             </button>
-            {/* Shopping Bag Icon (opens CartModal) */}
+            {/* Shopping bag Icon (opens CartModal) */}
             <CartModal textColor={textColor} />
           </div>
         </div>

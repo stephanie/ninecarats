@@ -152,6 +152,7 @@ export async function getCustomer(accessToken: string) {
             acceptsMarketing
             email
             phone
+            numberOfOrders
             defaultAddress {
               id
               firstName
@@ -181,25 +182,29 @@ export async function getCustomerAddresses(accessToken: string) {
       query: `
         query {
           customer(customerAccessToken: "${accessToken}") {
-            addresses(first: 10) {
-              id
-              firstName
-              lastName
-              address1
-              address2
-              city
-              province
-              country
-              zip
-              phone
-              company
+             addresses(first: 10) {
+              edges {
+                node {
+                  id
+                  address1
+                  address2
+                  city
+                  province
+                  zip
+                  country
+                  phone
+                  firstName
+                  lastName
+                  company
+                }
+              }
             }
           }
         }
       `,
     });
 
-    return response.body.data.customer.addresses;
+    return response.body.data.customer.addresses.edges.map((edge: any) => edge.node);
   } catch (error) {
     console.error('Get customer addresses error:', error);
     throw error;

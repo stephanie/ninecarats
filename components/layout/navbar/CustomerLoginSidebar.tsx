@@ -137,7 +137,7 @@ export default function CustomerLoginSidebar({
               }}
               className="w-full py-3 px-4 border border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-colors duration-200 rounded-none"
             >
-              Sign Out
+              Sign out
             </button>
           </div>
         </div>

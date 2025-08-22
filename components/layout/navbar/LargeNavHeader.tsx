@@ -6,6 +6,7 @@ import { Menu } from "lib/shopify/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
+import CategoriesSidebar from "./CategoriesSidebar";
 import ContactSidebar from "./ContactSidebar";
 import CustomerLoginSidebar from "./CustomerLoginSidebar";
 import MobileMenu from "./mobile-menu";
@@ -17,6 +18,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const [mounted, setMounted] = useState(false);
   const [isLoginSidebarOpen, setIsLoginSidebarOpen] = useState(false);
   const [isContactSidebarOpen, setIsContactSidebarOpen] = useState(false);
+  const [isCategoriesSidebarOpen, setIsCategoriesSidebarOpen] = useState(false);
   const isMobile = useIsMobile();
   const pathname = usePathname();
   const { customer, logout } = useCustomer();
@@ -115,6 +117,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                   menu={menu}
                   textColor={scrolled || forceSmall ? "text-black" : textColor}
                   onContactClick={() => setIsContactSidebarOpen(true)}
+                  onCategoriesClick={() => setIsCategoriesSidebarOpen(true)}
                 />
               </Suspense>
               <CartModal
@@ -124,6 +127,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
             <div className="flex justify-start sm:w-1/3 pl-4 sm:p-4 items-center sm:items-start">
               <button
                 aria-label="Open menu"
+                onClick={() => setIsCategoriesSidebarOpen(true)}
                 className={`mr-4 transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled || forceSmall)}`}
               >
                 <svg
@@ -161,6 +165,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                     <line x1="16.5" y1="16.5" x2="21" y2="21" />
                   </svg>
                 </span>
+
                 {menu.length ? (
                   <ul className="hidden gap-6 text-sm sm:flex sm:items-center">
                     {menu.map((item: Menu) => (
@@ -298,7 +303,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                   ></path>
                 </svg>
               </button>
-              {/* Shopping Bag Icon (opens CartModal) */}
+              {/* Shopping bag Icon (opens CartModal) */}
               <CartModal textColor={getTextColor(scrolled || forceSmall)} />
             </div>
           </div>
@@ -415,6 +420,13 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
         <ContactSidebar
           isOpen={isContactSidebarOpen}
           onClose={() => setIsContactSidebarOpen(false)}
+        />
+
+        {/* Categories Sidebar */}
+        <CategoriesSidebar
+          isOpen={isCategoriesSidebarOpen}
+          onClose={() => setIsCategoriesSidebarOpen(false)}
+          onContactClick={() => setIsContactSidebarOpen(true)}
         />
       </div>
     </header>
