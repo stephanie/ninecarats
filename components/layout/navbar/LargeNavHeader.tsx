@@ -165,22 +165,6 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                     <line x1="16.5" y1="16.5" x2="21" y2="21" />
                   </svg>
                 </span>
-
-                {menu.length ? (
-                  <ul className="hidden gap-6 text-sm sm:flex sm:items-center">
-                    {menu.map((item: Menu) => (
-                      <li key={item.title}>
-                        <Link
-                          href={item.path}
-                          prefetch={true}
-                          className={`underline-offset-4 hover:underline transition-colors duration-100 ${getTextColor(scrolled)}`}
-                        >
-                          {item.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
               </div>
             </div>
             <div
