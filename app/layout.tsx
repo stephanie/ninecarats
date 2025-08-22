@@ -2,6 +2,7 @@ import { CartProvider } from "components/cart/cart-context";
 import { CustomerProvider } from "components/customer/CustomerContext";
 import Footer from "components/layout/Footer";
 import { Navbar } from "components/layout/navbar";
+import { SignInModalProvider } from "components/layout/SignInModalProvider";
 import { getCart } from "lib/shopify";
 import { baseUrl } from "lib/utils";
 import { ReactNode } from "react";
@@ -34,8 +35,10 @@ export default async function RootLayout({
       <body className="font-body bg-white text-black">
         <CartProvider cartPromise={cart}>
           <CustomerProvider>
-            <Navbar />
-            <main>{children}</main>
+            <SignInModalProvider>
+              <Navbar />
+              <main>{children}</main>
+            </SignInModalProvider>
           </CustomerProvider>
         </CartProvider>
         <Footer />

@@ -255,7 +255,10 @@ export async function getCustomerOrders(accessToken: string) {
       `,
     });
 
-    return response.body.data.customer.orders.edges.map((edge: any) => edge.node);
+    return response.body.data.customer.orders.edges.map((edge: any) => ({
+      ...edge.node,
+      lineItems: edge.node.lineItems.edges.map((lineEdge: any) => lineEdge.node)
+    }));
   } catch (error) {
     console.error('Get customer orders error:', error);
     throw error;

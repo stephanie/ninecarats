@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { useCustomer } from "../customer/CustomerContext";
+import { useSignInModal } from "../layout/SignInModalProvider";
 import { createCartAndSetCookie, redirectToCheckout } from "./actions";
 import { useCart } from "./cart-context";
 import { DeleteItemButton } from "./delete-item-button";
@@ -20,9 +21,10 @@ type MerchandiseSearchParams = {
   [key: string]: string;
 };
 
-export default function CartModal({ textColor }: { textColor: string }) {
+export default function CartSidebar({ textColor }: { textColor: string }) {
   const { cart, updateCartItem } = useCart();
-  const { customer } = useCustomer();
+  const { customer, logout } = useCustomer();
+  const { openSignInModal } = useSignInModal();
   const [isOpen, setIsOpen] = useState(false);
   const quantityRef = useRef(cart?.totalQuantity);
   const openCart = () => setIsOpen(true);
@@ -48,7 +50,7 @@ export default function CartModal({ textColor }: { textColor: string }) {
   }, [isOpen, cart?.totalQuantity, quantityRef]);
 
   return (
-    <div>
+    <>
       <button aria-label="Open cart" onClick={openCart} className="flex">
         <OpenCart quantity={cart?.totalQuantity} textColor={textColor} />
       </button>
@@ -162,18 +164,41 @@ export default function CartModal({ textColor }: { textColor: string }) {
             </ul>
 
             {/* Customer Info */}
-            {customer?.email && (
-              <div className="py-3 text-sm">
-                <Link
-                  onClick={closeCart}
-                  href="/account"
-                  className="text-neutral-600 hover:text-black transition-colors duration-200"
-                >
+            {customer?.email ? (
+              <div className="py-3 text-sm flex flex-col gap-2">
+                <div>
                   Signed in as{" "}
-                  <span className="font-medium underline">
-                    {customer.email}
-                  </span>
-                </Link>
+                  <Link
+                    onClick={closeCart}
+                    href="/account"
+                    className="text-neutral-600 hover:text-black transition-colors duration-200"
+                  >
+                    <span className="font-medium underline">
+                      {customer.email}
+                    </span>
+                  </Link>
+                </div>
+                <div>
+                  Not you?{" "}
+                  <button
+                    className="text-neutral-600 hover:text-black transition-colors duration-200 underline font-medium cursor-pointer"
+                    onClick={async () => {
+                      await logout();
+                    }}
+                  >
+                    Sign out
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="py-3 text-sm">
+                Have an account?{" "}
+                <button
+                  onClick={openSignInModal}
+                  className="text-neutral-600 hover:text-black transition-colors duration-200 underline font-medium cursor-pointer"
+                >
+                  Sign in or create account
+                </button>
               </div>
             )}
 
@@ -239,7 +264,7 @@ export default function CartModal({ textColor }: { textColor: string }) {
           </div>
         )}
       </Sidebar>
-    </div>
+    </>
   );
 }
 

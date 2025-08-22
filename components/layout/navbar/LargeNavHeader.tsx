@@ -1,5 +1,5 @@
 "use client";
-import CartModal from "components/cart/modal";
+import CartSidebar from "components/cart/cart-sidebar";
 import { useCustomer } from "components/customer/CustomerContext";
 import { useIsMobile } from "hooks/useIsMobile";
 import { Menu } from "lib/shopify/types";
@@ -120,7 +120,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                   onCategoriesClick={() => setIsCategoriesSidebarOpen(true)}
                 />
               </Suspense>
-              <CartModal
+              <CartSidebar
                 textColor={scrolled || forceSmall ? "text-black" : textColor}
               />
             </div>
@@ -303,8 +303,8 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                   ></path>
                 </svg>
               </button>
-              {/* Shopping bag Icon (opens CartModal) */}
-              <CartModal textColor={getTextColor(scrolled || forceSmall)} />
+              {/* Shopping bag Icon (opens CartSidebar) */}
+              <CartSidebar textColor={getTextColor(scrolled || forceSmall)} />
             </div>
           </div>
         </div>

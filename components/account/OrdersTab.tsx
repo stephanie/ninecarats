@@ -12,6 +12,8 @@ export default function OrdersTab() {
     refreshOrders();
   }, [refreshOrders]);
 
+  console.log(orders, "orders");
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
@@ -126,7 +128,7 @@ export default function OrdersTab() {
       {/* Back to Account overview */}
       <div className="text-left pt-6">
         <button
-          onClick={() => router.push("/account")}
+          onClick={() => router.push("/account?tab=overview")}
           className="text-sm text-gray-600 underline hover:text-gray-900 transition-colors"
         >
           Back to Account overview

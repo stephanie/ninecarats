@@ -36,7 +36,7 @@ export default function AddressBookTab() {
       <div className="flex items-center justify-between text-left">
         <h2 className="text-2xl text-gray-900">Your addresses</h2>
         <button className="text-sm text-gray-600 underline hover:text-gray-900 transition-colors">
-          Add New Address
+          Add new address
         </button>
       </div>
 
@@ -67,7 +67,7 @@ export default function AddressBookTab() {
 
               <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-200">
                 <button className="text-sm text-gray-600 underline hover:text-gray-900 transition-colors">
-                  Update Address
+                  Update address
                 </button>
                 <button className="text-sm text-red-600 underline hover:text-red-700 transition-colors">
                   Remove
@@ -81,7 +81,7 @@ export default function AddressBookTab() {
       {/* Back to Account overview */}
       <div className="text-center pt-6">
         <button
-          onClick={() => router.push("/account")}
+          onClick={() => router.push("/account?tab=overview")}
           className="text-sm text-gray-600 underline hover:text-gray-900 transition-colors"
         >
           Back to Account overview

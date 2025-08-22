@@ -1,6 +1,6 @@
 "use client";
 
-import CartModal from "components/cart/modal";
+import CartSidebar from "components/cart/cart-sidebar";
 import { Menu } from "lib/shopify/types";
 import Link from "next/link";
 import { Suspense, useEffect, useState } from "react";
@@ -256,8 +256,8 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
                 ></path>
               </svg>
             </button>
-            {/* Shopping bag Icon (opens CartModal) */}
-            <CartModal textColor={textColor} />
+            {/* Shopping bag Icon (opens CartSidebar) */}
+            <CartSidebar textColor={textColor} />
           </div>
         </div>
       </div>
