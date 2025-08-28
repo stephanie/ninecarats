@@ -70,7 +70,7 @@ export default function ContactUsTab() {
       {/* Back to Account overview */}
       <div className="text-center pt-6">
         <button
-          onClick={() => router.push("/account")}
+          onClick={() => router.push("/account?tab=overview")}
           className="text-sm text-gray-600 underline hover:text-gray-900 transition-colors"
         >
           Back to Account overview

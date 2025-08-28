@@ -507,16 +507,25 @@ export async function getProducts({
   cacheLife('days');
 
   try {
+    // Filter out undefined values to avoid GraphQL errors
+    const variables: any = {};
+    if (query !== undefined && query !== null && query !== '') {
+      variables.query = query;
+    }
+    if (reverse !== undefined) {
+      variables.reverse = reverse;
+    }
+    if (sortKey !== undefined) {
+      variables.sortKey = sortKey;
+    }
+
     const res = await shopifyFetch<ShopifyProductsOperation>({
       query: getProductsQuery,
-      variables: {
-        query,
-        reverse,
-        sortKey
-      }
+      variables
     });
 
-    return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
+    const products = reshapeProducts(removeEdgesAndNodes(res.body.data.products));
+    return products;
   } catch (error) {
     console.error('Failed to fetch products:', error);
 
