@@ -17,9 +17,6 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
-      google:
-        specifier: link:@next/font/google
-        version: link:@next/font/google
       next:
         specifier: 15.3.0-canary.13
         version: 15.3.0-canary.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0)

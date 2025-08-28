@@ -32,10 +32,10 @@ export function ProductDescription({ product }: { product: Product }) {
       {/* Left Column - Product Description */}
       <div className="space-y-2 lg:space-y-8">
         <div>
-          <h2 className="text-md sm:text-lg text-black mb-2 hidden lg:block">
+          <h2 className="text-lg sm:text-2xl text-black mb-2 hidden lg:block font-header">
             {product.title}
           </h2>
-          <div className="text-md sm:text-lg text-neutral-500 mb-8 hidden lg:block">
+          <div className="text-sm text-neutral-500 mb-8 hidden lg:block">
             <Price
               amount={product.priceRange.maxVariantPrice.amount}
               currencyCode={product.priceRange.maxVariantPrice.currencyCode}
@@ -58,7 +58,7 @@ export function ProductDescription({ product }: { product: Product }) {
             {menu.map((section, idx) => (
               <div key={section.title}>
                 <button
-                  className="w-full flex items-center justify-between py-5 text-sm font-normal focus:outline-none"
+                  className="w-full flex text-left justify-between py-5 text-sm font-normal focus:outline-none"
                   onClick={() => setOpen(open === idx ? null : idx)}
                   aria-expanded={open === idx}
                 >

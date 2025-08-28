@@ -153,19 +153,19 @@ export default function CartSidebar({ textColor }: { textColor: string }) {
                           <Link
                             href={merchandiseUrl}
                             onClick={closeCart}
-                            className="z-30 ml-4 flex flex-row space-x-4"
+                            className="z-30 ml-4 flex flex-row space-x-5"
                           >
                             <div className="flex flex-1 flex-col text-base">
-                              <span className="leading-tight">
+                              <span className="leading-tight font-header text-lg mb-2">
                                 {item.merchandise.product.title}
                               </span>
                               {item.merchandise.title !== DEFAULT_OPTION ? (
-                                <p className="text-sm text-neutral-500">
+                                <p className="text-xs text-neutral-500">
                                   {item.merchandise.title}
                                 </p>
                               ) : null}
                               <Price
-                                className="flex flex-3 space-y-2 text-left text-sm mt-4"
+                                className="flex flex-3 space-y-2 text-left text-xs mt-4"
                                 amount={item.cost.totalAmount.amount}
                                 currencyCode={
                                   item.cost.totalAmount.currencyCode
@@ -178,7 +178,7 @@ export default function CartSidebar({ textColor }: { textColor: string }) {
                           <div className="ml-auto flex h-9 flex-row items-center rounded-full border border-neutral-200">
                             <EditItemQuantityButton item={item} type="minus" />
                             <p className="w-6 text-center">
-                              <span className="w-full text-sm">
+                              <span className="w-full text-xs">
                                 {item.quantity}
                               </span>
                             </p>

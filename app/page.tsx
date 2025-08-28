@@ -15,42 +15,42 @@ export const metadata = {
 const sliderProducts1 = [
   {
     name: "Classic Tennis Bracelet 1",
-    price: "$3,500",
+    price: 3500,
     image: "/images/bracelet.webp",
   },
   {
     name: "Classic Tennis Bracelet 2",
-    price: "$3,500",
+    price: 3500,
     image: "/images/bracelet.webp",
   },
   {
     name: "Classic Tennis Bracelet 3",
-    price: "$3,500",
+    price: 3500,
     image: "/images/bracelet.webp",
   },
   {
     name: "Classic Tennis Bracelet 4",
-    price: "$3,500",
+    price: 3500,
     image: "/images/bracelet.webp",
   },
   {
     name: "Classic Tennis Bracelet 5",
-    price: "$3,500",
+    price: 3500,
     image: "/images/bracelet.webp",
   },
   {
     name: "Classic Tennis Bracelet 6",
-    price: "$3,500",
+    price: 3500,
     image: "/images/bracelet.webp",
   },
   {
     name: "Classic Tennis Bracelet 7",
-    price: "$3,500",
+    price: 3500,
     image: "/images/bracelet.webp",
   },
   {
     name: "Classic Tennis Bracelet 8",
-    price: "$3,500",
+    price: 3500,
     image: "/images/bracelet.webp",
   },
 ];
@@ -58,42 +58,42 @@ const sliderProducts1 = [
 const sliderProducts2 = [
   {
     name: "Emerald Cut Ring 1",
-    price: "$3,500",
+    price: 3500,
     image: "/images/ring-2-transparent.webp",
   },
   {
     name: "Emerald Cut Ring 2",
-    price: "$3,500",
+    price: 3500,
     image: "/images/ring-2-transparent.webp",
   },
   {
     name: "Emerald Cut Ring 3",
-    price: "$3,500",
+    price: 3500,
     image: "/images/ring-2-transparent.webp",
   },
   {
     name: "Emerald Cut Ring 4",
-    price: "$3,500",
+    price: 3500,
     image: "/images/ring-2-transparent.webp",
   },
   {
     name: "Emerald Cut Ring 5",
-    price: "$3,500",
+    price: 3500,
     image: "/images/ring-2-transparent.webp",
   },
   {
     name: "Emerald Cut Ring 6",
-    price: "$3,500",
+    price: 3500,
     image: "/images/ring-2-transparent.webp",
   },
   {
     name: "Emerald Cut Ring 7",
-    price: "$3,500",
+    price: 3500,
     image: "/images/ring-2-transparent.webp",
   },
   {
     name: "Emerald Cut Ring 8",
-    price: "$3,500",
+    price: 3500,
     image: "/images/ring-2-transparent.webp",
   },
 ];

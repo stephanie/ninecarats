@@ -134,10 +134,10 @@ export default async function ProductPage(props: {
           <div className="lg:hidden w-full flex-row justify-center">
             <div className="flex flex-col p-4">
               <Suspense fallback={null}>
-                <h2 className="text-md sm:text-lg text-black mb-2">
+                <h2 className="text-xl text-black mb-2 font-header">
                   {product.title}
                 </h2>
-                <div className="text-md sm:text-lg text-neutral-500">
+                <div className="text-sm text-neutral-500">
                   <Price
                     amount={product.priceRange.maxVariantPrice.amount}
                     currencyCode={

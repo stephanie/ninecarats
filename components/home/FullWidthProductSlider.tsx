@@ -3,13 +3,14 @@
 import SliderDots from "components/slider/SliderDots";
 import TextHeaderFull from "components/text/TextHeaderFull";
 import { useIsMobile } from "hooks/useIsMobile";
+import { formatPrice } from "lib/utils";
 import Image from "next/image";
 import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
 interface Product {
   name: string;
-  price?: string;
+  price?: number;
   image: string;
 }
 
@@ -93,12 +94,12 @@ export default function FullWidthProductSlider({
                 </div>
               </div>
               <div className="text-center flex flex-col">
-                <div className="text-sm md:text-base mb-1 text-black">
+                <div className="text-lg mb-1 text-black font-headerk">
                   {product.name}
                 </div>
                 {product.price && (
-                  <div className="text-sm md:text-base text-neutral-400">
-                    {product.price}
+                  <div className="text-sm text-neutral-500">
+                    {formatPrice(Number(product.price), "HKD")}
                   </div>
                 )}
               </div>
@@ -145,10 +146,12 @@ export default function FullWidthProductSlider({
                   </div>
                 </div>
                 <div className="text-center flex flex-col">
-                  <div className="text-sm mb-1 text-black">{product.name}</div>
+                  <div className="text-lg mb-1 text-black font-header">
+                    {product.name}
+                  </div>
                   {product.price && (
-                    <div className="text-sm text-neutral-400">
-                      {product.price}
+                    <div className="text-sm text-neutral-500">
+                      {formatPrice(Number(product.price), "HKD")}
                     </div>
                   )}
                 </div>

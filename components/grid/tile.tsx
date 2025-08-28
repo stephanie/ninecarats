@@ -33,11 +33,11 @@ export function GridTileImage({
         </div>
       </div>
       <div className="text-center flex flex-col">
-        <div className="text-sm md:text-base mb-1 text-black">
+        <div className="text-lg mb-1 text-black font-header">
           {label?.title}
         </div>
         {label?.amount && (
-          <div className="text-sm md:text-base text-neutral-400">
+          <div className="text-sm text-neutral-500">
             {formatPrice(Number(label?.amount), label?.currencyCode)}
           </div>
         )}

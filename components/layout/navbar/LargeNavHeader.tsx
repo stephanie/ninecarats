@@ -200,7 +200,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                     : scrolled || !startWithLargeNav
                       ? "text-sm sm:text-lg pt-1 text-black"
                       : `text-[5vw] sm:pt-8 ${textColor}`
-                } tracking-[.15em] select-none uppercase font-medium whitespace-nowrap`}
+                } tracking-[.1em] select-none uppercase font-header whitespace-nowrap`}
               >
                 Nine Carats
               </Link>
