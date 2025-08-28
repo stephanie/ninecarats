@@ -7,7 +7,7 @@ import { DEFAULT_OPTION } from "lib/constants";
 import { createUrl } from "lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { useCustomer } from "../customer/CustomerContext";
 import { useSignInModal } from "../layout/SignInModalProvider";
@@ -15,20 +15,63 @@ import { createCartAndSetCookie, redirectToCheckout } from "./actions";
 import { useCart } from "./cart-context";
 import { DeleteItemButton } from "./delete-item-button";
 import { EditItemQuantityButton } from "./edit-item-quantity-button";
-import OpenCart from "./open-cart";
 
 type MerchandiseSearchParams = {
   [key: string]: string;
 };
 
+// Global cart sidebar state manager
+class CartSidebarManager {
+  private static instance: CartSidebarManager;
+  private isOpen: boolean = false;
+  private subscribers: Set<(isOpen: boolean) => void> = new Set();
+
+  static getInstance(): CartSidebarManager {
+    if (!CartSidebarManager.instance) {
+      CartSidebarManager.instance = new CartSidebarManager();
+    }
+    return CartSidebarManager.instance;
+  }
+
+  subscribe(callback: (isOpen: boolean) => void): () => void {
+    this.subscribers.add(callback);
+    return () => this.subscribers.delete(callback);
+  }
+
+  setOpen(open: boolean): void {
+    this.isOpen = open;
+    this.subscribers.forEach((callback) => callback(this.isOpen));
+  }
+
+  getIsOpen(): boolean {
+    return this.isOpen;
+  }
+}
+
+export const cartManager = CartSidebarManager.getInstance();
+
 export default function CartSidebar({ textColor }: { textColor: string }) {
-  const { cart, updateCartItem } = useCart();
+  const { cart } = useCart();
   const { customer, logout } = useCustomer();
   const { openSignInModal } = useSignInModal();
   const [isOpen, setIsOpen] = useState(false);
   const quantityRef = useRef(cart?.totalQuantity);
-  const openCart = () => setIsOpen(true);
-  const closeCart = () => setIsOpen(false);
+
+  // Subscribe to global cart state
+  useEffect(() => {
+    const unsubscribe = cartManager.subscribe((globalIsOpen) => {
+      setIsOpen(globalIsOpen);
+    });
+    return unsubscribe;
+  }, []);
+
+  const openCart = useCallback(() => {
+    cartManager.setOpen(true);
+  }, []);
+
+  const closeCart = useCallback(() => {
+    cartManager.setOpen(false);
+  }, []);
 
   useEffect(() => {
     if (!cart) {
@@ -42,19 +85,15 @@ export default function CartSidebar({ textColor }: { textColor: string }) {
       cart?.totalQuantity !== quantityRef.current &&
       cart?.totalQuantity > 0
     ) {
-      if (!isOpen) {
-        setIsOpen(true);
+      if (!cartManager.getIsOpen()) {
+        cartManager.setOpen(true);
       }
       quantityRef.current = cart?.totalQuantity;
     }
-  }, [isOpen, cart?.totalQuantity, quantityRef]);
+  }, [cart?.totalQuantity, quantityRef]);
 
   return (
     <>
-      <button aria-label="Open cart" onClick={openCart} className="flex">
-        <OpenCart quantity={cart?.totalQuantity} textColor={textColor} />
-      </button>
-
       <Sidebar
         isOpen={isOpen}
         onClose={closeCart}
@@ -96,10 +135,7 @@ export default function CartSidebar({ textColor }: { textColor: string }) {
                     <li key={i} className="flex w-full flex-col">
                       <div className="relative flex w-full flex-row justify-between px-1 py-4">
                         <div className="absolute z-40 -ml-1 -mt-2">
-                          <DeleteItemButton
-                            item={item}
-                            optimisticUpdate={updateCartItem}
-                          />
+                          <DeleteItemButton item={item} />
                         </div>
                         <div className="flex flex-row">
                           <div className="relative h-20 w-16 overflow-hidden bg-neutral-300">
@@ -140,21 +176,13 @@ export default function CartSidebar({ textColor }: { textColor: string }) {
                         </div>
                         <div className="flex flex-col justify-end">
                           <div className="ml-auto flex h-9 flex-row items-center rounded-full border border-neutral-200">
-                            <EditItemQuantityButton
-                              item={item}
-                              type="minus"
-                              optimisticUpdate={updateCartItem}
-                            />
+                            <EditItemQuantityButton item={item} type="minus" />
                             <p className="w-6 text-center">
                               <span className="w-full text-sm">
                                 {item.quantity}
                               </span>
                             </p>
-                            <EditItemQuantityButton
-                              item={item}
-                              type="plus"
-                              optimisticUpdate={updateCartItem}
-                            />
+                            <EditItemQuantityButton item={item} type="plus" />
                           </div>
                         </div>
                       </div>

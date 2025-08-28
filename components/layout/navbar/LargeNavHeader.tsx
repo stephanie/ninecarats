@@ -1,5 +1,7 @@
 "use client";
-import CartSidebar from "components/cart/cart-sidebar";
+import { useCart } from "components/cart/cart-context";
+import CartSidebar, { cartManager } from "components/cart/cart-sidebar";
+import OpenCart from "components/cart/open-cart";
 import { useCustomer } from "components/customer/CustomerContext";
 import { useIsMobile } from "hooks/useIsMobile";
 import { Menu } from "lib/shopify/types";
@@ -22,6 +24,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const isMobile = useIsMobile();
   const pathname = usePathname();
   const { customer, logout } = useCustomer();
+  const { cart } = useCart();
 
   const startWithLargeNav = pathname === "/" || pathname.includes("/search");
 
@@ -120,7 +123,24 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                   onCategoriesClick={() => setIsCategoriesSidebarOpen(true)}
                 />
               </Suspense>
+              {/* Mobile Cart Button */}
+              <div className="sm:hidden">
+                <button
+                  aria-label="Open cart"
+                  onClick={() => cartManager.setOpen(true)}
+                  className="flex"
+                >
+                  <OpenCart
+                    quantity={cart?.totalQuantity}
+                    textColor={
+                      scrolled || forceSmall ? "text-black" : textColor
+                    }
+                  />
+                </button>
+              </div>
+              {/* CartSidebar - always visible, positioned responsively */}
               <CartSidebar
+                key="main-cart-sidebar"
                 textColor={scrolled || forceSmall ? "text-black" : textColor}
               />
             </div>
@@ -287,8 +307,17 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                   ></path>
                 </svg>
               </button>
-              {/* Shopping bag Icon (opens CartSidebar) */}
-              <CartSidebar textColor={getTextColor(scrolled || forceSmall)} />
+              {/* Desktop Cart Button */}
+              <button
+                aria-label="Open cart"
+                onClick={() => cartManager.setOpen(true)}
+                className="flex"
+              >
+                <OpenCart
+                  quantity={cart?.totalQuantity}
+                  textColor={getTextColor(scrolled || forceSmall)}
+                />
+              </button>
             </div>
           </div>
         </div>

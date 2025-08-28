@@ -32,11 +32,9 @@ function SubmitButton({ type }: { type: "plus" | "minus" }) {
 export function EditItemQuantityButton({
   item,
   type,
-  optimisticUpdate,
 }: {
   item: CartItem;
   type: "plus" | "minus";
-  optimisticUpdate: any;
 }) {
   const [message, formAction] = useActionState(updateItemQuantity, null);
   const payload = {
@@ -46,12 +44,7 @@ export function EditItemQuantityButton({
   const updateItemQuantityAction = formAction.bind(null, payload);
 
   return (
-    <form
-      action={async () => {
-        optimisticUpdate(payload.merchandiseId, type);
-        updateItemQuantityAction();
-      }}
-    >
+    <form action={updateItemQuantityAction}>
       <SubmitButton type={type} />
       <p aria-live="polite" className="sr-only" role="status">
         {message}
