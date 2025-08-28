@@ -197,12 +197,12 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 className={`font-body transition-all duration-500 select-none font-header whitespace-nowrap`}
               >
                 <span
-                  className={`uppercase tracking-wider ${
+                  className={`uppercase ${
                     !startWithLargeNav && !scrolled && isMobile
                       ? "text-black"
                       : scrolled || !startWithLargeNav
-                        ? "text-xl pt-1 text-black"
-                        : `text-[8rem] sm:pt-8 ${textColor}`
+                        ? "text-2xl pt-1 tracking-wide text-black"
+                        : `text-[8rem] tracking-widest sm:pt-8 ${textColor}`
                   }`}
                 >
                   Lab
@@ -212,8 +212,8 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                     !startWithLargeNav && !scrolled && isMobile
                       ? "text-lg text-black"
                       : scrolled || !startWithLargeNav
-                        ? "text-[0.9rem] pt-1 text-black"
-                        : `text-[1.8rem] ml-[0.rem] tracking-[0.08rem] ${textColor}`
+                        ? "text-[0.6rem] pt-1 text-black"
+                        : `text-[1.8rem] ml-[-0.2rem] tracking-[0.08rem] ${textColor}`
                   }`}
                 >
                   by Lesley
