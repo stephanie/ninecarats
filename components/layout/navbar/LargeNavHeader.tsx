@@ -194,15 +194,30 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
             >
               <Link
                 href="/"
-                className={`font-body transition-all duration-500 ${
-                  !startWithLargeNav && !scrolled && isMobile
-                    ? "text-lg text-black"
-                    : scrolled || !startWithLargeNav
-                      ? "text-sm sm:text-lg pt-1 text-black"
-                      : `text-[5vw] sm:pt-8 ${textColor}`
-                } tracking-[.1em] select-none uppercase font-header whitespace-nowrap`}
+                className={`font-body transition-all duration-500 select-none font-header whitespace-nowrap`}
               >
-                Nine Carats
+                <span
+                  className={`uppercase tracking-wider ${
+                    !startWithLargeNav && !scrolled && isMobile
+                      ? "text-black"
+                      : scrolled || !startWithLargeNav
+                        ? "text-xl pt-1 text-black"
+                        : `text-[8rem] sm:pt-8 ${textColor}`
+                  }`}
+                >
+                  Lab
+                </span>{" "}
+                <span
+                  className={`${
+                    !startWithLargeNav && !scrolled && isMobile
+                      ? "text-lg text-black"
+                      : scrolled || !startWithLargeNav
+                        ? "text-[1rem] pt-1 text-black"
+                        : `text-[1.8rem] ml-[0.rem] tracking-[0.08rem] ${textColor}`
+                  }`}
+                >
+                  by Lesley
+                </span>
               </Link>
             </div>
             {/* Right Section */}
