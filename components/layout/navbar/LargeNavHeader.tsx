@@ -180,9 +180,9 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                     : scrolled || !startWithLargeNav
                       ? "text-sm sm:text-lg pt-1 text-black"
                       : `text-[5vw] sm:pt-8 ${textColor}`
-                } tracking-[.25em] select-none uppercase font-medium whitespace-nowrap`}
+                } tracking-[.15em] select-none uppercase font-medium whitespace-nowrap`}
               >
-                Shine Stella
+                Nine Carats
               </Link>
             </div>
             {/* Right Section */}
