@@ -212,7 +212,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                     !startWithLargeNav && !scrolled && isMobile
                       ? "text-lg text-black"
                       : scrolled || !startWithLargeNav
-                        ? "text-[1rem] pt-1 text-black"
+                        ? "text-[0.9rem] pt-1 text-black"
                         : `text-[1.8rem] ml-[0.rem] tracking-[0.08rem] ${textColor}`
                   }`}
                 >
