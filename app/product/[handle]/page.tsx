@@ -18,32 +18,32 @@ import { Suspense } from "react";
 const sliderProducts = [
   {
     name: "Classic Tennis Bracelet 1",
-    price: "$3,500",
+    price: 3500,
     image: "/images/bracelet.webp",
   },
   {
     name: "Classic Tennis Bracelet 2",
-    price: "$3,500",
+    price: 3500,
     image: "/images/bracelet.webp",
   },
   {
     name: "Classic Tennis Bracelet 3",
-    price: "$3,500",
+    price: 3500,
     image: "/images/bracelet.webp",
   },
   {
     name: "Classic Tennis Bracelet 4",
-    price: "$3,500",
+    price: 3500,
     image: "/images/bracelet.webp",
   },
   {
     name: "Classic Tennis Bracelet 5",
-    price: "$3,500",
+    price: 3500,
     image: "/images/bracelet.webp",
   },
   {
     name: "Classic Tennis Bracelet 6",
-    price: "$3,500",
+    price: 3500,
     image: "/images/bracelet.webp",
   },
 ];
