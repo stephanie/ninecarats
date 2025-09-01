@@ -94,7 +94,7 @@ export default function FullWidthProductSlider({
                 </div>
               </div>
               <div className="text-center flex flex-col">
-                <div className="text-lg mb-1 text-black font-headerk">
+                <div className="text-lg mb-1 text-black font-header">
                   {product.name}
                 </div>
                 {product.price && (

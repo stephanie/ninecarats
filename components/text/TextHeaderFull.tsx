@@ -29,12 +29,12 @@ export default function TextHeaderFull({
         {tagline}
       </div>
       <h2
-        className={`${headerClassName ? headerClassName : "text-xl md:text-4xl"} mb-1 md:mb-2 font-header`}
+        className={`${headerClassName ? headerClassName : "text-2xl md:text-4xl"} mb-1 md:mb-2 font-header`}
       >
         {children}
       </h2>
       {description && (
-        <p className="text-xs md:text-sm text-neutral-700 hidden md:flex p-4 w-[30rem]">
+        <p className="text-sm text-neutral-700 hidden md:flex p-4 w-[30rem]">
           {description}
         </p>
       )}

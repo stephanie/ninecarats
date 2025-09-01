@@ -184,7 +184,7 @@ export default async function ProductPage(props: {
             ))}
           </div>
         </section>
-        <div className="w-full text-center text-lg sm:text-xl pt-14 pb-2">
+        <div className="w-full text-center text-lg sm:text-xl pt-14 pb-2 font-header">
           You may also like
         </div>
         <FullWidthProductSlider products={sliderProducts} />
