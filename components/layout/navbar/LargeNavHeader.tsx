@@ -202,18 +202,18 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                       ? "text-black"
                       : scrolled || !startWithLargeNav
                         ? "text-2xl pt-1 tracking-wide text-black"
-                        : `text-[8rem] tracking-widest sm:pt-8 ${textColor}`
+                        : `text-[8rem] tracking-widest sm:pt-8 ${textColor} leading-[0.85em] block`
                   }`}
                 >
                   Lab
-                </span>{" "}
+                </span>
                 <span
                   className={`${
                     !startWithLargeNav && !scrolled && isMobile
                       ? "text-lg text-black"
                       : scrolled || !startWithLargeNav
-                        ? "text-[0.6rem] pt-1 text-black"
-                        : `text-[1.8rem] ml-[-0.2rem] tracking-[0.08rem] ${textColor}`
+                        ? "text-[1rem] pt-1 text-black ml-[0.3rem]"
+                        : `text-[2rem] ml-[-0.2rem] tracking-[0.08rem] ${textColor} text-center block`
                   }`}
                 >
                   by Lesley
