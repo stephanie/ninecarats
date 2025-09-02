@@ -1,7 +1,7 @@
 import FullScreenSlider from "components/home/FullScreenSlider";
-import FullWidthProductSlider from "components/home/FullWidthProductSlider";
 import FullWidthTextSection from "components/home/FullWidthTextSection";
 import MultiImageSection from "components/home/MultiImageSection";
+import ShopifyProductSlider from "components/home/ShopifyProductSlider";
 import StickyTextImageSection from "components/home/StickyTextImageSection";
 import ButtonLink from "components/text/ButtonLink";
 
@@ -11,92 +11,6 @@ export const metadata = {
     type: "website",
   },
 };
-
-const sliderProducts1 = [
-  {
-    name: "Classic Tennis Bracelet 1",
-    price: 3500,
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 2",
-    price: 3500,
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 3",
-    price: 3500,
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 4",
-    price: 3500,
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 5",
-    price: 3500,
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 6",
-    price: 3500,
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 7",
-    price: 3500,
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 8",
-    price: 3500,
-    image: "/images/bracelet.webp",
-  },
-];
-
-const sliderProducts2 = [
-  {
-    name: "Emerald Cut Ring 1",
-    price: 3500,
-    image: "/images/ring-2-transparent.webp",
-  },
-  {
-    name: "Emerald Cut Ring 2",
-    price: 3500,
-    image: "/images/ring-2-transparent.webp",
-  },
-  {
-    name: "Emerald Cut Ring 3",
-    price: 3500,
-    image: "/images/ring-2-transparent.webp",
-  },
-  {
-    name: "Emerald Cut Ring 4",
-    price: 3500,
-    image: "/images/ring-2-transparent.webp",
-  },
-  {
-    name: "Emerald Cut Ring 5",
-    price: 3500,
-    image: "/images/ring-2-transparent.webp",
-  },
-  {
-    name: "Emerald Cut Ring 6",
-    price: 3500,
-    image: "/images/ring-2-transparent.webp",
-  },
-  {
-    name: "Emerald Cut Ring 7",
-    price: 3500,
-    image: "/images/ring-2-transparent.webp",
-  },
-  {
-    name: "Emerald Cut Ring 8",
-    price: 3500,
-    image: "/images/ring-2-transparent.webp",
-  },
-];
 
 const cards = [
   {
@@ -140,13 +54,16 @@ export default function HomePage() {
       <div className="relative w-full">
         <FullScreenSlider />
       </div>
-      <FullWidthProductSlider
-        products={sliderProducts1}
+      <ShopifyProductSlider
+        collectionHandle="necklaces"
         tagline="Jewelry"
-        heading="Bracelets"
-        sectionDescription="Juxtaposed in elegant combinations, these fine bracelets offer a wide variety of forms to embellish the wrist."
+        heading="Necklaces"
+        sectionDescription="Juxtaposed in elegant combinations, these fine necklaces offer a wide variety of forms to embellish the neck."
         button={
-          <ButtonLink href="#" className="text-black hover:border-black">
+          <ButtonLink
+            href="/search/necklaces"
+            className="text-black hover:border-black"
+          >
             Shop our collection
           </ButtonLink>
         }
@@ -162,13 +79,16 @@ export default function HomePage() {
         />
       </div> */}
       <FullWidthTextSection />
-      <FullWidthProductSlider
-        products={sliderProducts2}
+      <ShopifyProductSlider
+        collectionHandle="bracelets"
         tagline="Wedding"
         heading="Engagement Rings"
         sectionDescription="Juxtaposed in elegant combinations, these fine rings offer a wide variety of forms to embellish the hand."
         button={
-          <ButtonLink href="#" className="text-black hover:border-black">
+          <ButtonLink
+            href="/search/bracelets"
+            className="text-black hover:border-black"
+          >
             Shop our collection
           </ButtonLink>
         }
@@ -178,18 +98,24 @@ export default function HomePage() {
         heading="Necklaces"
         image="/images/full-width-jewelry.webp"
         button={
-          <ButtonLink href="#" className="text-white hover:border-white">
+          <ButtonLink
+            href="/search/necklaces"
+            className="text-white hover:border-white"
+          >
             Shop our collection
           </ButtonLink>
         }
       />
-      <FullWidthProductSlider
-        products={sliderProducts1}
+      <ShopifyProductSlider
+        collectionHandle="bracelets"
         tagline="Jewelry"
         heading="Bracelets"
         sectionDescription="Juxtaposed in elegant combinations, these fine bracelets offer a wide variety of forms to embellish the wrist."
         button={
-          <ButtonLink href="#" className="text-black hover:border-black">
+          <ButtonLink
+            href="/search/bracelets"
+            className="text-black hover:border-black"
+          >
             Shop our collection
           </ButtonLink>
         }

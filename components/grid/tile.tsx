@@ -23,7 +23,7 @@ export function GridTileImage({
   return (
     <div className="flex-shrink-0 w-full flex flex-col mb-8">
       <div className="flex flex-col items-center p-2">
-        <div className="w-full aspect-[3/4] max-h-[60vh] relative mb-6">
+        <div className="w-full aspect-[1/1] max-h-[60vh] relative mb-6">
           <Image
             src={src}
             alt={alt}

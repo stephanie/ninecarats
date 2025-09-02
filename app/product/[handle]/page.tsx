@@ -3,50 +3,17 @@ import { notFound } from "next/navigation";
 
 import { AddToCart } from "components/cart/add-to-cart";
 import { GridTileImage } from "components/grid/tile";
-import FullWidthProductSlider from "components/home/FullWidthProductSlider";
 import Price from "components/price";
 import { Gallery } from "components/product/gallery";
 import { MobileVariantSelector } from "components/product/MobileVariantSelector";
 import { ProductProvider } from "components/product/product-context";
 import { ProductDescription } from "components/product/product-description";
+import RelatedProductsSlider from "components/product/RelatedProductsSlider";
 import { HIDDEN_PRODUCT_TAG } from "lib/constants";
 import { getProduct, getProductRecommendations } from "lib/shopify";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
-
-const sliderProducts = [
-  {
-    name: "Classic Tennis Bracelet 1",
-    price: 3500,
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 2",
-    price: 3500,
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 3",
-    price: 3500,
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 4",
-    price: 3500,
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 5",
-    price: 3500,
-    image: "/images/bracelet.webp",
-  },
-  {
-    name: "Classic Tennis Bracelet 6",
-    price: 3500,
-    image: "/images/bracelet.webp",
-  },
-];
 
 export async function generateMetadata(props: {
   params: Promise<{ handle: string }>;
@@ -187,7 +154,7 @@ export default async function ProductPage(props: {
         <div className="w-full text-center text-lg sm:text-xl pt-14 pb-2 font-header">
           You may also like
         </div>
-        <FullWidthProductSlider products={sliderProducts} />
+        <RelatedProductsSlider currentProduct={product} maxProducts={6} />
         {/* <RelatedProducts id={product.id} /> */}
         {/* Breadcrumb section */}
         <div className="w-full border-b border-neutral-200 pb-6 sm:pl-14 pl-4">

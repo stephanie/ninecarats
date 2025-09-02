@@ -3,16 +3,12 @@
 import SliderDots from "components/slider/SliderDots";
 import TextHeaderFull from "components/text/TextHeaderFull";
 import { useIsMobile } from "hooks/useIsMobile";
+import { Product } from "lib/shopify/types";
 import { formatPrice } from "lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
-
-interface Product {
-  name: string;
-  price?: number;
-  image: string;
-}
 
 interface FullWidthProductSliderProps {
   products: Product[];
@@ -32,8 +28,24 @@ export default function FullWidthProductSlider({
   const isMobile = useIsMobile();
   const [currentPage, setCurrentPage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Filter out products without proper data
+  const validProducts = products.filter(
+    (product) =>
+      product &&
+      product.id &&
+      product.title &&
+      (product.priceRange?.maxVariantPrice?.amount ||
+        product.priceRange?.minVariantPrice?.amount)
+  );
+
   const productsPerPage = isMobile ? 1 : 3;
-  const totalPages = Math.ceil(products.length / productsPerPage);
+  const totalPages = Math.ceil(validProducts.length / productsPerPage);
+
+  // Return early if no valid products
+  if (validProducts.length === 0) {
+    return null;
+  }
 
   const handleDotClick = (pageIndex: number) => {
     if (pageIndex === currentPage || isTransitioning) return;
@@ -76,34 +88,48 @@ export default function FullWidthProductSlider({
             transform: `translateX(calc(-${currentPage * 80}vw + 10vw))`,
           }}
         >
-          {products.map((product, idx) => (
-            <div
-              key={idx}
-              className="flex-shrink-0 w-[80vw] max-w-[340px] flex flex-col mb-8"
-            >
-              <div className="flex flex-col items-center p-2">
-                <div className="w-full aspect-[3/4] max-h-[40vh] relative mb-6">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-contain bg-neutral-100"
-                    sizes="80vw"
-                    priority={idx === 0}
-                  />
-                </div>
-              </div>
-              <div className="text-center flex flex-col">
-                <div className="text-lg mb-1 text-black font-header">
-                  {product.name}
-                </div>
-                {product.price && (
-                  <div className="text-sm text-neutral-500">
-                    {formatPrice(Number(product.price), "HKD")}
+          {validProducts.map((product, idx) => (
+            <Link href={`/product/${product.handle}`} key={product.id}>
+              <div
+                key={product.id}
+                className="flex-shrink-0 w-[80vw] max-w-[340px] flex flex-col mb-8"
+              >
+                <div className="flex flex-col items-center p-2">
+                  <div className="w-full aspect-[1/1] max-h-[40vh] relative mb-6">
+                    <Image
+                      src={
+                        product.featuredImage?.url || "/images/placeholder.webp"
+                      }
+                      alt={product.featuredImage?.altText || product.title}
+                      fill
+                      className="object-contain bg-neutral-100"
+                      sizes="80vw"
+                      priority={idx === 0}
+                    />
                   </div>
-                )}
+                </div>
+                <div className="text-center flex flex-col">
+                  <div className="text-lg mb-1 text-black font-header">
+                    {product.title}
+                  </div>
+                  <div className="text-sm text-neutral-500">
+                    {product.priceRange?.maxVariantPrice?.amount
+                      ? formatPrice(
+                          Number(product.priceRange.maxVariantPrice.amount),
+                          product.priceRange.maxVariantPrice.currencyCode ||
+                            "USD"
+                        )
+                      : product.priceRange?.minVariantPrice?.amount
+                        ? formatPrice(
+                            Number(product.priceRange.minVariantPrice.amount),
+                            product.priceRange.minVariantPrice.currencyCode ||
+                              "USD"
+                          )
+                        : "Price unavailable"}
+                  </div>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -116,46 +142,52 @@ export default function FullWidthProductSlider({
             isTransitioning ? "opacity-50 scale-95" : "opacity-100 scale-100"
           }`}
         >
-          {products
+          {validProducts
             .slice(
               currentPage * productsPerPage,
               currentPage * productsPerPage + productsPerPage
             )
             .map((product, idx) => (
-              <div
-                className="flex flex-col gap-4 mb-2 transform transition-all duration-500 ease-out"
-                key={`${currentPage}-${idx}`}
-                style={{
-                  animationDelay: `${idx * 100}ms`,
-                  transform: isTransitioning
-                    ? "translateY(20px)"
-                    : "translateY(0)",
-                  opacity: isTransitioning ? 0 : 1,
-                }}
-              >
-                <div className="flex flex-col items-center bg-neutral-100 p-2">
-                  <div className="w-full aspect-[3/4] max-h-[50vh] relative mb-8">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 1024px) 100vw, 25vw"
-                      priority={idx === 0}
-                    />
-                  </div>
-                </div>
-                <div className="text-center flex flex-col">
-                  <div className="text-lg mb-1 text-black font-header">
-                    {product.name}
-                  </div>
-                  {product.price && (
-                    <div className="text-sm text-neutral-500">
-                      {formatPrice(Number(product.price), "HKD")}
+              <Link href={`/product/${product.handle}`} key={product.id}>
+                <div
+                  className="flex flex-col gap-4 mb-2 transform transition-all duration-500 ease-out"
+                  key={`${currentPage}-${product.id}`}
+                  style={{
+                    animationDelay: `${idx * 100}ms`,
+                    transform: isTransitioning
+                      ? "translateY(20px)"
+                      : "translateY(0)",
+                    opacity: isTransitioning ? 0 : 1,
+                  }}
+                >
+                  <div className="flex flex-col items-center bg-neutral-100 p-2">
+                    <div className="w-full aspect-[1/1] max-h-[50vh] relative mb-8">
+                      <Image
+                        src={
+                          product.featuredImage?.url ||
+                          "/images/placeholder.webp"
+                        }
+                        alt={product.featuredImage?.altText || product.title}
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 1024px) 100vw, 25vw"
+                        priority={idx === 0}
+                      />
                     </div>
-                  )}
+                  </div>
+                  <div className="text-center flex flex-col">
+                    <div className="text-lg mb-1 text-black font-header">
+                      {product.title}
+                    </div>
+                    <div className="text-sm text-neutral-500">
+                      {formatPrice(
+                        Number(product.priceRange.maxVariantPrice.amount),
+                        product.priceRange.maxVariantPrice.currencyCode
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
         </div>
       </div>
