@@ -28,7 +28,7 @@ export default function Search({ onSubmitted }: { onSubmitted?: () => void }) {
         placeholder="Search for products..."
         autoComplete="off"
         defaultValue={searchParams?.get("q") || ""}
-        className="borderless-input w-full text-md font-light text-gray-900 border-b-1 border-gray-300 pb-2 focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-black transition-colors duration-200"
+        className="borderless-input w-full text-md font-light text-gray-900 border-b-1 border-gray-300 pb-2 focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-black transition-colors duration-200 text-sm"
       />
       <div className="absolute right-0 top-0 mr-3 flex h-full items-center">
         <MagnifyingGlassIcon className="h-4 text-gray-400" />
@@ -43,7 +43,7 @@ export function SearchSkeleton() {
       <input
         type="text"
         placeholder="Search for products..."
-        className="borderless-input w-full text-md font-light text-gray-900 border-b-1 border-gray-300 pb-2 focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-black transition-colors duration-200"
+        className="borderless-input w-full text-md font-light text-gray-900 border-b-1 border-gray-300 pb-2 focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-black transition-colors duration-200 text-sm"
         autoFocus
       />
       <div className="absolute right-0 top-0 mr-3 flex h-full items-center">

@@ -63,7 +63,7 @@ export default function CategoriesSidebar({
       width="w-[400px]"
     >
       <div className="space-y-4 mt-4">
-        <div className="text-sm text-gray-600 mb-6">
+        <div className="text-sm text-gray-500 mb-6">
           Discover our complete collection of fine jewelry and accessories
         </div>
 
@@ -77,7 +77,7 @@ export default function CategoriesSidebar({
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h3 className="text-base font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
+                    <h3 className="text-xl font-medium text-gray-900 group-hover:text-gray-700 transition-colors font-header">
                       {category.title}
                     </h3>
                     <p className="text-sm text-gray-500 mt-1 group-hover:text-gray-600 transition-colors">

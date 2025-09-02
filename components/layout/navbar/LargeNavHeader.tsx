@@ -353,7 +353,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
 
                   {/* Popular Section */}
                   <div>
-                    <h3 className="text-lg font-medium text-black mb-4">
+                    <h3 className="text-xl text-black mb-4 font-header">
                       Trending
                     </h3>
                     <div className="flex flex-wrap gap-3">
@@ -377,14 +377,12 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
 
                 {/* Right Section - Discover */}
                 <div className="ml-16">
-                  <h3 className="text-lg font-medium text-black mb-4">
-                    Discover
-                  </h3>
+                  <h3 className="mb-4 text-gray-500">Discover</h3>
                   <ul className="space-y-2">
                     <li>
                       <Link
                         href="/collections/jewelry"
-                        className="text-black hover:text-gray-600 transition-colors duration-200"
+                        className="text-black hover:text-gray-600 transition-colors duration-200 font-header text-xl"
                       >
                         Jewelry
                       </Link>
@@ -392,7 +390,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                     <li>
                       <Link
                         href="/collections/gifts"
-                        className="text-black hover:text-gray-600 transition-colors duration-200"
+                        className="text-black hover:text-gray-600 transition-colors duration-200 font-header text-xl"
                       >
                         Gifts
                       </Link>
