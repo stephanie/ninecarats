@@ -201,8 +201,10 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                     !startWithLargeNav && !scrolled && isMobile
                       ? "text-black"
                       : scrolled || !startWithLargeNav
-                        ? "text-2xl pt-1 tracking-wide text-black"
-                        : `text-[8rem] tracking-widest sm:pt-8 ${textColor} leading-[0.85em] block`
+                        ? "text-xl pt-1 tracking-wide text-black"
+                        : isMobile
+                          ? `text-[3rem] tracking-widest sm:pt-8 ${textColor} leading-[0.85em] block`
+                          : `text-[8vw] tracking-widest sm:pt-8 ${textColor} leading-[0.85em] block`
                   }`}
                 >
                   Lab
@@ -213,7 +215,9 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                       ? "text-lg text-black"
                       : scrolled || !startWithLargeNav
                         ? "text-[1rem] pt-1 text-black ml-[0.3rem]"
-                        : `text-[2rem] ml-[-0.2rem] tracking-[0.08rem] ${textColor} text-center block`
+                        : isMobile
+                          ? `text-[1rem] ml-[-0.2rem] tracking-[0.08rem] ${textColor} text-center block`
+                          : `text-[2vw] ml-[-0.2rem] tracking-[0.08rem] ${textColor} text-center block`
                   }`}
                 >
                   by Lesley
