@@ -3,11 +3,12 @@
 import SliderDots from "components/slider/SliderDots";
 import TextHeaderFull from "components/text/TextHeaderFull";
 import { useIsMobile } from "hooks/useIsMobile";
-import { Product } from "lib/shopify/types";
+import { getProductMedia } from "lib/shopify";
+import { Media, Product, Video } from "lib/shopify/types";
 import { formatPrice } from "lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
 interface FullWidthProductSliderProps {
@@ -28,6 +29,8 @@ export default function FullWidthProductSlider({
   const isMobile = useIsMobile();
   const [currentPage, setCurrentPage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [productMedia, setProductMedia] = useState<Record<string, Media[]>>({});
+  const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
 
   // Filter out products without proper data
   const validProducts = products.filter(
@@ -41,6 +44,52 @@ export default function FullWidthProductSlider({
 
   const productsPerPage = isMobile ? 1 : 3;
   const totalPages = Math.ceil(validProducts.length / productsPerPage);
+
+  // Fetch media data for products
+  useEffect(() => {
+    const fetchMediaForProducts = async () => {
+      const mediaPromises = validProducts.map(async (product) => {
+        try {
+          const media = await getProductMedia(product.handle);
+          return { productId: product.id, media };
+        } catch (error) {
+          console.error(
+            `Failed to fetch media for product ${product.handle}:`,
+            error
+          );
+          return { productId: product.id, media: [] };
+        }
+      });
+
+      const results = await Promise.all(mediaPromises);
+      const mediaMap: Record<string, Media[]> = {};
+      results.forEach(({ productId, media }) => {
+        mediaMap[productId] = media;
+      });
+      setProductMedia(mediaMap);
+    };
+
+    if (validProducts.length > 0) {
+      fetchMediaForProducts();
+    }
+  }, [validProducts]);
+
+  // Helper function to find MP4 video from media
+  const getMp4VideoUrl = (productId: string): string | null => {
+    const media = productMedia[productId];
+    if (!media) return null;
+
+    const mp4Video = media.find((mediaItem): mediaItem is Video => {
+      return (
+        "sources" in mediaItem &&
+        mediaItem.sources.some((source) => source.format === "mp4")
+      );
+    });
+
+    return (
+      mp4Video?.sources.find((source) => source.format === "mp4")?.url || null
+    );
+  };
 
   // Return early if no valid products
   if (validProducts.length === 0) {
@@ -83,7 +132,7 @@ export default function FullWidthProductSlider({
     sliderContent = (
       <div className="relative w-full overflow-x-hidden">
         <div
-          className="flex transition-transform duration-500 ease-in-out"
+          className="flex transition-transform duration-500 ease-in-out gap-4"
           style={{
             transform: `translateX(calc(-${currentPage * 80}vw + 10vw))`,
           }}
@@ -94,18 +143,48 @@ export default function FullWidthProductSlider({
                 key={product.id}
                 className="flex-shrink-0 w-[80vw] max-w-[340px] flex flex-col mb-8"
               >
-                <div className="flex flex-col items-center p-2">
-                  <div className="w-full aspect-[1/1] max-h-[40vh] relative mb-6">
+                <div className="flex flex-col items-center">
+                  <div
+                    className={`w-full aspect-[1/1] max-h-[40vh] relative mb-6 group transition-colors duration-500 ${
+                      hoveredProduct === product.id
+                        ? "bg-white"
+                        : "bg-neutral-100"
+                    }`}
+                    onMouseEnter={() => setHoveredProduct(product.id)}
+                    onMouseLeave={() => setHoveredProduct(null)}
+                  >
                     <Image
                       src={
                         product.featuredImage?.url || "/images/placeholder.webp"
                       }
                       alt={product.featuredImage?.altText || product.title}
                       fill
-                      className="object-contain bg-neutral-100"
+                      className="object-contain"
                       sizes="80vw"
                       priority={idx === 0}
                     />
+                    {getMp4VideoUrl(product.id) &&
+                      hoveredProduct === product.id && (
+                        <video
+                          className="absolute inset-0 w-full h-full object-cover"
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          style={{
+                            display: "block",
+                            margin: 0,
+                            padding: 0,
+                            outline: "none",
+                            border: "none",
+                          }}
+                        >
+                          <source
+                            src={getMp4VideoUrl(product.id)!}
+                            type="video/mp4"
+                          />
+                        </video>
+                      )}
                   </div>
                 </div>
                 <div className="text-center flex flex-col">
@@ -138,7 +217,7 @@ export default function FullWidthProductSlider({
     sliderContent = (
       <div className="relative w-full overflow-hidden px-4 mb-8">
         <div
-          className={`grid grid-cols-3 gap-4 w-full transition-all duration-500 ease-in-out ${
+          className={`grid grid-cols-3 w-full gap-4 transition-all duration-500 ease-in-out ${
             isTransitioning ? "opacity-50 scale-95" : "opacity-100 scale-100"
           }`}
         >
@@ -150,7 +229,7 @@ export default function FullWidthProductSlider({
             .map((product, idx) => (
               <Link href={`/product/${product.handle}`} key={product.id}>
                 <div
-                  className="flex flex-col gap-4 mb-2 transform transition-all duration-500 ease-out"
+                  className="flex flex-col mb-2 transform transition-all duration-500 ease-out"
                   key={`${currentPage}-${product.id}`}
                   style={{
                     animationDelay: `${idx * 100}ms`,
@@ -160,8 +239,12 @@ export default function FullWidthProductSlider({
                     opacity: isTransitioning ? 0 : 1,
                   }}
                 >
-                  <div className="flex flex-col items-center bg-neutral-100 p-2">
-                    <div className="w-full aspect-[1/1] max-h-[50vh] relative mb-8">
+                  <div className="flex flex-col items-center">
+                    <div
+                      className={`w-full aspect-[1/1] max-h-[50vh] relative mb-8 group transition-colors duration-300`}
+                      onMouseEnter={() => setHoveredProduct(product.id)}
+                      onMouseLeave={() => setHoveredProduct(null)}
+                    >
                       <Image
                         src={
                           product.featuredImage?.url ||
@@ -169,10 +252,31 @@ export default function FullWidthProductSlider({
                         }
                         alt={product.featuredImage?.altText || product.title}
                         fill
-                        className="object-contain"
-                        sizes="(max-width: 1024px) 100vw, 25vw"
+                        className="object-fill"
                         priority={idx === 0}
                       />
+                      {getMp4VideoUrl(product.id) &&
+                        hoveredProduct === product.id && (
+                          <video
+                            className="absolute inset-0 w-full h-full object-cover"
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            style={{
+                              display: "block",
+                              margin: 0,
+                              padding: 0,
+                              outline: "none",
+                              border: "none",
+                            }}
+                          >
+                            <source
+                              src={getMp4VideoUrl(product.id)!}
+                              type="video/mp4"
+                            />
+                          </video>
+                        )}
                     </div>
                   </div>
                   <div className="text-center flex flex-col">
