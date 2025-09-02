@@ -29,6 +29,7 @@ import {
 import { getMenuQuery } from './queries/menu';
 import { getPageQuery, getPagesQuery } from './queries/page';
 import {
+  getProductMediaQuery,
   getProductQuery,
   getProductRecommendationsQuery,
   getProductsQuery
@@ -38,6 +39,7 @@ import {
   Collection,
   Connection,
   Image,
+  Media,
   Menu,
   Page,
   Product,
@@ -53,6 +55,7 @@ import {
   ShopifyPageOperation,
   ShopifyPagesOperation,
   ShopifyProduct,
+  ShopifyProductMediaOperation,
   ShopifyProductOperation,
   ShopifyProductRecommendationsOperation,
   ShopifyProductsOperation,
@@ -176,6 +179,33 @@ const reshapeImages = (images: Connection<Image>, productTitle: string) => {
       ...image,
       altText: image.altText || `${productTitle} - ${filename}`
     };
+  });
+};
+
+const reshapeMedia = (media: Connection<Media>, productTitle: string) => {
+  const flattened = removeEdgesAndNodes(media);
+
+  return flattened.map((mediaItem) => {
+    // Handle MediaImage
+    if ('image' in mediaItem) {
+      const filename = mediaItem.image.url.match(/.*\/(.*)\..*/)?.[1];
+      return {
+        ...mediaItem,
+        image: {
+          ...mediaItem.image,
+          altText: mediaItem.image.altText || `${productTitle} - ${filename}`
+        }
+      };
+    }
+    // Handle Video
+    if ('sources' in mediaItem) {
+      return mediaItem;
+    }
+    // Handle ExternalVideo
+    if ('embedUrl' in mediaItem) {
+      return mediaItem;
+    }
+    return mediaItem;
   });
 };
 
@@ -533,6 +563,37 @@ export async function getProducts({
     if (process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV) {
       return [];
     }
+    // Re-throw the error in development
+    throw error;
+  }
+}
+
+export async function getProductMedia(
+  handle: string
+): Promise<Media[]> {
+  'use cache';
+  cacheTag(TAGS.products);
+  cacheLife('days');
+
+  try {
+    const res = await shopifyFetch<ShopifyProductMediaOperation>({
+      query: getProductMediaQuery,
+      variables: { handle }
+    });
+
+    if (!res.body.data.product) {
+      return [];
+    }
+
+    return reshapeMedia(res.body.data.product.media, '');
+  } catch (error) {
+    console.error('Failed to fetch product media:', error);
+    
+    // Return a fallback during build/deployment
+    if (process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV) {
+      return [];
+    }
+
     // Re-throw the error in development
     throw error;
   }

@@ -10,7 +10,11 @@ import { ProductProvider } from "components/product/product-context";
 import { ProductDescription } from "components/product/product-description";
 import RelatedProductsSlider from "components/product/RelatedProductsSlider";
 import { HIDDEN_PRODUCT_TAG } from "lib/constants";
-import { getProduct, getProductRecommendations } from "lib/shopify";
+import {
+  getProduct,
+  getProductMedia,
+  getProductRecommendations,
+} from "lib/shopify";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -60,6 +64,9 @@ export default async function ProductPage(props: {
 
   if (!product) return notFound();
 
+  // Fetch media data separately to avoid GraphQL errors
+  const media = await getProductMedia(params.handle);
+
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -96,6 +103,7 @@ export default async function ProductPage(props: {
                 src: image.url,
                 altText: image.altText,
               }))}
+              media={media}
             />
           </Suspense>
           <div className="lg:hidden w-full flex-row justify-center">

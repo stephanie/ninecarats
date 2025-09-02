@@ -30,3 +30,47 @@ export const getProductRecommendationsQuery = /* GraphQL */ `
   }
   ${productFragment}
 `;
+
+export const getProductMediaQuery = /* GraphQL */ `
+  query getProductMedia($handle: String!) {
+    product(handle: $handle) {
+      id
+      handle
+      media(first: 20) {
+        edges {
+          node {
+            __typename
+            ... on MediaImage {
+              id
+              image {
+                url
+                altText
+                width
+                height
+              }
+            }
+            ... on Video {
+              id
+              sources {
+                url
+                format
+                mimeType
+              }
+              previewImage {
+                url
+                altText
+                width
+                height
+              }
+            }
+            ... on ExternalVideo {
+              id
+              embedUrl
+              host
+            }
+          }
+        }
+      }
+    }
+  }
+`;

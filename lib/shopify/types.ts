@@ -47,6 +47,31 @@ export type Image = {
   height: number;
 };
 
+export type VideoSource = {
+  format: string;
+  url: string;
+  mimeType: string;
+};
+
+export type MediaImage = {
+  id: string;
+  image: Image;
+};
+
+export type Video = {
+  id: string;
+  sources: VideoSource[];
+  previewImage?: Image;
+};
+
+export type ExternalVideo = {
+  id: string;
+  embedUrl: string;
+  host: string;
+};
+
+export type Media = MediaImage | Video | ExternalVideo;
+
 export type Menu = {
   title: string;
   path: string;
@@ -268,5 +293,18 @@ export type ShopifyProductsOperation = {
     query?: string;
     reverse?: boolean;
     sortKey?: string;
+  };
+};
+
+export type ShopifyProductMediaOperation = {
+  data: {
+    product: {
+      id: string;
+      handle: string;
+      media: Connection<Media>;
+    };
+  };
+  variables: {
+    handle: string;
   };
 };
