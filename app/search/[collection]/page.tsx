@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import Grid from "components/grid";
 import ProductGridItems from "components/layout/product-grid-items";
 import FilterSortWrapper from "components/layout/search/FilterSortWrapper";
+import TextHeaderFull from "components/text/TextHeaderFull";
 import { defaultSort, sorting } from "lib/constants";
 
 export async function generateMetadata(props: {
@@ -37,6 +38,11 @@ export default async function CategoryPage(props: {
   const { sort, q: searchValue } = searchParams as { [key: string]: string };
   const { sortKey, reverse } =
     sorting.find((item) => item.slug === sort) || defaultSort;
+
+  // Fetch collection data to get title and description
+  const collection = await getCollection(params.collection);
+  if (!collection) return notFound();
+
   const products = await getCollectionProducts({
     collection: params.collection,
     sortKey,
@@ -53,9 +59,16 @@ export default async function CategoryPage(props: {
       collections={collections}
     >
       <div className="w-full max-w-[100vw] mx-auto pt-32 md:pt-48 lg:pt-64">
-        <p className="mb-4 text-center">
-          <span className="text-black">{params.collection}</span>
-        </p>
+        {collection && (
+          <div className="text-center p-8 sm:p-16">
+            <TextHeaderFull
+              description={collection.description}
+              className="text-black"
+            >
+              {collection.title}
+            </TextHeaderFull>
+          </div>
+        )}
 
         {/* Filter & Sort Header */}
         <div className="flex items-center justify-between mb-6 px-4">
@@ -71,7 +84,7 @@ export default async function CategoryPage(props: {
         {products.length === 0 ? (
           <p className="py-3 text-md">{`No products found in this collection`}</p>
         ) : (
-          <Grid className="grid grid-cols-2 lg:grid-cols-4 gap-4 w-full transition-all duration-500 ease-in-out opacity-100 scale-100">
+          <Grid className="grid grid-cols-2 lg:grid-cols-3 gap-4 w-full transition-all duration-500 ease-in-out opacity-100 scale-100">
             <ProductGridItems products={products} />
           </Grid>
         )}

@@ -54,20 +54,7 @@ export default function HomePage() {
       <div className="relative w-full">
         <FullScreenSlider />
       </div>
-      <ShopifyProductSlider
-        collectionHandle="necklaces"
-        tagline="Jewelry"
-        heading="Necklaces"
-        sectionDescription="Juxtaposed in elegant combinations, these fine necklaces offer a wide variety of forms to embellish the neck."
-        button={
-          <ButtonLink
-            href="/search/necklaces"
-            className="text-black hover:border-black"
-          >
-            Shop our collection
-          </ButtonLink>
-        }
-      />
+      <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" />
       {/* <div
         className="relative z-10"
         style={{ transform: "translateY(-100px)" }}
@@ -79,20 +66,7 @@ export default function HomePage() {
         />
       </div> */}
       <FullWidthTextSection />
-      <ShopifyProductSlider
-        collectionHandle="bracelets"
-        tagline="Wedding"
-        heading="Engagement Rings"
-        sectionDescription="Juxtaposed in elegant combinations, these fine rings offer a wide variety of forms to embellish the hand."
-        button={
-          <ButtonLink
-            href="/search/bracelets"
-            className="text-black hover:border-black"
-          >
-            Shop our collection
-          </ButtonLink>
-        }
-      />
+      <ShopifyProductSlider collectionHandle="bracelets" tagline="Wedding" />
       <StickyTextImageSection
         tagline="Day Jewelry"
         heading="Necklaces"
@@ -106,20 +80,7 @@ export default function HomePage() {
           </ButtonLink>
         }
       />
-      <ShopifyProductSlider
-        collectionHandle="bracelets"
-        tagline="Jewelry"
-        heading="Bracelets"
-        sectionDescription="Juxtaposed in elegant combinations, these fine bracelets offer a wide variety of forms to embellish the wrist."
-        button={
-          <ButtonLink
-            href="/search/bracelets"
-            className="text-black hover:border-black"
-          >
-            Shop our collection
-          </ButtonLink>
-        }
-      />
+      <ShopifyProductSlider collectionHandle="bracelets" tagline="Jewelry" />
       <MultiImageSection cards={cards2} columns={2} />
     </>
   );

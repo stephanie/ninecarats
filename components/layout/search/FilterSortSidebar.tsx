@@ -27,13 +27,13 @@ export default function FilterSortSidebar({
       <div className="space-y-8">
         {/* Sort Options */}
         <div>
-          <h3 className="text-sm font-medium text-gray-900 mb-4">Sort by</h3>
+          <h3 className="text-lg font-header text-gray-900 mb-4">Sort by</h3>
           <FilterList list={sorting} title="" />
         </div>
 
         {/* Filter Options - Placeholder for future filters */}
         <div>
-          <h3 className="text-sm font-medium text-gray-900 mb-4">Category</h3>
+          <h3 className="text-lg font-header text-gray-900 mb-4">Category</h3>
           <div className="space-y-4">
             {collections.length > 0 ? (
               <FilterList list={collections} title="" />
