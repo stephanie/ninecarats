@@ -4,17 +4,19 @@ import clsx from "clsx";
 import { addItem } from "components/cart/actions";
 import { useProduct } from "components/product/product-context";
 import { Product, ProductVariant } from "lib/shopify/types";
-import { useActionState } from "react";
+import { useState, useTransition } from "react";
 
 function SubmitButton({
   availableForSale,
   selectedVariantId,
+  isPending,
 }: {
   availableForSale: boolean;
   selectedVariantId: string | undefined;
+  isPending: boolean;
 }) {
   const buttonClasses =
-    "w-full bg-black text-white text-base tracking-wide py-4 px-6 gap-2 flex items-center justify-center uppercase cursor-pointer opacity-90 hover:opacity-100";
+    "w-full bg-black text-white text-base tracking-wide py-4 px-6 gap-2 flex items-center justify-center uppercase cursor-pointer opacity-90";
   const disabledClasses = "bg-black/60 cursor-not-allowed";
   const svg = (
     <svg
@@ -65,13 +67,16 @@ function SubmitButton({
 
   return (
     <button
+      type="submit"
+      disabled={isPending}
       aria-label="Add To Bag"
       className={clsx(buttonClasses, {
-        "hover:opacity-80": true,
+        "hover:bg-black/80": !isPending,
+        "bg-black/60": isPending,
       })}
     >
       {svg}
-      Add To Bag
+      {isPending ? "Adding..." : "Add To Bag"}
     </button>
   );
 }
@@ -79,8 +84,9 @@ function SubmitButton({
 export function AddToCart({ product }: { product: Product }) {
   const { variants, availableForSale } = product;
   const { state } = useProduct();
+  const [isPending, startTransition] = useTransition();
+  const [message, setMessage] = useState<string | null>(null);
 
-  const [message, formAction] = useActionState(addItem, null);
   const variant = variants.find((variant: ProductVariant) =>
     variant.selectedOptions.every(
       (option) => option.value === state[option.name.toLowerCase()]
@@ -88,13 +94,31 @@ export function AddToCart({ product }: { product: Product }) {
   );
   const defaultVariantId = variants.length === 1 ? variants[0]?.id : undefined;
   const selectedVariantId = variant?.id || defaultVariantId;
-  const addItemAction = formAction.bind(null, selectedVariantId);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!selectedVariantId) {
+      setMessage("Please select an option");
+      return;
+    }
+
+    startTransition(async () => {
+      try {
+        const result = await addItem(null, selectedVariantId);
+        setMessage(result || "Item added to cart");
+      } catch (error) {
+        setMessage("Error adding item to cart");
+      }
+    });
+  };
 
   return (
-    <form action={addItemAction} className="w-full">
+    <form onSubmit={handleSubmit} className="w-full">
       <SubmitButton
         availableForSale={availableForSale}
         selectedVariantId={selectedVariantId}
+        isPending={isPending}
       />
       <p aria-live="polite" className="sr-only" role="status">
         {message}

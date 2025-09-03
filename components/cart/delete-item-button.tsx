@@ -3,19 +3,33 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { removeItem } from "components/cart/actions";
 import type { CartItem } from "lib/shopify/types";
-import { useActionState } from "react";
+import { useState, useTransition } from "react";
 
 export function DeleteItemButton({ item }: { item: CartItem }) {
-  const [message, formAction] = useActionState(removeItem, null);
+  const [isPending, startTransition] = useTransition();
+  const [message, setMessage] = useState<string | null>(null);
   const merchandiseId = item.merchandise.id;
-  const removeItemAction = formAction.bind(null, merchandiseId);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    startTransition(async () => {
+      try {
+        const result = await removeItem(null, merchandiseId);
+        setMessage(result || "Item removed");
+      } catch (error) {
+        setMessage("Error removing item");
+      }
+    });
+  };
 
   return (
-    <form action={removeItemAction}>
+    <form onSubmit={handleSubmit}>
       <button
         type="submit"
+        disabled={isPending}
         aria-label="Remove cart item"
-        className="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-neutral-500"
+        className="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-neutral-500 disabled:opacity-50"
       >
         <XMarkIcon className="mx-[1px] h-4 w-4 text-white dark:text-black" />
       </button>

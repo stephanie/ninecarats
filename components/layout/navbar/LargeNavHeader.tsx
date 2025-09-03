@@ -39,17 +39,27 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
 
   useEffect(() => {
     setForceSmall(!startWithLargeNav);
-    // Set initial scrolled state if not on home
-    // setScrolled(!startWithLargeNav);
+  }, [startWithLargeNav]);
+
+  // Single scroll effect that runs after mount
+  useEffect(() => {
+    if (!mounted) return;
+
     function handleScroll() {
-      // Always set scrolled to true if scrolled, but if not on home, keep small size
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 0);
     }
     if (typeof window !== "undefined") {
+      // Check initial scroll position
+      handleScroll();
+
+      // Add scroll listener
       window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
     }
-  }, [startWithLargeNav]);
+  }, [mounted]);
 
   // Update text color when pathname changes
   useEffect(() => {
@@ -95,9 +105,9 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 transition-all duration-500">
+    <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300">
       <div
-        className={`relative flex flex-col justify-center w-full transition-all duration-800 ${
+        className={`relative flex flex-col justify-center w-full transition-all duration-300 ${
           scrolled
             ? "bg-white text-black py-2 sm:py-0"
             : `bg-transparent ${textColor} py-2 sm:py-0`
@@ -196,7 +206,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
             >
               <Link
                 href="/"
-                className={`font-body transition-all duration-500 ${
+                className={`font-body transition-all duration-300 ${
                   !startWithLargeNav && !scrolled && isMobile
                     ? "text-lg text-black"
                     : scrolled || !startWithLargeNav

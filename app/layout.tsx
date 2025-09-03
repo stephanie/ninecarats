@@ -44,6 +44,7 @@ export default async function RootLayout({
   children: ReactNode;
 }) {
   // Don't await the fetch, pass the Promise to the context provider
+  // Cache the cart promise to prevent repeated fetches
   const cart = getCart();
 
   return (

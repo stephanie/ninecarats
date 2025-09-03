@@ -1,5 +1,6 @@
 import ButtonLink from "components/text/ButtonLink";
 import { getCollection, getCollectionProducts } from "lib/shopify";
+import { Suspense } from "react";
 import FullWidthProductSlider from "./FullWidthProductSlider";
 
 interface ShopifyProductSliderProps {
@@ -27,19 +28,11 @@ export default async function ShopifyProductSlider({
     // Limit products to maxProducts
     const limitedProducts = products.slice(0, maxProducts);
 
-    // Debug: Log product data structure
-    console.log(
-      `Fetched ${limitedProducts.length} products for collection: ${collectionHandle}`
-    );
-    if (limitedProducts.length > 0) {
-      const sampleProduct = limitedProducts[0];
-      console.log("Sample product structure:", {
-        id: sampleProduct?.id,
-        title: sampleProduct?.title,
-        hasPriceRange: !!sampleProduct?.priceRange,
-        hasMaxVariantPrice: !!sampleProduct?.priceRange?.maxVariantPrice,
-        hasFeaturedImage: !!sampleProduct?.featuredImage,
-      });
+    // Debug: Log product data structure (only in development)
+    if (process.env.NODE_ENV === "development") {
+      console.log(
+        `Fetched ${limitedProducts.length} products for collection: ${collectionHandle}`
+      );
     }
 
     // If no products found, return null or a placeholder
@@ -65,13 +58,17 @@ export default async function ShopifyProductSlider({
     );
 
     return (
-      <FullWidthProductSlider
-        products={limitedProducts}
-        tagline={tagline}
-        heading={heading}
-        sectionDescription={sectionDescription}
-        button={button}
-      />
+      <Suspense
+        fallback={<div className="w-full h-96 bg-neutral-100 animate-pulse" />}
+      >
+        <FullWidthProductSlider
+          products={limitedProducts}
+          tagline={tagline}
+          heading={heading}
+          sectionDescription={sectionDescription}
+          button={button}
+        />
+      </Suspense>
     );
   } catch (error) {
     console.error(

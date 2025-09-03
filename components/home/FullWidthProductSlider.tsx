@@ -8,7 +8,7 @@ import { Media, Product, Video } from "lib/shopify/types";
 import { formatPrice } from "lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
 interface FullWidthProductSliderProps {
@@ -31,23 +31,32 @@ export default function FullWidthProductSlider({
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [productMedia, setProductMedia] = useState<Record<string, Media[]>>({});
   const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
+  const hasFetchedMedia = useRef(false);
 
   // Filter out products without proper data
-  const validProducts = products.filter(
-    (product) =>
-      product &&
-      product.id &&
-      product.title &&
-      (product.priceRange?.maxVariantPrice?.amount ||
-        product.priceRange?.minVariantPrice?.amount)
-  );
+  const validProducts = useMemo(() => {
+    return products.filter(
+      (product) =>
+        product &&
+        product.id &&
+        product.title &&
+        (product.priceRange?.maxVariantPrice?.amount ||
+          product.priceRange?.minVariantPrice?.amount)
+    );
+  }, [products]);
 
   const productsPerPage = isMobile ? 1 : 3;
   const totalPages = Math.ceil(validProducts.length / productsPerPage);
 
   // Fetch media data for products
   useEffect(() => {
+    if (hasFetchedMedia.current || validProducts.length === 0) {
+      return;
+    }
+
     const fetchMediaForProducts = async () => {
+      hasFetchedMedia.current = true;
+
       const mediaPromises = validProducts.map(async (product) => {
         try {
           const media = await getProductMedia(product.handle);
@@ -66,12 +75,11 @@ export default function FullWidthProductSlider({
       results.forEach(({ productId, media }) => {
         mediaMap[productId] = media;
       });
+
       setProductMedia(mediaMap);
     };
 
-    if (validProducts.length > 0) {
-      fetchMediaForProducts();
-    }
+    fetchMediaForProducts();
   }, [validProducts]);
 
   // Helper function to find MP4 video from media

@@ -73,6 +73,37 @@ export default function CartSidebar({ textColor }: { textColor: string }) {
     cartManager.setOpen(false);
   }, []);
 
+  const handleCheckout = useCallback(async () => {
+    // Prepare customer information for checkout prefilling
+    const customerInfo: any = {};
+
+    if (customer?.email) {
+      customerInfo.email = customer.email;
+    }
+
+    // Get default address if available
+    if (customer?.defaultAddress) {
+      const defaultAddress = customer.defaultAddress;
+      if (defaultAddress) {
+        customerInfo.address = {
+          firstName: defaultAddress.firstName,
+          lastName: defaultAddress.lastName,
+          address1: defaultAddress.address1,
+          address2: defaultAddress.address2,
+          city: defaultAddress.city,
+          province: defaultAddress.province,
+          country: defaultAddress.country,
+          zip: defaultAddress.zip,
+          phone: defaultAddress.phone,
+        };
+      }
+    }
+
+    await redirectToCheckout(
+      Object.keys(customerInfo).length > 0 ? customerInfo : undefined
+    );
+  }, [customer]);
+
   useEffect(() => {
     if (!cart) {
       createCartAndSetCookie();
@@ -253,40 +284,7 @@ export default function CartSidebar({ textColor }: { textColor: string }) {
                 />
               </div>
             </div>
-            <form
-              action={async () => {
-                // Prepare customer information for checkout prefilling
-                const customerInfo: any = {};
-
-                if (customer?.email) {
-                  customerInfo.email = customer.email;
-                }
-
-                // Get default address if available
-                if (customer?.defaultAddress) {
-                  const defaultAddress = customer.defaultAddress;
-                  if (defaultAddress) {
-                    customerInfo.address = {
-                      firstName: defaultAddress.firstName,
-                      lastName: defaultAddress.lastName,
-                      address1: defaultAddress.address1,
-                      address2: defaultAddress.address2,
-                      city: defaultAddress.city,
-                      province: defaultAddress.province,
-                      country: defaultAddress.country,
-                      zip: defaultAddress.zip,
-                      phone: defaultAddress.phone,
-                    };
-                  }
-                }
-
-                await redirectToCheckout(
-                  Object.keys(customerInfo).length > 0
-                    ? customerInfo
-                    : undefined
-                );
-              }}
-            >
+            <form action={handleCheckout}>
               <CheckoutButton />
             </form>
           </div>
