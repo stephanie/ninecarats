@@ -41,12 +41,14 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
     setForceSmall(!startWithLargeNav);
     // Set initial scrolled state if not on home
     // setScrolled(!startWithLargeNav);
-    function onScroll() {
+    function handleScroll() {
       // Always set scrolled to true if scrolled, but if not on home, keep small size
       setScrolled(window.scrollY > 40);
     }
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
   }, [startWithLargeNav]);
 
   // Update text color when pathname changes
