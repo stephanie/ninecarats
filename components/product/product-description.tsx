@@ -4,10 +4,26 @@ import Price from "components/price";
 import { Product } from "lib/shopify/types";
 import { useState } from "react";
 import { AddToCart } from "../cart/add-to-cart";
+import { useProduct } from "./product-context";
 import { VariantSelector } from "./variant-selector";
 
 export function ProductDescription({ product }: { product: Product }) {
   const [open, setOpen] = useState<number | null>(null);
+  const { state } = useProduct();
+
+  // Find the selected variant based on current state
+  const selectedVariant = product.variants.find((variant) =>
+    variant.selectedOptions.every(
+      (option) => option.value === state[option.name.toLowerCase()]
+    )
+  );
+
+  // Use selected variant price or fall back to max variant price
+  const displayPrice =
+    selectedVariant?.price || product.priceRange.maxVariantPrice;
+  const displayCurrencyCode =
+    selectedVariant?.price?.currencyCode ||
+    product.priceRange.maxVariantPrice.currencyCode;
 
   const menu = [
     {
@@ -37,8 +53,8 @@ export function ProductDescription({ product }: { product: Product }) {
           </h2>
           <div className="text-sm text-neutral-500 mb-8 hidden lg:block">
             <Price
-              amount={product.priceRange.maxVariantPrice.amount}
-              currencyCode={product.priceRange.maxVariantPrice.currencyCode}
+              amount={displayPrice.amount}
+              currencyCode={displayCurrencyCode}
             />
           </div>
           <div className="mb-10 hidden lg:block">
