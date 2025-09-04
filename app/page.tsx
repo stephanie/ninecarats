@@ -54,7 +54,7 @@ export default function HomePage() {
       <div className="relative w-full">
         <FullScreenSlider />
       </div>
-      <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" />
+      <ShopifyProductSlider collectionHandle="bracelets" tagline="Jewelry" />
       {/* <div
         className="relative z-10"
         style={{ transform: "translateY(-100px)" }}
@@ -66,7 +66,10 @@ export default function HomePage() {
         />
       </div> */}
       <FullWidthTextSection />
-      <ShopifyProductSlider collectionHandle="bracelets" tagline="Wedding" />
+      <ShopifyProductSlider
+        collectionHandle="engagement-rings"
+        tagline="Wedding"
+      />
       <StickyTextImageSection
         tagline="Day Jewelry"
         heading="Necklaces"
@@ -80,7 +83,7 @@ export default function HomePage() {
           </ButtonLink>
         }
       />
-      <ShopifyProductSlider collectionHandle="bracelets" tagline="Jewelry" />
+      <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" />
       <MultiImageSection cards={cards2} columns={2} />
     </>
   );

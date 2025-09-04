@@ -1,6 +1,3 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-
 import { AddToCart } from "components/cart/add-to-cart";
 import { GridTileImage } from "components/grid/tile";
 import Price from "components/price";
@@ -15,8 +12,10 @@ import {
   getProductMedia,
   getProductRecommendations,
 } from "lib/shopify";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 export async function generateMetadata(props: {
@@ -84,6 +83,24 @@ export default async function ProductPage(props: {
     },
   };
 
+  const backgroundColorMapping = {
+    default: "bg-neutral-100",
+    "Evermore Trilogy": "bg-[#FDFDFD]",
+  };
+
+  const getBackgroundColor = () => {
+    // Check if pathname contains any of the keys in backgroundColorMapping
+    for (const [key, color] of Object.entries(backgroundColorMapping)) {
+      console.log(key, product.title);
+      if (key !== "default" && product.title.includes(key)) {
+        console.log(color, "match!!!");
+        return color;
+      }
+    }
+    // Return default background color if no match found
+    return backgroundColorMapping.default;
+  };
+
   return (
     <ProductProvider>
       <script
@@ -99,6 +116,7 @@ export default async function ProductPage(props: {
             fallback={<div className="relative w-full bg-neutral-100" />}
           >
             <Gallery
+              backgroundColor={getBackgroundColor()}
               images={product.images.slice(0, 1).map((image) => ({
                 src: image.url,
                 altText: image.altText,
@@ -169,13 +187,14 @@ export default async function ProductPage(props: {
           <nav className="text-sm text-neutral-700" aria-label="Breadcrumb">
             <ol className="list-none p-0 inline-flex gap-1">
               <li className="flex items-center">
-                <Link href="/search/all" className="hover:underline">
-                  Jewelery
-                </Link>
+                <span>Jewelery</span>
                 <span className="mx-2">/</span>
               </li>
               <li className="flex items-center">
-                <Link href="/search/bracelets" className="hover:underline">
+                <Link
+                  href="/search/bracelets"
+                  className="hover:underline underline cursor-pointer"
+                >
                   Bracelets
                 </Link>
               </li>

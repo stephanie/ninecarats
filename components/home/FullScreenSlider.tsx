@@ -38,12 +38,12 @@ const slides: Slide[] = [
   {
     type: "image",
     src: "/images/slider/rings3.webp",
-    alt: "Necklaces",
-    link: "/search/necklaces",
-    tagline: "Jewelry",
-    heading: "Necklaces",
+    alt: "Engagement Rings",
+    link: "/search/engagement-rings",
+    tagline: "Wedding",
+    heading: "Engagement Rings",
     buttonText: "Explore all",
-    buttonLink: "/search/necklaces",
+    buttonLink: "/search/engagement-rings",
   },
   {
     type: "image",

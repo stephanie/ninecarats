@@ -164,16 +164,16 @@ export default function CartSidebar({ textColor }: { textColor: string }) {
 
                   return (
                     <li key={i} className="flex w-full flex-col">
-                      <div className="relative flex w-full flex-row justify-between px-1 py-4">
-                        <div className="absolute z-40 -ml-1 -mt-2">
+                      <div className="relative flex w-full flex-row justify-between px-2 py-4">
+                        <div className="absolute z-40 -ml-2 -mt-2">
                           <DeleteItemButton item={item} />
                         </div>
                         <div className="flex flex-row">
-                          <div className="relative h-20 w-16 overflow-hidden bg-neutral-300">
+                          <div className="relative aspect-square h-25 overflow-hidden bg-neutral-300">
                             <Image
-                              className="h-full w-full object-cover"
-                              width={64}
-                              height={64}
+                              className="h-full w-full object-fit"
+                              width={100}
+                              height={100}
                               alt={
                                 item.merchandise.product.featuredImage
                                   .altText || item.merchandise.product.title
@@ -181,39 +181,37 @@ export default function CartSidebar({ textColor }: { textColor: string }) {
                               src={item.merchandise.product.featuredImage.url}
                             />
                           </div>
-                          <Link
-                            href={merchandiseUrl}
-                            onClick={closeCart}
-                            className="z-30 ml-4 flex flex-row space-x-5"
-                          >
-                            <div className="flex flex-1 flex-col text-base">
-                              <span className="leading-tight font-header text-lg mb-2">
+                          <div className="z-30 ml-4 flex flex-col">
+                            <Link href={merchandiseUrl} onClick={closeCart}>
+                              <p className="leading-tight font-header text-lg mb-1">
                                 {item.merchandise.product.title}
-                              </span>
-                              {item.merchandise.title !== DEFAULT_OPTION ? (
-                                <p className="text-xs text-neutral-500">
-                                  {item.merchandise.title}
-                                </p>
-                              ) : null}
+                                {item.merchandise.title !== DEFAULT_OPTION ? (
+                                  <span className="text-xs text-neutral-500 ml-1">
+                                    • {item.merchandise.title}
+                                  </span>
+                                ) : null}
+                              </p>
+
                               <Price
-                                className="flex flex-3 space-y-2 text-left text-xs mt-4"
+                                className="flex flex-3 space-y-2 text-left text-xs"
                                 amount={item.cost.totalAmount.amount}
                                 currencyCode={
                                   item.cost.totalAmount.currencyCode
                                 }
                               />
+                            </Link>
+                            <div className="flex h-9 items-center rounded-full border border-neutral-200 w-fit mt-4">
+                              <EditItemQuantityButton
+                                item={item}
+                                type="minus"
+                              />
+                              <p className="w-6 text-center">
+                                <span className="w-full text-xs">
+                                  {item.quantity}
+                                </span>
+                              </p>
+                              <EditItemQuantityButton item={item} type="plus" />
                             </div>
-                          </Link>
-                        </div>
-                        <div className="flex flex-col justify-end">
-                          <div className="ml-auto flex h-9 flex-row items-center rounded-full border border-neutral-200">
-                            <EditItemQuantityButton item={item} type="minus" />
-                            <p className="w-6 text-center">
-                              <span className="w-full text-xs">
-                                {item.quantity}
-                              </span>
-                            </p>
-                            <EditItemQuantityButton item={item} type="plus" />
                           </div>
                         </div>
                       </div>

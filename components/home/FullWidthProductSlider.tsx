@@ -153,7 +153,7 @@ export default function FullWidthProductSlider({
               >
                 <div className="flex flex-col items-center">
                   <div
-                    className={`w-full aspect-[1/1] max-h-[40vh] relative mb-6 group transition-colors duration-500 ${
+                    className={`w-full aspect-square max-h-[40vh] relative mb-6 group transition-colors duration-500 ${
                       hoveredProduct === product.id
                         ? "bg-white"
                         : "bg-neutral-100"
@@ -167,7 +167,7 @@ export default function FullWidthProductSlider({
                       }
                       alt={product.featuredImage?.altText || product.title}
                       fill
-                      className="object-contain"
+                      className="object-cover"
                       sizes="80vw"
                       priority={idx === 0}
                     />
@@ -249,7 +249,7 @@ export default function FullWidthProductSlider({
                 >
                   <div className="flex flex-col items-center">
                     <div
-                      className={`w-full aspect-[1/1] max-h-[50vh] relative mb-8 group transition-colors duration-300`}
+                      className={`w-full aspect-square max-h-[50vh] relative mb-8 group transition-colors duration-300`}
                       onMouseEnter={() => setHoveredProduct(product.id)}
                       onMouseLeave={() => setHoveredProduct(null)}
                     >
@@ -260,7 +260,7 @@ export default function FullWidthProductSlider({
                         }
                         alt={product.featuredImage?.altText || product.title}
                         fill
-                        className="object-fill"
+                        className="object-cover"
                         priority={idx === 0}
                       />
                       {getMp4VideoUrl(product.id) &&
