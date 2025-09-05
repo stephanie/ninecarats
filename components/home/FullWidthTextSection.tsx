@@ -19,7 +19,7 @@ export default function FullWidthTextSection() {
         <TextHeaderFull
           className="text-white"
           headerClassName="text-xl md:text-4xl"
-          tagline="Meet NineCarats"
+          tagline="Meet Nine Carats"
           button={
             <ButtonLink href="#" className="text-white hover:border-white">
               Read our story

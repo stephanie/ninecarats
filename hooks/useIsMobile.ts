@@ -1,25 +1,24 @@
 import { useEffect, useState } from "react";
 
-export function useIsMobile(): boolean {
+export function useIsMobile(MOBILE_BREAKPOINT = 768) {
   const [isMobile, setIsMobile] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    if (typeof window === "undefined") return;
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    };
 
-    const media = window.matchMedia("(max-width: 639px)");
-    setIsMobile(media.matches);
+    // Set initial value
+    handleResize();
 
-    const listener = () => setIsMobile(media.matches);
-    media.addEventListener("change", listener);
-    return () => media.removeEventListener("change", listener);
-  }, []);
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
 
-  // Return false during SSR to prevent hydration mismatch
-  if (!mounted) {
-    return false;
-  }
+    // Cleanup: remove event listener on unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [MOBILE_BREAKPOINT]); // Re-run effect if breakpoint changes
 
   return isMobile;
-} 
+}
