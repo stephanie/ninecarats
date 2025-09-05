@@ -37,7 +37,6 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
     setForceSmall(!startWithLargeNav);
   }, [startWithLargeNav]);
 
-  // Single scroll effect that runs after mount
   useEffect(() => {
     function handleScroll() {
       setScrolled(window.scrollY > 0);
