@@ -17,7 +17,6 @@ import Search, { SearchSkeleton } from "./search";
 export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const [scrolled, setScrolled] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [isLoginSidebarOpen, setIsLoginSidebarOpen] = useState(false);
   const [isContactSidebarOpen, setIsContactSidebarOpen] = useState(false);
   const [isCategoriesSidebarOpen, setIsCategoriesSidebarOpen] = useState(false);
@@ -333,98 +332,93 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
         )}
 
         {/* Search Overlay Section */}
-        {mounted && (
-          <div
-            className={`fixed left-0 w-full bg-white shadow-lg z-20 transition-all duration-500 ease-in-out ${
-              searchActive ? "top-14" : "-top-full"
-            }`}
-          >
-            <div
-              ref={overlayRef}
-              className="w-full max-w-6xl mx-auto px-8 py-8"
-            >
-              <div className="flex justify-between items-start">
-                {/* Left Section - Search Input and Popular */}
-                <div className="flex-1 max-w-lg">
-                  {/* Search Input */}
-                  <Suspense fallback={<SearchSkeleton />}>
-                    <Search
-                      onSubmitted={() => {
-                        setSearchActive(false);
-                        setScrolled(false);
-                      }}
-                    />
-                  </Suspense>
+        <div
+          className={`fixed left-0 w-full bg-white shadow-lg z-20 transition-all duration-500 ease-in-out ${
+            searchActive ? "top-14" : "-top-full"
+          }`}
+        >
+          <div ref={overlayRef} className="w-full max-w-6xl mx-auto px-8 py-8">
+            <div className="flex justify-between items-start">
+              {/* Left Section - Search Input and Popular */}
+              <div className="flex-1 max-w-lg">
+                {/* Search Input */}
+                <Suspense fallback={<SearchSkeleton />}>
+                  <Search
+                    onSubmitted={() => {
+                      setSearchActive(false);
+                      setScrolled(false);
+                    }}
+                  />
+                </Suspense>
 
-                  {/* Popular Section */}
-                  <div>
-                    <h3 className="text-xl text-black mb-4 font-header">
-                      Trending
-                    </h3>
-                    <div className="flex flex-wrap gap-3">
-                      {[
-                        "gifts",
-                        "necklaces",
-                        "bracelets",
-                        "rings",
-                        "earrings",
-                      ].map((term) => (
-                        <button
-                          key={term}
-                          className="px-4 py-2 bg-gray-100 text-black text-sm hover:bg-gray-200 transition-colors duration-200 rounded"
-                        >
-                          {term}
-                        </button>
-                      ))}
-                    </div>
+                {/* Popular Section */}
+                <div>
+                  <h3 className="text-xl text-black mb-4 font-header">
+                    Trending
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    {[
+                      "gifts",
+                      "necklaces",
+                      "bracelets",
+                      "rings",
+                      "earrings",
+                    ].map((term) => (
+                      <button
+                        key={term}
+                        className="px-4 py-2 bg-gray-100 text-black text-sm hover:bg-gray-200 transition-colors duration-200 rounded"
+                      >
+                        {term}
+                      </button>
+                    ))}
                   </div>
                 </div>
-
-                {/* Right Section - Discover */}
-                <div className="ml-16">
-                  <h3 className="mb-4 text-gray-500">Discover</h3>
-                  <ul className="space-y-2">
-                    <li>
-                      <Link
-                        href="/collections/jewelry"
-                        className="text-black hover:text-gray-600 transition-colors duration-200 font-header text-xl"
-                      >
-                        Jewelry
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/collections/gifts"
-                        className="text-black hover:text-gray-600 transition-colors duration-200 font-header text-xl"
-                      >
-                        Gifts
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Close Button */}
-                <button
-                  onClick={() => resetNav()}
-                  className="ml-8 text-black hover:text-gray-600 transition-colors duration-200 cursor-pointer"
-                  aria-label="Close search"
-                >
-                  <svg
-                    width="32"
-                    height="32"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    viewBox="0 0 24 24"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                </button>
               </div>
+
+              {/* Right Section - Discover */}
+              <div className="ml-16">
+                <h3 className="mb-4 text-gray-500">Discover</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <Link
+                      href="/collections/jewelry"
+                      className="text-black hover:text-gray-600 transition-colors duration-200 font-header text-xl"
+                    >
+                      Jewelry
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/collections/gifts"
+                      className="text-black hover:text-gray-600 transition-colors duration-200 font-header text-xl"
+                    >
+                      Gifts
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Close Button */}
+              <button
+                onClick={() => resetNav()}
+                className="ml-8 text-black hover:text-gray-600 transition-colors duration-200 cursor-pointer"
+                aria-label="Close search"
+              >
+                <svg
+                  width="32"
+                  height="32"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  viewBox="0 0 24 24"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
             </div>
           </div>
-        )}
+        </div>
 
         {/* Customer Login Sidebar */}
         <CustomerLoginSidebar
