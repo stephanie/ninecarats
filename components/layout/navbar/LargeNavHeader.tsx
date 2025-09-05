@@ -34,17 +34,11 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const pageTextColor = pathname === "/" ? "text-white" : "text-black";
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
     setForceSmall(!startWithLargeNav);
   }, [startWithLargeNav]);
 
   // Single scroll effect that runs after mount
   useEffect(() => {
-    if (!mounted) return;
-
     function handleScroll() {
       setScrolled(window.scrollY > 0);
     }
@@ -59,7 +53,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
         window.removeEventListener("scroll", handleScroll);
       };
     }
-  }, [mounted]);
+  }, []);
 
   // Update text color when pathname changes
   useEffect(() => {
