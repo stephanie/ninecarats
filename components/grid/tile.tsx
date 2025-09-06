@@ -1,3 +1,4 @@
+import { AnimatedText } from "components/animations";
 import { formatPrice } from "lib/utils";
 import Image from "next/image";
 
@@ -34,11 +35,15 @@ export function GridTileImage({
       </div>
       <div className="text-center flex flex-col">
         <div className="text-lg mb-1 text-black font-header">
-          {label?.title}
+          <AnimatedText direction="up" staggerDelay={200}>
+            {label?.title}
+          </AnimatedText>
         </div>
         {label?.amount && (
           <div className="text-sm text-neutral-500">
-            {formatPrice(Number(label?.amount), label?.currencyCode)}
+            <AnimatedText direction="up" staggerDelay={300}>
+              {formatPrice(Number(label?.amount), label?.currencyCode)}
+            </AnimatedText>
           </div>
         )}
       </div>

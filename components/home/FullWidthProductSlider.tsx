@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatedText } from "components/animations";
 import SliderDots from "components/slider/SliderDots";
 import TextHeaderFull from "components/text/TextHeaderFull";
 import { useIsMobile } from "hooks/useIsMobile";
@@ -289,13 +290,17 @@ export default function FullWidthProductSlider({
                   </div>
                   <div className="text-center flex flex-col">
                     <div className="text-lg mb-1 text-black font-header">
-                      {product.title}
+                      <AnimatedText direction="up" staggerDelay={200}>
+                        {product.title}
+                      </AnimatedText>
                     </div>
                     <div className="text-sm text-neutral-500">
-                      {formatPrice(
-                        Number(product.priceRange.maxVariantPrice.amount),
-                        product.priceRange.maxVariantPrice.currencyCode
-                      )}
+                      <AnimatedText direction="up" staggerDelay={300}>
+                        {formatPrice(
+                          Number(product.priceRange.maxVariantPrice.amount),
+                          product.priceRange.maxVariantPrice.currencyCode
+                        )}
+                      </AnimatedText>
                     </div>
                   </div>
                 </div>

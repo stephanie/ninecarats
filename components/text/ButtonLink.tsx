@@ -1,3 +1,4 @@
+import { AnimatedText } from "components/animations";
 import Link from "next/link";
 
 interface ButtonLinkProps {
@@ -16,7 +17,9 @@ export default function ButtonLink({
       href={href}
       className={`mt-1 px-0 py-1 border-b border-neutral-400 text-neutral-800 text-sm tracking-wide hover:border-black transition ${className}`}
     >
-      {children}
+      <AnimatedText direction="up" staggerDelay={250}>
+        {children}
+      </AnimatedText>
     </Link>
   );
 }

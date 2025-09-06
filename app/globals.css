@@ -11,6 +11,15 @@
     --font-jost: 'Jost', sans-serif;
     --font-bellefair: 'Bellefair', serif;
   }
+
+  /* Animation utilities for better performance */
+  .animate-on-scroll {
+    will-change: transform, opacity;
+  }
+
+  .animate-on-scroll * {
+    will-change: transform, opacity;
+  }
   
   *,
   ::after,
