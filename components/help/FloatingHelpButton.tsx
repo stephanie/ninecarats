@@ -69,8 +69,8 @@ export function FloatingHelpButton({
               d="M0.599609 5.6C0.599609 -0.7 10.4996 -0.7 10.4996 5.6C10.4996 10.1 5.99961 9.2 5.99961 14.6M5.99961 21.818L6.01761 21.7982"
               stroke="currentColor"
               strokeWidth="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         )}
