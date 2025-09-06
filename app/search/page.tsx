@@ -52,7 +52,7 @@ export default async function SearchPage(props: {
             <div className="flex items-center space-x-4"></div>
             <button
               id="filter-sort-button"
-              className="text-sm text-gray-900 hover:text-blue-700 transition-colors duration-200 cursor-pointer"
+              className="text-base text-gray-900 hover:text-blue-700 transition-colors duration-200 cursor-pointer font-header"
             >
               Filter & Sort
             </button>
