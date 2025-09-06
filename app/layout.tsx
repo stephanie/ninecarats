@@ -1,5 +1,6 @@
 import { CartProvider } from "components/cart/cart-context";
 import { CustomerProvider } from "components/customer/CustomerContext";
+import { HelpSystem } from "components/help";
 import Footer from "components/layout/Footer";
 import { Navbar } from "components/layout/navbar";
 import { SignInModalProvider } from "components/layout/SignInModalProvider";
@@ -57,6 +58,7 @@ export default async function RootLayout({
             <SignInModalProvider>
               <Navbar />
               <main>{children}</main>
+              <HelpSystem />
             </SignInModalProvider>
           </CustomerProvider>
         </CartProvider>
