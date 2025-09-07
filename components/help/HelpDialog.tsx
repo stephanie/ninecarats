@@ -66,7 +66,7 @@ export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
     {
       id: "whatsapp",
       title: "Send us a message",
-      description: "We aim answer your questions within an hour",
+      description: "We typically reply within an hour",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
