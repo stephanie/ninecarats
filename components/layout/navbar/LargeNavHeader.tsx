@@ -135,8 +135,8 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                   className={`transition-colors duration-100 sm:flex ${getTextColor(scrolled || forceSmall)}`}
                 >
                   <svg
-                    width="18px"
-                    height="18px"
+                    width="24px"
+                    height="24px"
                     strokeWidth="1.2"
                     viewBox="0 0 24 24"
                     fill="none"
@@ -166,8 +166,6 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 >
                   <OpenCart
                     quantity={cart?.totalQuantity}
-                    svgWidth="18px"
-                    svgHeight="18px"
                     textColor={
                       scrolled || forceSmall ? "text-black" : textColor
                     }

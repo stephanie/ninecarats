@@ -2,6 +2,7 @@
 
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useIsMobile } from "hooks/useIsMobile";
 import { Fragment, ReactNode } from "react";
 
 interface SidebarProps {
@@ -23,8 +24,11 @@ export function Sidebar({
   width = "max-w-md",
   position = "right",
 }: SidebarProps) {
+  const isMobile = useIsMobile();
   const positionClasses =
-    position === "right" ? "right-0 pl-10" : "left-0 pr-10";
+    position === "right"
+      ? `right-0 ${!isMobile ? "pl-10" : ""}`
+      : `left-0 ${!isMobile ? "pr-10" : ""}`;
 
   const slideDirection =
     position === "right"
