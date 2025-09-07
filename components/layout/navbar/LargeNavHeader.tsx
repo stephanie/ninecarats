@@ -166,6 +166,8 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 >
                   <OpenCart
                     quantity={cart?.totalQuantity}
+                    svgWidth="18px"
+                    svgHeight="18px"
                     textColor={
                       scrolled || forceSmall ? "text-black" : textColor
                     }
