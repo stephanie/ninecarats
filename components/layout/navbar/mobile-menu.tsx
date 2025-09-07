@@ -1,17 +1,11 @@
 "use client";
 
-import {
-  Dialog,
-  DialogPanel,
-  Transition,
-  TransitionChild,
-} from "@headlessui/react";
-import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Fragment, Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { Sidebar } from "components/ui/Sidebar";
 import { Menu } from "lib/shopify/types";
+import Link from "next/link";
 import Search, { SearchSkeleton } from "./search";
 
 export default function MobileMenu({
@@ -45,6 +39,34 @@ export default function MobileMenu({
     setIsOpen(false);
   }, [pathname, searchParams]);
 
+  const categories = [
+    {
+      title: "Engagement rings",
+      path: "/search/engagement-rings",
+      description: "Timeless engagement rings for your special moment",
+    },
+    {
+      title: "Necklaces",
+      path: "/search/necklaces",
+      description: "Elegant necklaces and pendants",
+    },
+    {
+      title: "Bracelets",
+      path: "/search/bracelets",
+      description: "Delicate and bold bracelet designs",
+    },
+    {
+      title: "New arrivals",
+      path: "/search?q=new",
+      description: "Latest additions to our collection",
+    },
+    {
+      title: "Sale",
+      path: "/search?q=sale",
+      description: "Special offers and discounted pieces",
+    },
+  ];
+
   return (
     <>
       <button
@@ -65,92 +87,83 @@ export default function MobileMenu({
           <line x1="4" y1="18" x2="20" y2="18" />
         </svg>
       </button>
-      <Transition show={isOpen}>
-        <Dialog onClose={closeMobileMenu} className="relative z-50">
-          <TransitionChild
-            as={Fragment}
-            enter="transition-all ease-in-out duration-300"
-            enterFrom="opacity-0 backdrop-blur-none"
-            enterTo="opacity-100 backdrop-blur-[.5px]"
-            leave="transition-all ease-in-out duration-200"
-            leaveFrom="opacity-100 backdrop-blur-[.5px]"
-            leaveTo="opacity-0 backdrop-blur-none"
-          >
-            <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-          </TransitionChild>
-          <TransitionChild
-            as={Fragment}
-            enter="transition-all ease-in-out duration-300"
-            enterFrom="translate-x-[-100%]"
-            enterTo="translate-x-0"
-            leave="transition-all ease-in-out duration-200"
-            leaveFrom="translate-x-0"
-            leaveTo="translate-x-[-100%]"
-          >
-            <DialogPanel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-white pb-6 dark:bg-black">
-              <div className="p-4">
-                <button
-                  className="mb-4 flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white"
-                  onClick={closeMobileMenu}
-                  aria-label="Close mobile menu"
-                >
-                  <XMarkIcon className="h-6" />
-                </button>
-
-                <div className="mb-4 w-full">
-                  <Suspense fallback={<SearchSkeleton />}>
-                    <Search />
-                  </Suspense>
-                </div>
-                {menu.length ? (
-                  <ul className="flex w-full flex-col">
-                    {menu.map((item: Menu) => (
-                      <li
-                        className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
-                        key={item.title}
-                      >
-                        <Link
-                          href={item.path}
-                          prefetch={true}
-                          onClick={closeMobileMenu}
-                        >
-                          {item.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-
-                {/* Contact Link */}
-                <div className="mt-6 pt-6 border-t border-neutral-200">
-                  <button
-                    onClick={() => {
-                      closeMobileMenu();
-                      onContactClick?.();
-                    }}
-                    className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
+      <Sidebar
+        width="w-[100vw]"
+        isOpen={isOpen}
+        onClose={closeMobileMenu}
+        title="Menu"
+        position="left"
+      >
+        <div className="mb-4 w-full">
+          <Suspense fallback={<SearchSkeleton />}>
+            <Search />
+          </Suspense>
+        </div>
+        <nav className="space-y-1">
+          {categories.map((category) => (
+            <div key={category.path}>
+              <Link
+                href={category.path}
+                onClick={closeMobileMenu}
+                className="block py-3 group"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-medium text-gray-900 group-hover:text-gray-700 transition-colors font-header">
+                      {category.title}
+                    </h3>
+                    <p className="text-sm text-gray-500 mt-1 group-hover:text-gray-600 transition-colors">
+                      {category.description}
+                    </p>
+                  </div>
+                  <svg
+                    className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-colors ml-3 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
                   >
-                    Contact us
-                  </button>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
                 </div>
+              </Link>
+            </div>
+          ))}
+        </nav>
 
-                {/* Categories Link */}
-                <div className="mt-4">
-                  <button
-                    onClick={() => {
-                      closeMobileMenu();
-                      onCategoriesClick?.();
-                    }}
-                    className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
-                  >
-                    Categories
-                  </button>
-                </div>
-              </div>
-            </DialogPanel>
-          </TransitionChild>
-        </Dialog>
-      </Transition>
+        {/* Additional Links */}
+        <div className="pt-6 border-t border-gray-200">
+          <div className="space-y-3">
+            <Link
+              href="/about"
+              onClick={closeMobileMenu}
+              className="block text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              About us
+            </Link>
+            <Link
+              href="/size-guide"
+              onClick={closeMobileMenu}
+              className="block text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Size guide
+            </Link>
+            <button
+              onClick={() => {
+                closeMobileMenu();
+                onContactClick?.();
+              }}
+              className="block text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Contact us
+            </button>
+          </div>
+        </div>
+      </Sidebar>
     </>
   );
 }

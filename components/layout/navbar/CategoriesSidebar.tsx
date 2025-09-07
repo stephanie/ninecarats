@@ -18,37 +18,27 @@ export default function CategoriesSidebar({
   const categories = [
     {
       title: "Engagement rings",
-      path: "/collections/engagement-rings",
+      path: "/search/engagement-rings",
       description: "Timeless engagement rings for your special moment",
     },
     {
-      title: "Wedding bands",
-      path: "/collections/wedding-bands",
-      description: "Classic and contemporary wedding bands",
-    },
-    {
       title: "Necklaces",
-      path: "/collections/necklaces",
+      path: "/search/necklaces",
       description: "Elegant necklaces and pendants",
     },
     {
-      title: "Earrings",
-      path: "/collections/earrings",
-      description: "Beautiful earrings from studs to chandeliers",
-    },
-    {
       title: "Bracelets",
-      path: "/collections/bracelets",
+      path: "/search/bracelets",
       description: "Delicate and bold bracelet designs",
     },
     {
       title: "New arrivals",
-      path: "/collections/new-arrivals",
+      path: "/search?q=new",
       description: "Latest additions to our collection",
     },
     {
       title: "Sale",
-      path: "/collections/sale",
+      path: "/search?q=sale",
       description: "Special offers and discounted pieces",
     },
   ];
