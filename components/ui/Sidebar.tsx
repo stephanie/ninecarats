@@ -14,7 +14,7 @@ interface SidebarProps {
   position?: "right" | "left";
 }
 
-export default function Sidebar({
+export function Sidebar({
   isOpen,
   onClose,
   title,

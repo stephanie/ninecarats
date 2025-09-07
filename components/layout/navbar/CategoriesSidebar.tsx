@@ -1,6 +1,6 @@
 "use client";
 
-import Sidebar from "components/ui/Sidebar";
+import { Sidebar } from "components/ui/Sidebar";
 import Link from "next/link";
 
 interface CategoriesSidebarProps {
@@ -58,7 +58,6 @@ export default function CategoriesSidebar({
       isOpen={isOpen}
       onClose={onClose}
       title="Categories"
-      zIndex={50}
       position="left"
       width="w-[400px]"
     >

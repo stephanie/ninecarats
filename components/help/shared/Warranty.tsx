@@ -1,5 +1,7 @@
 "use client";
 
+import { ButtonDark } from "components/ui/ButtonDark";
+
 interface WarrantyProps {
   className?: string;
 }
@@ -101,9 +103,7 @@ export function Warranty({ className = "" }: WarrantyProps) {
         </div>
 
         <div className="pt-2">
-          <button className="border border-gray-900 text-gray-900 px-6 py-3 hover:bg-gray-900 hover:text-white transition-colors duration-200 text-sm">
-            Contact Customer Service
-          </button>
+          <ButtonDark className="text-sm">Contact Customer Service</ButtonDark>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import Sidebar from "components/ui/Sidebar";
+import { Sidebar } from "components/ui/Sidebar";
 
 interface ContactSidebarProps {
   isOpen: boolean;
@@ -16,7 +16,6 @@ export default function ContactSidebar({
       isOpen={isOpen}
       onClose={onClose}
       title="Contact us"
-      zIndex={50}
       position="right"
       width="w-[400px]"
     >

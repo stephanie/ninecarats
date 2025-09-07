@@ -1,6 +1,6 @@
 "use client";
 
-import Sidebar from "components/ui/Sidebar";
+import { Sidebar } from "components/ui/Sidebar";
 import { sorting } from "lib/constants";
 import FilterList from "./filter";
 
@@ -20,7 +20,6 @@ export default function FilterSortSidebar({
       isOpen={isOpen}
       onClose={onClose}
       title="Filter & Sort"
-      zIndex={50}
       position="right"
       width="w-[400px]"
     >

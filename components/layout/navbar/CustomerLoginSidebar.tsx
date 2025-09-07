@@ -2,7 +2,7 @@
 
 import { useCustomer } from "components/customer/CustomerContext";
 import CustomerSignInForm from "components/customer/CustomerSignInForm";
-import Sidebar from "components/ui/Sidebar";
+import { Sidebar } from "components/ui/Sidebar";
 import { useState } from "react";
 
 interface CustomerLoginSidebarProps {
@@ -24,7 +24,6 @@ export default function CustomerLoginSidebar({
         isOpen={isOpen}
         onClose={onClose}
         title="Account"
-        zIndex={50}
         position="right"
         width="w-[500px]"
       >
@@ -93,7 +92,6 @@ export default function CustomerLoginSidebar({
       isOpen={isOpen}
       onClose={onClose}
       title={isLogin ? "Sign in" : "Create account"}
-      zIndex={50}
       position="right"
       width="w-[500px]"
     >

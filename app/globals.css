@@ -10,6 +10,7 @@
     /* Google Fonts CSS Variables */
     --font-jost: 'Jost', sans-serif;
     --font-bellefair: 'Bellefair', serif;
+    --color-primary-dark: #28262B;
   }
 
   /* Animation utilities for better performance */
@@ -162,6 +163,7 @@
 @theme {
   --font-header: var(--font-bellefair), "serif";
   --font-body: var(--font-jost), "sans-serif";
+  --color-primary-dark: var(--color-primary-dark);
 }
 
 a,

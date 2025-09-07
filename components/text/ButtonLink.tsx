@@ -13,13 +13,13 @@ export default function ButtonLink({
   className = "",
 }: ButtonLinkProps) {
   return (
-    <Link
-      href={href}
-      className={`mt-1 px-0 py-1 border-b border-neutral-400 text-neutral-800 text-sm tracking-wide hover:border-black transition ${className}`}
-    >
-      <AnimatedText direction="up" staggerDelay={250}>
+    <AnimatedText direction="up" staggerDelay={250}>
+      <Link
+        href={href}
+        className={`mt-1 px-0 py-1 border-b border-neutral-400 text-neutral-800 text-sm tracking-wide hover:border-black transition ${className}`}
+      >
         {children}
-      </AnimatedText>
-    </Link>
+      </Link>
+    </AnimatedText>
   );
 }

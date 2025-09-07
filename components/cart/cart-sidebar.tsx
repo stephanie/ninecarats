@@ -2,7 +2,8 @@
 
 import LoadingDots from "components/loading-dots";
 import Price from "components/price";
-import Sidebar from "components/ui/Sidebar";
+import { ButtonDark } from "components/ui/ButtonDark";
+import { Sidebar } from "components/ui/Sidebar";
 import { DEFAULT_OPTION } from "lib/constants";
 import { createUrl } from "lib/utils";
 import Image from "next/image";
@@ -129,7 +130,6 @@ export default function CartSidebar({ textColor }: { textColor: string }) {
         isOpen={isOpen}
         onClose={closeCart}
         title="Shopping bag"
-        zIndex={50}
         position="right"
         width="w-[500px]"
       >
@@ -296,12 +296,12 @@ function CheckoutButton() {
   const { pending } = useFormStatus();
 
   return (
-    <button
-      className="w-full bg-black text-white text-sm tracking-wide py-4 px-6 flex items-center justify-center uppercase cursor-pointer opacity-90 hover:opacity-100 min-h-14"
+    <ButtonDark
       type="submit"
-      disabled={pending}
+      pending={pending}
+      loadingComponent={<LoadingDots className="bg-white" />}
     >
-      {pending ? <LoadingDots className="bg-white" /> : "Checkout"}
-    </button>
+      Checkout
+    </ButtonDark>
   );
 }

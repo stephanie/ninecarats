@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { HelpOptionBox } from "./HelpOptionBox";
-import { ContactInfo } from "./shared/ContactInfo";
-import { QualityPromise } from "./shared/QualityPromise";
-import { Warranty } from "./shared/Warranty";
+import { useIsMobile } from "hooks/useIsMobile";
+import { useEffect, useState } from "react";
+import { HelpDialogContent } from "./HelpDialogContent";
+import { HelpDialogHeader } from "./HelpDialogHeader";
+import { HelpDialogTabs } from "./HelpDialogTabs";
 
 interface HelpDialogProps {
   isOpen: boolean;
@@ -17,6 +17,29 @@ type HelpSectionType = "main" | "quality" | "warranty" | "faq";
 export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
   const [activeTab, setActiveTab] = useState<TabType>("help");
   const [helpSection, setHelpSection] = useState<HelpSectionType>("main");
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    // Prevent background scrolling when dialog is open on mobile
+    if (isMobile) {
+      if (isOpen) {
+        // Add overflow hidden to body to prevent background scrolling
+        document.body.style.overflow = "hidden";
+        // Also add it to html for extra safety
+        document.documentElement.style.overflow = "hidden";
+      } else {
+        // Restore scrolling when dialog is closed
+        document.body.style.overflow = "unset";
+        document.documentElement.style.overflow = "unset";
+      }
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = "unset";
+      document.documentElement.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   const handleWhatsApp = () => {
     window.open("https://wa.me/85298611934", "_blank");
@@ -164,200 +187,40 @@ export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-20 right-6 z-50">
-      {/* Dialog */}
-      <div className="bg-white rounded-lg shadow-2xl w-[26rem] max-h-[80vh] overflow-hidden help-dialog-enter mb-4">
-        {/* Header */}
-        <div className="bg-[#28262B] text-white p-6 relative">
-          <button
-            onClick={onClose}
-            className="absolute top-6 right-6 text-white hover:text-gray-200 transition-colors cursor-pointer"
-            aria-label="Close dialog"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-              fill="none"
-            >
-              <path
-                d="M0.666992 13.3332L7.00033 6.99984L13.3337 13.3332M13.3337 0.666504L6.99912 6.99984L0.666992 0.666504"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-
-          <div className="pr-8">
-            <h1 className="text-sm font-header font-light mb-2 uppercase mb-12">
-              Nine Carats
-            </h1>
-            <h2 className="text-2xl tracking-wide font-header font-light mb-1">
-              Hello
-            </h2>
-            <p className="text-2xl tracking-wide text-gray-300 font-header">
-              How can we help?
-            </p>
+    <>
+      {/* Mobile Full Screen */}
+      <div className="fixed inset-0 z-50 md:hidden">
+        <div className="bg-white h-full help-dialog-enter overflow-y-auto">
+          <HelpDialogHeader onClose={onClose} isMobile={true} />
+          <div className="bg-white p-6" style={{ touchAction: "pan-y" }}>
+            <HelpDialogTabs activeTab={activeTab} onTabChange={setActiveTab} />
+            <HelpDialogContent
+              activeTab={activeTab}
+              helpSection={helpSection}
+              helpOptions={helpOptions}
+              onWhatsApp={handleWhatsApp}
+              onBackToMain={handleBackToMain}
+            />
           </div>
-        </div>
-
-        {/* Content */}
-        <div className="bg-white p-6 overflow-y-auto max-h-[60vh]">
-          {/* Tabs */}
-          <div className="flex border-b border-gray-200 mb-6 gap-8">
-            <button
-              onClick={() => setActiveTab("help")}
-              className={`px-4 py-2 text-sm border-b-2 transition-colors cursor-pointer ${
-                activeTab === "help"
-                  ? "border-gray-900 text-gray-900 font-medium"
-                  : "border-transparent text-gray-500 hover:text-gray-700"
-              }`}
-            >
-              Help
-            </button>
-            <button
-              onClick={() => setActiveTab("contact")}
-              className={`px-4 py-2 text-sm border-b-2 transition-colors cursor-pointer ${
-                activeTab === "contact"
-                  ? "border-gray-900 text-gray-900 font-medium"
-                  : "border-transparent text-gray-500 hover:text-gray-700"
-              }`}
-            >
-              Contact
-            </button>
-          </div>
-
-          {/* Tab Content */}
-          {activeTab === "help" && (
-            <div className="space-y-4">
-              {helpSection === "main" && (
-                <HelpOptionBox options={helpOptions} />
-              )}
-
-              {helpSection === "quality" && (
-                <div>
-                  <button
-                    onClick={handleBackToMain}
-                    className="text-sm text-gray-600 hover:text-gray-900 mb-4 flex items-center"
-                  >
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className="mr-2"
-                    >
-                      <path
-                        d="M19 12H5M12 19L5 12L12 5"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    Back to Help
-                  </button>
-                  <QualityPromise />
-                </div>
-              )}
-
-              {helpSection === "warranty" && (
-                <div>
-                  <button
-                    onClick={handleBackToMain}
-                    className="text-sm text-gray-600 hover:text-gray-900 mb-4 flex items-center"
-                  >
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className="mr-2"
-                    >
-                      <path
-                        d="M19 12H5M12 19L5 12L12 5"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    Back to Help
-                  </button>
-                  <Warranty />
-                </div>
-              )}
-
-              {helpSection === "faq" && (
-                <div>
-                  <button
-                    onClick={handleBackToMain}
-                    className="text-sm text-gray-600 hover:text-gray-900 mb-4 flex items-center"
-                  >
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className="mr-2"
-                    >
-                      <path
-                        d="M19 12H5M12 19L5 12L12 5"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    Back to Help
-                  </button>
-                  <div className="space-y-4">
-                    <h2 className="text-2xl font-header text-gray-900">
-                      Frequently Asked Questions
-                    </h2>
-                    <div className="space-y-4">
-                      <div>
-                        <h3 className="font-header text-lg text-gray-900 mb-2">
-                          How do I care for my jewelry?
-                        </h3>
-                        <p className="text-sm text-gray-600">
-                          Clean your jewelry with a soft cloth and avoid harsh
-                          chemicals. Store in a dry place and have it
-                          professionally cleaned annually.
-                        </p>
-                      </div>
-                      <div>
-                        <h3 className="font-header text-lg text-gray-900 mb-2">
-                          What is your return policy?
-                        </h3>
-                        <p className="text-sm text-gray-600">
-                          We offer a 30-day return policy for unworn items in
-                          original condition. Custom pieces are final sale.
-                        </p>
-                      </div>
-                      <div>
-                        <h3 className="font-header text-lg text-gray-900 mb-2">
-                          Do you offer custom designs?
-                        </h3>
-                        <p className="text-sm text-gray-600">
-                          Yes, we create custom jewelry pieces. Contact our
-                          design team to discuss your vision.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
-          {activeTab === "contact" && (
-            <ContactInfo onSendMessage={handleWhatsApp} />
-          )}
         </div>
       </div>
-    </div>
+
+      {/* Desktop Dialog */}
+      <div className="fixed bottom-20 right-6 z-50 hidden md:block">
+        <div className="bg-white rounded-lg shadow-2xl w-[26rem] max-h-[80vh] overflow-hidden help-dialog-enter mb-4 overflow-y-auto">
+          <HelpDialogHeader onClose={onClose} isMobile={false} />
+          <div className="bg-white p-6">
+            <HelpDialogTabs activeTab={activeTab} onTabChange={setActiveTab} />
+            <HelpDialogContent
+              activeTab={activeTab}
+              helpSection={helpSection}
+              helpOptions={helpOptions}
+              onWhatsApp={handleWhatsApp}
+              onBackToMain={handleBackToMain}
+            />
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
