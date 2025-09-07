@@ -49,7 +49,7 @@ export default function CustomerLoginSidebar({
               onClick={() => {
                 window.location.href = "/account";
               }}
-              className="w-full py-3 px-4 border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200 rounded-none"
+              className="w-full py-3 px-4 border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200 rounded-none uppercase text-sm min-h-14"
             >
               Your profile
             </button>
@@ -57,7 +57,7 @@ export default function CustomerLoginSidebar({
               onClick={() => {
                 window.location.href = "/account?tab=orders";
               }}
-              className="w-full py-3 px-4 border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200 rounded-none"
+              className="w-full py-3 px-4 border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200 rounded-none uppercase text-sm min-h-14"
             >
               Your orders
             </button>
@@ -65,7 +65,7 @@ export default function CustomerLoginSidebar({
               onClick={() => {
                 window.location.href = "/account?tab=addresses";
               }}
-              className="w-full py-3 px-4 border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200 rounded-none"
+              className="w-full py-3 px-4 border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200 rounded-none uppercase text-sm min-h-14"
             >
               Your addresses
             </button>
@@ -77,7 +77,7 @@ export default function CustomerLoginSidebar({
                 await logout();
                 onClose();
               }}
-              className="w-full py-3 px-4 border border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-colors duration-200 rounded-none"
+              className="w-full py-3 px-4 border border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-colors duration-200 rounded-none uppercase text-sm min-h-14"
             >
               Sign out
             </button>

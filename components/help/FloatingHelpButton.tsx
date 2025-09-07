@@ -35,7 +35,7 @@ export function FloatingHelpButton({
         onClick={onClick}
         onMouseEnter={() => !isDialogOpen && setIsHovered(true)}
         onMouseLeave={() => !isDialogOpen && setIsHovered(false)}
-        className={`group bg-primary-dark text-white relative border border-black rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 ease-out hover:scale-105 cursor-pointer`}
+        className={`group bg-primary-dark text-white relative rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 ease-out hover:scale-105 cursor-pointer`}
         aria-label={isDialogOpen ? "Close help dialog" : "Open help dialog"}
       >
         {isDialogOpen ? (

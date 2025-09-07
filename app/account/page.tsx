@@ -100,7 +100,7 @@ export default function AccountPage() {
                 <div className="border-t border-gray-200 pt-2">
                   <button
                     onClick={() => handleTabChange("overview")}
-                    className={`w-full text-left py-2 px-0 text-sm transition-colors ${
+                    className={`w-full text-left py-2 px-0 text-sm transition-colors cursor-pointer ${
                       activeTab === "overview"
                         ? "text-gray-900 font-medium"
                         : "text-gray-600 hover:text-gray-900"
@@ -113,7 +113,7 @@ export default function AccountPage() {
                 <div className="border-t border-gray-200 pt-2">
                   <button
                     onClick={() => handleTabChange("orders")}
-                    className={`w-full text-left py-2 px-0 text-sm transition-colors ${
+                    className={`w-full text-left py-2 px-0 text-sm transition-colors cursor-pointer ${
                       activeTab === "orders"
                         ? "text-gray-900 font-medium"
                         : "text-gray-600 hover:text-gray-900"
@@ -126,7 +126,7 @@ export default function AccountPage() {
                 <div className="border-t border-gray-200 pt-2">
                   <button
                     onClick={() => handleTabChange("addresses")}
-                    className={`w-full text-left py-2 px-0 text-sm transition-colors ${
+                    className={`w-full text-left py-2 px-0 text-sm transition-colors cursor-pointer ${
                       activeTab === "addresses"
                         ? "text-gray-900 font-medium"
                         : "text-gray-600 hover:text-gray-900"
@@ -139,7 +139,7 @@ export default function AccountPage() {
                 <div className="border-t border-gray-200 pt-2">
                   <button
                     onClick={() => handleTabChange("contact")}
-                    className={`w-full text-left py-2 px-0 text-sm transition-colors ${
+                    className={`w-full text-left py-2 px-0 text-sm transition-colors cursor-pointer ${
                       activeTab === "contact"
                         ? "text-gray-900 font-medium"
                         : "text-gray-600 hover:text-gray-900"

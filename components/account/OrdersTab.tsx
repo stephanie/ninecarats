@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function OrdersTab() {
-  const { customer, orders, refreshOrders } = useCustomer();
+  const { orders, refreshOrders } = useCustomer();
   const router = useRouter();
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function OrdersTab() {
     <div className="space-y-6">
       {/* Header */}
       <div className="text-left">
-        <h2 className="text-2xl text-gray-900">Your orders</h2>
+        <h2 className="text-2xl text-gray-900 font-header">Your orders</h2>
       </div>
 
       {/* Orders Content */}
@@ -50,15 +50,13 @@ export default function OrdersTab() {
             >
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-lg font-medium text-gray-900">
-                    Order {order.name}
-                  </h3>
+                  <h3 className="text-lg text-gray-900">Order {order.name}</h3>
                   <p className="text-sm text-gray-600">
                     {formatDate(order.processedAt)}
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-lg font-medium text-gray-900">
+                  <p className="text-lg text-gray-900">
                     {formatPrice(
                       String(order.totalPrice.amount),
                       order.totalPrice.currencyCode
@@ -94,15 +92,15 @@ export default function OrdersTab() {
                     key={index}
                     className="flex items-center gap-4 py-3 border-t border-gray-100"
                   >
-                    {item.variant.image && (
+                    {item.variant?.image && (
                       <img
-                        src={item.variant.image.url}
-                        alt={item.variant.image.altText || item.title}
+                        src={item.variant?.image.url}
+                        alt={item.variant?.image.altText || item.title}
                         className="w-16 h-16 object-cover rounded"
                       />
                     )}
                     <div className="flex-1">
-                      <h4 className="font-medium text-gray-900">
+                      <h4 className="text-lg text-gray-900 font-header">
                         {item.title}
                       </h4>
                       <p className="text-sm text-gray-600">
@@ -111,10 +109,11 @@ export default function OrdersTab() {
                     </div>
                     <div className="text-right">
                       <p className="font-medium text-gray-900">
-                        {formatPrice(
-                          item.variant.price.amount,
-                          item.variant.price.currencyCode
-                        )}
+                        {item.variant?.price &&
+                          formatPrice(
+                            item.variant?.price.amount,
+                            item.variant?.price.currencyCode
+                          )}
                       </p>
                     </div>
                   </div>

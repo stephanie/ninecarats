@@ -18,7 +18,7 @@ export default function AccountOverview() {
     <div className="space-y-8">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-gray-200 pb-4">
-        <h2 className="text-2xl text-gray-900">Account overview</h2>
+        <h2 className="text-2xl text-gray-900 font-header">Account overview</h2>
         <button
           onClick={() => router.push("/account?tab=orders")}
           className="text-sm text-gray-600 underline hover:text-gray-900 transition-colors"
@@ -29,7 +29,7 @@ export default function AccountOverview() {
 
       {/* Orders Section */}
       <div className="space-y-4">
-        <h3 className="text-lg text-gray-900">Orders</h3>
+        <h3 className="text-xl text-gray-900 font-header">Orders</h3>
         {orders.length === 0 ? (
           <div className="bg-gray-50 p-6 rounded-lg text-center">
             <p className="text-gray-600 text-sm">You have no orders</p>
@@ -48,7 +48,7 @@ export default function AccountOverview() {
 
       {/* Addresses Section */}
       <div className="space-y-4">
-        <h3 className="text-lg text-gray-900">Addresses</h3>
+        <h3 className="text-xl text-gray-900 font-header">Addresses</h3>
         <p className="text-gray-600 text-sm">
           Manage your addresses and choose your default address.
         </p>

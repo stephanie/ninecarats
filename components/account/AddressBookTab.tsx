@@ -34,7 +34,7 @@ export default function AddressBookTab() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between text-left">
-        <h2 className="text-2xl text-gray-900">Your addresses</h2>
+        <h2 className="text-2xl text-gray-900 font-header">Your addresses</h2>
         <button className="text-sm text-gray-600 underline hover:text-gray-900 transition-colors">
           Add new address
         </button>
