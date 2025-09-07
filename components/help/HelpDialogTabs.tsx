@@ -12,7 +12,7 @@ export function HelpDialogTabs({
   onTabChange,
 }: HelpDialogTabsProps) {
   return (
-    <div className="flex border-b border-gray-200 mb-6 gap-8">
+    <div className="flex border-b border-gray-200 mb-4 gap-8">
       <button
         onClick={() => onTabChange("help")}
         className={`px-4 py-2 text-sm border-b-2 transition-colors cursor-pointer ${

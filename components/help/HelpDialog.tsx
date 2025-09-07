@@ -192,7 +192,7 @@ export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
       <div className="fixed inset-0 z-50 md:hidden">
         <div className="bg-white h-full help-dialog-enter overflow-y-auto">
           <HelpDialogHeader onClose={onClose} isMobile={true} />
-          <div className="bg-white p-6" style={{ touchAction: "pan-y" }}>
+          <div className="bg-white p-4" style={{ touchAction: "pan-y" }}>
             <HelpDialogTabs activeTab={activeTab} onTabChange={setActiveTab} />
             <HelpDialogContent
               activeTab={activeTab}
@@ -209,7 +209,7 @@ export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
       <div className="fixed bottom-20 right-6 z-50 hidden md:block">
         <div className="bg-white rounded-lg shadow-2xl w-[26rem] max-h-[80vh] overflow-hidden help-dialog-enter mb-4 overflow-y-auto">
           <HelpDialogHeader onClose={onClose} isMobile={false} />
-          <div className="bg-white p-6">
+          <div className="bg-white p-4">
             <HelpDialogTabs activeTab={activeTab} onTabChange={setActiveTab} />
             <HelpDialogContent
               activeTab={activeTab}

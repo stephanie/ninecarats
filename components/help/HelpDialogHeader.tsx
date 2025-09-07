@@ -36,7 +36,7 @@ export function HelpDialogHeader({
         <h1 className="text-sm font-header font-light mb-2 uppercase">
           Nine Carats
         </h1>
-        <div className={isMobile ? "mt-12" : "mt-6 xl:mt-12"}>
+        <div className="mt-6 xl:mt-12">
           <h2
             className={`tracking-wide font-header font-light mb-1 ${
               isMobile ? "text-2xl" : "text-xl xl:text-2xl"
