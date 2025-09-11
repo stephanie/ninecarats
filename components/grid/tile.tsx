@@ -22,9 +22,9 @@ export function GridTileImage({
   key?: string;
 } & React.ComponentProps<typeof Image>) {
   return (
-    <div className="flex-shrink-0 w-full flex flex-col mb-8">
+    <div className="flex-shrink-0 w-full flex flex-col mb-4">
       <div className="flex flex-col items-center p-2">
-        <div className="w-full aspect-square max-h-[60vh] relative mb-6">
+        <div className="w-full aspect-square max-h-[60vh] relative mb-2">
           <Image
             src={src}
             alt={alt}
@@ -33,8 +33,8 @@ export function GridTileImage({
           />
         </div>
       </div>
-      <div className="text-center flex flex-col">
-        <div className="text-lg mb-1 text-black font-header">
+      <div className="text-center flex flex-col pl-1 pr-1">
+        <div className="text-lg text-black font-header">
           <AnimatedText direction="up" staggerDelay={200}>
             {label?.title}
           </AnimatedText>
