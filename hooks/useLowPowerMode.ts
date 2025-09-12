@@ -18,7 +18,7 @@ export function useLowPowerMode() {
       // Check battery level
       if ('getBattery' in navigator) {
         try {
-          const battery = await navigator.getBattery();
+          const battery = await (navigator as any).getBattery();
           const batteryData = {
             isLowBattery: battery.level < 0.2, // Less than 20%
             isCharging: battery.charging,
@@ -45,7 +45,7 @@ export function useLowPowerMode() {
       }
 
       // Check for slow connection (might indicate power saving)
-      const connection = navigator.connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
+      const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
       if (connection && connection.effectiveType) {
         const isSlowConnection = ['slow-2g', '2g'].includes(connection.effectiveType);
         if (isSlowConnection) {
@@ -78,7 +78,7 @@ export function useLowPowerMode() {
 
     // Listen for battery changes
     if ('getBattery' in navigator) {
-      navigator.getBattery().then(battery => {
+      (navigator as any).getBattery().then((battery: any) => {
         battery.addEventListener('levelchange', detectLowPower);
         battery.addEventListener('chargingchange', detectLowPower);
       });
