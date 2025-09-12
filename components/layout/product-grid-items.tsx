@@ -22,6 +22,7 @@ export default function ProductGridItems({
               }}
               src={product.featuredImage?.url}
               index={index}
+              productHandle={product.handle}
             />
           </Link>
         </Grid.Item>
