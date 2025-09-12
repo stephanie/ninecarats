@@ -48,12 +48,12 @@ const slides: Slide[] = [
   {
     type: "image",
     src: "/images/slider/heroBanner.webp",
-    alt: "Bracelets",
-    link: "/search/bracelets",
+    alt: "Earrings",
+    link: "/search/earrings",
     tagline: "Jewelry",
-    heading: "Bracelets",
+    heading: "Earrings",
     buttonText: "Explore all",
-    buttonLink: "/search/bracelets",
+    buttonLink: "/search/earrings",
   },
 ];
 
