@@ -174,7 +174,7 @@ export default function FullWidthProductSlider({
     preventScrollOnSwipe: true,
   });
 
-  const sliderItemWidth = "80vw";
+  const sliderItemWidth = "340px";
 
   // For mobile, show one product per page, with the next product peeking in
   let sliderContent;
@@ -184,7 +184,7 @@ export default function FullWidthProductSlider({
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{
-            transform: `translateX(calc(-${currentPage * Number(sliderItemWidth.replace("vw", ""))}vw + calc((100vw - ${sliderItemWidth}) / 2)))`,
+            transform: `translateX(calc(-${currentPage * Number(sliderItemWidth.replace("px", ""))}px + calc((100vw - ${sliderItemWidth}) / 2)))`,
           }}
         >
           {validProducts.map((product, idx) => (
