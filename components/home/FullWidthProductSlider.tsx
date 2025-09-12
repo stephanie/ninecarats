@@ -141,7 +141,7 @@ export default function FullWidthProductSlider({
     sliderContent = (
       <div className="relative w-full overflow-x-hidden">
         <div
-          className="flex transition-transform duration-500 ease-in-out gap-4"
+          className="flex transition-transform duration-500 ease-in-out"
           style={{
             transform: `translateX(calc(-${currentPage * 80}vw + 10vw))`,
           }}
@@ -154,7 +154,9 @@ export default function FullWidthProductSlider({
               >
                 <div className="flex flex-col items-center">
                   <div
-                    className={`w-full aspect-square max-h-[40vh] relative mb-6 group transition-colors duration-500 ${
+                    className={`w-full aspect-square max-h-[40vh] relative mb-6 group transition-colors duration-500 border border-neutral-200 ${
+                      idx === 0 ? "border-r-0" : idx === 2 ? "border-l-0" : ""
+                    } ${
                       hoveredProduct === product.id
                         ? "bg-white"
                         : "bg-neutral-100"
@@ -226,7 +228,7 @@ export default function FullWidthProductSlider({
     sliderContent = (
       <div className="relative w-full overflow-hidden px-4 mb-8">
         <div
-          className={`grid grid-cols-3 w-full gap-4 transition-all duration-500 ease-in-out ${
+          className={`grid grid-cols-3 w-full transition-all duration-500 ease-in-out ${
             isTransitioning ? "opacity-50 scale-95" : "opacity-100 scale-100"
           }`}
         >
@@ -236,57 +238,59 @@ export default function FullWidthProductSlider({
               currentPage * productsPerPage + productsPerPage
             )
             .map((product, idx) => (
-              <Link href={`/product/${product.handle}`} key={product.id}>
-                <div
-                  className="flex flex-col mb-2 transform transition-all duration-500 ease-out"
-                  key={`${currentPage}-${product.id}`}
-                  style={{
-                    animationDelay: `${idx * 100}ms`,
-                    transform: isTransitioning
-                      ? "translateY(20px)"
-                      : "translateY(0)",
-                    opacity: isTransitioning ? 0 : 1,
-                  }}
+              <div
+                key={`${currentPage}-${product.id}`}
+                className="flex flex-col mb-2 transform transition-all duration-500 ease-out"
+                style={{
+                  animationDelay: `${idx * 100}ms`,
+                  transform: isTransitioning
+                    ? "translateY(20px)"
+                    : "translateY(0)",
+                  opacity: isTransitioning ? 0 : 1,
+                }}
+              >
+                <Link
+                  href={`/product/${product.handle}`}
+                  className="flex flex-col items-center"
                 >
-                  <div className="flex flex-col items-center">
-                    <div
-                      className={`w-full aspect-square max-h-[50vh] relative mb-8 group transition-colors duration-300`}
-                      onMouseEnter={() => setHoveredProduct(product.id)}
-                      onMouseLeave={() => setHoveredProduct(null)}
-                    >
-                      <Image
-                        src={
-                          product.featuredImage?.url ||
-                          "/images/placeholder.webp"
-                        }
-                        alt={product.featuredImage?.altText || product.title}
-                        fill
-                        className="object-cover"
-                        priority={idx === 0}
-                      />
-                      {getMp4VideoUrl(product.id) &&
-                        hoveredProduct === product.id && (
-                          <video
-                            className="absolute inset-0 w-full h-full object-cover"
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                            style={{
-                              display: "block",
-                              margin: 0,
-                              padding: 0,
-                              outline: "none",
-                              border: "none",
-                            }}
-                          >
-                            <source
-                              src={getMp4VideoUrl(product.id)!}
-                              type="video/mp4"
-                            />
-                          </video>
-                        )}
-                    </div>
+                  <div
+                    className={`w-full aspect-square max-h-[50vh] relative mb-8 group transition-colors duration-300 border border-neutral-200 ${
+                      idx === 0 ? "border-r-0" : idx === 2 ? "border-l-0" : ""
+                    }`}
+                    onMouseEnter={() => setHoveredProduct(product.id)}
+                    onMouseLeave={() => setHoveredProduct(null)}
+                  >
+                    <Image
+                      src={
+                        product.featuredImage?.url || "/images/placeholder.webp"
+                      }
+                      alt={product.featuredImage?.altText || product.title}
+                      fill
+                      className="object-cover"
+                      priority={idx === 0}
+                    />
+                    {getMp4VideoUrl(product.id) &&
+                      hoveredProduct === product.id && (
+                        <video
+                          className="absolute inset-0 w-full h-full object-cover"
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          style={{
+                            display: "block",
+                            margin: 0,
+                            padding: 0,
+                            outline: "none",
+                            border: "none",
+                          }}
+                        >
+                          <source
+                            src={getMp4VideoUrl(product.id)!}
+                            type="video/mp4"
+                          />
+                        </video>
+                      )}
                   </div>
                   <div className="text-center flex flex-col">
                     <div className="text-lg mb-1 text-black font-header">
@@ -303,8 +307,8 @@ export default function FullWidthProductSlider({
                       </AnimatedText>
                     </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             ))}
         </div>
       </div>

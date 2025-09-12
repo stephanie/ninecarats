@@ -39,7 +39,7 @@ export function Gallery({
   return (
     <form>
       <div className="relative aspect-square h-full max-h-[75vh] w-full overflow-hidden">
-        <div className={`flex flex-col items-center ${backgroundColor} p-2`}>
+        <div className={`flex flex-col items-center p-2`}>
           <div className="w-full aspect-square max-h-[75vh] relative mb-8">
             {images[imageIndex] && (
               <Image

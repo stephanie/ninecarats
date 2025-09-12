@@ -10,7 +10,7 @@ export default function ProductGridItems({
 }) {
   return (
     <>
-      {products.map((product) => (
+      {products.map((product, index) => (
         <Grid.Item key={product.handle} className="animate-fadeIn">
           <Link href={`/product/${product.handle}`} prefetch={true}>
             <GridTileImage
@@ -21,6 +21,7 @@ export default function ProductGridItems({
                 currencyCode: product.priceRange.maxVariantPrice.currencyCode,
               }}
               src={product.featuredImage?.url}
+              index={index}
             />
           </Link>
         </Grid.Item>

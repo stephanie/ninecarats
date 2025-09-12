@@ -111,10 +111,8 @@ export default async function ProductPage(props: {
       />
       <div className="w-full flex flex-col gap-4">
         {/* Full width gallery section */}
-        <div className="w-full">
-          <Suspense
-            fallback={<div className="relative w-full bg-neutral-100" />}
-          >
+        <div className="w-full border-b border-neutral-200">
+          <Suspense fallback={<div className="relative w-full" />}>
             <Gallery
               backgroundColor={getBackgroundColor()}
               images={product.images.slice(0, 1).map((image) => ({
