@@ -35,6 +35,7 @@ export function GridTileImage({
 } & React.ComponentProps<typeof Image>) {
   const [productMedia, setProductMedia] = useState<Media[]>([]);
   const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const isMobile = useIsMobile();
 
   // Fetch media data for the product
@@ -56,6 +57,34 @@ export function GridTileImage({
     fetchMedia();
   }, [productHandle]);
 
+  // Scroll detection for mobile video autoplay
+  useEffect(() => {
+    if (!isMobile || !productHandle) return;
+
+    const element = document.querySelector(
+      `[data-product-id="${productHandle}"]`
+    );
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry) {
+          setIsVisible(entry.isIntersecting);
+        }
+      },
+      {
+        threshold: 0.5, // Trigger when 50% of the element is visible
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isMobile, productHandle]);
+
   // Helper function to find MP4 video from media
   const getMp4VideoUrl = (): string | null => {
     const mp4Video = productMedia.find((mediaItem): mediaItem is Video => {
@@ -70,7 +99,10 @@ export function GridTileImage({
     );
   };
   return (
-    <div className="flex-shrink-0 w-full flex flex-col pb-8">
+    <div
+      className="flex-shrink-0 w-full flex flex-col pb-8"
+      data-product-id={productHandle}
+    >
       <div className="flex flex-col items-center">
         <div
           className={`w-full aspect-square border border-neutral-200 relative group transition-colors duration-300 ${
@@ -90,7 +122,7 @@ export function GridTileImage({
           onMouseLeave={() => setIsHovered(false)}
         >
           <Image src={src} alt={alt} fill className="object-cover" />
-          {getMp4VideoUrl() && isHovered && (
+          {getMp4VideoUrl() && (isMobile ? isVisible : isHovered) && (
             <video
               className="absolute inset-0 w-full h-full object-cover"
               autoPlay

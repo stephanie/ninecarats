@@ -32,6 +32,9 @@ export default function FullWidthProductSlider({
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [productMedia, setProductMedia] = useState<Record<string, Media[]>>({});
   const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
+  const [visibleProducts, setVisibleProducts] = useState<Set<string>>(
+    new Set()
+  );
   const hasFetchedMedia = useRef(false);
 
   // Filter out products without proper data
@@ -82,6 +85,42 @@ export default function FullWidthProductSlider({
 
     fetchMediaForProducts();
   }, [validProducts]);
+
+  // Scroll detection for mobile video autoplay
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const handleScroll = () => {
+      const productElements = document.querySelectorAll("[data-product-id]");
+      const newVisibleProducts = new Set<string>();
+
+      productElements.forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+        if (isVisible) {
+          const productId = element.getAttribute("data-product-id");
+          if (productId) {
+            newVisibleProducts.add(productId);
+          }
+        }
+      });
+
+      setVisibleProducts(newVisibleProducts);
+    };
+
+    // Initial check
+    handleScroll();
+
+    // Add scroll listener
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [isMobile]);
 
   // Helper function to find MP4 video from media
   const getMp4VideoUrl = (productId: string): string | null => {
@@ -153,6 +192,7 @@ export default function FullWidthProductSlider({
               <div
                 key={product.id}
                 className={`flex-shrink-0 w-[${sliderItemWidth}] flex flex-col mb-8`}
+                data-product-id={product.id}
               >
                 <div className="flex flex-col items-center">
                   <div
@@ -177,7 +217,9 @@ export default function FullWidthProductSlider({
                       priority={idx === 0}
                     />
                     {getMp4VideoUrl(product.id) &&
-                      hoveredProduct === product.id && (
+                      (isMobile
+                        ? visibleProducts.has(product.id)
+                        : hoveredProduct === product.id) && (
                         <video
                           className="absolute inset-0 w-full h-full object-cover"
                           autoPlay
