@@ -4,6 +4,7 @@ import { AnimatedText } from "components/animations";
 import SliderDots from "components/slider/SliderDots";
 import TextHeaderFull from "components/text/TextHeaderFull";
 import { useIsMobile } from "hooks/useIsMobile";
+import { useLowPowerMode } from "hooks/useLowPowerMode";
 import { getProductMedia } from "lib/shopify";
 import { Media, Product, Video } from "lib/shopify/types";
 import { formatPrice } from "lib/utils";
@@ -28,6 +29,7 @@ export default function FullWidthProductSlider({
   button,
 }: FullWidthProductSliderProps) {
   const isMobile = useIsMobile();
+  const { lowPowerMode } = useLowPowerMode();
   const [currentPage, setCurrentPage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [productMedia, setProductMedia] = useState<Record<string, Media[]>>({});
@@ -216,7 +218,7 @@ export default function FullWidthProductSlider({
                     />
                     {getMp4VideoUrl(product.id) &&
                       (isMobile
-                        ? visibleProducts.has(product.id)
+                        ? !lowPowerMode && visibleProducts.has(product.id)
                         : hoveredProduct === product.id) && (
                         <video
                           className="absolute inset-0 w-full h-full object-cover"
