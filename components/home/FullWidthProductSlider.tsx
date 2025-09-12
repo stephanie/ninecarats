@@ -174,8 +174,6 @@ export default function FullWidthProductSlider({
     preventScrollOnSwipe: true,
   });
 
-  const sliderItemWidth = "340px";
-
   // For mobile, show one product per page, with the next product peeking in
   let sliderContent;
   if (isMobile) {
@@ -184,19 +182,19 @@ export default function FullWidthProductSlider({
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{
-            transform: `translateX(calc(-${currentPage * Number(sliderItemWidth.replace("px", ""))}px + calc((100vw - ${sliderItemWidth}) / 2)))`,
+            transform: `translateX(calc(-${currentPage * 80}vw + calc((100vw - 80vw) / 2)))`,
           }}
         >
           {validProducts.map((product, idx) => (
             <Link href={`/product/${product.handle}`} key={product.id}>
               <div
                 key={product.id}
-                className={`flex-shrink-0 w-[${sliderItemWidth}] flex flex-col mb-8`}
+                className="flex-shrink-0 w-[80vw] max-w-[340px] flex flex-col mb-8"
                 data-product-id={product.id}
               >
                 <div className="flex flex-col items-center">
                   <div
-                    className={`w-full aspect-square h-[${sliderItemWidth}] relative mb-6 group transition-colors duration-500 border border-neutral-200 ${
+                    className={`w-full aspect-square h-[80vw] relative mb-6 group transition-colors duration-500 border border-neutral-200 ${
                       idx === 0 ? "border-r-0" : idx === 2 ? "border-l-0" : ""
                     } ${
                       hoveredProduct === product.id
@@ -213,7 +211,7 @@ export default function FullWidthProductSlider({
                       alt={product.featuredImage?.altText || product.title}
                       fill
                       className="object-cover"
-                      sizes={sliderItemWidth}
+                      sizes="80vw"
                       priority={idx === 0}
                     />
                     {getMp4VideoUrl(product.id) &&
