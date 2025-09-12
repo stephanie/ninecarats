@@ -23,6 +23,7 @@ export default function ProductGridItems({
               src={product.featuredImage?.url}
               index={index}
               productHandle={product.handle}
+              isLast={index === products.length - 1}
             />
           </Link>
         </Grid.Item>

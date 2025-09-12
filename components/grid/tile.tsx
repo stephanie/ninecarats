@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatedText } from "components/animations";
+import { useIsMobile } from "hooks/useIsMobile";
 import { getProductMedia } from "lib/shopify";
 import { Media, Video } from "lib/shopify/types";
 import { formatPrice } from "lib/utils";
@@ -15,6 +16,7 @@ export function GridTileImage({
   label,
   index,
   productHandle,
+  isLast,
   ...props
 }: {
   src: string;
@@ -27,11 +29,13 @@ export function GridTileImage({
     currencyCode: string;
   };
   key?: string;
-  index?: number;
+  index: number;
   productHandle?: string;
+  isLast?: boolean;
 } & React.ComponentProps<typeof Image>) {
   const [productMedia, setProductMedia] = useState<Media[]>([]);
   const [isHovered, setIsHovered] = useState(false);
+  const isMobile = useIsMobile();
 
   // Fetch media data for the product
   useEffect(() => {
@@ -66,12 +70,22 @@ export function GridTileImage({
     );
   };
   return (
-    <div className="flex-shrink-0 w-full flex flex-col">
+    <div className="flex-shrink-0 w-full flex flex-col pb-8">
       <div className="flex flex-col items-center">
         <div
           className={`w-full aspect-square border border-neutral-200 relative group transition-colors duration-300 ${
-            index === 0 ? "border-r-0" : index === 2 ? "border-l-0" : ""
-          }`}
+            isMobile
+              ? index % 2 === 0
+                ? "border-r-0"
+                : index % 2 === 1
+                  ? "border-r-1"
+                  : ""
+              : index % 3 === 0
+                ? "border-r-0"
+                : index % 3 === 2
+                  ? "border-l-0"
+                  : ""
+          } ${isLast ? "border-r-1" : ""}`}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
