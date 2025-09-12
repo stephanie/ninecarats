@@ -189,7 +189,7 @@ export default function FullWidthProductSlider({
             <Link href={`/product/${product.handle}`} key={product.id}>
               <div
                 key={product.id}
-                className="flex-shrink-0 w-[80vw] max-w-[340px] flex flex-col mb-8"
+                className="flex-shrink-0 w-[80vw] max-w-[80vw] flex flex-col mb-8"
                 data-product-id={product.id}
               >
                 <div className="flex flex-col items-center">
