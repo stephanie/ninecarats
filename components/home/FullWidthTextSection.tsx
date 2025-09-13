@@ -6,7 +6,7 @@ export default function FullWidthTextSection() {
     <section className="relative w-full md:min-h-[60vh] min-h-[320px] bg-white py-24 px-4 overflow-hidden flex flex-col justify-center">
       {/* Background Video */}
       <video
-        className="absolute inset-0 w-full h-full object-cover z-0 p-4"
+        className="absolute inset-0 w-full h-full object-cover z-0"
         src="/videos/sky.mov"
         autoPlay
         loop

@@ -19,7 +19,7 @@ export default function MultiImageSection({
   columns = 3,
 }: MultiImageSectionProps) {
   return (
-    <section className="w-full p-4 bg-white">
+    <section className="w-full bg-white">
       <div
         className={`grid grid-cols-1 md:grid-cols-${columns} gap-4 w-full mx-auto`}
       >

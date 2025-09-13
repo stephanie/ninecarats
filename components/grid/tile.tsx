@@ -2,7 +2,6 @@
 
 import { AnimatedText } from "components/animations";
 import { useIsMobile } from "hooks/useIsMobile";
-import { useLowPowerMode } from "hooks/useLowPowerMode";
 import { getProductMedia } from "lib/shopify";
 import { Media, Video } from "lib/shopify/types";
 import { formatPrice } from "lib/utils";
@@ -36,9 +35,7 @@ export function GridTileImage({
 } & React.ComponentProps<typeof Image>) {
   const [productMedia, setProductMedia] = useState<Media[]>([]);
   const [isHovered, setIsHovered] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
   const isMobile = useIsMobile();
-  const { lowPowerMode } = useLowPowerMode();
 
   // Fetch media data for the product
   useEffect(() => {
@@ -124,25 +121,24 @@ export function GridTileImage({
           onMouseLeave={() => setIsHovered(false)}
         >
           <Image src={src} alt={alt} fill className="object-cover" />
-          {getMp4VideoUrl() &&
-            (isMobile ? !lowPowerMode && isVisible : isHovered) && (
-              <video
-                className="absolute inset-0 w-full h-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                style={{
-                  display: "block",
-                  margin: 0,
-                  padding: 0,
-                  outline: "none",
-                  border: "none",
-                }}
-              >
-                <source src={getMp4VideoUrl()!} type="video/mp4" />
-              </video>
-            )}
+          {getMp4VideoUrl() && isHovered && (
+            <video
+              className="absolute inset-0 w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{
+                display: "block",
+                margin: 0,
+                padding: 0,
+                outline: "none",
+                border: "none",
+              }}
+            >
+              <source src={getMp4VideoUrl()!} type="video/mp4" />
+            </video>
+          )}
         </div>
       </div>
       <div className="text-center flex flex-col pt-8 pl-1 pr-1">

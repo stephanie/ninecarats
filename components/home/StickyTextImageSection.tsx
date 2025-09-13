@@ -24,7 +24,7 @@ export default function StickyTextImageSection({
           src={image}
           alt={imageAlt}
           fill
-          className="object-cover object-center p-4 bg-white"
+          className="object-cover object-center bg-white"
           priority
         />
       </div>
