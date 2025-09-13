@@ -56,34 +56,6 @@ export function GridTileImage({
     fetchMedia();
   }, [productHandle]);
 
-  // Scroll detection for mobile video autoplay
-  useEffect(() => {
-    if (!isMobile || !productHandle) return;
-
-    const element = document.querySelector(
-      `[data-product-id="${productHandle}"]`
-    );
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry) {
-          setIsVisible(entry.isIntersecting);
-        }
-      },
-      {
-        threshold: 0.5, // Trigger when 50% of the element is visible
-      }
-    );
-
-    observer.observe(element);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [isMobile, productHandle]);
-
   // Helper function to find MP4 video from media
   const getMp4VideoUrl = (): string | null => {
     const mp4Video = productMedia.find((mediaItem): mediaItem is Video => {
