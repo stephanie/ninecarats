@@ -85,9 +85,19 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
             </div>
             <button
               aria-label="Open menu"
-              className={`mr-4 transition-colors duration-100 hidden lg:flex ${
+              className={`mr-4 transition-colors duration-100 hidden lg:flex p-2 -m-2 ${
                 isScrolled ? "text-black" : "text-white"
               }`}
+              style={{
+                touchAction: "manipulation",
+                userSelect: "none",
+                WebkitTapHighlightColor: "transparent",
+                minWidth: "44px",
+                minHeight: "44px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
             >
               <svg
                 width="24"
@@ -96,6 +106,7 @@ export default function NavbarClient({ menu, siteName }: NavbarClientProps) {
                 stroke="currentColor"
                 strokeWidth="1.5"
                 viewBox="0 0 24 24"
+                style={{ pointerEvents: "none" }}
               >
                 <line x1="4" y1="6" x2="20" y2="6" />
                 <line x1="4" y1="12" x2="20" y2="12" />

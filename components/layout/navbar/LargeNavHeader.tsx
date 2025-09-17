@@ -132,7 +132,17 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 <button
                   aria-label="user icon"
                   onClick={handleUserIconClick}
-                  className={`transition-colors duration-100 sm:flex ${getTextColor(scrolled || forceSmall)}`}
+                  className={`transition-colors duration-100 sm:flex p-2 -m-2 ${getTextColor(scrolled || forceSmall)}`}
+                  style={{
+                    touchAction: "manipulation",
+                    userSelect: "none",
+                    WebkitTapHighlightColor: "transparent",
+                    minWidth: "44px",
+                    minHeight: "44px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                 >
                   <svg
                     width="24px"
@@ -142,6 +152,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     color="currentColor"
+                    style={{ pointerEvents: "none" }}
                   >
                     <path
                       d="M5 20V19C5 15.134 8.13401 12 12 12V12C15.866 12 19 15.134 19 19V20"
@@ -162,7 +173,17 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 <button
                   aria-label="Open cart"
                   onClick={() => cartManager.setOpen(true)}
-                  className="flex"
+                  className="flex p-2 -m-2"
+                  style={{
+                    touchAction: "manipulation",
+                    userSelect: "none",
+                    WebkitTapHighlightColor: "transparent",
+                    minWidth: "44px",
+                    minHeight: "44px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                 >
                   <OpenCart
                     quantity={cart?.totalQuantity}

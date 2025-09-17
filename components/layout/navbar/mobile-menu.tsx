@@ -72,7 +72,7 @@ export default function MobileMenu({
       <button
         onClick={openMobileMenu}
         aria-label="Open mobile menu"
-        className={`mr-4 transition-colors duration-300 cursor-pointer p-2 -m-2 ${textColor}`}
+        className={`mr-2 transition-colors duration-300 cursor-pointer p-2 -m-2 ${textColor}`}
         style={{
           touchAction: "manipulation",
           userSelect: "none",
