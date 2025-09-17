@@ -72,7 +72,17 @@ export default function MobileMenu({
       <button
         onClick={openMobileMenu}
         aria-label="Open mobile menu"
-        className={`mr-4 transition-colors duration-300 cursor-pointer ${textColor}`}
+        className={`mr-4 transition-colors duration-300 cursor-pointer p-2 -m-2 ${textColor}`}
+        style={{
+          touchAction: "manipulation",
+          userSelect: "none",
+          WebkitTapHighlightColor: "transparent",
+          minWidth: "44px",
+          minHeight: "44px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
         <svg
           width="24px"
@@ -81,6 +91,7 @@ export default function MobileMenu({
           stroke="currentColor"
           strokeWidth="1.5"
           viewBox="0 0 24 24"
+          style={{ pointerEvents: "none" }}
         >
           <line x1="4" y1="6" x2="20" y2="6" />
           <line x1="4" y1="12" x2="20" y2="12" />
