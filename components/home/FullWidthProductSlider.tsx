@@ -197,7 +197,11 @@ export default function FullWidthProductSlider({
                 <div className="flex flex-col items-center">
                   <div
                     className={`w-full aspect-square h-[80vw] relative mb-6 group transition-colors duration-500 border border-neutral-200 ${
-                      idx === 0 ? "border-r-0" : idx === 2 ? "border-l-0" : ""
+                      validProducts.length > 1 && idx === 0
+                        ? "border-r-0"
+                        : validProducts.length > 1 && idx === 2
+                          ? "border-l-0"
+                          : ""
                     } ${
                       hoveredProduct === product.id
                         ? "bg-white"
@@ -299,7 +303,11 @@ export default function FullWidthProductSlider({
                 >
                   <div
                     className={`w-full aspect-square max-h-[50vh] relative mb-8 group transition-colors duration-300 border border-neutral-200 ${
-                      idx === 0 ? "border-r-0" : idx === 2 ? "border-l-0" : ""
+                      validProducts.length > 1 && idx === 0
+                        ? "border-r-0"
+                        : validProducts.length > 1 && idx === 2
+                          ? "border-l-0"
+                          : ""
                     }`}
                     onMouseEnter={() => setHoveredProduct(product.id)}
                     onMouseLeave={() => setHoveredProduct(null)}
