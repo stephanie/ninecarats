@@ -13,6 +13,7 @@ interface SidebarProps {
   zIndex?: number;
   width?: string;
   position?: "right" | "left";
+  hideDefaultHeader?: boolean;
 }
 
 export function Sidebar({
@@ -23,6 +24,7 @@ export function Sidebar({
   zIndex = 50,
   width = "max-w-md",
   position = "right",
+  hideDefaultHeader = false,
 }: SidebarProps) {
   const isMobile = useIsMobile();
   const positionClasses =
@@ -76,12 +78,33 @@ export function Sidebar({
               >
                 <Dialog.Panel className={`pointer-events-auto ${width}`}>
                   <div className="flex h-full flex-col overflow-y-scroll bg-white py-8 shadow-xl">
-                    <div className="px-8">
-                      <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-sm text-gray-900">
-                          {title}
-                        </Dialog.Title>
-                        <div className="ml-3 flex h-7 items-center">
+                    {!hideDefaultHeader && (
+                      <div className="px-8">
+                        <div className="flex items-start justify-between">
+                          <Dialog.Title className="text-sm text-gray-900">
+                            {title}
+                          </Dialog.Title>
+                          <div className="ml-3 flex h-7 items-center">
+                            <button
+                              type="button"
+                              className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none cursor-pointer"
+                              onClick={onClose}
+                            >
+                              <span className="sr-only">Close panel</span>
+                              <XMarkIcon
+                                className="h-6 w-6"
+                                aria-hidden="true"
+                              />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    <div
+                      className={`relative ${hideDefaultHeader ? "px-8" : "mt-6 flex-1 px-8"}`}
+                    >
+                      {hideDefaultHeader && (
+                        <div className="absolute top-0 right-0 pt-8 pr-8 z-10">
                           <button
                             type="button"
                             className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none cursor-pointer"
@@ -91,9 +114,9 @@ export function Sidebar({
                             <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                           </button>
                         </div>
-                      </div>
+                      )}
+                      {children}
                     </div>
-                    <div className="relative mt-6 flex-1 px-8">{children}</div>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

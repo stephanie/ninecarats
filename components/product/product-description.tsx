@@ -1,15 +1,74 @@
 "use client";
 
 import Price from "components/price";
+import Prose from "components/prose";
 import { Product } from "lib/shopify/types";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { AddToCart } from "../cart/add-to-cart";
 import { useProduct } from "./product-context";
 import { VariantSelector } from "./variant-selector";
 
+type MenuSection = {
+  title: string;
+  description: string;
+  isHtml: boolean;
+};
+
 export function ProductDescription({ product }: { product: Product }) {
   const [open, setOpen] = useState<number | null>(null);
   const { state } = useProduct();
+
+  // Parse the descriptionHtml to extract "Item details" section
+  const { mainDescription, itemDetailsHtml } = useMemo(() => {
+    if (!product.descriptionHtml)
+      return { mainDescription: null, itemDetailsHtml: null };
+
+    // Look for start and end markers
+    const startMarkerRegex = /<p[^>]*>###\s*Start:\s*Item details\s*###<\/p>/i;
+    const endMarkerRegex = /<p[^>]*>###\s*End:\s*Item details\s*###<\/p>/i;
+
+    const startMatch = product.descriptionHtml.match(startMarkerRegex);
+    const endMatch = product.descriptionHtml.match(endMarkerRegex);
+
+    // If both markers are found, extract the content between them
+    if (
+      startMatch &&
+      endMatch &&
+      startMatch.index !== undefined &&
+      endMatch.index !== undefined &&
+      endMatch.index > startMatch.index
+    ) {
+      const startIndex = startMatch.index;
+      const endIndex = endMatch.index;
+
+      // Extract the item details content (between start and end markers, excluding the markers themselves)
+      const itemDetailsContent = product.descriptionHtml
+        .substring(startIndex + startMatch[0].length, endIndex)
+        .trim();
+
+      // Get the content before the start marker
+      const beforeStart = product.descriptionHtml.substring(0, startIndex);
+
+      // Get the content after the end marker
+      const afterEnd = product.descriptionHtml.substring(
+        endIndex + endMatch[0].length
+      );
+
+      // Combine to create the main description without the item details section
+      const mainDescription = (beforeStart + afterEnd).trim();
+
+      return {
+        mainDescription: mainDescription || null,
+        itemDetailsHtml: itemDetailsContent || null,
+      };
+    }
+
+    // If no markers found, return the original description
+    return {
+      mainDescription: product.descriptionHtml,
+      itemDetailsHtml: null,
+    };
+  }, [product.descriptionHtml]);
 
   // Find the selected variant based on current state
   const selectedVariant = product.variants.find((variant) =>
@@ -25,23 +84,42 @@ export function ProductDescription({ product }: { product: Product }) {
     selectedVariant?.price?.currencyCode ||
     product.priceRange.maxVariantPrice.currencyCode;
 
-  const menu = [
-    {
-      title: "Complimentary shipping & returns",
-      description:
-        "We offer complimentary and secure shipping to selected countries. Returns and exchanges are free of charge.",
-    },
-    {
-      title: "Care & maintenance",
-      description:
-        "To keep your jewelry looking its best, we recommend cleaning it with a soft cloth and avoiding harsh chemicals. For more detailed care instructions, please refer to our care guide.",
-    },
-    {
-      title: "Exceptional quality & craftsmanship",
-      description:
-        "Meticulously selected by eye to find the perfect alignment of facets and angles, each of our diamonds is chosen for its exquisite brilliance and sparkle. Responsibly and ethically sourced, all of our diamonds are of the highest grade, a sign of its extraordinary beauty and quality, before being crafted by the finest artisans.",
-    },
-  ];
+  const menu = useMemo(() => {
+    const baseSections: MenuSection[] = [
+      {
+        title: "Complimentary shipping & returns",
+        description:
+          "We offer complimentary and secure shipping to selected countries. Returns and exchanges are free of charge.",
+        isHtml: false,
+      },
+      {
+        title: "Care & maintenance",
+        description:
+          "To keep your jewelry looking its best, we recommend cleaning it with a soft cloth and avoiding harsh chemicals. For more detailed care instructions, please refer to our care guide.",
+        isHtml: false,
+      },
+      {
+        title: "Exceptional quality & craftsmanship",
+        description:
+          "Meticulously selected by eye to find the perfect alignment of facets and angles, each of our diamonds is chosen for its exquisite brilliance and sparkle. Responsibly and ethically sourced, all of our diamonds are of the highest grade, a sign of its extraordinary beauty and quality, before being crafted by the finest artisans.",
+        isHtml: false,
+      },
+    ];
+
+    // Add "Item details" section at the beginning if it exists
+    if (itemDetailsHtml) {
+      return [
+        {
+          title: "Product details",
+          description: itemDetailsHtml,
+          isHtml: true,
+        },
+        ...baseSections,
+      ];
+    }
+
+    return baseSections;
+  }, [itemDetailsHtml]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mx-auto p-4 lg:p-8 w-full">
@@ -63,9 +141,21 @@ export function ProductDescription({ product }: { product: Product }) {
               variants={product.variants}
             />
           </div>
-          <p className="text-sm sm:text-base leading-relaxed text-black">
-            {product.description}
-          </p>
+          {mainDescription ? (
+            <Prose
+              className="text-sm sm:text-base leading-relaxed text-black"
+              html={mainDescription}
+            />
+          ) : product.descriptionHtml ? (
+            <Prose
+              className="text-sm sm:text-base leading-relaxed text-black"
+              html={product.descriptionHtml}
+            />
+          ) : (
+            <p className="text-sm sm:text-base leading-relaxed text-black">
+              {product.description}
+            </p>
+          )}
         </div>
 
         {/* Collapsible sections */}
@@ -98,8 +188,18 @@ export function ProductDescription({ product }: { product: Product }) {
                 </button>
                 {/* Menu items */}
                 {open === idx && (
-                  <div className="pb-6 text-sm text-neutral-600 gap-2">
-                    <p>{section.description}</p>
+                  <div
+                    className={`pb-6 text-sm text-neutral-600 gap-2 ${section.isHtml ? "[&_h5]:text-md [&_h5]:font-medium [&_ul]:list-disc [&_ul]:mb-4 [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_ul]:mt-2 [&_ol]:mt-2" : ""}`}
+                  >
+                    {section.isHtml ? (
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: section.description as string,
+                        }}
+                      />
+                    ) : (
+                      <p>{section.description}</p>
+                    )}
                   </div>
                 )}
               </div>
