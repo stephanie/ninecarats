@@ -93,16 +93,16 @@ export function ProductDescription({ product }: { product: Product }) {
         isHtml: false,
       },
       {
-        title: "Care & maintenance",
+        title: "Exceptional quality & craftsmanship",
         description:
-          "To keep your jewelry looking its best, we recommend cleaning it with a soft cloth and avoiding harsh chemicals. For more detailed care instructions, please refer to our care guide.",
+          "Our promise is high-end craftsmanship without the traditional luxury markup. Every piece is handcrafted to order in our workshop, combining timeless skill with modern, ethical gemstones. We use only the highest quality lab-grown diamonds, hand-selected for their sparkling brilliance, and exclusively use colorless DEF grades with VS1 clarity or higher to ensure maximum beauty.",
         isHtml: false,
       },
       {
-        title: "Exceptional quality & craftsmanship",
+        title: "Care & maintenance",
         description:
-          "Meticulously selected by eye to find the perfect alignment of facets and angles, each of our diamonds is chosen for its exquisite brilliance and sparkle. Responsibly and ethically sourced, all of our diamonds are of the highest grade, a sign of its extraordinary beauty and quality, before being crafted by the finest artisans.",
-        isHtml: false,
+          "<p>To ensure your Nine Carats jewelry remains beautiful for years to come, please follow these care and maintenance guidelines.</p><br>\n\n<h5>Gold & Platinum Care</h5>\n<ul>\n <li>Take care to protect all your jewelry from impacts against hard surfaces and avoid contact with abrasive surfaces.</li>\n <li>Between professional servicing, most gold and platinum pieces can be maintained using a non-abrasive jewelry cleaner.</li>\n <li>Never expose gold jewelry to household bleach or other harsh chemicals. This may cause the gold to discolor or degrade.</li>\n</ul>\n\n<h5>Cleaning Your Diamonds</h5>\n<p>To clean diamonds at home, use a mild solution of six parts water to one part ammonia. Apply this solution gently with a soft-bristle brush.</p><br>\n\n<h5>Storage</h5>\n<p>Jewelry storage is crucial. At the time of purchase, all Nine Carats jewelry is presented in a protective box, case, or tarnish-resistant pouch. We recommend that between wearings, you place your jewelry back in its Nine Carats case or another suitably lined box or pouch to prevent scratching.</p><br>\n\n<h5>Professional Servicing</h5>\n<p>Dust, pollution, and daily wear can cloud the brilliance of a gemstone and dull the surface of precious metals. We suggest that your jewelry receive periodic professional maintenance to check your settings and give it a thorough, expert cleaning.</p>",
+        isHtml: true,
       },
     ];
 
@@ -189,7 +189,7 @@ export function ProductDescription({ product }: { product: Product }) {
                 {/* Menu items */}
                 {open === idx && (
                   <div
-                    className={`pb-6 text-sm text-neutral-600 gap-2 ${section.isHtml ? "[&_h5]:text-md [&_h5]:font-medium [&_ul]:list-disc [&_ul]:mb-4 [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_ul]:mt-2 [&_ol]:mt-2" : ""}`}
+                    className={`pb-6 text-sm text-neutral-600 gap-2 ${section.isHtml ? "[&_h5]:text-md [&_h5]:font-medium [&_ul]:list-disc [&_ul]:mb-4 [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_ul]:mt-2 [&_ol]:mt-2 [&_p]:mt-2" : ""}`}
                   >
                     {section.isHtml ? (
                       <div
@@ -273,7 +273,8 @@ export function ProductDescription({ product }: { product: Product }) {
                 ></path>
               </svg>
               <span>
-                Order now. Complimentary express delivery by Wed, 16 Jul.
+                Note that all our pieces are handcrafted to order and delivery
+                may take up to 2-3 weeks.
               </span>
             </div>
           </div>
