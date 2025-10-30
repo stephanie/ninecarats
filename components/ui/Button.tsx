@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 
-interface ButtonDarkProps {
+interface ButtonProps {
   children: ReactNode;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
@@ -10,9 +10,10 @@ interface ButtonDarkProps {
   pending?: boolean;
   className?: string;
   loadingComponent?: ReactNode;
+  isDark?: boolean;
 }
 
-export function ButtonDark({
+export function Button({
   children,
   onClick,
   type = "button",
@@ -20,10 +21,11 @@ export function ButtonDark({
   pending = false,
   className = "",
   loadingComponent,
-}: ButtonDarkProps) {
+  isDark = true,
+}: ButtonProps) {
   return (
     <button
-      className={`w-full bg-primary-dark text-white text-sm tracking-wide py-4 px-6 flex items-center justify-center uppercase cursor-pointer hover:opacity-95 min-h-14 ${className}`}
+      className={`w-full text-sm tracking-wide py-4 px-6 flex items-center justify-center uppercase cursor-pointer hover:opacity-95 min-h-14 ${className} ${isDark ? "bg-primary-dark text-white" : "bg-white text-black border border-primary-dark"}`}
       type={type}
       disabled={disabled || pending}
       onClick={onClick}

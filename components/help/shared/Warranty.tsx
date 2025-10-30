@@ -1,6 +1,6 @@
 "use client";
 
-import { ButtonDark } from "components/ui/ButtonDark";
+import { Button } from "components/ui/Button";
 
 interface WarrantyProps {
   className?: string;
@@ -103,7 +103,7 @@ export function Warranty({ className = "" }: WarrantyProps) {
         </div>
 
         <div className="pt-2">
-          <ButtonDark className="text-sm">Contact Customer Service</ButtonDark>
+          <Button className="text-sm">Contact Customer Service</Button>
         </div>
       </div>
     </div>

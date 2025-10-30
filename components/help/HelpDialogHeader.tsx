@@ -10,7 +10,7 @@ export function HelpDialogHeader({
   isMobile = false,
 }: HelpDialogHeaderProps) {
   return (
-    <div className="bg-primary-dark text-white p-6 relative">
+    <div className="bg-primary text-white p-6 relative">
       <button
         onClick={onClose}
         className="absolute top-6 right-6 text-white hover:text-gray-200 transition-colors cursor-pointer"

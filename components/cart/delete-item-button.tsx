@@ -29,7 +29,7 @@ export function DeleteItemButton({ item }: { item: CartItem }) {
         type="submit"
         disabled={isPending}
         aria-label="Remove cart item"
-        className="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-neutral-500 disabled:opacity-50"
+        className="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-primary disabled:opacity-50"
       >
         <XMarkIcon className="mx-[1px] h-4 w-4 text-white" />
       </button>

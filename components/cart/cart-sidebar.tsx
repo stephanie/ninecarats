@@ -2,7 +2,7 @@
 
 import LoadingDots from "components/loading-dots";
 import Price from "components/price";
-import { ButtonDark } from "components/ui/ButtonDark";
+import { Button } from "components/ui/Button";
 import { Sidebar } from "components/ui/Sidebar";
 import { DEFAULT_OPTION } from "lib/constants";
 import { createUrl } from "lib/utils";
@@ -296,12 +296,12 @@ function CheckoutButton() {
   const { pending } = useFormStatus();
 
   return (
-    <ButtonDark
+    <Button
       type="submit"
       pending={pending}
       loadingComponent={<LoadingDots className="bg-white" />}
     >
       Checkout
-    </ButtonDark>
+    </Button>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { ButtonDark } from "components/ui/ButtonDark";
+import { Button } from "components/ui/Button";
 
 interface ContactInfoProps {
   className?: string;
@@ -72,7 +72,7 @@ export function ContactInfo({
 
       {showSendMessageButton && (
         <div className="pt-2">
-          <ButtonDark onClick={handleSendMessage} className="gap-3">
+          <Button onClick={handleSendMessage} className="gap-3" isDark={false}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="30"
@@ -95,8 +95,8 @@ export function ContactInfo({
                 strokeLinejoin="round"
               />
             </svg>
-            Send us a message
-          </ButtonDark>
+            Send us a message{" "}
+          </Button>
         </div>
       )}
     </div>
