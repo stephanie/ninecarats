@@ -374,7 +374,7 @@ export default function FullWidthProductSlider({
         {...swipeHandlers}
       >
         {heading && (
-          <div className="text-center p-8 sm:p-16">
+          <div className="text-center p-16 sm:p-16">
             <TextHeaderFull
               tagline={tagline}
               description={sectionDescription}
