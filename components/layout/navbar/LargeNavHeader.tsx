@@ -125,7 +125,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               <Suspense fallback={null}>
                 <MobileMenu
                   menu={menu}
-                  textColor={scrolled || forceSmall ? "text-black" : textColor}
+                  textColor={getTextColor(scrolled)}
                   onContactClick={() => setIsContactSidebarOpen(true)}
                   onCategoriesClick={() => setIsCategoriesSidebarOpen(true)}
                 />
@@ -190,9 +190,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 >
                   <OpenCart
                     quantity={cart?.totalQuantity}
-                    textColor={
-                      scrolled || forceSmall ? "text-black" : textColor
-                    }
+                    textColor={getTextColor(scrolled)}
                   />
                 </button>
               </div>

@@ -3,25 +3,11 @@
 import SliderDots from "components/slider/SliderDots";
 import ButtonLink from "components/text/ButtonLink";
 import TextHeaderFull from "components/text/TextHeaderFull";
+import { useViewportHeight } from "hooks/useViewportHeight";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
-
-// Custom hook to handle mobile viewport height
-function useViewportHeight() {
-  const [viewportHeight, setViewportHeight] = useState(0);
-
-  useEffect(() => {
-    // Get the actual viewport height only once on mount
-    const vh = window.innerHeight;
-    setViewportHeight(vh);
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-    // No resize/orientationchange listeners
-  }, []);
-
-  return viewportHeight;
-}
 
 interface Slide {
   type: "image" | "video";

@@ -1,10 +1,20 @@
+"use client";
+
+import { useViewportHeight } from "hooks/useViewportHeight";
 import Image from "next/image";
 
 export default function AboutPage() {
+  const viewportHeight = useViewportHeight();
+
   return (
     <div className="w-full flex flex-col">
       {/* Hero Section */}
-      <section className="relative w-full min-h-screen h-screen flex items-end">
+      <section
+        className="relative w-full flex items-end"
+        style={{
+          height: viewportHeight ? `calc(${viewportHeight}px)` : "calc(100vh)",
+        }}
+      >
         {/* <Image
           src="/images/full-width-jewelry.webp"
           alt="21st Century Diamond Jewelry Hero"
@@ -22,15 +32,15 @@ export default function AboutPage() {
           muted
           playsInline
         />
-        <div className="z-10 absolute bottom-0 left-0 p-8 md:p-16 max-w-xl flex flex-col gap-2 pointer-events-none">
-          <span className="text-white text-3xl sm:text-4xl md:text-6xl font-header drop-shadow-xl">
+        <div className="z-10 absolute bottom-8 left-0 p-4 sm:p-12 md:p-16 max-w-xl flex flex-col gap-2 pointer-events-none">
+          <span className="text-white text-4xl md:text-6xl font-header drop-shadow-xl">
             Meet Nine Carats
           </span>
         </div>
         <div className="absolute inset-0 bg-black opacity-30 pointer-events-none" />
       </section>
       {/* About Section */}
-      <section className="w-full bg-white min-h-screen h-screen flex flex-col lg:flex-row items-center justify-center gap-0 sm:gap-16 py-16 md:py-28 px-4 md:px-20">
+      <section className="w-full bg-white min-h-screen flex flex-col lg:flex-row items-center justify-center gap-0 sm:gap-16 py-16 md:py-28 px-4 md:px-20">
         {/* Left text */}
         <div className="flex-1 max-w-xl w-full">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-header mb-8">
