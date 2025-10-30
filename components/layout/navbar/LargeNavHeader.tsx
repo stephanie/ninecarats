@@ -30,7 +30,10 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const [forceSmall, setForceSmall] = useState(false);
   const [textColor, setTextColor] = useState("text-white");
   const overlayRef = useRef<HTMLDivElement | null>(null);
-  const pageTextColor = pathname === "/" ? "text-white" : "text-black";
+  const pageTextColor =
+    pathname === "/" || pathname.includes("/about")
+      ? "text-white"
+      : "text-black";
 
   useEffect(() => {
     setForceSmall(!startWithLargeNav);
@@ -77,7 +80,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   }, [searchActive]);
 
   const getTextColor = (isScrolled: boolean) => {
-    return isScrolled || forceSmall ? "text-black" : textColor;
+    return isScrolled ? "text-black" : textColor;
   };
 
   const resetNav = () => {
@@ -132,7 +135,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 <button
                   aria-label="user icon"
                   onClick={handleUserIconClick}
-                  className={`transition-colors duration-100 sm:flex p-2 -m-2 ${getTextColor(scrolled || forceSmall)}`}
+                  className={`transition-colors duration-100 sm:flex p-2 -m-2 ${getTextColor(scrolled)}`}
                   style={{
                     touchAction: "manipulation",
                     userSelect: "none",
@@ -203,7 +206,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               <button
                 aria-label="Open menu"
                 onClick={() => setIsCategoriesSidebarOpen(true)}
-                className={`mr-4 transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled || forceSmall)}`}
+                className={`mr-4 transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled)}`}
               >
                 <svg
                   width="24"
@@ -219,7 +222,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 </svg>
               </button>
               <div
-                className={`flex gap-2 transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled || forceSmall)}`}
+                className={`flex gap-2 transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled)}`}
               >
                 <span
                   className="text-sm cursor-pointer select-none"
@@ -249,12 +252,12 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
             >
               <Link
                 href="/"
-                className={`font-body transition-all duration-300 ${
+                className={`font-body transition-all duration-300 ${getTextColor(scrolled)} ${
                   !startWithLargeNav && !scrolled && isMobile
-                    ? "text-lg text-black"
+                    ? "text-lg"
                     : scrolled || !startWithLargeNav
-                      ? "text-base sm:text-lg pt-1 text-black"
-                      : "text-[8vw] sm:text-[5vw] pt-4 sm:pt-8 ${textColor}"
+                      ? "text-base sm:text-lg pt-1"
+                      : "text-[8vw] sm:text-[5vw] pt-4 sm:pt-8"
                 } tracking-[.1em] select-none uppercase font-header whitespace-nowrap`}
               >
                 Nine Carats
@@ -311,7 +314,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               <button
                 aria-label="Phone"
                 onClick={() => setIsContactSidebarOpen(true)}
-                className={`transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled || forceSmall)}`}
+                className={`transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled)}`}
               >
                 <svg
                   width="24px"
@@ -335,7 +338,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               <button
                 aria-label="user icon"
                 onClick={handleUserIconClick}
-                className={`transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled || forceSmall)}`}
+                className={`transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled)}`}
               >
                 <svg
                   width="24px"
@@ -370,7 +373,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               >
                 <OpenCart
                   quantity={cart?.totalQuantity}
-                  textColor={getTextColor(scrolled || forceSmall)}
+                  textColor={getTextColor(scrolled)}
                 />
               </button>
             </div>

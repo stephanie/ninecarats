@@ -21,7 +21,7 @@ export default function FullWidthTextSection() {
           headerClassName="text-xl md:text-4xl"
           tagline="Meet Nine Carats"
           button={
-            <ButtonLink href="#" className="text-white hover:border-white">
+            <ButtonLink href="/about" className="text-white hover:border-white">
               Read our story
             </ButtonLink>
           }

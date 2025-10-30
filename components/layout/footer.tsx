@@ -2,16 +2,23 @@ import NewsletterSignup from "components/layout/NewsletterSignup";
 import Link from "next/link";
 import MobileFooter from "./MobileFooter";
 
-const navLinks = ["Contact us", "Join Our Maison", "Services", "FAQs"];
+const navLinks = [
+  { title: "Contact us", href: "/contact" },
+  { title: "About our maison", href: "/about" },
+  { title: "Shop our collection", href: "/search?q=" },
+  { title: "FAQs", href: "/faqs" },
+];
 
-const socialLinks = ["Instagram", "Facebook", "YouTube", "LinkedIn"];
+const socialLinks = [
+  { title: "Instagram", href: "/instagram" },
+  { title: "Facebook", href: "/facebook" },
+  { title: "LinkedIn", href: "/linkedin" },
+];
 
 const legalLinks = [
-  "Legal",
-  "Privacy policy",
-  "Cookie policy",
-  "Conditions of sale",
-  "Site map",
+  { title: "Privacy policy", href: "/privacy-policy" },
+  { title: "Cookie policy", href: "/cookie-policy" },
+  { title: "Conditions of sale", href: "/conditions-of-sale" },
 ];
 
 export default function Footer() {
@@ -25,24 +32,24 @@ export default function Footer() {
         {/* Main Footer Grid - Centered Nav Links */}
         <div className="max-w-6xl mx-auto flex flex-col items-center gap-4 px-4 mb-8">
           <nav className="w-full flex flex-wrap justify-center gap-x-10 gap-y-2 mb-2">
-            {navLinks.map((label, idx) => (
+            {navLinks.map((link, idx) => (
               <Link
-                key={label}
-                href="#"
+                key={idx}
+                href={link.href}
                 className="uppercase tracking-widest text-xs md:text-sm text-neutral-500 hover:text-neutral-700 transition"
               >
-                {label}
+                {link.title}
               </Link>
             ))}
           </nav>
           <nav className="w-full flex flex-wrap justify-center gap-x-8 gap-y-2 pb-8">
-            {socialLinks.map((label) => (
+            {socialLinks.map((link, idx) => (
               <Link
-                key={label}
-                href="#"
+                key={idx}
+                href={link.href}
                 className="uppercase tracking-widest text-xs md:text-sm text-neutral-400 hover:text-neutral-700 transition"
               >
-                {label}
+                {link.title}
               </Link>
             ))}
           </nav>
@@ -54,13 +61,13 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 text-xs text-neutral-400 gap-2 pb-4">
           <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-1 mb-2 md:mb-0">
-            {legalLinks.map((label) => (
+            {legalLinks.map((link, idx) => (
               <Link
-                key={label}
-                href="#"
+                key={idx}
+                href={link.href}
                 className="hover:text-neutral-700 transition"
               >
-                {label}
+                {link.title}
               </Link>
             ))}
           </div>
