@@ -23,7 +23,7 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className="w-full pt-24 text-neutral-800 bg-neutral-100 mt-4">
+    <footer className="w-full pt-24 text-neutral-800 bg-primary mt-4 text-white">
       <NewsletterSignup />
       <div className="md:hidden">
         <MobileFooter />
@@ -36,7 +36,7 @@ export default function Footer() {
               <Link
                 key={idx}
                 href={link.href}
-                className="uppercase tracking-widest text-xs md:text-sm text-neutral-500 hover:text-neutral-700 transition"
+                className="uppercase tracking-widest text-xs md:text-sm"
               >
                 {link.title}
               </Link>
@@ -47,7 +47,7 @@ export default function Footer() {
               <Link
                 key={idx}
                 href={link.href}
-                className="uppercase tracking-widest text-xs md:text-sm text-neutral-400 hover:text-neutral-700 transition"
+                className="uppercase tracking-widest text-xs md:text-sm text-neutral-300 transition"
               >
                 {link.title}
               </Link>
@@ -56,21 +56,15 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-neutral-300" />
+        <div className="border-t border-neutral-300 max-w-[98vw] mx-auto" />
 
         {/* Bottom Bar */}
-        <div className="w-full px-4 text-xs text-neutral-400 gap-2 p-8 bg-neutral-100">
+        <div className="w-full px-4 text-xs text-neutral-300 gap-2 p-8">
           <div className="max-w-6xl mx-auto flex flex-row items-center justify-between">
-            <div className="text-neutral-400 mt-2 md:mt-0">
-              © NINECARATS 2025
-            </div>
+            <div className=" mt-2 md:mt-0">© NINECARATS 2025</div>
             <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-1">
               {legalLinks.map((link, idx) => (
-                <Link
-                  key={idx}
-                  href={link.href}
-                  className="hover:text-neutral-700 transition"
-                >
+                <Link key={idx} href={link.href}>
                   {link.title}
                 </Link>
               ))}

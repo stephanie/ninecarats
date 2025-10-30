@@ -10,7 +10,12 @@
     /* Google Fonts CSS Variables */
     --font-jost: 'Jost', sans-serif;
     --font-bellefair: 'Bellefair', serif;
+    /* --color-primary-dark: #28262B;
+    --color-primary: #736a79;
+    --color-primary-light: #c9bfcf; */
     --color-primary-dark: #28262B;
+    --color-primary: #273B3C;
+    --color-primary-light: #c9bfcf;
   }
 
   /* Animation utilities for better performance */
@@ -163,7 +168,9 @@
 @theme {
   --font-header: var(--font-bellefair), "serif";
   --font-body: var(--font-jost), "sans-serif";
+  --color-primary: var(--color-primary);
   --color-primary-dark: var(--color-primary-dark);
+  --color-primary-light: var(--color-primary-light);
 }
 
 a,

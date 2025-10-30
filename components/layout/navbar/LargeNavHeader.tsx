@@ -103,20 +103,23 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   return (
     <header
       className={`fixed left-0 w-full z-50 transition-all duration-300 ${
-        !topBarClosed && !scrolled ? "top-10 sm:top-11" : "top-0"
+        !topBarClosed && !scrolled ? "top-14 sm:top-11" : "top-0"
       }`}
     >
       {/* Announcement Top Bar */}
       {!topBarClosed && (
         <div
-          className={`fixed top-0 left-0 w-full bg-primary-dark text-white text-xs sm:text-sm flex justify-between px-4 h-10 sm:h-11 transition-transform duration-300 ${
+          className={`fixed top-0 left-0 w-full bg-primary text-white text-xs sm:text-sm flex justify-between px-4 h-14 sm:h-11 transition-transform duration-300 ${
             scrolled ? "-translate-y-full" : "translate-y-0"
           }`}
         >
-          <div className="w-full flex items-center justify-center">
+          <div className="w-full flex items-center justify-start sm:justify-center">
             <p className="opacity-90">
               Enjoy complimentary next day delivery and gift wrapping on all
-              orders, plus complimentary engraving on eligible products.
+              orders.{" "}
+              <Link href="/search?q=" className="underline">
+                Shop now
+              </Link>
             </p>
           </div>
           <button

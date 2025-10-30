@@ -48,7 +48,7 @@ export default function AboutPage() {
           </h2>
           <p className="mb-6 text-base md:text-md text-black">
             Nine Carats, founded in 2025, is a pioneering lab diamond jewelry
-            brand. Driven by the passion to bring high-end and sustainable
+            brand. Driven by the passion to bring high-end, sustainable
             jewellery to customers worldwide, we are revolutionizing the fine
             jewelry industry by removing the traditional luxury markup without
             compromising on quality. Our unique creative approach skillfully

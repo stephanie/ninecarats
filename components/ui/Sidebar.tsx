@@ -59,7 +59,7 @@ export function Sidebar({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-[rgb(217_41_31)]/30 transition-opacity" />
+          <div className="fixed inset-0 bg-primary-light/30 transition-opacity" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">

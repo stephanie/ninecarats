@@ -33,7 +33,7 @@ export default async function SearchPage(props: {
         resultsText={resultsText}
         collections={collections}
       >
-        <div className="w-full max-w-[100vw] mx-auto pt-32 md:pt-48 lg:pt-64">
+        <div className="w-full max-w-[100vw] mx-auto pt-48 lg:pt-64">
           {searchValue ? (
             <p className="mb-4 text-center">
               {products.length === 0
@@ -71,7 +71,7 @@ export default async function SearchPage(props: {
 
     // Return a fallback UI in case of errors
     return (
-      <div className="w-full max-w-[100vw] mx-auto pt-32 md:pt-48 lg:pt-64">
+      <div className="w-full max-w-[100vw] mx-auto pt-48 lg:pt-64">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Search Error</h1>
           <p className="text-gray-600 mb-4">

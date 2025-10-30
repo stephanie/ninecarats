@@ -6,16 +6,16 @@ export default function NewsletterSignup() {
         events and more.
       </p>
       <form className="w-full flex flex-col flex-row items-center justify-center gap-2">
-        <div className="border-b border-neutral-400 w-[15rem] md:w-[20rem] px-2.5 py-2.5 text-center">
+        <div className="border-b border-white w-[15rem] md:w-[20rem] px-2.5 py-2.5 text-center">
           <input
             type="email"
             placeholder="Enter your email"
-            className="borderless-input bg-transparent w-full text-center transition text-sm"
+            className="borderless-input bg-transparent w-full text-center transition text-sm text-white"
           />
         </div>
         <button
           type="submit"
-          className="mt-2 px-2 py-2 border-b border-neutral-400 text-neutral-800 text-sm tracking-wide hover:border-black transition"
+          className="mt-2 px-2 py-2 border-b border-white text-white text-sm tracking-wide hover:border-black transition"
         >
           Subscribe
         </button>
