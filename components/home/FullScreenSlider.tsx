@@ -261,7 +261,7 @@ export default function FullScreenSlider() {
         {/* Progress bar */}
         <div className="h-2 w-full bg-white">
           <div
-            className="h-full bg-primary transition-all duration-50 ease-linear"
+            className="h-full bg-primary-dark transition-all duration-50 ease-linear"
             style={{ width: `${progress}%` }}
           />
         </div>
