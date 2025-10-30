@@ -28,7 +28,7 @@ export default function SliderDots({
           aria-label={`Go to slide ${i + 1}`}
           className={`transition-all duration-300 flex items-center justify-center focus:outline-none ${
             i === selected
-              ? `w-5 h-2 bg-black rounded-full ${selectedDotClassName}` // pill/elongated
+              ? `w-5 h-2 bg-primary-dark rounded-full ${selectedDotClassName}` // pill/elongated
               : `w-2 h-2 bg-gray-400 rounded-full hover:bg-gray-500 ${dotClassName}`
           } ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
         />

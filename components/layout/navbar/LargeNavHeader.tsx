@@ -16,6 +16,7 @@ import Search, { SearchSkeleton } from "./search";
 
 export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const [scrolled, setScrolled] = useState(false);
+  const [topBarClosed, setTopBarClosed] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
   const [isLoginSidebarOpen, setIsLoginSidebarOpen] = useState(false);
   const [isContactSidebarOpen, setIsContactSidebarOpen] = useState(false);
@@ -100,7 +101,43 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+    <header
+      className={`fixed left-0 w-full z-50 transition-all duration-300 ${
+        !topBarClosed && !scrolled ? "top-10 sm:top-11" : "top-0"
+      }`}
+    >
+      {/* Announcement Top Bar */}
+      {!topBarClosed && (
+        <div
+          className={`fixed top-0 left-0 w-full bg-primary-dark text-white text-xs sm:text-sm flex justify-between px-4 h-10 sm:h-11 transition-transform duration-300 ${
+            scrolled ? "-translate-y-full" : "translate-y-0"
+          }`}
+        >
+          <div className="w-full flex items-center justify-center">
+            <p className="opacity-90">
+              Enjoy complimentary next day delivery and gift wrapping on all
+              orders, plus complimentary engraving on eligible products.
+            </p>
+          </div>
+          <button
+            aria-label="Close announcement"
+            onClick={() => setTopBarClosed(true)}
+            className="ml-auto cursor-pointer opacity-70 hover:opacity-100"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+      )}
       <div
         className={`relative flex flex-col justify-center w-full transition-all duration-300 ${
           scrolled

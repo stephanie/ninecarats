@@ -23,7 +23,7 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className="w-full pt-24 pb-2 text-neutral-800 bg-white">
+    <footer className="w-full pt-24 text-neutral-800 bg-neutral-100 mt-4">
       <NewsletterSignup />
       <div className="md:hidden">
         <MobileFooter />
@@ -56,23 +56,25 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-neutral-200 my-6" />
+        <div className="border-t border-neutral-300" />
 
         {/* Bottom Bar */}
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 text-xs text-neutral-400 gap-2 pb-4">
-          <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-1 mb-2 md:mb-0">
-            {legalLinks.map((link, idx) => (
-              <Link
-                key={idx}
-                href={link.href}
-                className="hover:text-neutral-700 transition"
-              >
-                {link.title}
-              </Link>
-            ))}
-          </div>
-          <div className="text-neutral-400 mt-2 md:mt-0">
-            © NINECARATS 2025
+        <div className="w-full px-4 text-xs text-neutral-400 gap-2 p-8 bg-neutral-100">
+          <div className="max-w-6xl mx-auto flex flex-row items-center justify-between">
+            <div className="text-neutral-400 mt-2 md:mt-0">
+              © NINECARATS 2025
+            </div>
+            <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-1">
+              {legalLinks.map((link, idx) => (
+                <Link
+                  key={idx}
+                  href={link.href}
+                  className="hover:text-neutral-700 transition"
+                >
+                  {link.title}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
