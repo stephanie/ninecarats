@@ -81,7 +81,7 @@ export function Sidebar({
                     {!hideDefaultHeader && (
                       <div className="px-8">
                         <div className="flex items-start justify-between">
-                          <Dialog.Title className="text-sm text-gray-900">
+                          <Dialog.Title className="text-md font-header text-gray-900">
                             {title}
                           </Dialog.Title>
                           <div className="ml-3 flex h-7 items-center">

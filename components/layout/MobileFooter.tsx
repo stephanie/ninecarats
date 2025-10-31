@@ -1,21 +1,43 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 import { FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 
 const menu = [
   {
-    title: "Customer Care",
-    items: ["Contact us", "FAQ", "Shipping & Returns"],
+    title: "Shop",
+    items: [
+      { title: "Engagement Rings", href: "/search/engagement-rings" },
+      { title: "Necklaces", href: "/search/necklaces" },
+      { title: "Bracelets", href: "/search/bracelets" },
+      { title: "New Arrivals", href: "/search?q=new" },
+      { title: "Sale", href: "/search?q=sale" },
+      { title: "All Products", href: "/search?q=" },
+    ],
   },
   {
-    title: "Client Services",
-    items: ["My Account", "Order Tracking", "Wishlist"],
+    title: "Customer Care",
+    items: [
+      { title: "Your Account", href: "/account" },
+      { title: "Contact Us", href: "/contact" },
+      { title: "FAQs", href: "/faqs" },
+    ],
   },
-  { title: "Our Company", items: ["About Us", "Careers", "Press"] },
+  {
+    title: "About Nine Carats",
+    items: [
+      { title: "Our Story", href: "/about" },
+      { title: "Our Diamonds", href: "/our-diamonds" },
+    ],
+  },
   {
     title: "Legal & Privacy",
-    items: ["Terms of Service", "Privacy Policy", "Cookie Policy"],
+    items: [
+      { title: "Privacy Policy", href: "/privacy-policy" },
+      { title: "Cookie Policy", href: "/cookie-policy" },
+      { title: "Conditions of Sale", href: "/conditions-of-sale" },
+    ],
   },
 ];
 
@@ -24,11 +46,11 @@ export default function MobileFooter() {
 
   return (
     <div>
-      <div className="divide-y divide-neutral-200 py-5 px-4">
+      <div className="divide-y divide-neutral-200 py-4 px-4">
         {menu.map((section, idx) => (
           <div key={section.title}>
             <button
-              className="w-full flex items-center justify-between py-5 text-sm font-normal focus:outline-none"
+              className="w-full flex items-center justify-between py-4 text-sm font-normal focus:outline-none"
               onClick={() => setOpen(open === idx ? null : idx)}
               aria-expanded={open === idx}
             >
@@ -50,9 +72,15 @@ export default function MobileFooter() {
             </button>
             {/* Menu items */}
             {open === idx && (
-              <div className="pb-2 text-sm text-neutral-600 gap-2">
-                {section.items.map((item) => (
-                  <div key={item}>{item}</div>
+              <div className="pb-5 text-sm text-white gap-2">
+                {section.items.map((item, idx) => (
+                  <Link
+                    href={item.href}
+                    key={idx}
+                    className="block text-sm text-white"
+                  >
+                    {item.title}
+                  </Link>
                 ))}
               </div>
             )}
@@ -62,7 +90,7 @@ export default function MobileFooter() {
       <div className="py-8 text-center text-sm">
         Shipping to <span className="underline">Hong Kong SAR ($)</span>
       </div>
-      <div className="flex flex-row justify-between px-6 border-t border-neutral-200 pt-6">
+      <div className="flex flex-row justify-between px-4 border-t border-neutral-200 pt-4">
         <div className="flex justify-center gap-4 text-md mb-4">
           <a href="#" aria-label="Instagram">
             <FaInstagram />

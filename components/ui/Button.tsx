@@ -25,7 +25,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className={`w-full text-sm tracking-wide py-4 px-6 flex items-center justify-center uppercase cursor-pointer hover:opacity-95 min-h-14 ${className} ${isDark ? "bg-primary-dark text-white" : "bg-white text-black border border-primary-dark"}`}
+      className={`w-full text-sm uppercase tracking-wide py-4 px-6 gap-2 flex items-center justify-center cursor-pointer hover:bg-primary hover:text-white transition-all duration-300 ${className} ${isDark ? "bg-primary-dark text-white" : "bg-white text-black border border-primary-dark"}`}
       type={type}
       disabled={disabled || pending}
       onClick={onClick}

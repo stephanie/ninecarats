@@ -16,7 +16,7 @@ function SubmitButton({
   isPending: boolean;
 }) {
   const buttonClasses =
-    "w-full bg-primary-dark text-white text-base tracking-wide py-4 px-6 gap-2 flex items-center justify-center uppercase cursor-pointer";
+    "w-full bg-primary-dark hover:bg-primary transition-all duration-300 text-white text-base tracking-wide py-4 px-6 gap-2 flex items-center justify-center uppercase cursor-pointer";
   const disabledClasses = "bg-black/60 cursor-not-allowed";
   const svg = (
     <svg
