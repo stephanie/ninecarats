@@ -4,6 +4,7 @@ import { HelpSystem } from "components/help";
 import Footer from "components/layout/Footer";
 import { Navbar } from "components/layout/navbar";
 import { SignInModalProvider } from "components/layout/SignInModalProvider";
+import PageLoader from "components/PageLoader";
 import { getCart } from "lib/shopify";
 import { baseUrl } from "lib/utils";
 import { Bellefair, Jost } from "next/font/google";
@@ -53,6 +54,7 @@ export default async function RootLayout({
       <body
         className={`${jost.variable} ${bellefair.variable} font-body bg-white text-black`}
       >
+        <PageLoader />
         <CartProvider cartPromise={cart}>
           <CustomerProvider>
             <SignInModalProvider>
