@@ -6,7 +6,8 @@ import StickyTextImageSection from "components/home/StickyTextImageSection";
 import ButtonLink from "components/text/ButtonLink";
 
 export const metadata = {
-  description: "Luxury jewelry and engagement rings.",
+  description:
+    "Nine Carats is pioneering sustainable diamond jewelry with exceptional craftsmanship, bringing you made-to-order heirlooms that will last a lifetime.",
   openGraph: {
     type: "website",
   },
@@ -84,7 +85,7 @@ export default function HomePage() {
         }
       />
       <ShopifyProductSlider collectionHandle="earrings" tagline="Jewelry" />
-      {/* <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" /> */}
+      <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" />
       <MultiImageSection cards={cards2} columns={2} />
     </>
   );
