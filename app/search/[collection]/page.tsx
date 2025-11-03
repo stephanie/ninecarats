@@ -61,10 +61,7 @@ export default async function CategoryPage(props: {
       <div className="w-full max-w-[100vw] mx-auto pt-48 lg:pt-64">
         {collection && (
           <div className="text-center p-16">
-            <TextHeaderFull
-              description={collection.description}
-              className="text-black"
-            >
+            <TextHeaderFull className="text-black">
               {collection.title}
             </TextHeaderFull>
           </div>

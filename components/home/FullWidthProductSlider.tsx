@@ -387,7 +387,6 @@ export default function FullWidthProductSlider({
           <div className="text-center p-16">
             <TextHeaderFull
               tagline={tagline}
-              description={sectionDescription}
               button={button}
               className="text-black"
             >

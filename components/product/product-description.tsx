@@ -24,8 +24,8 @@ export function ProductDescription({ product }: { product: Product }) {
       return { mainDescription: null, itemDetailsHtml: null };
 
     // Look for start and end markers
-    const startMarkerRegex = /<p[^>]*>###\s*Start:\s*Item details\s*###<\/p>/i;
-    const endMarkerRegex = /<p[^>]*>###\s*End:\s*Item details\s*###<\/p>/i;
+    const startMarkerRegex = /###\s*Start:\s*Item details\s*###/i;
+    const endMarkerRegex = /###\s*End:\s*Item details\s*###/i;
 
     const startMatch = product.descriptionHtml.match(startMarkerRegex);
     const endMatch = product.descriptionHtml.match(endMarkerRegex);
@@ -124,43 +124,41 @@ export function ProductDescription({ product }: { product: Product }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mx-auto p-4 lg:p-8 w-full">
       {/* Left Column - Product Description */}
-      <div className="space-y-2 lg:space-y-8">
-        <div>
-          <h2 className="text-lg sm:text-2xl text-black mb-2 hidden lg:block font-header">
-            {product.title}
-          </h2>
-          <div className="text-sm text-neutral-500 mb-8 hidden lg:block">
-            <Price
-              amount={displayPrice.amount}
-              currencyCode={displayCurrencyCode}
-            />
-          </div>
-          <div className="mb-10 hidden lg:block">
-            <VariantSelector
-              options={product.options}
-              variants={product.variants}
-            />
-          </div>
-          {mainDescription ? (
-            <Prose
-              className="text-sm sm:text-base leading-relaxed text-black"
-              html={mainDescription}
-            />
-          ) : product.descriptionHtml ? (
-            <Prose
-              className="text-sm sm:text-base leading-relaxed text-black"
-              html={product.descriptionHtml}
-            />
-          ) : (
-            <p className="text-sm sm:text-base leading-relaxed text-black">
-              {product.description}
-            </p>
-          )}
+      <div>
+        <h2 className="text-lg sm:text-2xl text-black mb-2 hidden lg:block font-header">
+          {product.title}
+        </h2>
+        <div className="text-sm text-neutral-500 mb-8 hidden lg:block">
+          <Price
+            amount={displayPrice.amount}
+            currencyCode={displayCurrencyCode}
+          />
         </div>
+        <div className="mb-10 hidden lg:block">
+          <VariantSelector
+            options={product.options}
+            variants={product.variants}
+          />
+        </div>
+        {mainDescription ? (
+          <Prose
+            className="text-sm sm:text-base leading-relaxed text-black"
+            html={mainDescription}
+          />
+        ) : product.descriptionHtml ? (
+          <Prose
+            className="text-sm sm:text-base leading-relaxed text-black"
+            html={product.descriptionHtml}
+          />
+        ) : (
+          <p className="text-sm sm:text-base leading-relaxed text-black">
+            {product.description}
+          </p>
+        )}
 
         {/* Collapsible sections */}
         <div className="space-y-2">
-          <div className="divide-y divide-neutral-200 py-2 lg:py-5">
+          <div className="divide-y divide-neutral-200 pb-2 lg:pb-5">
             {menu.map((section, idx) => (
               <div key={section.title}>
                 <button
