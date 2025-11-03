@@ -181,7 +181,7 @@ export default async function ProductPage(props: {
         <RelatedProductsSlider currentProduct={product} maxProducts={6} />
         {/* <RelatedProducts id={product.id} /> */}
         {/* Breadcrumb section */}
-        <div className="w-full border-b border-neutral-200 pb-6 sm:pl-14 pl-4">
+        <div className="w-full pb-6 sm:pl-14 pl-4">
           <nav className="text-sm text-neutral-700" aria-label="Breadcrumb">
             <ol className="list-none p-0 inline-flex gap-1">
               <li className="flex items-center">

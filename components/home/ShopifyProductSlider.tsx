@@ -20,8 +20,8 @@ export default async function ShopifyProductSlider({
       getCollection(collectionHandle),
       getCollectionProducts({
         collection: collectionHandle,
-        sortKey: "CREATED",
-        reverse: true, // Get newest products first
+        sortKey: "MANUAL", // Respect manual ordering from Shopify Admin
+        reverse: false,
       }),
     ]);
 

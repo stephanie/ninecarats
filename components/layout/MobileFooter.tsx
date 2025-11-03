@@ -8,10 +8,10 @@ const menu = [
   {
     title: "Shop",
     items: [
-      { title: "Engagement Rings", href: "/search/engagement-rings" },
-      { title: "Necklaces", href: "/search/necklaces" },
       { title: "Bracelets", href: "/search/bracelets" },
-      { title: "New Arrivals", href: "/search?q=new" },
+      { title: "Engagement Rings", href: "/search/engagement-rings" },
+      { title: "Earrings", href: "/search/earrings" },
+      { title: "Necklaces", href: "/search/necklaces" },
       { title: "Sale", href: "/search?q=sale" },
       { title: "All Products", href: "/search?q=" },
     ],

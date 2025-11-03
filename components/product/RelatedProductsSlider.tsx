@@ -50,8 +50,8 @@ export default async function RelatedProductsSlider({
       try {
         const products = await getCollectionProducts({
           collection: collectionHandle,
-          sortKey: "CREATED",
-          reverse: true,
+          sortKey: "MANUAL", // Respect manual ordering from Shopify Admin
+          reverse: false,
         });
 
         // Filter out the current product
@@ -79,8 +79,8 @@ export default async function RelatedProductsSlider({
           try {
             const products = await getCollectionProducts({
               collection: collection.handle,
-              sortKey: "CREATED",
-              reverse: true,
+              sortKey: "MANUAL", // Respect manual ordering from Shopify Admin
+              reverse: false,
             });
 
             const filteredProducts = products.filter(

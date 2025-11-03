@@ -446,22 +446,26 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 {/* Popular Section */}
                 <div>
                   <h3 className="text-xl text-black mb-4 font-header">
-                    Trending
+                    Categories
                   </h3>
                   <div className="flex flex-wrap gap-3">
                     {[
-                      "gifts",
-                      "necklaces",
-                      "bracelets",
-                      "rings",
-                      "earrings",
-                    ].map((term) => (
-                      <button
-                        key={term}
+                      { title: "necklaces", href: "/search/necklaces" },
+                      { title: "bracelets", href: "/search/bracelets" },
+                      {
+                        title: "engagement rings",
+                        href: "/search/engagement-rings",
+                      },
+                      { title: "earrings", href: "/search/earrings" },
+                    ].map((term, idx) => (
+                      <Link
+                        key={idx}
                         className="px-4 py-2 bg-gray-100 text-black text-sm hover:bg-gray-200 transition-colors duration-200 rounded"
+                        href={term.href}
+                        prefetch={true}
                       >
-                        {term}
-                      </button>
+                        {term.title}
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -473,18 +477,26 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 <ul className="space-y-2">
                   <li>
                     <Link
-                      href="/collections/jewelry"
+                      href="/search?q="
                       className="text-black hover:text-gray-600 transition-colors duration-200 font-header text-xl"
                     >
-                      Jewelry
+                      All Jewelry
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/collections/gifts"
+                      href="/search?q=new"
                       className="text-black hover:text-gray-600 transition-colors duration-200 font-header text-xl"
                     >
-                      Gifts
+                      New Arrivals
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/search?q=sale"
+                      className="text-black hover:text-gray-600 transition-colors duration-200 font-header text-xl"
+                    >
+                      Sale
                     </Link>
                   </li>
                 </ul>

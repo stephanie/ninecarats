@@ -83,8 +83,8 @@ export default function HomePage() {
           </ButtonLink>
         }
       />
-      <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" />
       <ShopifyProductSlider collectionHandle="earrings" tagline="Jewelry" />
+      <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" />
       <MultiImageSection cards={cards2} columns={2} />
     </>
   );

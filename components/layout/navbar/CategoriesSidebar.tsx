@@ -17,24 +17,24 @@ export default function CategoriesSidebar({
   // Define your categories here - you can replace this with dynamic data from your CMS
   const categories = [
     {
-      title: "Engagement rings",
-      path: "/search/engagement-rings",
-      description: "Timeless engagement rings for your special moment",
-    },
-    {
-      title: "Necklaces",
-      path: "/search/necklaces",
-      description: "Elegant necklaces and pendants",
-    },
-    {
       title: "Bracelets",
       path: "/search/bracelets",
       description: "Delicate and bold bracelet designs",
     },
     {
-      title: "New arrivals",
-      path: "/search?q=new",
-      description: "Latest additions to our collection",
+      title: "Engagement rings",
+      path: "/search/engagement-rings",
+      description: "Stunning engagement rings for your special moment",
+    },
+    {
+      title: "Earrings",
+      path: "/search/earrings",
+      description: "Timeless earrings for day or night",
+    },
+    {
+      title: "Necklaces",
+      path: "/search/necklaces",
+      description: "Elegant necklaces and pendants",
     },
     {
       title: "Sale",
@@ -102,19 +102,12 @@ export default function CategoriesSidebar({
             >
               About us
             </Link>
-            <Link
-              href="/size-guide"
-              onClick={onClose}
-              className="block text-sm text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              Size guide
-            </Link>
             <button
               onClick={() => {
                 onClose();
                 onContactClick();
               }}
-              className="block text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              className="block text-sm text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
             >
               Contact us
             </button>
