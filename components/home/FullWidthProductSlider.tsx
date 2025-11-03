@@ -273,95 +273,104 @@ export default function FullWidthProductSlider({
       </div>
     );
   } else {
+    const currentPageProducts = validProducts.slice(
+      currentPage * productsPerPage,
+      currentPage * productsPerPage + productsPerPage
+    );
+    const productCount = currentPageProducts.length;
+
     sliderContent = (
       <div className="relative w-full overflow-hidden px-4 mb-8">
         <div
-          className={`grid grid-cols-3 w-full transition-all duration-500 ease-in-out ${
+          className={`${
+            productCount < 3 ? "flex justify-center gap-4" : "grid grid-cols-3"
+          } w-full transition-all duration-500 ease-in-out ${
             isTransitioning ? "opacity-50 scale-95" : "opacity-100 scale-100"
           }`}
         >
-          {validProducts
-            .slice(
-              currentPage * productsPerPage,
-              currentPage * productsPerPage + productsPerPage
-            )
-            .map((product, idx) => (
-              <div
-                key={`${currentPage}-${product.id}`}
-                className="flex flex-col mb-2 transform transition-all duration-500 ease-out"
-                style={{
-                  animationDelay: `${idx * 100}ms`,
-                  transform: isTransitioning
-                    ? "translateY(20px)"
-                    : "translateY(0)",
-                  opacity: isTransitioning ? 0 : 1,
-                }}
+          {currentPageProducts.map((product, idx) => (
+            <div
+              key={`${currentPage}-${product.id}`}
+              className={`flex flex-col mb-2 transform transition-all duration-500 ease-out ${
+                productCount === 1
+                  ? "w-full max-w-[33.333%]"
+                  : productCount === 2
+                    ? "w-full max-w-[33.333%]"
+                    : "w-full"
+              }`}
+              style={{
+                animationDelay: `${idx * 100}ms`,
+                transform: isTransitioning
+                  ? "translateY(20px)"
+                  : "translateY(0)",
+                opacity: isTransitioning ? 0 : 1,
+              }}
+            >
+              <Link
+                href={`/product/${product.handle}`}
+                className="flex flex-col items-center"
               >
-                <Link
-                  href={`/product/${product.handle}`}
-                  className="flex flex-col items-center"
+                <div
+                  className={`w-full aspect-square max-h-[50vh] relative mb-8 group transition-colors duration-300 border border-neutral-200 ${
+                    productCount === 3 && idx === 0
+                      ? "border-r-0"
+                      : productCount === 3 && idx === 2
+                        ? "border-l-0"
+                        : ""
+                  }`}
+                  onMouseEnter={() => setHoveredProduct(product.id)}
+                  onMouseLeave={() => setHoveredProduct(null)}
                 >
-                  <div
-                    className={`w-full aspect-square max-h-[50vh] relative mb-8 group transition-colors duration-300 border border-neutral-200 ${
-                      validProducts.length > 1 && idx === 0
-                        ? "border-r-0"
-                        : validProducts.length > 1 && idx === 2
-                          ? "border-l-0"
-                          : ""
-                    }`}
-                    onMouseEnter={() => setHoveredProduct(product.id)}
-                    onMouseLeave={() => setHoveredProduct(null)}
-                  >
-                    <Image
-                      src={
-                        product.featuredImage?.url || "/images/placeholder.webp"
-                      }
-                      alt={product.featuredImage?.altText || product.title}
-                      fill
-                      className="object-cover"
-                      priority={idx === 0}
-                    />
-                    {getMp4VideoUrl(product.id) &&
-                      hoveredProduct === product.id && (
-                        <video
-                          className="absolute inset-0 w-full h-full object-cover"
-                          autoPlay
-                          muted
-                          loop
-                          playsInline
-                          style={{
-                            display: "block",
-                            margin: 0,
-                            padding: 0,
-                            outline: "none",
-                            border: "none",
-                          }}
-                        >
-                          <source
-                            src={getMp4VideoUrl(product.id)!}
-                            type="video/mp4"
-                          />
-                        </video>
+                  <Image
+                    src={
+                      product.featuredImage?.url || "/images/placeholder.webp"
+                    }
+                    alt={product.featuredImage?.altText || product.title}
+                    fill
+                    className="object-cover"
+                    priority={idx === 0}
+                  />
+                  {getMp4VideoUrl(product.id) &&
+                    hoveredProduct === product.id && (
+                      <video
+                        className="absolute inset-0 w-full h-full object-cover"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        style={{
+                          display: "block",
+                          margin: 0,
+                          padding: 0,
+                          outline: "none",
+                          border: "none",
+                        }}
+                      >
+                        <source
+                          src={getMp4VideoUrl(product.id)!}
+                          type="video/mp4"
+                        />
+                      </video>
+                    )}
+                </div>
+                <div className="text-center flex flex-col">
+                  <div className="text-lg mb-1 text-black font-header">
+                    <AnimatedText direction="up" staggerDelay={200}>
+                      {product.title}
+                    </AnimatedText>
+                  </div>
+                  <div className="text-sm text-neutral-500">
+                    <AnimatedText direction="up" staggerDelay={300}>
+                      {formatPrice(
+                        Number(product.priceRange.maxVariantPrice.amount),
+                        product.priceRange.maxVariantPrice.currencyCode
                       )}
+                    </AnimatedText>
                   </div>
-                  <div className="text-center flex flex-col">
-                    <div className="text-lg mb-1 text-black font-header">
-                      <AnimatedText direction="up" staggerDelay={200}>
-                        {product.title}
-                      </AnimatedText>
-                    </div>
-                    <div className="text-sm text-neutral-500">
-                      <AnimatedText direction="up" staggerDelay={300}>
-                        {formatPrice(
-                          Number(product.priceRange.maxVariantPrice.amount),
-                          product.priceRange.maxVariantPrice.currencyCode
-                        )}
-                      </AnimatedText>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            ))}
+                </div>
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     );
