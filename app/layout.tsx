@@ -42,6 +42,7 @@ export const metadata = {
   },
   openGraph: {
     type: "website",
+    url: baseUrl,
     siteName: SITE_NAME!,
     title: SITE_NAME!,
     description:
@@ -54,6 +55,9 @@ export const metadata = {
         alt: SITE_NAME!,
       },
     ],
+    ...(process.env.FACEBOOK_APP_ID && {
+      appId: process.env.FACEBOOK_APP_ID,
+    }),
   },
   twitter: {
     card: "summary_large_image",
