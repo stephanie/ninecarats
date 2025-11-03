@@ -31,7 +31,7 @@ const bellefair = Bellefair({
 export const metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: SITE_NAME!,
+    default: "Nine Carats | Sustainable Luxury Diamond Jewelry",
     template: `%s | ${SITE_NAME}`,
   },
   description:
