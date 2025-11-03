@@ -52,8 +52,14 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${jost.variable} ${bellefair.variable} font-body bg-white text-black`}
+        className={`${jost.variable} ${bellefair.variable} font-body bg-white text-black loading`}
       >
+        {/* Blocking script to hide content immediately - prevents FOUC */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.setAttribute('data-loading','true');`,
+          }}
+        />
         <PageLoader />
         <CartProvider cartPromise={cart}>
           <CustomerProvider>

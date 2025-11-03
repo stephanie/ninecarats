@@ -19,10 +19,15 @@ export default function PageLoader() {
 
   // Wait for the page to fully load
   useEffect(() => {
+    // Make body visible once React has hydrated
+    document.documentElement.removeAttribute("data-loading");
+
     const handleLoad = () => {
       // Small delay to ensure smooth transition
       setTimeout(() => {
         setIsLoading(false);
+        // Remove loading class to restore scrolling
+        document.body.classList.remove("loading");
       }, 300);
     };
 
@@ -39,7 +44,7 @@ export default function PageLoader() {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 transition-opacity duration-500"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 transition-opacity duration-500"
       style={{
         opacity: isLoading ? 1 : 0,
         pointerEvents: isLoading ? "auto" : "none",

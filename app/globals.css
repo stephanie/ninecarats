@@ -18,6 +18,17 @@
     --color-primary-light: #c9bfcf;
   }
 
+  /* Prevent flash of content before loader appears */
+  html[data-loading="true"] body > *:not(script) {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  /* Keep overflow hidden during loading */
+  body.loading {
+    overflow: hidden;
+  }
+
   /* Animation utilities for better performance */
   .animate-on-scroll {
     will-change: transform, opacity;
