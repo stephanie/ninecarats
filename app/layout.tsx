@@ -49,7 +49,7 @@ export const metadata = {
       "Nine Carats is pioneering sustainable diamond jewelry with exceptional craftsmanship, bringing you made-to-order heirlooms that will last a lifetime.",
     images: [
       {
-        url: "/images/nine-carats-social-share-img.png",
+        url: "/images/nine-carats-social-share-img.webp",
         width: 1200,
         height: 630,
         alt: SITE_NAME!,
@@ -64,7 +64,7 @@ export const metadata = {
     title: "Nine Carats | Sustainable Luxury Diamond Jewelry",
     description:
       "Nine Carats is pioneering sustainable diamond jewelry with exceptional craftsmanship, bringing you made-to-order heirlooms that will last a lifetime.",
-    images: ["/images/nine-carats-social-share-img.png"],
+    images: ["/images/nine-carats-social-share-img.webp"],
   },
 };
 
