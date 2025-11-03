@@ -199,7 +199,7 @@ export default function FullWidthProductSlider({
                     className={`w-full aspect-square h-[80vw] relative mb-6 group transition-colors duration-500 border border-neutral-200 ${
                       validProducts.length > 1 && idx === 0
                         ? "border-r-0"
-                        : validProducts.length > 1 && idx === 2
+                        : validProducts.length > 1 && idx % 2 === 0
                           ? "border-l-0"
                           : ""
                     } ${
@@ -311,7 +311,8 @@ export default function FullWidthProductSlider({
                 className="flex flex-col items-center"
               >
                 <div
-                  className={`w-full aspect-square max-h-[50vh] relative mb-8 group transition-colors duration-300 border border-neutral-200 ${
+                  className={`w-full aspect-square max-h-[50vh] relative mb-8 group transition-colors duration-300 ${
+                    // Old border logic if we want to bring it back on desktop - removed border border-neutral-200
                     productCount === 3 && idx === 0
                       ? "border-r-0"
                       : productCount === 3 && idx === 2

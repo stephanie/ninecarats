@@ -76,7 +76,14 @@ export function GridTileImage({
     >
       <div className="flex flex-col items-center">
         <div
-          className="w-full aspect-square border border-neutral-200 relative group transition-colors duration-300 border-r-1"
+          className="w-full aspect-square border border-neutral-200 relative group transition-colors duration-300"
+          style={{
+            borderRightWidth: isLast
+              ? 1
+              : (isMobile && index % 2 === 0) || (!isMobile && index % 3 !== 2)
+                ? 0
+                : 1, // Keep right border for last item in each row
+          }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
