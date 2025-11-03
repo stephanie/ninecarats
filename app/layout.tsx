@@ -34,9 +34,33 @@ export const metadata = {
     default: SITE_NAME!,
     template: `%s | ${SITE_NAME}`,
   },
+  description:
+    "Nine Carats is pioneering sustainable diamond jewelry with exceptional craftsmanship, bringing you made-to-order heirlooms that will last a lifetime.",
   robots: {
     follow: true,
     index: true,
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME!,
+    title: SITE_NAME!,
+    description:
+      "Nine Carats is pioneering sustainable diamond jewelry with exceptional craftsmanship, bringing you made-to-order heirlooms that will last a lifetime.",
+    images: [
+      {
+        url: "/images/nine-carats-social-share-img.png",
+        width: 1200,
+        height: 630,
+        alt: SITE_NAME!,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_NAME!,
+    description:
+      "Nine Carats is pioneering sustainable diamond jewelry with exceptional craftsmanship, bringing you made-to-order heirlooms that will last a lifetime.",
+    images: ["/images/nine-carats-social-share-img.png"],
   },
 };
 
