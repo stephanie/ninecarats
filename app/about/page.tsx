@@ -66,8 +66,15 @@ export default function AboutPage() {
             a part of the growing movement towards more sustainable and ethical
             practices in the jewelry industry.
           </p>
-          <p className="text-base md:text-md text-black">
-            We hope your Nine Carats jewelry will last you a lifetime.
+          <p className="mb-6 text-base md:text-md text-black">
+            <span className="font-bold">Why Nine?</span> In numerology, nine is
+            often associated with universal love and completion. This meaning is
+            deepened by our roots: in Chinese culture, the number nine (九, jiǔ)
+            sounds like the word "everlasting", making it the number most
+            associated with eternity. For us, this concept of enduring love and
+            permanence perfectly captures our diamond jewelry. Our name embodies
+            our promise to create timeless jewelry of the highest quality,
+            designed to last you a lifetime.
           </p>
         </div>
         {/* Right photo */}

@@ -114,7 +114,7 @@ export default function FullScreenSlider() {
 
     const interval = setInterval(() => {
       setProgress((prev) => {
-        const increment = 0.1;
+        const increment = 0.25;
         const nextProgress = prev + increment;
 
         if (nextProgress >= 100) {
