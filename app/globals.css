@@ -16,6 +16,9 @@
     --color-primary-dark: #28262B;
     --color-primary: #273B3C;
     --color-primary-light: #c9bfcf;
+
+    --navbar-height-desktop: 100px;
+    --navbar-height-mobile: 120px;
   }
 
   /* Prevent flash of content before loader appears */
@@ -182,6 +185,8 @@
   --color-primary: var(--color-primary);
   --color-primary-dark: var(--color-primary-dark);
   --color-primary-light: var(--color-primary-light);
+  --navbar-height-desktop: var(--navbar-height-desktop);
+  --navbar-height-mobile: var(--navbar-height-mobile);
 }
 
 a,

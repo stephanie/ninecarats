@@ -111,7 +111,7 @@ export default async function ProductPage(props: {
       />
       <div className="w-full flex flex-col gap-4">
         {/* Full width gallery section */}
-        <div className="w-full border-b border-neutral-200">
+        <div className="w-full border-b border-neutral-200 pt-[var(--navbar-height-mobile)] sm:pt-[var(--navbar-height-desktop)]">
           <Suspense fallback={<div className="relative w-full" />}>
             <Gallery
               backgroundColor={getBackgroundColor()}
