@@ -36,10 +36,10 @@ const cards = [
 
 const cards2 = [
   {
-    image: "/images/engagement-rings.webp",
-    heading: "Visit us",
-    buttonText: "Book an appointment",
-    link: "#",
+    image: "/images/round-tennis-bracelet-hand.avif",
+    heading: "Get in touch",
+    buttonText: "Contact our team",
+    link: "https://api.whatsapp.com/send/?phone=85298611934&text&type=phone_number&app_absent=0",
   },
   {
     image: "/images/diamonds.avif",
@@ -67,25 +67,21 @@ export default function HomePage() {
         />
       </div> */}
       <FullWidthTextSection />
-      <ShopifyProductSlider
-        collectionHandle="engagement-rings"
-        tagline="Wedding"
-      />
+      <ShopifyProductSlider collectionHandle="earrings" tagline="Jewelry" />
       <StickyTextImageSection
-        tagline="Day Jewelry"
-        heading="Necklaces"
-        image="/images/full-width-jewelry.webp"
+        tagline="Wedding"
+        heading="Engagement Rings"
+        image="/images/engagement-ring2.avif"
         button={
           <ButtonLink
-            href="/search/necklaces"
-            className="text-white hover:border-white"
+            href="/search/engagement-rings"
+            className="text-white border-white hover:border-gray-200"
           >
             Shop our collection
           </ButtonLink>
         }
       />
-      <ShopifyProductSlider collectionHandle="earrings" tagline="Jewelry" />
-      {/* <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" /> */}
+      <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" />
       <MultiImageSection cards={cards2} columns={2} />
     </>
   );

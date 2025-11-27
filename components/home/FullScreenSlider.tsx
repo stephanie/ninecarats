@@ -23,23 +23,23 @@ interface Slide {
 const slides: Slide[] = [
   {
     type: "image",
-    src: "/images/slider/rings3.webp",
+    src: "/images/slider/evermore-trilogy-ring-hand.avif",
     alt: "Engagement Rings",
     link: "/search/engagement-rings",
     tagline: "Wedding",
-    heading: "Engagement Rings",
+    heading: "The Evermore Trilogy Ring",
     buttonText: "Explore all",
     buttonLink: "/search/engagement-rings",
   },
   {
     type: "image",
-    src: "/images/slider/heroBanner.webp",
-    alt: "Earrings",
-    link: "/search/earrings",
+    src: "/images/slider/heart-necklace-model.avif",
+    alt: "Necklaces",
+    link: "/search/necklaces",
     tagline: "Jewelry",
-    heading: "Earrings",
+    heading: "The Venus Solitaire Necklace",
     buttonText: "Explore all",
-    buttonLink: "/search/earrings",
+    buttonLink: "/search/necklaces",
   },
 ];
 

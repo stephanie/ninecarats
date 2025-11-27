@@ -45,7 +45,7 @@ export default function MultiImageSection({
                   button={
                     <ButtonLink
                       href={card.link}
-                      className="text-white hover:border-white"
+                      className="text-white border-white hover:border-gray-200"
                     >
                       {card.buttonText}
                     </ButtonLink>
