@@ -8,7 +8,7 @@ const menu = [
     title: "Shop",
     items: [
       { title: "Bracelets", href: "/search/bracelets" },
-      { title: "Engagement Rings", href: "/search/engagement-rings" },
+      { title: "Rings", href: "/search/engagement-rings" },
       { title: "Earrings", href: "/search/earrings" },
       { title: "Necklaces", href: "/search/necklaces" },
       { title: "Sale", href: "/search?q=sale" },

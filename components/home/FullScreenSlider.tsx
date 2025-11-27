@@ -24,7 +24,7 @@ const slides: Slide[] = [
   {
     type: "image",
     src: "/images/slider/evermore-trilogy-ring-hand.avif",
-    alt: "Engagement Rings",
+    alt: "Rings",
     link: "/search/engagement-rings",
     tagline: "Wedding",
     heading: "The Evermore Trilogy Ring",

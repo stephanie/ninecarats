@@ -70,11 +70,11 @@ export default function HomePage() {
       <ShopifyProductSlider collectionHandle="earrings" tagline="Jewelry" />
       <StickyTextImageSection
         tagline="Wedding"
-        heading="Engagement Rings"
+        heading="Rings"
         image="/images/engagement-ring-model.avif"
         button={
           <ButtonLink
-            href="/search/engagement-rings"
+            href="/search/rings"
             className="text-white border-white hover:border-gray-200"
           >
             Shop our collection

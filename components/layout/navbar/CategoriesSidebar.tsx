@@ -16,9 +16,9 @@ export const categories = [
     description: "Delicate and bold bracelet designs",
   },
   {
-    title: "Engagement rings",
-    path: "/search/engagement-rings",
-    description: "Stunning engagement rings for your special moment",
+    title: "Rings",
+    path: "/search/rings",
+    description: "Stunning rings for your special moment",
   },
   {
     title: "Earrings",
@@ -54,7 +54,7 @@ export default function CategoriesSidebar({
     >
       <div className="space-y-4 mt-4">
         <div className="text-sm text-gray-500 mb-6">
-          Discover our complete collection of fine jewelry and accessories
+          Discover our complete collection of fine jewelry and accessories.
         </div>
 
         <nav className="space-y-1">
@@ -65,7 +65,7 @@ export default function CategoriesSidebar({
                 onClick={onClose}
                 className="block py-3 group"
               >
-                <div className="flex items-start justify-between">
+                <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <h3 className="text-xl font-medium text-gray-900 group-hover:text-gray-700 transition-colors font-header">
                       {category.title}
