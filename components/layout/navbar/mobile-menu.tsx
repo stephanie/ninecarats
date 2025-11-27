@@ -6,6 +6,7 @@ import { Suspense, useEffect, useState } from "react";
 import { Sidebar } from "components/ui/Sidebar";
 import { Menu } from "lib/shopify/types";
 import Link from "next/link";
+import { categories } from "./CategoriesSidebar";
 import Search, { SearchSkeleton } from "./search";
 
 export default function MobileMenu({
@@ -38,34 +39,6 @@ export default function MobileMenu({
   useEffect(() => {
     setIsOpen(false);
   }, [pathname, searchParams]);
-
-  const categories = [
-    {
-      title: "Engagement rings",
-      path: "/search/engagement-rings",
-      description: "Timeless engagement rings for your special moment",
-    },
-    {
-      title: "Necklaces",
-      path: "/search/necklaces",
-      description: "Elegant necklaces and pendants",
-    },
-    {
-      title: "Bracelets",
-      path: "/search/bracelets",
-      description: "Delicate and bold bracelet designs",
-    },
-    {
-      title: "New arrivals",
-      path: "/search?q=new",
-      description: "Latest additions to our collection",
-    },
-    {
-      title: "Sale",
-      path: "/search?q=sale",
-      description: "Special offers and discounted pieces",
-    },
-  ];
 
   return (
     <>
@@ -155,13 +128,6 @@ export default function MobileMenu({
               className="block text-sm text-gray-600 hover:text-gray-900 transition-colors"
             >
               About us
-            </Link>
-            <Link
-              href="/size-guide"
-              onClick={closeMobileMenu}
-              className="block text-sm text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              Size guide
             </Link>
             <button
               onClick={() => {

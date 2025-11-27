@@ -9,39 +9,40 @@ interface CategoriesSidebarProps {
   onContactClick: () => void;
 }
 
+export const categories = [
+  {
+    title: "Bracelets",
+    path: "/search/bracelets",
+    description: "Delicate and bold bracelet designs",
+  },
+  {
+    title: "Engagement rings",
+    path: "/search/engagement-rings",
+    description: "Stunning engagement rings for your special moment",
+  },
+  {
+    title: "Earrings",
+    path: "/search/earrings",
+    description: "Timeless earrings for day or night",
+  },
+  {
+    title: "Necklaces",
+    path: "/search/necklaces",
+    description: "Elegant necklaces and pendants",
+  },
+  {
+    title: "Sale",
+    path: "/search?q=sale",
+    description: "Special offers and discounted pieces",
+  },
+];
+
 export default function CategoriesSidebar({
   isOpen,
   onClose,
   onContactClick,
 }: CategoriesSidebarProps) {
   // Define your categories here - you can replace this with dynamic data from your CMS
-  const categories = [
-    {
-      title: "Bracelets",
-      path: "/search/bracelets",
-      description: "Delicate and bold bracelet designs",
-    },
-    {
-      title: "Engagement rings",
-      path: "/search/engagement-rings",
-      description: "Stunning engagement rings for your special moment",
-    },
-    {
-      title: "Earrings",
-      path: "/search/earrings",
-      description: "Timeless earrings for day or night",
-    },
-    {
-      title: "Necklaces",
-      path: "/search/necklaces",
-      description: "Elegant necklaces and pendants",
-    },
-    {
-      title: "Sale",
-      path: "/search?q=sale",
-      description: "Special offers and discounted pieces",
-    },
-  ];
 
   return (
     <Sidebar

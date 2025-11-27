@@ -1,7 +1,6 @@
 "use client";
 
 import { useViewportHeight } from "hooks/useViewportHeight";
-import Image from "next/image";
 
 export default function AboutPage() {
   const viewportHeight = useViewportHeight();
@@ -26,7 +25,7 @@ export default function AboutPage() {
         {/* Background Video */}
         <video
           className="absolute inset-0 w-full h-full object-cover z-0"
-          src="/videos/sky.mov"
+          src="/videos/sky-b&w.mov"
           autoPlay
           loop
           muted
@@ -40,7 +39,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-black opacity-30 pointer-events-none" />
       </section>
       {/* About Section */}
-      <section className="w-full bg-white min-h-screen flex flex-col lg:flex-row items-center justify-center gap-0 sm:gap-16 py-16 md:py-28 px-4 md:px-20">
+      <section className="w-full bg-white min-h-screen flex flex-col lg:flex-row items-center justify-center gap-0 sm:gap-16 py-16 md:py-28 px-4 md:px-20 text-center">
         {/* Left text */}
         <div className="flex-1 max-w-xl w-full">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-header mb-8">
@@ -67,32 +66,32 @@ export default function AboutPage() {
             practices in the jewelry industry.
           </p>
           <p className="mb-6 text-base md:text-md text-black">
-            <span className="font-bold">Why Nine?</span> In numerology, nine is
-            often associated with universal love and completion. This meaning is
-            deepened by our roots: in Chinese culture, the number nine (九, jiǔ)
-            sounds like the word "everlasting", making it the number most
-            associated with eternity. For us, this concept of enduring love and
-            permanence perfectly captures our diamond jewelry. Our name embodies
-            our promise to create timeless jewelry of the highest quality,
-            designed to last you a lifetime.
+            Why nine? In numerology, nine is often associated with universal
+            love and completion. This meaning is deepened by our roots: in
+            Chinese culture, the number nine (九, jiǔ) sounds like the word
+            "everlasting", making it the number most associated with eternity.
+            For us, this concept of enduring love and permanence perfectly
+            captures our diamond jewelry. Our name embodies our promise to
+            create timeless jewelry of the highest quality, designed to last you
+            a lifetime.
           </p>
         </div>
         {/* Right photo */}
-        <div className="flex-1 flex justify-center xs:justify-end w-full mt-12 md:mt-0">
-          <div className="relative w-[100vw] sm:w-[50vw] aspect-[4/3] overflow-hidden">
-            <Image
+        {/* <div className="flex-1 flex justify-center xs:justify-end w-full mt-12 md:mt-0"> */}
+        {/* <div className="relative w-[100vw] sm:w-[50vw] aspect-[4/3] overflow-hidden"> */}
+        {/* <Image
               src="/images/two-asian-women.webp"
               alt="Lesley Yu and Stephanie Siaw, the Nine Carats founders"
               fill
               className="object-cover object-center w-full h-full"
               sizes="(max-width: 768px) 300px, (max-width: 1024px) 390px, 480px"
-            />
-            {/* Caption for photo */}
-            <span className="absolute left-4 bottom-4 text-white text-xs md:text-sm drop-shadow-lg z-10">
+            /> */}
+        {/* Caption for photo */}
+        {/* <span className="absolute left-4 bottom-4 text-white text-xs md:text-sm drop-shadow-lg z-10">
               Lesley Yu and Stephanie Siaw, the Nine Carats founders
-            </span>
-          </div>
-        </div>
+            </span> */}
+        {/* </div> */}
+        {/* </div> */}
       </section>
     </div>
   );

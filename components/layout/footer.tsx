@@ -6,20 +6,14 @@ const navLinks = [
   { title: "Contact us", href: "/contact" },
   { title: "About our maison", href: "/about" },
   { title: "Shop our collection", href: "/search?q=" },
-  { title: "FAQs", href: "/faqs" },
 ];
 
 const socialLinks = [
-  { title: "Instagram", href: "/instagram" },
-  { title: "Facebook", href: "/facebook" },
-  { title: "LinkedIn", href: "/linkedin" },
+  { title: "Instagram", href: "http://instagram.com/ninecaratsofficial" },
+  { title: "LinkedIn", href: "#" },
 ];
 
-const legalLinks = [
-  { title: "Privacy policy", href: "/privacy-policy" },
-  { title: "Cookie policy", href: "/cookie-policy" },
-  { title: "Conditions of sale", href: "/conditions-of-sale" },
-];
+const legalLinks = [{ title: "Privacy policy", href: "/privacy-policy" }];
 
 export default function Footer() {
   return (
@@ -60,15 +54,13 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="w-full px-4 text-xs text-neutral-300 gap-2 p-8">
-          <div className="max-w-6xl mx-auto flex flex-row items-center justify-between">
+          <div className="max-w-6xl mx-auto flex flex-row justify-between">
+            {legalLinks.map((link, idx) => (
+              <Link key={idx} href={link.href}>
+                {link.title}
+              </Link>
+            ))}
             <div className=" mt-2 md:mt-0">© NINECARATS 2025</div>
-            <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-1">
-              {legalLinks.map((link, idx) => (
-                <Link key={idx} href={link.href}>
-                  {link.title}
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
       </div>

@@ -106,13 +106,13 @@ export function HelpDialogContent({
                 </svg>
                 Back to Help
               </button>
-              <div className="space-y-4">
-                <h2 className="text-xl font-bold text-gray-900">
+              <div className="space-y-4 mb-4">
+                <h2 className="text-2xl font-header">
                   Frequently Asked Questions
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="font-medium text-gray-900 mb-2">
+                    <h3 className="text-gray-900 mb-2">
                       How do I care for my jewelry?
                     </h3>
                     <p className="text-sm text-gray-600">
@@ -122,7 +122,7 @@ export function HelpDialogContent({
                     </p>
                   </div>
                   <div>
-                    <h3 className="font-medium text-gray-900 mb-2">
+                    <h3 className="text-gray-900 mb-2">
                       What is your return policy?
                     </h3>
                     <p className="text-sm text-gray-600">
@@ -131,12 +131,21 @@ export function HelpDialogContent({
                     </p>
                   </div>
                   <div>
-                    <h3 className="font-medium text-gray-900 mb-2">
+                    <h3 className="text-gray-900 mb-2">
                       Do you offer custom designs?
                     </h3>
                     <p className="text-sm text-gray-600">
                       Yes, we create custom jewelry pieces. Contact our design
                       team to discuss your vision.
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="text-gray-900 mb-2">
+                      Do you offer a warranty?
+                    </h3>
+                    <p className="text-sm text-gray-600">
+                      Yes, we offer a warranty for all our jewelry. Contact our
+                      customer service team to discuss your warranty claim.
                     </p>
                   </div>
                 </div>

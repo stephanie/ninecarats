@@ -15,7 +15,7 @@ export default function NewsletterSignup() {
         </div>
         <button
           type="submit"
-          className="mt-2 px-2 py-2 border-b border-white text-white text-sm tracking-wide hover:border-black transition"
+          className="mt-2 px-2 py-2 border-b border-white hover:border-neutral-200 text-white text-sm tracking-wide transition"
         >
           Subscribe
         </button>

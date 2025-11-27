@@ -27,11 +27,11 @@ export function QualityPromise({ className = "" }: QualityPromiseProps) {
             <ul className="space-y-2 text-gray-700 text-sm">
               <li className="flex items-start">
                 <span className="text-gray-500 mr-2">•</span>
-                Only GIA certified diamonds of VS clarity or higher
+                Only lab certified diamonds of VS1 clarity or higher
               </li>
               <li className="flex items-start">
                 <span className="text-gray-500 mr-2">•</span>
-                Color grades of H or better for maximum brilliance
+                Color grades of DEF for maximum brilliance
               </li>
               <li className="flex items-start">
                 <span className="text-gray-500 mr-2">•</span>
@@ -62,20 +62,22 @@ export function QualityPromise({ className = "" }: QualityPromiseProps) {
 
           <div>
             <h3 className="text-lg font-header text-gray-900 mb-2">
-              Ethical Sourcing
+              Sustainability in mind
             </h3>
             <ul className="space-y-2 text-gray-700 text-sm">
               <li className="flex items-start">
                 <span className="text-gray-500 mr-2">•</span>
-                Conflict-free diamonds from certified sources
+                Lab grown diamonds using sustainable energy where possible
               </li>
               <li className="flex items-start">
                 <span className="text-gray-500 mr-2">•</span>
-                Responsible mining practices and fair trade
+                Ethical production practices and environmentally friendly
+                materials
               </li>
               <li className="flex items-start">
                 <span className="text-gray-500 mr-2">•</span>
-                Full traceability from mine to market
+                Each piece is crafted to order in our workshop to maximise
+                quality and reduce waste
               </li>
             </ul>
           </div>
@@ -83,7 +85,7 @@ export function QualityPromise({ className = "" }: QualityPromiseProps) {
 
         <div className="bg-gray-100 p-4 rounded-lg mt-8">
           <p className="text-gray-700 text-sm">
-            Every piece of Nine Carats jewelry comes with a certificate of
+            Every Nine Carats diamond above 1ct comes with a certificate of
             authenticity and our personal guarantee of quality. We stand behind
             every piece we create.
           </p>

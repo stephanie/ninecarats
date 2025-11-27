@@ -16,8 +16,7 @@ function SubmitButton({
   isPending: boolean;
 }) {
   const buttonClasses =
-    "w-full bg-primary-dark hover:bg-primary transition-all duration-300 text-white text-base tracking-wide py-4 px-6 gap-2 flex items-center justify-center uppercase cursor-pointer";
-  const disabledClasses = "bg-black/60 cursor-not-allowed";
+    "w-full hover:bg-primary transition-all duration-300 text-white text-base tracking-wide py-4 px-6 gap-2 flex items-center justify-center uppercase cursor-pointer bg-primary-dark";
   const svg = (
     <svg
       className="w-4 h-4"
@@ -46,7 +45,14 @@ function SubmitButton({
 
   if (!availableForSale) {
     return (
-      <button disabled className={clsx(buttonClasses, disabledClasses)}>
+      <button
+        disabled
+        className={clsx(buttonClasses)}
+        style={{
+          backgroundColor: "var(--color-neutral-400)",
+          cursor: "default",
+        }}
+      >
         Out of stock
       </button>
     );
@@ -57,7 +63,11 @@ function SubmitButton({
       <button
         aria-label="Please select an option"
         disabled
-        className={clsx(buttonClasses, disabledClasses)}
+        className={clsx(buttonClasses)}
+        style={{
+          backgroundColor: "var(--color-neutral-400)",
+          cursor: "default",
+        }}
       >
         {svg}
         Add To Bag

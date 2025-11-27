@@ -36,9 +36,9 @@ const cards = [
 
 const cards2 = [
   {
-    image: "/images/round-tennis-bracelet-hand.avif",
-    heading: "Get in touch",
-    buttonText: "Contact our team",
+    image: "/images/emerald-tennis-bracelet-model.avif",
+    heading: "Contact us",
+    buttonText: "Chat to our team",
     link: "https://api.whatsapp.com/send/?phone=85298611934&text&type=phone_number&app_absent=0",
   },
   {
@@ -71,7 +71,7 @@ export default function HomePage() {
       <StickyTextImageSection
         tagline="Wedding"
         heading="Engagement Rings"
-        image="/images/engagement-ring2.avif"
+        image="/images/engagement-ring-model.avif"
         button={
           <ButtonLink
             href="/search/engagement-rings"

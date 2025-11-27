@@ -178,6 +178,7 @@ export default function FullScreenSlider() {
                 alt={slide.alt || ""}
                 fill
                 className="object-cover"
+                sizes="100vw"
                 priority={index === 0}
               />
             </Link>

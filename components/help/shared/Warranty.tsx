@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "components/ui/Button";
+import Link from "next/link";
 
 interface WarrantyProps {
   className?: string;
@@ -15,9 +15,8 @@ export function Warranty({ className = "" }: WarrantyProps) {
 
       <div className="space-y-4">
         <p className="text-gray-700 leading-relaxed text-sm">
-          Your Nine Carats jewelry is protected by our comprehensive warranty
-          program, ensuring your investment remains beautiful and secure for
-          years to come.
+          Your Nine Carats jewelry is protected by our warranty, ensuring your
+          investment remains beautiful and secure for years to come.
         </p>
 
         <div className="space-y-6">
@@ -33,14 +32,6 @@ export function Warranty({ className = "" }: WarrantyProps) {
               <li className="flex items-start">
                 <span className="text-gray-500 mr-2">•</span>
                 Stone tightening and re-setting services
-              </li>
-              <li className="flex items-start">
-                <span className="text-gray-500 mr-2">•</span>
-                Ring resizing within the first year
-              </li>
-              <li className="flex items-start">
-                <span className="text-gray-500 mr-2">•</span>
-                Professional cleaning and polishing
               </li>
             </ul>
           </div>
@@ -102,8 +93,10 @@ export function Warranty({ className = "" }: WarrantyProps) {
           </p>
         </div>
 
-        <div className="pt-2">
-          <Button className="text-sm">Contact Customer Service</Button>
+        <div className="pt-2 pb-4">
+          <Link className="text-sm underline" href="/contact">
+            Contact Customer Service
+          </Link>
         </div>
       </div>
     </div>
