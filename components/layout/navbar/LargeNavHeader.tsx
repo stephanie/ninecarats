@@ -117,7 +117,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
             <p className="opacity-90">
               Enjoy complimentary next day delivery and gift wrapping on all
               orders.{" "}
-              <Link href="/search?q=" className="underline">
+              <Link href="/search/all-products" className="underline">
                 Shop now
               </Link>
             </p>
@@ -454,7 +454,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                       { title: "bracelets", href: "/search/bracelets" },
                       {
                         title: "engagement rings",
-                        href: "/search/engagement-rings",
+                        href: "/search/rings",
                       },
                       { title: "earrings", href: "/search/earrings" },
                     ].map((term, idx) => (
@@ -477,7 +477,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 <ul className="space-y-2">
                   <li>
                     <Link
-                      href="/search?q="
+                      href="/search/all-products"
                       className="text-black hover:text-gray-600 transition-colors duration-200 font-header text-xl"
                     >
                       All Jewelry

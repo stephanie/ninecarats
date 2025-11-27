@@ -5,7 +5,7 @@ import MobileFooter from "./MobileFooter";
 const navLinks = [
   { title: "Contact us", href: "/contact" },
   { title: "About our maison", href: "/about" },
-  { title: "Shop our collection", href: "/search?q=" },
+  { title: "Shop our collection", href: "/search/all-products" },
 ];
 
 const socialLinks = [

@@ -8,11 +8,11 @@ const menu = [
     title: "Shop",
     items: [
       { title: "Bracelets", href: "/search/bracelets" },
-      { title: "Rings", href: "/search/engagement-rings" },
+      { title: "Rings", href: "/search/rings" },
       { title: "Earrings", href: "/search/earrings" },
       { title: "Necklaces", href: "/search/necklaces" },
       { title: "Sale", href: "/search?q=sale" },
-      { title: "All Products", href: "/search?q=" },
+      { title: "All Products", href: "/search/all-products" },
     ],
   },
   {
