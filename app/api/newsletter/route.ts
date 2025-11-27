@@ -27,6 +27,12 @@ export async function POST(req: NextRequest) {
       html: `<p>New newsletter subscription:</p><p><strong>Email:</strong> ${email}</p>`,
     });
 
-
+    return NextResponse.json({ message: 'Email sent successfully' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    return NextResponse.json(
+      { error: 'Failed to send email' },
+      { status: 500 }
+    );
+  }
 }
-
