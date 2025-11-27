@@ -21,12 +21,12 @@ export default function MultiImageSection({
   return (
     <section className="w-full bg-white">
       <div
-        className={`grid grid-cols-1 md:grid-cols-${columns} gap-4 w-full mx-auto`}
+        className={`grid grid-cols-1 md:grid-cols-${columns} gap-0 md:gap-4 w-full mx-auto`}
       >
         {cards.map((card, idx) => (
           <div
             key={idx}
-            className="relative w-full md:min-h-[90vh] min-h-[70vh] flex items-stretch overflow-visible"
+            className="relative w-full md:min-h-[90vh] min-h-[70vh] flex items-stretch overflow-hidden"
           >
             <Image
               src={card.image}

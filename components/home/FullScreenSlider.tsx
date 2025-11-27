@@ -158,7 +158,7 @@ export default function FullScreenSlider() {
 
   return (
     <div
-      className="relative w-full"
+      className="relative w-full overflow-hidden"
       style={{
         height: viewportHeight ? `calc(${viewportHeight}px)` : "calc(100vh)",
       }}
@@ -167,12 +167,12 @@ export default function FullScreenSlider() {
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
+          className={`absolute inset-0 transition-opacity duration-1000 overflow-hidden ${
             index === currentSlide ? "opacity-100" : "opacity-0"
           }`}
         >
           {slide.type === "image" ? (
-            <Link href={slide.link || "#"}>
+            <Link href={slide.link || "#"} className="block w-full h-full">
               <Image
                 src={slide.src}
                 alt={slide.alt || ""}
