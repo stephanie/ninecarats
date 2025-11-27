@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 
 const menu = [
@@ -21,23 +20,15 @@ const menu = [
     items: [
       { title: "Your Account", href: "/account" },
       { title: "Contact Us", href: "/contact" },
-      { title: "FAQs", href: "/faqs" },
     ],
   },
   {
     title: "About Nine Carats",
-    items: [
-      { title: "Our Story", href: "/about" },
-      { title: "Our Diamonds", href: "/our-diamonds" },
-    ],
+    items: [{ title: "Our Story", href: "/about" }],
   },
   {
     title: "Legal & Privacy",
-    items: [
-      { title: "Privacy Policy", href: "/privacy-policy" },
-      { title: "Cookie Policy", href: "/cookie-policy" },
-      { title: "Conditions of Sale", href: "/conditions-of-sale" },
-    ],
+    items: [{ title: "Privacy Policy", href: "/privacy-policy" }],
   },
 ];
 
@@ -88,14 +79,19 @@ export default function MobileFooter() {
         ))}
       </div>
       <div className="py-8 text-center text-sm">
-        Shipping to <span className="underline">Hong Kong SAR ($)</span>
+        Shipping to <span className="underline">Hong Kong SAR (HKD)</span>
       </div>
       <div className="flex flex-row justify-between px-4 border-t border-neutral-200 pt-4">
         <div className="flex justify-center gap-4 text-md mb-4">
-          <a href="#" aria-label="Instagram">
+          <a
+            href="http://instagram.com/ninecaratsofficial"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaInstagram />
           </a>
-          <a href="#" aria-label="Facebook">
+          {/* <a href="#" aria-label="Facebook">
             <FaFacebook />
           </a>
           <a href="#" aria-label="YouTube">
@@ -103,7 +99,7 @@ export default function MobileFooter() {
           </a>
           <a href="#" aria-label="LinkedIn">
             <FaLinkedin />
-          </a>
+          </a> */}
         </div>
         <div className="text-center text-neutral-400 text-xs">
           © NINECARATS 2025
