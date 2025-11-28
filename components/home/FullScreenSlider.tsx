@@ -25,11 +25,11 @@ const slides: Slide[] = [
     type: "image",
     src: "/images/slider/evermore-trilogy-ring-hand.avif",
     alt: "Rings",
-    link: "/search/engagement-rings",
+    link: "/search/rings",
     tagline: "Wedding",
     heading: "The Evermore Trilogy Ring",
     buttonText: "Explore all",
-    buttonLink: "/search/engagement-rings",
+    buttonLink: "/search/rings",
   },
   {
     type: "image",
@@ -158,7 +158,7 @@ export default function FullScreenSlider() {
 
   return (
     <div
-      className="relative w-full overflow-hidden"
+      className="relative w-full"
       style={{
         height: viewportHeight ? `calc(${viewportHeight}px)` : "calc(100vh)",
       }}
@@ -167,12 +167,12 @@ export default function FullScreenSlider() {
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 overflow-hidden ${
+          className={`absolute inset-0 transition-opacity duration-1000 ${
             index === currentSlide ? "opacity-100" : "opacity-0"
           }`}
         >
           {slide.type === "image" ? (
-            <Link href={slide.link || "#"} className="block w-full h-full">
+            <Link href={slide.link || "#"}>
               <Image
                 src={slide.src}
                 alt={slide.alt || ""}
