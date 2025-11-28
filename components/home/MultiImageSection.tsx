@@ -6,9 +6,11 @@ interface Card {
   image?: string;
   video?: string;
   videoClassName?: string;
+  imageClassName?: string;
   heading: string;
   buttonText: string;
   link: string;
+  tagline?: string;
 }
 
 interface MultiImageSectionProps {
@@ -34,7 +36,7 @@ export default function MultiImageSection({
           >
             {card.video ? (
               <video
-                className="absolute inset-0 w-full h-full object-contain z-0"
+                className={`absolute inset-0 w-full h-full object-contain z-0 ${card.videoClassName}`}
                 src={card.video}
                 autoPlay
                 loop
@@ -46,7 +48,7 @@ export default function MultiImageSection({
                 src={card.image!}
                 alt={card.heading}
                 fill
-                className="object-cover object-center"
+                className={`object-cover object-center ${card.imageClassName}`}
                 priority={idx === 0}
               />
             )}
@@ -56,7 +58,7 @@ export default function MultiImageSection({
                 <TextHeaderFull
                   className="text-white"
                   align="left"
-                  tagline=""
+                  tagline={card.tagline}
                   button={
                     <ButtonLink
                       href={card.link}

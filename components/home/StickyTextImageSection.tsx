@@ -2,11 +2,14 @@ import TextHeaderFull from "components/text/TextHeaderFull";
 import Image from "next/image";
 
 interface StickyTextImageSectionProps {
-  tagline: string;
+  tagline?: string;
   heading: React.ReactNode;
   button?: React.ReactNode;
-  image: string;
+  image?: string;
+  video?: string;
+  videoClassName?: string;
   imageAlt?: string;
+  minHeight?: string;
 }
 
 export default function StickyTextImageSection({
@@ -14,19 +17,37 @@ export default function StickyTextImageSection({
   heading,
   button,
   image,
+  video,
+  videoClassName,
   imageAlt = "",
+  minHeight = "min-h-[100vh]",
 }: StickyTextImageSectionProps) {
   return (
-    <section className="relative w-full min-h-[100vh] flex items-stretch overflow-visible">
-      {/* Background Image */}
-      <div className="absolute inset-0 w-full h-full -z-10">
-        <Image
-          src={image}
-          alt={imageAlt}
-          fill
-          className="object-cover object-center bg-white"
-          priority
-        />
+    <section
+      className={`relative w-full ${minHeight ? minHeight : "min-h-[100vh]"} flex items-stretch overflow-visible ${video ? videoClassName : ""}`}
+    >
+      {/* Background Image or Video */}
+      <div
+        className={`absolute inset-0 w-full h-full ${video ? "flex items-center justify-center" : ""}`}
+      >
+        {video ? (
+          <video
+            className={`w-full h-auto object-contain ${videoClassName || ""}`}
+            src={video}
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+        ) : (
+          <Image
+            src={image!}
+            alt={imageAlt}
+            fill
+            className="object-cover object-center bg-white"
+            priority
+          />
+        )}
       </div>
       {/* Sticky Text */}
       <div className="w-full max-w-xl">

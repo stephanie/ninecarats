@@ -28,7 +28,7 @@ const slides: Slide[] = [
     link: "/search/rings",
     tagline: "Wedding",
     heading: "The Evermore Trilogy Ring",
-    buttonText: "Explore all",
+    buttonText: "Shop our collection",
     buttonLink: "/search/rings",
   },
   {
@@ -38,7 +38,7 @@ const slides: Slide[] = [
     link: "/search/necklaces",
     tagline: "Jewelry",
     heading: "The Venus Solitaire Necklace",
-    buttonText: "Explore all",
+    buttonText: "Shop our collection",
     buttonLink: "/search/necklaces",
   },
 ];

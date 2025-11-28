@@ -162,11 +162,14 @@ export default async function ProductPage(props: {
             {product.images.slice(1, 3).map((image, idx) => (
               <div
                 key={idx}
-                className="relative w-full md:min-h-[90vh] min-h-[70vh] flex items-stretch overflow-visible"
+                className="relative w-full md:min-h-[90vh] min-h-[50vh] flex items-stretch overflow-visible"
               >
                 <Image
                   src={image.url}
                   alt={image.altText}
+                  style={{
+                    objectFit: "contain",
+                  }}
                   fill
                   className="object-cover object-center"
                   priority={idx === 0}

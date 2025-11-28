@@ -7,14 +7,14 @@ export default function FullWidthTextSection() {
       {/* Background Video */}
       <video
         className="absolute inset-0 w-full h-full object-cover z-0"
-        src="/videos/sky.mov"
+        src="/videos/clouds.mov"
         autoPlay
         loop
         muted
         playsInline
       />
       {/* Optional overlay for readability */}
-      <div className="absolute inset-0 z-0 bg-primary-dark opacity-20" />
+      <div className="absolute inset-0 z-0" />
       <div className="relative z-10">
         <TextHeaderFull
           className="text-white"

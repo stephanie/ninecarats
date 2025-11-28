@@ -50,6 +50,24 @@ const cards2 = [
   },
 ];
 
+const cards3 = [
+  {
+    image: "/images/emerald-tennis-bracelet-cropped.avif",
+    imageClassName: "object-cover object-bottom",
+    tagline: "Day Jewelry",
+    heading: "The Emerald Tennis Bracelet",
+    buttonText: "Shop our collection",
+    link: "/search/bracelets",
+  },
+  {
+    image: "/images/emerald-eternity-band.avif",
+    tagline: "Wedding",
+    heading: "The Emerald Eternity Band",
+    buttonText: "Shop our collection",
+    link: "/search/rings",
+  },
+];
+
 export default function HomePage() {
   return (
     <>
@@ -57,6 +75,7 @@ export default function HomePage() {
         <FullScreenSlider />
       </div>
       <ShopifyProductSlider collectionHandle="rings" tagline="Wedding" />
+      <FullWidthTextSection />
       <ShopifyProductSlider collectionHandle="bracelets" tagline="Jewelry" />
       {/* <div
         className="relative z-10"
@@ -68,9 +87,9 @@ export default function HomePage() {
           rightImageAlt="Model wearing jewelry"
         />
       </div> */}
-      <FullWidthTextSection />
+      <MultiImageSection cards={cards3} columns={2} />
       <ShopifyProductSlider collectionHandle="earrings" tagline="Jewelry" />
-      <StickyTextImageSection
+      {/* <StickyTextImageSection
         tagline="Wedding"
         heading="Our Engagement Rings"
         image="/images/engagement-ring-model.avif"
@@ -82,9 +101,23 @@ export default function HomePage() {
             Shop our collection
           </ButtonLink>
         }
+      /> */}
+      <StickyTextImageSection
+        tagline="About us"
+        heading="Our Diamonds"
+        video="/videos/diamond-rotating.mp4"
+        videoClassName="bg-black max-h-[40vh]"
+        minHeight="min-h-[75vh]"
+        button={
+          <ButtonLink
+            href="/our-diamonds"
+            className="text-white border-white hover:border-gray-200"
+          >
+            Why we only use the highest grade diamonds
+          </ButtonLink>
+        }
       />
-      <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" />
-      <MultiImageSection cards={cards2} columns={2} />
+      {/* <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" /> */}
     </>
   );
 }
