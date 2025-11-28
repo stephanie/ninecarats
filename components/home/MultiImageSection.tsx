@@ -23,14 +23,14 @@ export default function MultiImageSection({
   columns = 3,
 }: MultiImageSectionProps) {
   return (
-    <section className="w-full bg-white">
+    <section className="w-full">
       <div
         className={`grid grid-cols-1 md:grid-cols-${columns} w-full mx-auto`}
       >
         {cards.map((card, idx) => (
           <div
             key={idx}
-            className={`relative w-full md:min-h-[90vh] min-h-[70vh] flex items-stretch overflow-visible ${
+            className={`relative w-full md:min-h-[90vh] min-h-[70vh] flex items-stretch overflow-visible bg-black ${
               card.video ? card.videoClassName : ""
             }`}
           >
@@ -54,9 +54,9 @@ export default function MultiImageSection({
             )}
             {/* Sticky Text */}
             <div className="w-full max-w-xl">
-              <div className="sticky bottom-8 top-12 pt-6 pb-6 px-2 md:p-8 md:top-16">
+              <div className="sticky bottom-8 top-18 p-2 md:p-8 mt-4">
                 <TextHeaderFull
-                  className="text-white"
+                  className="text-white pb-8"
                   align="left"
                   tagline={card.tagline}
                   button={

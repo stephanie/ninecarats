@@ -51,7 +51,7 @@ export default function StickyTextImageSection({
       </div>
       {/* Sticky Text */}
       <div className="w-full max-w-xl">
-        <div className="sticky top-8 md:top-16 pt-10 md:pt-16 z-10 pl-6 md:pl-12 pb-12 md:pb-16">
+        <div className="sticky top-12 pt-10 md:pt-16 z-10 pl-2 md:pl-8 pb-12 md:pb-16">
           <TextHeaderFull
             tagline={tagline}
             button={button}

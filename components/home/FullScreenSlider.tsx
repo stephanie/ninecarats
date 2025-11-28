@@ -158,7 +158,7 @@ export default function FullScreenSlider() {
 
   return (
     <div
-      className="relative w-full"
+      className="relative w-full bg-black"
       style={{
         height: viewportHeight ? `calc(${viewportHeight}px)` : "calc(100vh)",
       }}
