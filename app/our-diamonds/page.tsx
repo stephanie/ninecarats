@@ -30,10 +30,10 @@ export default function OurDiamondsPage() {
         </div>
       </section>
       {/* OurDiamonds Section */}
-      <section className="w-full bg-white flex flex-col lg:flex-row items-center justify-center">
+      <section className="w-full bg-white flex flex-col lg:flex-row items-center justify-center pt-0 lg:pt-48 pb-8 lg:pb-48">
         {/* Left text */}
         <div className="flex-1 flex items-center w-full mx-auto">
-          <div className="relative max-w-3xl w-full mx-auto">
+          <div className="relative max-w-3xl w-full mx-auto bg-black">
             <video
               className="w-full h-auto object-contain z-0"
               src="/videos/craftsman-ring.mp4"
@@ -44,10 +44,7 @@ export default function OurDiamondsPage() {
             />
           </div>
         </div>
-        <div className="flex-1 w-full mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-header mb-8">
-            Our diamonds
-          </h2>
+        <div className="flex-1 w-full mx-auto p-4 md:p-8 mt-8 lg:mt-0">
           <p className="mb-6 text-base md:text-md text-black">
             At Nine Carats, we are committed to delivering the highest quality
             diamonds that meet the most stringent standards of excellence. We
