@@ -56,6 +56,7 @@ export default function HomePage() {
       <div className="relative w-full">
         <FullScreenSlider />
       </div>
+      <ShopifyProductSlider collectionHandle="rings" tagline="Wedding" />
       <ShopifyProductSlider collectionHandle="bracelets" tagline="Jewelry" />
       {/* <div
         className="relative z-10"
@@ -71,7 +72,7 @@ export default function HomePage() {
       <ShopifyProductSlider collectionHandle="earrings" tagline="Jewelry" />
       <StickyTextImageSection
         tagline="Wedding"
-        heading="Rings"
+        heading="Our Engagement Rings"
         image="/images/engagement-ring-model.avif"
         button={
           <ButtonLink
