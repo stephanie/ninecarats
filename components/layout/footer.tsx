@@ -5,6 +5,7 @@ import MobileFooter from "./MobileFooter";
 const navLinks = [
   { title: "Contact us", href: "/contact" },
   { title: "About our maison", href: "/about" },
+  { title: "Our diamonds", href: "/our-diamonds" },
   { title: "Shop our collection", href: "/search/all-products" },
 ];
 
@@ -17,7 +18,7 @@ const legalLinks = [{ title: "Privacy policy", href: "/privacy-policy" }];
 
 export default function Footer() {
   return (
-    <footer className="w-full pt-24 text-neutral-800 bg-primary mt-4 text-white">
+    <footer className="w-full pt-24 text-neutral-800 bg-primary text-white">
       <NewsletterSignup />
       <div className="md:hidden">
         <MobileFooter />

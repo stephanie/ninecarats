@@ -42,10 +42,11 @@ const cards2 = [
     link: "https://api.whatsapp.com/send/?phone=85298611934&text&type=phone_number&app_absent=0",
   },
   {
-    image: "/images/diamonds.avif",
+    video: "/videos/diamond-rotating.mp4",
     heading: "Our diamonds",
+    videoClassName: "bg-black",
     buttonText: "Why we only use the highest grade diamonds",
-    link: "#",
+    link: "/our-diamonds",
   },
 ];
 

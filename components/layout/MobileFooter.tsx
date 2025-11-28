@@ -24,7 +24,10 @@ const menu = [
   },
   {
     title: "About Nine Carats",
-    items: [{ title: "Our Story", href: "/about" }],
+    items: [
+      { title: "Our Story", href: "/about" },
+      { title: "Our Diamonds", href: "/our-diamonds" },
+    ],
   },
   {
     title: "Legal & Privacy",

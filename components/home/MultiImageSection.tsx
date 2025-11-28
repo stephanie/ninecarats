@@ -3,7 +3,9 @@ import TextHeaderFull from "components/text/TextHeaderFull";
 import Image from "next/image";
 
 interface Card {
-  image: string;
+  image?: string;
+  video?: string;
+  videoClassName?: string;
   heading: string;
   buttonText: string;
   link: string;
@@ -21,20 +23,33 @@ export default function MultiImageSection({
   return (
     <section className="w-full bg-white">
       <div
-        className={`grid grid-cols-1 md:grid-cols-${columns} gap-4 w-full mx-auto`}
+        className={`grid grid-cols-1 md:grid-cols-${columns} w-full mx-auto`}
       >
         {cards.map((card, idx) => (
           <div
             key={idx}
-            className="relative w-full md:min-h-[90vh] min-h-[70vh] flex items-stretch overflow-visible"
+            className={`relative w-full md:min-h-[90vh] min-h-[70vh] flex items-stretch overflow-visible ${
+              card.video ? card.videoClassName : ""
+            }`}
           >
-            <Image
-              src={card.image}
-              alt={card.heading}
-              fill
-              className="object-cover object-center"
-              priority={idx === 0}
-            />
+            {card.video ? (
+              <video
+                className="absolute inset-0 w-full h-full object-contain z-0"
+                src={card.video}
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            ) : (
+              <Image
+                src={card.image!}
+                alt={card.heading}
+                fill
+                className="object-cover object-center"
+                priority={idx === 0}
+              />
+            )}
             {/* Sticky Text */}
             <div className="w-full max-w-xl">
               <div className="sticky bottom-8 top-12 pt-6 pb-6 px-2 md:p-8 md:top-16">

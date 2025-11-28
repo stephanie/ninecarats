@@ -32,7 +32,9 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const [textColor, setTextColor] = useState("text-white");
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const pageTextColor =
-    pathname === "/" || pathname.includes("/about")
+    pathname === "/" ||
+    pathname.includes("/about") ||
+    pathname.includes("/our-diamonds")
       ? "text-white"
       : "text-black";
 
