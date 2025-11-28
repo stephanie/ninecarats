@@ -30,9 +30,9 @@ export default function OurDiamondsPage() {
         </div>
       </section>
       {/* OurDiamonds Section */}
-      <section className="w-full bg-white flex flex-col lg:flex-row items-center justify-center pt-0 lg:pt-48 pb-8 lg:pb-48">
+      <section className="w-full bg-white flex flex-col lg:flex-row items-center pt-0 lg:pt-48 pb-16 lg:pb-48 gap-8 px-0 lg:px-12">
         {/* Left text */}
-        <div className="flex-1 flex items-center w-full mx-auto">
+        <div className="flex-1 flex w-full mx-auto">
           <div className="relative max-w-3xl w-full mx-auto bg-black">
             <video
               className="w-full h-auto object-contain z-0"
@@ -44,7 +44,7 @@ export default function OurDiamondsPage() {
             />
           </div>
         </div>
-        <div className="flex-1 w-full mx-auto p-4 md:p-8 mt-8 lg:mt-0">
+        <div className="flex-1 w-full mx-auto mt-8 lg:mt-0 px-4 md:px-12 lg:px-0">
           <p className="mb-6 text-base md:text-md text-black">
             At Nine Carats, we are committed to delivering the highest quality
             diamonds that meet the most stringent standards of excellence. We
