@@ -36,7 +36,7 @@ export default function OurDiamondsPage() {
           <div className="relative max-w-3xl w-full mx-auto bg-black">
             <video
               className="w-full h-auto object-contain z-0"
-              src="/videos/craftsman-ring.mp4"
+              src="/videos/diamond-polishing-short.mp4"
               autoPlay
               loop
               muted

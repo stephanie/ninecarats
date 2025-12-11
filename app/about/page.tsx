@@ -59,11 +59,11 @@ export default function AboutPage() {
           </p>
           <p className="mb-6 text-base md:text-md text-black">
             Fully committed to eco-conscious production—we are meticulous in
-            selecting each and every one of gemstones and metals, using only the
-            most exceptional lab-grown, colorless diamonds, and crafting each of
-            your pieces individually to combat fast fashion. We are proud to be
-            a part of the growing movement towards more sustainable and ethical
-            practices in the jewelry industry.
+            selecting each and every one of our gemstones and metals, using only
+            the most exceptional lab-grown, colorless diamonds, and crafting
+            each of your pieces individually to combat fast fashion. We are
+            proud to be a part of the growing movement towards more sustainable
+            and ethical practices in the jewelry industry.
           </p>
           <p className="mb-6 text-base md:text-md text-black">
             Why nine? In numerology, nine is often associated with universal
