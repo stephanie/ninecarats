@@ -53,14 +53,14 @@ const cards3 = [
     image: "/images/tennis-bracelet-branch2.png",
     imageClassName: "object-cover object-center",
     tagline: "Day Jewelry",
-    heading: "The Emerald Tennis Bracelet",
-    buttonText: "Shop our collection",
-    link: "/search/bracelets",
+    heading: "The Signature Tennis Bracelet",
+    buttonText: "Shop now",
+    link: "/product/the-signature-tennis-bracelet",
   },
   {
     image: "/images/model-emerald-jewelry.png",
     tagline: "Wedding",
-    heading: "The Emerald Eternity Band",
+    heading: "Engagement Rings",
     buttonText: "Shop our collection",
     link: "/search/rings",
   },
@@ -72,9 +72,9 @@ export default function HomePage() {
       <div className="relative w-full">
         <FullScreenSlider />
       </div>
-      <ShopifyProductSlider collectionHandle="rings" tagline="Wedding" />
-      <FullWidthTextSection />
       <ShopifyProductSlider collectionHandle="bracelets" tagline="Jewelry" />
+      <FullWidthTextSection />
+      <ShopifyProductSlider collectionHandle="rings" tagline="Wedding" />
       {/* <div
         className="relative z-10"
         style={{ transform: "translateY(-100px)" }}
@@ -115,7 +115,7 @@ export default function HomePage() {
           </ButtonLink>
         }
       /> */}
-      {/* <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" /> */}
+      <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" />
     </>
   );
 }

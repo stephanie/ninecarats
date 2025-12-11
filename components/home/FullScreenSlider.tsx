@@ -24,22 +24,22 @@ const slides: Slide[] = [
   {
     type: "image",
     src: "/images/slider/jewelry-branch-cover-off-center2.png",
-    alt: "Necklaces",
-    link: "/search/necklaces",
+    alt: "Two emerald eternity bands and an emerald tennis bracelet on a branch",
+    link: "/search/bracelets",
     tagline: "Jewelry",
-    heading: "The Venus Solitaire Necklace",
-    buttonText: "Shop our collection",
-    buttonLink: "/search/necklaces",
+    heading: "The Emerald Collection",
+    buttonText: "Shop our bracelets",
+    buttonLink: "/search/bracelets",
   },
   {
     type: "image",
     src: "/images/slider/slider2.png",
-    alt: "Necklaces",
-    link: "/search/necklaces",
+    alt: "A woman wearing the signature stud earrings",
+    link: "/product/the-signature-stud-earrings",
     tagline: "Jewelry",
-    heading: "The Venus Solitaire Necklace",
-    buttonText: "Shop our collection",
-    buttonLink: "/search/necklaces",
+    heading: "The Signature Stud Earrings",
+    buttonText: "Shop now",
+    buttonLink: "/product/the-signature-stud-earrings",
   },
   {
     type: "image",
@@ -47,50 +47,10 @@ const slides: Slide[] = [
     alt: "Rings",
     link: "/search/rings",
     tagline: "Wedding",
-    heading: "The Evermore Trilogy Ring",
+    heading: "Engagement Rings",
     buttonText: "Shop our collection",
     buttonLink: "/search/rings",
   },
-  // {
-  //   type: "image",
-  //   src: "/images/slider/slider3.png",
-  //   alt: "Necklaces",
-  //   link: "/search/necklaces",
-  //   tagline: "Jewelry",
-  //   heading: "The Venus Solitaire Necklace",
-  //   buttonText: "Shop our collection",
-  //   buttonLink: "/search/necklaces",
-  // },
-  // {
-  //   type: "image",
-  //   src: "/images/slider/slider4.png",
-  //   alt: "Necklaces",
-  //   link: "/search/necklaces",
-  //   tagline: "Jewelry",
-  //   heading: "The Venus Solitaire Necklace",
-  //   buttonText: "Shop our collection",
-  //   buttonLink: "/search/necklaces",
-  // },
-  // {
-  //   type: "image",
-  //   src: "/images/slider/ring-background-green2.png",
-  //   alt: "Necklaces",
-  //   link: "/search/necklaces",
-  //   tagline: "Jewelry",
-  //   heading: "The Venus Solitaire Necklace",
-  //   buttonText: "Shop our collection",
-  //   buttonLink: "/search/necklaces",
-  // },
-  // {
-  //   type: "image",
-  //   src: "/images/slider/eternity-ring-cover.png",
-  //   alt: "Necklaces",
-  //   link: "/search/necklaces",
-  //   tagline: "Jewelry",
-  //   heading: "The Venus Solitaire Necklace",
-  //   buttonText: "Shop our collection",
-  //   buttonLink: "/search/necklaces",
-  // },
 ];
 
 const LeftCaret = () => (
@@ -280,7 +240,7 @@ export default function FullScreenSlider() {
               button={
                 <ButtonLink
                   href={slides[currentSlide]!.buttonLink || "#"}
-                  className="text-white hover:border-white"
+                  className="text-white border-white hover:border-neutral-200"
                 >
                   {slides[currentSlide]!.buttonText || ""}
                 </ButtonLink>
