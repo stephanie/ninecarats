@@ -23,7 +23,7 @@ interface Slide {
 const slides: Slide[] = [
   {
     type: "image",
-    src: "/images/slider/branch-rings.png",
+    src: "/images/slider/jewelry-branch-cover-off-center2.png",
     alt: "Necklaces",
     link: "/search/necklaces",
     tagline: "Jewelry",
