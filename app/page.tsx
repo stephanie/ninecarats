@@ -2,8 +2,6 @@ import FullScreenSlider from "components/home/FullScreenSlider";
 import FullWidthTextSection from "components/home/FullWidthTextSection";
 import MultiImageSection from "components/home/MultiImageSection";
 import ShopifyProductSlider from "components/home/ShopifyProductSlider";
-import StickyTextImageSection from "components/home/StickyTextImageSection";
-import ButtonLink from "components/text/ButtonLink";
 
 export const metadata = {
   description:
@@ -52,15 +50,15 @@ const cards2 = [
 
 const cards3 = [
   {
-    image: "/images/emerald-tennis-bracelet-cropped.avif",
-    imageClassName: "object-cover object-bottom",
+    image: "/images/tennis-bracelet-branch2.png",
+    imageClassName: "object-cover object-center",
     tagline: "Day Jewelry",
     heading: "The Emerald Tennis Bracelet",
     buttonText: "Shop our collection",
     link: "/search/bracelets",
   },
   {
-    image: "/images/emerald-eternity-band.avif",
+    image: "/images/model-emerald-jewelry.png",
     tagline: "Wedding",
     heading: "The Emerald Eternity Band",
     buttonText: "Shop our collection",
@@ -102,7 +100,7 @@ export default function HomePage() {
           </ButtonLink>
         }
       /> */}
-      <StickyTextImageSection
+      {/* <StickyTextImageSection
         tagline="About us"
         heading="Our Diamonds"
         video="/videos/diamond-rotating.mp4"
@@ -116,7 +114,7 @@ export default function HomePage() {
             Why we only use the highest grade diamonds
           </ButtonLink>
         }
-      />
+      /> */}
       {/* <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" /> */}
     </>
   );

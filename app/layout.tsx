@@ -7,8 +7,9 @@ import { SignInModalProvider } from "components/layout/SignInModalProvider";
 import PageLoader from "components/PageLoader";
 import { getCart } from "lib/shopify";
 import { baseUrl } from "lib/utils";
+import type { Metadata } from "next";
 import { Bellefair, Jost } from "next/font/google";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import "./globals.css";
 
 const { SITE_NAME } = process.env;
@@ -28,7 +29,7 @@ const bellefair = Bellefair({
   variable: "--font-bellefair",
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
     default: "Nine Carats | Sustainable Luxury Diamond Jewelry",
@@ -49,9 +50,9 @@ export const metadata = {
       "Nine Carats is pioneering sustainable diamond jewelry with exceptional craftsmanship, bringing you made-to-order heirlooms that will last a lifetime.",
     images: [
       {
-        url: "/images/nine-carats-social-image2-notext.png",
-        width: 1200,
-        height: 630,
+        url: "/images/nine-carats-social-image1.png",
+        width: 1125,
+        height: 600,
         alt: SITE_NAME!,
       },
     ],
@@ -64,7 +65,7 @@ export const metadata = {
     title: "Nine Carats | Sustainable Luxury Diamond Jewelry",
     description:
       "Nine Carats is pioneering sustainable diamond jewelry with exceptional craftsmanship, bringing you made-to-order heirlooms that will last a lifetime.",
-    images: ["/images/nine-carats-social-image2-notext.png"],
+    images: ["/images/nine-carats-social-image1.png"],
   },
 };
 
@@ -78,7 +79,7 @@ export default async function RootLayout({
   const cart = getCart();
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${jost.variable} ${bellefair.variable}`}>
       <body
         className={`${jost.variable} ${bellefair.variable} font-body bg-white text-black loading`}
       >
@@ -89,15 +90,19 @@ export default async function RootLayout({
           }}
         />
         <PageLoader />
-        <CartProvider cartPromise={cart}>
-          <CustomerProvider>
-            <SignInModalProvider>
-              <Navbar />
-              <main>{children}</main>
-              <HelpSystem />
-            </SignInModalProvider>
-          </CustomerProvider>
-        </CartProvider>
+        <Suspense fallback={null}>
+          <CartProvider cartPromise={cart}>
+            <Suspense fallback={null}>
+              <CustomerProvider>
+                <SignInModalProvider>
+                  <Navbar />
+                  <main>{children}</main>
+                  <HelpSystem />
+                </SignInModalProvider>
+              </CustomerProvider>
+            </Suspense>
+          </CartProvider>
+        </Suspense>
         <Footer />
       </body>
     </html>

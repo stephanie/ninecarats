@@ -1,7 +1,5 @@
 "use client";
-import { useCart } from "components/cart/cart-context";
 import CartSidebar, { cartManager } from "components/cart/cart-sidebar";
-import OpenCart from "components/cart/open-cart";
 import { useCustomer } from "components/customer/CustomerContext";
 import { useIsMobile } from "hooks/useIsMobile";
 import { Menu } from "lib/shopify/types";
@@ -13,6 +11,7 @@ import ContactSidebar from "./ContactSidebar";
 import CustomerLoginSidebar from "./CustomerLoginSidebar";
 import MobileMenu from "./mobile-menu";
 import Search, { SearchSkeleton } from "./search";
+import CartIcon from "./CartIcon";
 
 export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const [scrolled, setScrolled] = useState(false);
@@ -24,7 +23,6 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const isMobile = useIsMobile();
   const pathname = usePathname();
   const { customer, logout } = useCustomer();
-  const { cart } = useCart();
 
   const startWithLargeNav = pathname === "/" || pathname.includes("/search");
 
@@ -215,32 +213,34 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                     ></path>
                   </svg>
                 </button>
-                <button
-                  aria-label="Open cart"
-                  onClick={() => cartManager.setOpen(true)}
-                  className="flex p-2 -m-2"
-                  style={{
-                    touchAction: "manipulation",
-                    userSelect: "none",
-                    WebkitTapHighlightColor: "transparent",
-                    minWidth: "44px",
-                    minHeight: "44px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <OpenCart
-                    quantity={cart?.totalQuantity}
-                    textColor={getTextColor(scrolled)}
-                  />
-                </button>
+                <Suspense fallback={
+                  <button
+                    aria-label="Open cart"
+                    className="flex p-2 -m-2"
+                    style={{
+                      touchAction: "manipulation",
+                      userSelect: "none",
+                      WebkitTapHighlightColor: "transparent",
+                      minWidth: "44px",
+                      minHeight: "44px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div className={`h-6 w-6 ${getTextColor(scrolled)}`} />
+                  </button>
+                }>
+                  <CartIcon textColor={getTextColor(scrolled)} />
+                </Suspense>
               </div>
               {/* CartSidebar - always visible, positioned responsively */}
-              <CartSidebar
-                key="main-cart-sidebar"
-                textColor={scrolled || forceSmall ? "text-black" : textColor}
-              />
+              <Suspense fallback={null}>
+                <CartSidebar
+                  key="main-cart-sidebar"
+                  textColor={scrolled || forceSmall ? "text-black" : textColor}
+                />
+              </Suspense>
             </div>
             <div className="flex justify-start sm:w-1/3 pl-4 sm:p-4 items-center sm:items-start">
               <button
@@ -406,16 +406,13 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 </svg>
               </button>
               {/* Desktop Cart Button */}
-              <button
-                aria-label="Open cart"
-                onClick={() => cartManager.setOpen(true)}
-                className="flex"
-              >
-                <OpenCart
-                  quantity={cart?.totalQuantity}
-                  textColor={getTextColor(scrolled)}
-                />
-              </button>
+              <Suspense fallback={
+                <button aria-label="Open cart" className="flex">
+                  <div className={`h-6 w-6 ${getTextColor(scrolled)}`} />
+                </button>
+              }>
+                <CartIcon textColor={getTextColor(scrolled)} />
+              </Suspense>
             </div>
           </div>
         </div>

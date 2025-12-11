@@ -102,14 +102,16 @@ export default async function ProductPage(props: {
   };
 
   return (
-    <ProductProvider>
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(productJsonLd),
         }}
       />
-      <div className="w-full flex flex-col gap-4">
+      <Suspense fallback={<div className="w-full flex flex-col gap-4" />}>
+        <ProductProvider>
+          <div className="w-full flex flex-col gap-4">
         {/* Full width gallery section */}
         <div className="w-full border-b border-neutral-200 pt-[var(--navbar-height-mobile)] sm:pt-[var(--navbar-height-desktop)]">
           <Suspense fallback={<div className="relative w-full" />}>
@@ -203,7 +205,9 @@ export default async function ProductPage(props: {
           </nav>
         </div>
       </div>
-    </ProductProvider>
+        </ProductProvider>
+      </Suspense>
+    </>
   );
 }
 

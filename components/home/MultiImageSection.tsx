@@ -44,13 +44,16 @@ export default function MultiImageSection({
                 playsInline
               />
             ) : (
-              <Image
-                src={card.image!}
-                alt={card.heading}
-                fill
-                className={`object-cover object-center ${card.imageClassName}`}
-                priority={idx === 0}
-              />
+              <>
+                <Image
+                  src={card.image!}
+                  alt={card.heading}
+                  fill
+                  className={`object-cover object-center ${card.imageClassName}`}
+                  priority={idx === 0}
+                />
+                <div className="absolute inset-0 bg-black opacity-10 pointer-events-none" />
+              </>
             )}
             {/* Sticky Text */}
             <div className="w-full max-w-xl">

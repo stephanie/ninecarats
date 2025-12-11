@@ -231,6 +231,7 @@ export default function FullScreenSlider() {
                 sizes="100vw"
                 priority={index === 0}
               />
+              <div className="absolute inset-0 bg-black opacity-10 pointer-events-none" />
             </Link>
           ) : (
             <video
@@ -312,7 +313,7 @@ export default function FullScreenSlider() {
         {/* Progress bar */}
         <div className="h-2 w-full bg-white">
           <div
-            className="h-full bg-primary-dark transition-all duration-50 ease-linear"
+            className="h-full bg-primary transition-all duration-50 ease-linear"
             style={{ width: `${progress}%` }}
           />
         </div>
