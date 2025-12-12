@@ -52,7 +52,7 @@ export default function MultiImageSection({
                   className={`object-cover object-center ${card.imageClassName}`}
                   priority={idx === 0}
                 />
-                <div className="absolute inset-0 bg-black opacity-10 pointer-events-none" />
+                <div className="absolute inset-0 bg-black opacity-5 pointer-events-none" />
               </>
             )}
             {/* Sticky Text */}

@@ -66,14 +66,19 @@ export default function AboutPage() {
             and ethical practices in the jewelry industry.
           </p>
           <p className="mb-6 text-base md:text-md text-black">
-            Why nine? In numerology, nine is often associated with universal
-            love and completion. This meaning is deepened by our roots: in
-            Chinese culture, the number nine (九, jiǔ) sounds like the word
-            "everlasting", making it the number most associated with eternity.
-            For us, this concept of enduring love and permanence perfectly
-            captures our diamond jewelry. Our name embodies our promise to
-            create timeless jewelry of the highest quality, designed to last you
-            a lifetime.
+            Why nine? In Chinese culture, the number nine (九, jiǔ) shares its
+            sound with 長久—meaning "long-lasting" or "enduring." It's a number
+            that speaks to longevity, to things built to outlast fleeting
+            trends. Nine is also the highest single digit—there is no ten. It's
+            the score you aspire to, the grade that means exceptional. This is
+            the standard we set for ourselves: Jewelry of the highest caliber,
+            crafted to accompany you through a lifetime and passed down to
+            generations after. Imagine slipping on a brilliant piece of Nine
+            Carats jewelry to celebrate a life milestone, mark a precious
+            moment, or simply reward yourself after months of hard work.
+          </p>
+          <p className="mb-6 text-base md:text-md text-black">
+            Nine Carats. With you through all of life's moments.
           </p>
         </div>
         {/* Right photo */}

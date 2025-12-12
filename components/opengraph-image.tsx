@@ -10,7 +10,7 @@ export default async function OpengraphImage(props?: Props): Promise<Response> {
     process.cwd(),
     "public",
     "images",
-    "nine-carats-social-image1.png"
+    "nine-carats-social-share-2.png"
   );
   const imageBuffer = await readFile(imagePath);
 

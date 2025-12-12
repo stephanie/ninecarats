@@ -3,6 +3,7 @@
 import SliderDots from "components/slider/SliderDots";
 import ButtonLink from "components/text/ButtonLink";
 import TextHeaderFull from "components/text/TextHeaderFull";
+import { useIsMobile } from "hooks/useIsMobile";
 import { useViewportHeight } from "hooks/useViewportHeight";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +13,7 @@ import { useSwipeable } from "react-swipeable";
 interface Slide {
   type: "image" | "video";
   src: string;
+  mobileSrc?: string;
   alt?: string;
   link?: string;
   heading?: string;
@@ -23,7 +25,8 @@ interface Slide {
 const slides: Slide[] = [
   {
     type: "image",
-    src: "/images/slider/jewelry-branch-cover-off-center2.png",
+    src: "/images/slider/branch-rings.png",
+    mobileSrc: "/images/slider/mobile/branch-rings-mobile.png",
     alt: "Two emerald eternity bands and an emerald tennis bracelet on a branch",
     link: "/search/bracelets",
     tagline: "Jewelry",
@@ -34,6 +37,7 @@ const slides: Slide[] = [
   {
     type: "image",
     src: "/images/slider/slider2.png",
+    mobileSrc: "/images/slider/mobile/slider2-mobile.png",
     alt: "A woman wearing the signature stud earrings",
     link: "/product/the-signature-stud-earrings",
     tagline: "Jewelry",
@@ -44,6 +48,7 @@ const slides: Slide[] = [
   {
     type: "image",
     src: "/images/slider/eternity-ring-cover-dark.png",
+    mobileSrc: "/images/slider/mobile/eternity-ring-cover-dark-mobile.png",
     alt: "Rings",
     link: "/search/rings",
     tagline: "Wedding",
@@ -89,6 +94,7 @@ export default function FullScreenSlider() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [headingVisible, setHeadingVisible] = useState(true);
   const viewportHeight = useViewportHeight();
+  const isMobile = useIsMobile();
 
   const nextSlide = useCallback(() => {
     if (isTransitioning) return;
@@ -184,14 +190,14 @@ export default function FullScreenSlider() {
           {slide.type === "image" ? (
             <Link href={slide.link || "#"}>
               <Image
-                src={slide.src}
+                src={isMobile && slide.mobileSrc ? slide.mobileSrc : slide.src}
                 alt={slide.alt || ""}
                 fill
                 className="object-cover"
                 sizes="100vw"
                 priority={index === 0}
               />
-              <div className="absolute inset-0 bg-black opacity-10 pointer-events-none" />
+              <div className="absolute inset-0 bg-black opacity-5 pointer-events-none" />
             </Link>
           ) : (
             <video

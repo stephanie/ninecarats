@@ -12,6 +12,7 @@ import {
   getProductMedia,
   getProductRecommendations,
 } from "lib/shopify";
+import { baseUrl } from "lib/utils";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -42,6 +43,7 @@ export async function generateMetadata(props: {
     },
     openGraph: url
       ? {
+          url: `${baseUrl}/product/${params.handle}`,
           images: [
             {
               url,
@@ -51,7 +53,9 @@ export async function generateMetadata(props: {
             },
           ],
         }
-      : null,
+      : {
+          url: `${baseUrl}/product/${params.handle}`,
+        },
   };
 }
 
