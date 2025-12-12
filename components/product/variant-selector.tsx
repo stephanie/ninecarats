@@ -3,8 +3,8 @@
 import clsx from "clsx";
 import { useProduct, useUpdateURL } from "components/product/product-context";
 import { ProductOption, ProductVariant } from "lib/shopify/types";
-import { startTransition, useState } from "react";
-import { SizeGuideSidebar } from "./SizeGuideSidebar";
+import { startTransition } from "react";
+import { useSizeGuide } from "./useSizeGuide";
 
 type Combination = {
   id: string;
@@ -21,7 +21,8 @@ export function VariantSelector({
 }) {
   const { state, updateOption } = useProduct();
   const updateURL = useUpdateURL();
-  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
+  const { showSizeGuide, openSizeGuide, SizeGuideComponent } =
+    useSizeGuide(options);
   const hasNoOptionsOrJustOneOption =
     !options.length ||
     (options.length === 1 && options[0]?.values.length === 1);
@@ -29,20 +30,6 @@ export function VariantSelector({
   if (hasNoOptionsOrJustOneOption) {
     return null;
   }
-
-  // Check for supported size guide types
-  const hasBraceletSizeGuide = options.some(
-    (option) => option.name.toLowerCase() === "bracelet size"
-  );
-  const hasRingSizeGuide = options.some(
-    (option) => option.name.toLowerCase() === "ring size"
-  );
-  const showSizeGuide = hasBraceletSizeGuide || hasRingSizeGuide;
-  const sizeType = hasRingSizeGuide
-    ? "ring"
-    : hasBraceletSizeGuide
-      ? "bracelet"
-      : undefined;
 
   const combinations: Combination[] = variants.map((variant) => ({
     id: variant.id,
@@ -172,7 +159,7 @@ export function VariantSelector({
               {isSizeGuideOption && (
                 <button
                   type="button"
-                  onClick={() => setIsSizeGuideOpen(true)}
+                  onClick={openSizeGuide}
                   className="text-sm underline text-neutral-600 hover:text-neutral-900"
                 >
                   Size guide
@@ -182,14 +169,7 @@ export function VariantSelector({
           </form>
         );
       })}
-      {showSizeGuide && (
-        <SizeGuideSidebar
-          isOpen={isSizeGuideOpen}
-          onClose={() => setIsSizeGuideOpen(false)}
-          selectedSize={state.size as string}
-          sizeType={sizeType}
-        />
-      )}
+      {SizeGuideComponent}
     </>
   );
 }

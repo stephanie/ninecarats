@@ -181,6 +181,7 @@ export function SizeGuideSidebar({
             <table className="w-full">
               <thead>
                 <tr className="border-b border-neutral-200">
+                  <th className="py-3"></th>
                   <th className="text-left py-3 text-xs font-normal text-neutral-500">
                     SIZE
                   </th>
@@ -190,7 +191,6 @@ export function SizeGuideSidebar({
                   <th className="text-left py-3 text-xs font-normal text-neutral-500">
                     WRIST DIAMETER (CM)
                   </th>
-                  <th className="py-3"></th>
                 </tr>
               </thead>
               <tbody>
@@ -201,10 +201,7 @@ export function SizeGuideSidebar({
                       key={size.braceletSize}
                       className="border-b border-neutral-200"
                     >
-                      <td className="py-3 text-sm">{size.braceletSize}</td>
-                      <td className="py-3 text-sm">{size.wristDiameterIn}</td>
-                      <td className="py-3 text-sm">{size.wristDiameterCm}</td>
-                      <td className="py-3">
+                      <td className="py-3 pr-6">
                         <div className="flex justify-center">
                           {isSelected ? (
                             <svg
@@ -225,6 +222,9 @@ export function SizeGuideSidebar({
                           )}
                         </div>
                       </td>
+                      <td className="py-3 text-sm">{size.braceletSize}</td>
+                      <td className="py-3 text-sm">{size.wristDiameterIn}</td>
+                      <td className="py-3 text-sm">{size.wristDiameterCm}</td>
                     </tr>
                   );
                 })}
@@ -237,6 +237,7 @@ export function SizeGuideSidebar({
             <table className="w-full">
               <thead>
                 <tr className="border-b border-neutral-200">
+                  <th className="py-3"></th>
                   <th className="text-left py-3 text-xs font-normal text-neutral-500">
                     Ring size (mm)
                   </th>
@@ -255,18 +256,43 @@ export function SizeGuideSidebar({
                 </tr>
               </thead>
               <tbody>
-                {ringSizes.map((size) => (
-                  <tr
-                    key={size.ringSize}
-                    className="border-b border-neutral-200"
-                  >
-                    <td className="py-3 text-sm">{size.ringSize}</td>
-                    <td className="py-3 text-sm">{size.diameterMm}</td>
-                    <td className="py-3 text-sm">{size.usaSize}</td>
-                    <td className="py-3 text-sm">{size.ukSize}</td>
-                    <td className="py-3 text-sm">{size.japanSize}</td>
-                  </tr>
-                ))}
+                {ringSizes.map((size) => {
+                  const isSelected =
+                    selectedSize?.trim() === size.ringSize.trim();
+                  return (
+                    <tr
+                      key={size.ringSize}
+                      className="border-b border-neutral-200"
+                    >
+                      <td className="py-3 pr-6">
+                        <div className="flex justify-center">
+                          {isSelected ? (
+                            <svg
+                              className="w-5 h-5 text-black"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                          ) : (
+                            <div className="w-5 h-5 border-2 border-neutral-300 rounded-full"></div>
+                          )}
+                        </div>
+                      </td>
+                      <td className="py-3 text-sm">{size.ringSize}</td>
+                      <td className="py-3 text-sm">{size.diameterMm}</td>
+                      <td className="py-3 text-sm">{size.usaSize}</td>
+                      <td className="py-3 text-sm">{size.ukSize}</td>
+                      <td className="py-3 text-sm">{size.japanSize}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

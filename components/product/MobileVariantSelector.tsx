@@ -10,6 +10,7 @@ import clsx from "clsx";
 import { useProduct, useUpdateURL } from "components/product/product-context";
 import { ProductOption, ProductVariant } from "lib/shopify/types";
 import { useState } from "react";
+import { useSizeGuide } from "./useSizeGuide";
 
 type Combination = {
   id: string;
@@ -27,6 +28,8 @@ export function MobileVariantSelector({
   const { state, updateOption } = useProduct();
   const updateURL = useUpdateURL();
   const [openSheet, setOpenSheet] = useState<string | null>(null);
+  const { showSizeGuide, openSizeGuide, SizeGuideComponent } =
+    useSizeGuide(options);
 
   if (
     !options.length ||
@@ -50,6 +53,9 @@ export function MobileVariantSelector({
       {options.map((option) => {
         const optionNameLowerCase = option.name.toLowerCase();
         const selectedValue = state[optionNameLowerCase];
+        const isSizeGuideOption =
+          optionNameLowerCase === "ring size" ||
+          optionNameLowerCase === "bracelet size";
         return (
           <div key={option.id} className="w-full">
             <button
@@ -166,6 +172,15 @@ export function MobileVariantSelector({
                         );
                       })}
                     </ul>
+                    {isSizeGuideOption && showSizeGuide && (
+                      <button
+                        type="button"
+                        onClick={openSizeGuide}
+                        className="pt-4 text-sm underline text-neutral-600 hover:text-neutral-900"
+                      >
+                        Size guide
+                      </button>
+                    )}
                   </DialogPanel>
                 </TransitionChild>
               </div>
@@ -173,6 +188,7 @@ export function MobileVariantSelector({
           </div>
         );
       })}
+      {SizeGuideComponent}
     </div>
   );
 }
