@@ -105,15 +105,13 @@ export default async function CategoryPage(props: {
             </TextHeaderFull>
           </div>
         )}
-        <div className="px-4">
-          <SubCollectionCarousel
-            mainCollectionHandle={params.collection}
-            collections={allCollections}
-          />
-        </div>
+        <SubCollectionCarousel
+          mainCollectionHandle={params.collection}
+          collections={allCollections}
+        />
 
         {collection && (
-          <div className="flex items-end justify-between p-4 sm:p-6 flex-row gap-2">
+          <div className="flex items-end justify-between pb-3 flex-row gap-2">
             <div className="flex-1 hidden md:flex"></div>
             <div className="flex-1 text-left sm:text-center hidden md:flex">
               <TextHeaderFull className="text-black">

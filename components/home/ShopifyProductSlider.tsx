@@ -57,18 +57,18 @@ export default async function ShopifyProductSlider({
       </ButtonLink>
     );
 
+    // Create a key based on products to force remount when products change
+    const productsKey = limitedProducts.map((p) => p.id).join("-");
+
     return (
-      <Suspense
-        fallback={<div className="w-full h-96 bg-neutral-100 animate-pulse" />}
-      >
-        <FullWidthProductSlider
-          products={limitedProducts}
-          tagline={tagline}
-          heading={heading}
-          sectionDescription={sectionDescription}
-          button={button}
-        />
-      </Suspense>
+      <FullWidthProductSlider
+        key={productsKey}
+        products={limitedProducts}
+        tagline={tagline}
+        heading={heading}
+        sectionDescription={sectionDescription}
+        button={button}
+      />
     );
   } catch (error) {
     console.error(

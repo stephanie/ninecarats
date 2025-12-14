@@ -55,6 +55,12 @@ export default function FullWidthProductSlider({
   const productsPerPage = isMobile ? 1 : 3;
   const totalPages = Math.ceil(validProducts.length / productsPerPage);
 
+  // Reset hasFetchedMedia when products change
+  useEffect(() => {
+    hasFetchedMedia.current = false;
+    setProductMedia({});
+  }, [products]);
+
   // Fetch media data for products
   useEffect(() => {
     if (hasFetchedMedia.current || validProducts.length === 0) {

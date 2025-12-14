@@ -49,12 +49,12 @@ export default function SubCollectionCarouselClient({
   });
 
   return (
-    <div className="w-full mb-8 sm:mb-12 overflow-hidden" {...swipeHandlers}>
+    <div className="w-full mb-4 sm:mb-12 overflow-hidden" {...swipeHandlers}>
       <div
         ref={containerRef}
         className={`flex ${
           isMobile
-            ? "overflow-x-auto gap-4 px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            ? "overflow-x-auto gap-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
             : "gap-6 justify-center flex-wrap"
         }`}
         style={{
