@@ -98,6 +98,13 @@ export default async function CategoryPage(props: {
     >
       <div className="w-full max-w-[100vw] mx-auto pt-48 lg:pt-64">
         {/* Sub-collection carousel - shown above the header */}
+        {collection && (
+          <div className="flex-1 text-left mt-2 mb-4 md:hidden">
+            <TextHeaderFull className="text-black">
+              {mapCollectionTitle(collection.title)}
+            </TextHeaderFull>
+          </div>
+        )}
         <div className="px-4">
           <SubCollectionCarousel
             mainCollectionHandle={params.collection}
@@ -107,8 +114,8 @@ export default async function CategoryPage(props: {
 
         {collection && (
           <div className="flex items-end justify-between p-4 sm:p-6 flex-row gap-2">
-            <div className="flex-1"></div>
-            <div className="flex-1 text-left sm:text-center">
+            <div className="flex-1 hidden md:flex"></div>
+            <div className="flex-1 text-left sm:text-center hidden md:flex">
               <TextHeaderFull className="text-black">
                 {mapCollectionTitle(collection.title)}
               </TextHeaderFull>
@@ -116,10 +123,10 @@ export default async function CategoryPage(props: {
             <div className="flex-1 flex justify-end">
               <button
                 id="filter-sort-button"
-                className="flex items-center text-base text-gray-900 hover:text-gray-700 transition-colors duration-200 cursor-pointer font-header"
+                className="flex gap-3 items-center text-base text-gray-900 hover:text-gray-700 transition-colors duration-200 cursor-pointer font-header"
               >
-                <span className="hidden sm:block">Filter & Sort</span>
-                <span className="sm:hidden">
+                <span>Filter & Sort</span>
+                <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="30"

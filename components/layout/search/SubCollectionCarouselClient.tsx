@@ -68,7 +68,7 @@ export default function SubCollectionCarouselClient({
             href={`/search/${mainCollectionHandle}?subCollection=${collection.handle}`}
             className={`${
               isMobile
-                ? "flex-shrink-0 w-[200px] scroll-snap-align-start"
+                ? "flex-shrink-0 w-[38vw] scroll-snap-align-start"
                 : "w-[15vw]"
             } group`}
           >

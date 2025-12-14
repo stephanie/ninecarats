@@ -68,11 +68,11 @@ function CategoryFilterItem({
   };
 
   return (
-    <li className="mt-2 flex text-black dark:text-white">
+    <li className="mt-2 flex text-black">
       <Link
         href={createUrl(basePath, newParams)}
         onClick={handleClick}
-        className={`w-full text-sm underline-offset-4 hover:underline dark:hover:text-neutral-100 ${
+        className={`w-full text-sm underline-offset-4 hover:underline ${
           isActive ? "underline underline-offset-4 cursor-default" : ""
         }`}
       >

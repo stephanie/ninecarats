@@ -26,33 +26,28 @@ export const SUB_COLLECTION_MAPPING: Record<string, SubCollectionConfig[]> = {
       imageAlt: "Signature Necklaces",
     },
   ],
-  // rings: [
-  //   {
-  //     handle: "engagement-rings",
-  //     imagePath: "/images/collections/necklaces-yellow-gold.avif",
-  //     imageAlt: "Engagement Rings",
-  //   },
-  //   {
-  //     handle: "bands",
-  //     imagePath: "/images/collections/necklaces-yellow-gold.avif",
-  //     imageAlt: "Bands",
-  //   },
-  //   {
-  //     handle: "yellow-gold",
-  //     imagePath: "/images/collections/necklaces-yellow-gold.avif",
-  //     imageAlt: "Yellow Gold Rings",
-  //   },
-  //   {
-  //     handle: "white-gold",
-  //     imagePath: "/images/collections/necklaces-yellow-gold.avif",
-  //     imageAlt: "White Gold Rings",
-  //   },
-  //   {
-  //     handle: "platinum",
-  //     imagePath: "/images/collections/necklaces-yellow-gold.avif",
-  //     imageAlt: "Platinum Rings",
-  //   },
-  // ],
+  rings: [
+    {
+      handle: "engagement-rings",
+      imagePath: "/images/collections/rings-oval-gold.avif",
+      imageAlt: "Engagement Rings",
+    },
+    {
+      handle: "bands",
+      imagePath: "/images/collections/rings-oval-band.avif",
+      imageAlt: "Bands",
+    },
+    {
+      handle: "platinum",
+      imagePath: "/images/collections/rings-cushion-cut.avif",
+      imageAlt: "Platinum Rings",
+    },
+    {
+      handle: "yellow-gold",
+      imagePath: "/images/collections/rings-emerald-band.avif",
+      imageAlt: "Yellow Gold Rings",
+    },
+  ],
   // bracelets: [
   //   {
   //     handle: "yellow-gold",
