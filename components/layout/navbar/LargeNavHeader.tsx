@@ -115,8 +115,8 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
         >
           <div className="w-full flex items-center justify-start sm:justify-center">
             <p className="opacity-90">
-              Enjoy complimentary next day delivery and gift wrapping on all
-              orders.{" "}
+              Enjoy complimentary shipping and gift wrapping on all orders in
+              Hong Kong.{" "}
               <Link href="/search/all-products" className="underline">
                 Shop now
               </Link>

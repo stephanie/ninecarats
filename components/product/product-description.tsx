@@ -5,6 +5,7 @@ import Prose from "components/prose";
 import { Product } from "lib/shopify/types";
 import { useMemo, useState } from "react";
 import { AddToCart } from "../cart/add-to-cart";
+import ProductMetafields from "../home/ProductMetafields";
 import { useProduct } from "./product-context";
 import { VariantSelector } from "./variant-selector";
 
@@ -129,6 +130,10 @@ export function ProductDescription({ product }: { product: Product }) {
           {product.title}
         </h2>
         <div className="text-sm text-neutral-500 mb-8 hidden lg:block">
+          <ProductMetafields
+            metafields={product.metafields}
+            className="font-body text-xs mb-4"
+          />
           <Price
             amount={displayPrice.amount}
             currencyCode={displayCurrencyCode}

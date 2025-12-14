@@ -3,17 +3,18 @@
 import { AnimatedText } from "components/animations";
 import { useIsMobile } from "hooks/useIsMobile";
 import { getProductMedia } from "lib/shopify";
-import { Media, Video } from "lib/shopify/types";
+import { Media, Metafield, Video } from "lib/shopify/types";
 import { formatPrice } from "lib/utils";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import ProductMetafields from "../home/ProductMetafields";
 
 export function GridTileImage({
   src,
   alt,
   isInteractive = true,
   active,
-  label,
+  product,
   index,
   productHandle,
   isLast,
@@ -23,10 +24,11 @@ export function GridTileImage({
   alt: string;
   isInteractive?: boolean;
   active?: boolean;
-  label?: {
+  product?: {
     title: string;
     amount: string;
     currencyCode: string;
+    metafields?: Metafield[];
   };
   key?: string;
   index: number;
@@ -111,13 +113,17 @@ export function GridTileImage({
       <div className="text-center flex flex-col pt-8 pl-1 pr-1">
         <div className="text-lg text-black font-header">
           <AnimatedText direction="up" staggerDelay={200}>
-            {label?.title}
+            {product?.title}
+            <ProductMetafields
+              metafields={product?.metafields}
+              className="font-body text-xs justify-center mt-1"
+            />
           </AnimatedText>
         </div>
-        {label?.amount && (
-          <div className="text-sm text-neutral-500">
+        {product?.amount && (
+          <div className="text-xs text-neutral-500 mt-4">
             <AnimatedText direction="up" staggerDelay={300}>
-              {formatPrice(Number(label?.amount), label?.currencyCode)}
+              {formatPrice(Number(product?.amount), product?.currencyCode)}
             </AnimatedText>
           </div>
         )}

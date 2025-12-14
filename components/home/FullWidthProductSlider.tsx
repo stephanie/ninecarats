@@ -12,6 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSwipeable } from "react-swipeable";
+import ProductMetafields from "./ProductMetafields";
 
 interface FullWidthProductSliderProps {
   products: Product[];
@@ -176,6 +177,20 @@ export default function FullWidthProductSlider({
     preventScrollOnSwipe: true,
   });
 
+  const getPrice = (product: Product) => {
+    return product.priceRange?.minVariantPrice?.amount
+      ? formatPrice(
+          Number(product.priceRange.minVariantPrice.amount),
+          product.priceRange.minVariantPrice.currencyCode
+        )
+      : product.priceRange?.maxVariantPrice?.amount
+        ? formatPrice(
+            Number(product.priceRange.maxVariantPrice.amount),
+            product.priceRange.maxVariantPrice.currencyCode
+          )
+        : "Price unavailable";
+  };
+
   // For mobile, show one product per page, with the next product peeking in
   let sliderContent;
   if (isMobile) {
@@ -247,23 +262,15 @@ export default function FullWidthProductSlider({
                   </div>
                 </div>
                 <div className="text-center flex flex-col">
-                  <div className="text-lg mb-1 text-black font-header">
+                  <div className="text-lg text-black font-header">
                     {product.title}
                   </div>
-                  <div className="text-sm text-neutral-500">
-                    {product.priceRange?.maxVariantPrice?.amount
-                      ? formatPrice(
-                          Number(product.priceRange.maxVariantPrice.amount),
-                          product.priceRange.maxVariantPrice.currencyCode ||
-                            "USD"
-                        )
-                      : product.priceRange?.minVariantPrice?.amount
-                        ? formatPrice(
-                            Number(product.priceRange.minVariantPrice.amount),
-                            product.priceRange.minVariantPrice.currencyCode ||
-                              "USD"
-                          )
-                        : "Price unavailable"}
+                  <ProductMetafields
+                    metafields={product.metafields}
+                    className="font-body text-xs justify-center mt-1"
+                  />
+                  <div className="text-xs text-neutral-500 mt-4">
+                    {getPrice(product)}
                   </div>
                 </div>
               </div>
@@ -355,17 +362,18 @@ export default function FullWidthProductSlider({
                     )}
                 </div>
                 <div className="text-center flex flex-col">
-                  <div className="text-lg mb-1 text-black font-header">
+                  <div className="text-lg text-black font-header">
                     <AnimatedText direction="up" staggerDelay={200}>
                       {product.title}
+                      <ProductMetafields
+                        metafields={product.metafields}
+                        className="font-body text-xs justify-center mt-1"
+                      />
                     </AnimatedText>
                   </div>
-                  <div className="text-sm text-neutral-500">
+                  <div className="text-xs text-neutral-500 mt-4">
                     <AnimatedText direction="up" staggerDelay={300}>
-                      {formatPrice(
-                        Number(product.priceRange.maxVariantPrice.amount),
-                        product.priceRange.maxVariantPrice.currencyCode
-                      )}
+                      {getPrice(product)}
                     </AnimatedText>
                   </div>
                 </div>

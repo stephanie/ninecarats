@@ -29,22 +29,12 @@ export default function OurDiamondsPage() {
           </span>
         </div>
       </section>
-      {/* OurDiamonds Section */}
-      <section className="w-full bg-white flex flex-col lg:flex-row items-center pt-0 lg:pt-48 pb-16 lg:pb-48 gap-8 px-0 lg:px-12">
+      <section className="w-full bg-white lg:min-h-screen min-h-auto flex flex-col lg:flex-row items-center justify-center gap-0 sm:gap-16 py-16 md:py-28 px-4 md:px-20 text-center">
         {/* Left text */}
-        <div className="flex-1 flex w-full mx-auto">
-          <div className="relative max-w-3xl w-full mx-auto bg-black">
-            <video
-              className="w-full h-auto object-contain z-0"
-              src="/videos/diamond-polishing-short.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-          </div>
-        </div>
-        <div className="flex-1 w-full mx-auto mt-8 lg:mt-0 px-4 md:px-12 lg:px-0">
+        <div className="flex-1 max-w-xl w-full">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-header mb-8">
+            The Nine Carats Diamond Standard
+          </h2>
           <p className="mb-6 text-base md:text-md text-black">
             At Nine Carats, we are committed to delivering the highest quality
             diamonds that meet the most stringent standards of excellence. We
@@ -55,7 +45,7 @@ export default function OurDiamondsPage() {
           </p>
           <p className="mb-6 text-base md:text-md text-black">
             Every diamond in our collection meets our rigorous quality
-            standards: only lab certified diamonds of VS1 clarity or higher,
+            standards: Only lab certified diamonds of VS1 clarity or higher,
             with color grades of DEF for maximum brilliance. Each stone is
             carefully selected by our master gemologists, ensuring that every
             piece of Nine Carats jewelry showcases diamonds of the highest
@@ -63,10 +53,10 @@ export default function OurDiamondsPage() {
           </p>
           <p className="text-base md:text-md text-black">
             Our commitment to quality extends beyond the diamond itself. Every
-            Nine Carats diamond above 1ct comes with a certificate of
+            Nine Carats diamond above 1.00CT comes with a certificate of
             authenticity and our personal guarantee of quality. We stand behind
             every piece we create, ensuring that your jewelry not only meets but
-            exceeds the highest industry standards for brilliance, clarity, and
+            exceeds the highest industry standards for brilliance, clarity and
             lasting beauty.
           </p>
         </div>

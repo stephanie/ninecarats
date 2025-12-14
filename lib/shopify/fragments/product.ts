@@ -56,6 +56,16 @@ const productFragment = /* GraphQL */ `
     }
     tags
     updatedAt
+    metafields(identifiers: [
+      {namespace: "custom", key: "carat_weights"},
+      {namespace: "custom", key: "jewelry_material"}
+    ]) {
+      id
+      namespace
+      key
+      value
+      type
+    }
   }
   ${imageFragment}
   ${seoFragment}

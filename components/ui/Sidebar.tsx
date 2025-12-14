@@ -76,8 +76,8 @@ export function Sidebar({
                 leaveFrom={slideDirection.leaveFrom}
                 leaveTo={slideDirection.leaveTo}
               >
-                <Dialog.Panel className={`pointer-events-auto ${width}`}>
-                  <div className="flex h-full flex-col overflow-y-scroll bg-white py-8 shadow-xl">
+                <Dialog.Panel className={`pointer-events-auto ${width} ${isMobile ? "h-full max-h-screen" : ""}`}>
+                  <div className={`flex h-full flex-col ${isMobile ? "overflow-y-auto" : "overflow-y-scroll"} bg-white py-8 shadow-xl`}>
                     {!hideDefaultHeader && (
                       <div className="px-8">
                         <div className="flex items-start justify-between">

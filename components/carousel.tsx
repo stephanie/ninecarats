@@ -28,10 +28,11 @@ export async function Carousel() {
               <GridTileImage
                 index={i}
                 alt={product.title}
-                label={{
+                product={{
                   title: product.title,
                   amount: product.priceRange.maxVariantPrice.amount,
                   currencyCode: product.priceRange.maxVariantPrice.currencyCode,
+                  metafields: product.metafields,
                 }}
                 src={product.featuredImage?.url}
                 fill

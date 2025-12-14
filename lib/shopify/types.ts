@@ -93,9 +93,10 @@ export type Page = {
   updatedAt: string;
 };
 
-export type Product = Omit<ShopifyProduct, 'variants' | 'images'> & {
+export type Product = Omit<ShopifyProduct, 'variants' | 'images' | 'metafields'> & {
   variants: ProductVariant[];
   images: Image[];
+  metafields?: Metafield[];
 };
 
 export type ProductOption = {
@@ -140,6 +141,14 @@ export type ShopifyCollection = {
   updatedAt: string;
 };
 
+export type Metafield = {
+  id: string;
+  namespace: string;
+  key: string;
+  value: string;
+  type: string;
+};
+
 export type ShopifyProduct = {
   id: string;
   handle: string;
@@ -158,6 +167,7 @@ export type ShopifyProduct = {
   seo: SEO;
   tags: string[];
   updatedAt: string;
+  metafields?: Metafield[];
 };
 
 export type ShopifyCartOperation = {

@@ -28,9 +28,7 @@ export default function FullWidthTextSection() {
         >
           We are pioneering
           <br />
-          <span className="italic font-normal">
-            sustainable diamond jewelry
-          </span>
+          <span className="italic font-normal">luxury lab diamond jewelry</span>
           <br />
           with exceptional craftsmanship
         </TextHeaderFull>

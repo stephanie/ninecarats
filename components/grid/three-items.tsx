@@ -41,10 +41,11 @@ function ThreeItemGridItem({
           priority={priority}
           alt={item.title}
           isLast={isLast}
-          label={{
+          product={{
             title: item.title as string,
             amount: item.priceRange.maxVariantPrice.amount,
             currencyCode: item.priceRange.maxVariantPrice.currencyCode,
+            metafields: item.metafields,
           }}
         />
       </Link>

@@ -39,7 +39,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-black opacity-30 pointer-events-none" />
       </section>
       {/* About Section */}
-      <section className="w-full bg-white min-h-screen flex flex-col lg:flex-row items-center justify-center gap-0 sm:gap-16 py-16 md:py-28 px-4 md:px-20 text-center">
+      <section className="w-full bg-white lg:min-h-screen min-h-auto flex flex-col lg:flex-row items-center justify-center gap-0 sm:gap-16 py-16 md:py-28 px-4 md:px-20 text-center">
         {/* Left text */}
         <div className="flex-1 max-w-xl w-full">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-header mb-8">
@@ -58,12 +58,12 @@ export default function AboutPage() {
             Hong Kong harbour.
           </p>
           <p className="mb-6 text-base md:text-md text-black">
-            Fully committed to eco-conscious production—we are meticulous in
-            selecting each and every one of our gemstones and metals, using only
-            the most exceptional lab-grown, colorless diamonds, and crafting
-            each of your pieces individually to combat fast fashion. We are
-            proud to be a part of the growing movement towards more sustainable
-            and ethical practices in the jewelry industry.
+            Fully committed to eco-conscious production, we are meticulous in
+            selecting each and every one of our gemstones and metals. We use
+            only the most exceptional colorless lab-grown diamonds, and craft
+            each of your pieces individually. We are proud to be a part of the
+            growing movement towards more sustainable and ethical practices in
+            the jewelry industry.
           </p>
           <p className="mb-6 text-base md:text-md text-black">
             Why nine? In Chinese culture, the number nine (九, jiǔ) shares its

@@ -41,7 +41,7 @@ export function ContactInfo({
             </a>
           </p>
           <p className="text-sm text-gray-600">
-            (Monday - Saturday 10am to 6pm)
+            (Monday - Friday, 10am to 6pm)
           </p>
         </div>
 

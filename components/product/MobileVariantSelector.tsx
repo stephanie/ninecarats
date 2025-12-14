@@ -99,8 +99,8 @@ export function MobileVariantSelector({
                   leaveFrom="translate-y-0"
                   leaveTo="translate-y-full"
                 >
-                  <DialogPanel className="w-full mx-auto bg-white shadow-xl p-6 pb-6 relative">
-                    <div className="flex justify-between items-center mb-6">
+                  <DialogPanel className="w-full mx-auto bg-white shadow-xl p-6 pb-6 relative max-h-[85vh] flex flex-col overflow-hidden">
+                    <div className="flex justify-between items-center mb-6 flex-shrink-0">
                       <div className="flex gap-4 w-full">
                         <button
                           className={clsx("text-base pt-1 mr-4")}
@@ -114,73 +114,75 @@ export function MobileVariantSelector({
                         &times;
                       </button>
                     </div>
-                    <ul className="divide-y divide-neutral-200 border border-neutral-200">
-                      {option.values.map((value) => {
-                        // Check if this value is available for sale
-                        const optionParams = {
-                          ...state,
-                          [optionNameLowerCase]: value,
-                        };
-                        const filtered = Object.entries(optionParams).filter(
-                          ([key, value]) =>
-                            options.find(
-                              (option) =>
-                                option.name.toLowerCase() === key &&
-                                option.values.includes(value)
-                            )
-                        );
-                        const isAvailableForSale = combinations.find(
-                          (combination: Combination) =>
-                            filtered.every(
-                              ([key, value]) =>
-                                combination[key] === value &&
-                                combination.availableForSale
-                            )
-                        );
-                        const isActive = selectedValue === value;
-                        return (
-                          <li key={value}>
-                            <form
-                              action={() => {
-                                if (!isAvailableForSale) return;
-                                const newState = updateOption(
-                                  optionNameLowerCase,
-                                  value
-                                );
-                                updateURL(newState);
-                                setOpenSheet(null);
-                              }}
-                            >
-                              <button
-                                type="submit"
-                                className={clsx(
-                                  "w-full flex justify-between items-center p-4 text-sm",
-                                  isActive
-                                    ? "font-semibold bg-neutral-100"
-                                    : "font-normal",
-                                  isAvailableForSale
-                                    ? "text-black"
-                                    : "text-neutral-400 cursor-not-allowed"
-                                )}
-                                disabled={!isAvailableForSale}
-                                aria-disabled={!isAvailableForSale}
+                    <div className="flex-1 overflow-y-auto -mx-6 px-6">
+                      <ul className="divide-y divide-neutral-200 border border-neutral-200">
+                        {option.values.map((value) => {
+                          // Check if this value is available for sale
+                          const optionParams = {
+                            ...state,
+                            [optionNameLowerCase]: value,
+                          };
+                          const filtered = Object.entries(optionParams).filter(
+                            ([key, value]) =>
+                              options.find(
+                                (option) =>
+                                  option.name.toLowerCase() === key &&
+                                  option.values.includes(value)
+                              )
+                          );
+                          const isAvailableForSale = combinations.find(
+                            (combination: Combination) =>
+                              filtered.every(
+                                ([key, value]) =>
+                                  combination[key] === value &&
+                                  combination.availableForSale
+                              )
+                          );
+                          const isActive = selectedValue === value;
+                          return (
+                            <li key={value}>
+                              <form
+                                action={() => {
+                                  if (!isAvailableForSale) return;
+                                  const newState = updateOption(
+                                    optionNameLowerCase,
+                                    value
+                                  );
+                                  updateURL(newState);
+                                  setOpenSheet(null);
+                                }}
                               >
-                                <span>{value}</span>
-                              </button>
-                            </form>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                    {isSizeGuideOption && showSizeGuide && (
-                      <button
-                        type="button"
-                        onClick={openSizeGuide}
-                        className="pt-4 text-sm underline text-neutral-600 hover:text-neutral-900"
-                      >
-                        Size guide
-                      </button>
-                    )}
+                                <button
+                                  type="submit"
+                                  className={clsx(
+                                    "w-full flex justify-between items-center p-4 text-sm",
+                                    isActive
+                                      ? "font-semibold bg-neutral-100"
+                                      : "font-normal",
+                                    isAvailableForSale
+                                      ? "text-black"
+                                      : "text-neutral-400 cursor-not-allowed"
+                                  )}
+                                  disabled={!isAvailableForSale}
+                                  aria-disabled={!isAvailableForSale}
+                                >
+                                  <span>{value}</span>
+                                </button>
+                              </form>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                      {isSizeGuideOption && showSizeGuide && (
+                        <button
+                          type="button"
+                          onClick={openSizeGuide}
+                          className="pt-4 text-sm underline text-neutral-600 hover:text-neutral-900"
+                        >
+                          Size guide
+                        </button>
+                      )}
+                    </div>
                   </DialogPanel>
                 </TransitionChild>
               </div>
