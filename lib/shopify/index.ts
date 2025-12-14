@@ -365,6 +365,44 @@ export async function getCollectionProducts({
   );
 }
 
+// Get products that are in both the main collection and a sub-collection
+// This is used for filtering products when a sub-collection is selected
+export async function getProductsInBothCollections({
+  mainCollection,
+  subCollection,
+  reverse,
+  sortKey
+}: {
+  mainCollection: string;
+  subCollection: string;
+  reverse?: boolean;
+  sortKey?: string;
+}): Promise<Product[]> {
+  'use cache';
+  cacheTag(TAGS.collections, TAGS.products);
+  cacheLife('days');
+
+  // Get products from the main collection
+  const mainProducts = await getCollectionProducts({
+    collection: mainCollection,
+    reverse,
+    sortKey
+  });
+
+  // Get products from the sub-collection
+  const subProducts = await getCollectionProducts({
+    collection: subCollection,
+    reverse,
+    sortKey
+  });
+
+  // Create a set of product IDs from the sub-collection for fast lookup
+  const subProductIds = new Set(subProducts.map(p => p.id));
+
+  // Return products that are in both collections
+  return mainProducts.filter(product => subProductIds.has(product.id));
+}
+
 export async function getCollections(): Promise<Collection[]> {
   'use cache';
   cacheTag(TAGS.collections);

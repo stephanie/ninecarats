@@ -2,13 +2,16 @@ import {
   getCollection,
   getCollectionProducts,
   getCollections,
+  getProductsInBothCollections,
 } from "lib/shopify";
+import { getSubCollections } from "lib/shopify/sub-collections";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import Grid from "components/grid";
 import ProductGridItems from "components/layout/product-grid-items";
 import FilterSortWrapper from "components/layout/search/FilterSortWrapper";
+import SubCollectionCarousel from "components/layout/search/SubCollectionCarousel";
 import TextHeaderFull from "components/text/TextHeaderFull";
 import { defaultSort, sorting } from "lib/constants";
 
@@ -35,7 +38,13 @@ export default async function CategoryPage(props: {
 }) {
   const searchParams = await props.searchParams;
   const params = await props.params;
-  const { sort, q: searchValue } = searchParams as { [key: string]: string };
+  const {
+    sort,
+    q: searchValue,
+    subCollection,
+  } = searchParams as {
+    [key: string]: string;
+  };
   const { sortKey, reverse } =
     sorting.find((item) => item.slug === sort) || defaultSort;
 
@@ -43,40 +52,82 @@ export default async function CategoryPage(props: {
   const collection = await getCollection(params.collection);
   if (!collection) return notFound();
 
-  const products = await getCollectionProducts({
-    collection: params.collection,
-    sortKey,
-    reverse,
-  });
+  // If subCollection is specified, get products that are in both collections
+  const products = subCollection
+    ? await getProductsInBothCollections({
+        mainCollection: params.collection,
+        subCollection,
+        sortKey,
+        reverse,
+      })
+    : await getCollectionProducts({
+        collection: params.collection,
+        sortKey,
+        reverse,
+      });
+
   const resultsText = products.length > 1 ? "results" : "result";
-  const collections = await getCollections();
+  const allCollections = await getCollections();
+
+  // Get sub-collections for the current collection
+  const subCollectionConfigs = getSubCollections(params.collection);
+  const subCollectionHandles = subCollectionConfigs.map((config) =>
+    config.handle.toLowerCase()
+  );
+
+  // Filter collections to only include sub-collections
+  const subCollections = allCollections.filter((collection) =>
+    subCollectionHandles.includes(collection.handle.toLowerCase())
+  );
 
   return (
     <FilterSortWrapper
       products={products}
       searchValue={searchValue || ""}
       resultsText={resultsText}
-      collections={collections}
+      collections={subCollections}
     >
       <div className="w-full max-w-[100vw] mx-auto pt-48 lg:pt-64">
+        {/* Sub-collection carousel - shown above the header */}
+        <div className="px-4 sm:px-8">
+          <SubCollectionCarousel
+            mainCollectionHandle={params.collection}
+            collections={allCollections}
+          />
+        </div>
+
         {collection && (
-          <div className="text-center p-16">
-            <TextHeaderFull className="text-black">
-              {collection.title}
-            </TextHeaderFull>
+          <div className="flex items-end justify-between p-8 px-4">
+            <div className="flex-1"></div>
+            <div className="flex-1 text-center">
+              <TextHeaderFull className="text-black">
+                {collection.title}
+              </TextHeaderFull>
+            </div>
+            <div className="flex-1 flex justify-end">
+              <button
+                id="filter-sort-button"
+                className="flex items-center gap-2 text-base text-gray-900 hover:text-gray-700 transition-colors duration-200 cursor-pointer font-header"
+              >
+                Filter & Sort
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                >
+                  <path
+                    d="M3 2.25H15C15.1989 2.25 15.3897 2.32902 15.5303 2.46967C15.671 2.61032 15.75 2.80109 15.75 3V4.1895C15.75 4.3884 15.6709 4.57913 15.5303 4.71975L10.7198 9.53025C10.5791 9.67087 10.5 9.8616 10.5 10.0605V14.7892C10.5 14.9033 10.474 15.0158 10.424 15.1182C10.374 15.2207 10.3013 15.3104 10.2114 15.3805C10.1215 15.4506 10.0169 15.4994 9.90532 15.523C9.79378 15.5466 9.67834 15.5445 9.56775 15.5167L8.06775 15.1417C7.90557 15.1011 7.76161 15.0075 7.65874 14.8757C7.55588 14.7438 7.5 14.5814 7.5 14.4142V10.0605C7.49996 9.8616 7.42091 9.67087 7.28025 9.53025L2.46975 4.71975C2.32909 4.57913 2.25004 4.3884 2.25 4.1895V3C2.25 2.80109 2.32902 2.61032 2.46967 2.46967C2.61032 2.32902 2.80109 2.25 3 2.25Z"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         )}
-
-        {/* Filter & Sort Header */}
-        <div className="flex items-center justify-between mb-6 px-4">
-          <div className="flex items-center space-x-4"></div>
-          <button
-            id="filter-sort-button"
-            className="text-base text-gray-900 hover:text-gray-700 transition-colors duration-200 cursor-pointer font-header"
-          >
-            Filter & Sort
-          </button>
-        </div>
 
         {products.length === 0 ? (
           <p className="py-3 text-md">{`No products found in this collection`}</p>
