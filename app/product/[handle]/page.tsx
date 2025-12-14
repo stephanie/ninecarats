@@ -109,24 +109,24 @@ export default async function ProductPage(props: {
           __html: JSON.stringify(productJsonLd),
         }}
       />
-      <Suspense fallback={null}>
-        <ProductProvider>
-          <div className="w-full flex flex-col gap-4">
-            {/* Full width gallery section */}
-            <div className="w-full border-b border-neutral-200 pt-[var(--navbar-height-mobile)] sm:pt-[var(--navbar-height-desktop)]">
-              <Suspense fallback={<div className="relative w-full" />}>
-                <Gallery
-                  backgroundColor={getBackgroundColor()}
-                  images={product.images.slice(0, 1).map((image) => ({
-                    src: image.url,
-                    altText: image.altText,
-                  }))}
-                  media={media}
-                />
-              </Suspense>
-              <div className="lg:hidden w-full flex-row justify-center">
-                <div className="flex flex-col p-4">
-                  <Suspense fallback={null}>
+      <div className="w-full flex flex-col gap-4">
+        <Suspense fallback={null}>
+          <ProductProvider>
+            <>
+              {/* Full width gallery section */}
+              <div className="w-full border-b border-neutral-200 pt-[var(--navbar-height-mobile)] sm:pt-[var(--navbar-height-desktop)]">
+                <Suspense fallback={<div className="relative w-full" />}>
+                  <Gallery
+                    backgroundColor={getBackgroundColor()}
+                    images={product.images.slice(0, 1).map((image) => ({
+                      src: image.url,
+                      altText: image.altText,
+                    }))}
+                    media={media}
+                  />
+                </Suspense>
+                <div className="lg:hidden w-full flex-row justify-center">
+                  <div className="flex flex-col p-4">
                     <h2 className="text-xl text-black mb-2 font-header">
                       {product.title}
                       <ProductMetafields
@@ -137,75 +137,75 @@ export default async function ProductPage(props: {
                     <div className="text-sm text-neutral-500">
                       <ProductPrice product={product} />
                     </div>
-                  </Suspense>
-                </div>
-                <AddToCart product={product} />
-                <div className="flex flex-col">
-                  <MobileVariantSelector
-                    options={product.options}
-                    variants={product.variants}
-                  />
-                </div>
-              </div>
-            </div>
-            {/* Product details section */}
-            <div className="flex w-full lg:px-6">
-              <div className="basis-full">
-                <Suspense fallback={null}>
-                  <ProductDescription product={product} />
-                </Suspense>
-              </div>
-            </div>
-            <section className="w-full bg-white p-4">
-              <div
-                className={`grid grid-cols-1 md:grid-cols-2 gap-4 w-full mx-auto`}
-              >
-                {product.images.slice(1).map((image, idx) => (
-                  <div
-                    key={idx}
-                    className="relative w-full md:min-h-[90vh] min-h-[50vh] flex items-stretch overflow-visible"
-                  >
-                    <Image
-                      src={image.url}
-                      alt={image.altText}
-                      style={{
-                        objectFit: "contain",
-                      }}
-                      fill
-                      className="object-cover object-center"
-                      priority={idx === 0}
+                  </div>
+                  <AddToCart product={product} />
+                  <div className="flex flex-col">
+                    <MobileVariantSelector
+                      options={product.options}
+                      variants={product.variants}
                     />
                   </div>
-                ))}
+                </div>
               </div>
-            </section>
-            <div className="w-full text-center text-lg sm:text-xl pt-14 pb-2 font-header">
-              You may also like
-            </div>
-            <RelatedProductsSlider currentProduct={product} maxProducts={6} />
-            {/* <RelatedProducts id={product.id} /> */}
-            {/* Breadcrumb section */}
-            <div className="w-full pb-6 sm:pl-14 pl-4">
-              <nav className="text-sm text-neutral-700" aria-label="Breadcrumb">
-                <ol className="list-none p-0 inline-flex gap-1">
-                  <li className="flex items-center">
-                    <span>Jewelery</span>
-                    <span className="mx-2">/</span>
-                  </li>
-                  <li className="flex items-center">
-                    <Link
-                      href="/search/bracelets"
-                      className="hover:underline underline cursor-pointer"
-                    >
-                      Bracelets
-                    </Link>
-                  </li>
-                </ol>
-              </nav>
-            </div>
+              {/* Product details section */}
+              <div className="flex w-full lg:px-6">
+                <div className="basis-full">
+                  <ProductDescription product={product} />
+                </div>
+              </div>
+            </>
+          </ProductProvider>
+        </Suspense>
+        <section className="w-full bg-white p-4">
+          <div
+            className={`grid grid-cols-1 md:grid-cols-2 gap-4 w-full mx-auto`}
+          >
+            {product.images.slice(1).map((image, idx) => (
+              <div
+                key={idx}
+                className="relative w-full md:min-h-[90vh] min-h-[50vh] flex items-stretch overflow-visible"
+              >
+                <Image
+                  src={image.url}
+                  alt={image.altText}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                  fill
+                  className="object-cover object-center"
+                  priority={idx === 0}
+                />
+              </div>
+            ))}
           </div>
-        </ProductProvider>
-      </Suspense>
+        </section>
+        <div className="w-full text-center text-lg sm:text-xl pt-14 pb-2 font-header">
+          You may also like
+        </div>
+        <Suspense fallback={null}>
+          <RelatedProductsSlider currentProduct={product} maxProducts={6} />
+        </Suspense>
+        {/* <RelatedProducts id={product.id} /> */}
+        {/* Breadcrumb section */}
+        <div className="w-full pb-6 sm:pl-14 pl-4">
+          <nav className="text-sm text-neutral-700" aria-label="Breadcrumb">
+            <ol className="list-none p-0 inline-flex gap-1">
+              <li className="flex items-center">
+                <span>Jewelery</span>
+                <span className="mx-2">/</span>
+              </li>
+              <li className="flex items-center">
+                <Link
+                  href="/search/bracelets"
+                  className="hover:underline underline cursor-pointer"
+                >
+                  Bracelets
+                </Link>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
     </>
   );
 }
