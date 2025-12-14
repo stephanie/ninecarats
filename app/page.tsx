@@ -35,9 +35,9 @@ export default function HomePage() {
       <div className="relative w-full">
         <FullScreenSlider />
       </div>
-      <ShopifyProductSlider collectionHandle="bracelets" tagline="Jewelry" />
-      <FullWidthTextSection />
       <ShopifyProductSlider collectionHandle="rings" tagline="Wedding" />
+      <FullWidthTextSection />
+      <ShopifyProductSlider collectionHandle="bracelets" tagline="Jewelry" />
       {/* <div
         className="relative z-10"
         style={{ transform: "translateY(-100px)" }}

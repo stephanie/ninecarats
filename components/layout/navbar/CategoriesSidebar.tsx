@@ -11,14 +11,14 @@ interface CategoriesSidebarProps {
 
 export const categories = [
   {
-    title: "Bracelets",
-    path: "/search/bracelets",
-    description: "Delicate and bold bracelet designs",
-  },
-  {
     title: "Rings",
     path: "/search/rings",
     description: "Stunning rings for your special moment",
+  },
+  {
+    title: "Bracelets",
+    path: "/search/bracelets",
+    description: "Delicate and bold bracelet designs",
   },
   {
     title: "Earrings",
