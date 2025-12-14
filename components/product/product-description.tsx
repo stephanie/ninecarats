@@ -1,12 +1,11 @@
 "use client";
 
-import Price from "components/price";
 import Prose from "components/prose";
 import { Product } from "lib/shopify/types";
 import { useMemo, useState } from "react";
 import { AddToCart } from "../cart/add-to-cart";
 import ProductMetafields from "../home/ProductMetafields";
-import { useProduct } from "./product-context";
+import { ProductPrice } from "./product-price";
 import { VariantSelector } from "./variant-selector";
 
 type MenuSection = {
@@ -17,7 +16,6 @@ type MenuSection = {
 
 export function ProductDescription({ product }: { product: Product }) {
   const [open, setOpen] = useState<number | null>(null);
-  const { state } = useProduct();
 
   // Parse the descriptionHtml to extract "Item details" section
   const { mainDescription, itemDetailsHtml } = useMemo(() => {
@@ -71,20 +69,6 @@ export function ProductDescription({ product }: { product: Product }) {
     };
   }, [product.descriptionHtml]);
 
-  // Find the selected variant based on current state
-  const selectedVariant = product.variants.find((variant) =>
-    variant.selectedOptions.every(
-      (option) => option.value === state[option.name.toLowerCase()]
-    )
-  );
-
-  // Use selected variant price or fall back to max variant price
-  const displayPrice =
-    selectedVariant?.price || product.priceRange.minVariantPrice;
-  const displayCurrencyCode =
-    selectedVariant?.price?.currencyCode ||
-    product.priceRange.minVariantPrice.currencyCode;
-
   const menu = useMemo(() => {
     const baseSections: MenuSection[] = [
       {
@@ -131,10 +115,7 @@ export function ProductDescription({ product }: { product: Product }) {
         </h2>
         <div className="text-sm text-neutral-500 mb-8 hidden lg:block">
           <ProductMetafields metafields={product.metafields} className="mb-4" />
-          <Price
-            amount={displayPrice.amount}
-            currencyCode={displayCurrencyCode}
-          />
+          <ProductPrice product={product} />
         </div>
         <div className="mb-10 hidden lg:block">
           <VariantSelector
@@ -281,29 +262,5 @@ export function ProductDescription({ product }: { product: Product }) {
         </div>
       </div>
     </div>
-    // <div className="flex flex-row gap-4 w-full">
-    //   <div className="mb-6 flex flex-col border-b pb-6 dark:border-neutral-700 w-3/4">
-    //     <h1 className="mb-2 text-5xl font-medium">{product.title}</h1>
-    //     <div className="mr-auto w-auto rounded-full bg-black p-2 text-sm text-white">
-    //       <Price
-    //         amount={product.priceRange.maxVariantPrice.amount}
-    //         currencyCode={product.priceRange.maxVariantPrice.currencyCode}
-    //       />
-    //     </div>
-    //     <VariantSelector
-    //       options={product.options}
-    //       variants={product.variants}
-    //     />
-    //     {product.descriptionHtml ? (
-    //       <Prose
-    //         className="mb-6 text-sm leading-tight dark:text-white/[60%]"
-    //         html={product.descriptionHtml}
-    //       />
-    //     ) : null}
-    //   </div>
-    //   <div className="flex w-full w-1/4">
-    //     <AddToCart product={product} />
-    //   </div>
-    // </div>
   );
 }

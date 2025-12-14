@@ -1,10 +1,10 @@
 import { AddToCart } from "components/cart/add-to-cart";
 import ProductMetafields from "components/home/ProductMetafields";
-import Price from "components/price";
 import { Gallery } from "components/product/gallery";
 import { MobileVariantSelector } from "components/product/MobileVariantSelector";
 import { ProductProvider } from "components/product/product-context";
 import { ProductDescription } from "components/product/product-description";
+import { ProductPrice } from "components/product/product-price";
 import RelatedProductsSlider from "components/product/RelatedProductsSlider";
 import { HIDDEN_PRODUCT_TAG } from "lib/constants";
 import { getProduct, getProductMedia } from "lib/shopify";
@@ -135,12 +135,7 @@ export default async function ProductPage(props: {
                       />
                     </h2>
                     <div className="text-sm text-neutral-500">
-                      <Price
-                        amount={product.priceRange.maxVariantPrice.amount}
-                        currencyCode={
-                          product.priceRange.maxVariantPrice.currencyCode
-                        }
-                      />
+                      <ProductPrice product={product} />
                     </div>
                   </Suspense>
                 </div>
