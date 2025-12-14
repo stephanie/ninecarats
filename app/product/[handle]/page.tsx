@@ -1,5 +1,4 @@
 import { AddToCart } from "components/cart/add-to-cart";
-import { GridTileImage } from "components/grid/tile";
 import ProductMetafields from "components/home/ProductMetafields";
 import Price from "components/price";
 import { Gallery } from "components/product/gallery";
@@ -8,11 +7,7 @@ import { ProductProvider } from "components/product/product-context";
 import { ProductDescription } from "components/product/product-description";
 import RelatedProductsSlider from "components/product/RelatedProductsSlider";
 import { HIDDEN_PRODUCT_TAG } from "lib/constants";
-import {
-  getProduct,
-  getProductMedia,
-  getProductRecommendations,
-} from "lib/shopify";
+import { getProduct, getProductMedia } from "lib/shopify";
 import { baseUrl } from "lib/utils";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -217,44 +212,5 @@ export default async function ProductPage(props: {
         </ProductProvider>
       </Suspense>
     </>
-  );
-}
-
-async function RelatedProducts({ id }: { id: string }) {
-  const relatedProducts = await getProductRecommendations(id);
-
-  if (!relatedProducts.length) return null;
-
-  return (
-    <div className="py-8">
-      <h2 className="mb-4 text-2xl font-bold">Related Products</h2>
-      <ul className="flex w-full gap-4 overflow-x-auto pt-1">
-        {relatedProducts.map((product, index) => (
-          <li
-            key={product.handle}
-            className="aspect-square w-full flex-none min-[475px]:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5"
-          >
-            <Link
-              className="relative h-full w-full"
-              href={`/product/${product.handle}`}
-              prefetch={true}
-            >
-              <GridTileImage
-                index={index}
-                alt={product.title}
-                product={{
-                  title: product.title,
-                  amount: product.priceRange.maxVariantPrice.amount,
-                  currencyCode: product.priceRange.maxVariantPrice.currencyCode,
-                  metafields: product.metafields,
-                }}
-                src={product.featuredImage?.url}
-                isLast={index === relatedProducts.length - 1}
-              />
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }

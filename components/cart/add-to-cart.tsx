@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { addItem } from "components/cart/actions";
 import { useProduct } from "components/product/product-context";
 import { Product, ProductVariant } from "lib/shopify/types";
+import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
 function SubmitButton({
@@ -96,6 +97,7 @@ export function AddToCart({ product }: { product: Product }) {
   const { state } = useProduct();
   const [isPending, startTransition] = useTransition();
   const [message, setMessage] = useState<string | null>(null);
+  const router = useRouter();
 
   const variant = variants.find((variant: ProductVariant) =>
     variant.selectedOptions.every(
@@ -117,6 +119,7 @@ export function AddToCart({ product }: { product: Product }) {
       try {
         const result = await addItem(null, selectedVariantId);
         setMessage(result || "Item added to cart");
+        router.refresh();
       } catch (error) {
         setMessage("Error adding item to cart");
       }

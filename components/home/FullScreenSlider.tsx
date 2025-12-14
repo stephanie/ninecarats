@@ -25,8 +25,8 @@ interface Slide {
 const slides: Slide[] = [
   {
     type: "image",
-    src: "/images/slider/branch-rings-smaller.png",
-    mobileSrc: "/images/slider/mobile/branch-rings-smaller-mobile.png",
+    src: "/images/slider/branch-rings-smaller.avif",
+    mobileSrc: "/images/slider/mobile/branch-rings-smaller-mobile.avif",
     alt: "Two emerald eternity bands and an emerald tennis bracelet on a branch",
     link: "/search/emerald",
     tagline: "Jewelry",
@@ -36,8 +36,8 @@ const slides: Slide[] = [
   },
   {
     type: "image",
-    src: "/images/slider/slider2.png",
-    mobileSrc: "/images/slider/mobile/slider2-mobile.png",
+    src: "/images/slider/slider2.avif",
+    mobileSrc: "/images/slider/mobile/slider2-mobile.avif",
     alt: "A woman wearing the signature stud earrings",
     link: "/product/the-signature-stud-earrings",
     tagline: "Jewelry",
@@ -47,8 +47,8 @@ const slides: Slide[] = [
   },
   {
     type: "image",
-    src: "/images/slider/eternity-ring-cover-dark.png",
-    mobileSrc: "/images/slider/mobile/eternity-ring-cover-dark-mobile.png",
+    src: "/images/slider/eternity-ring-cover-dark.avif",
+    mobileSrc: "/images/slider/mobile/eternity-ring-cover-dark-mobile.avif",
     alt: "Rings",
     link: "/search/rings",
     tagline: "Wedding",

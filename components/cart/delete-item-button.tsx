@@ -3,11 +3,13 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { removeItem } from "components/cart/actions";
 import type { CartItem } from "lib/shopify/types";
+import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
 export function DeleteItemButton({ item }: { item: CartItem }) {
   const [isPending, startTransition] = useTransition();
   const [message, setMessage] = useState<string | null>(null);
+  const router = useRouter();
   const merchandiseId = item.merchandise.id;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -17,6 +19,7 @@ export function DeleteItemButton({ item }: { item: CartItem }) {
       try {
         const result = await removeItem(null, merchandiseId);
         setMessage(result || "Item removed");
+        router.refresh();
       } catch (error) {
         setMessage("Error removing item");
       }

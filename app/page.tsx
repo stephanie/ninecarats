@@ -13,7 +13,7 @@ export const metadata = {
 
 const multiImageCards = [
   {
-    image: "/images/tennis-bracelet-branch2.png",
+    image: "/images/tennis-bracelet-branch2.avif",
     imageClassName: "object-cover object-center",
     tagline: "Day Jewelry",
     heading: "The Signature Tennis Bracelet",
@@ -21,7 +21,7 @@ const multiImageCards = [
     link: "/product/the-signature-tennis-bracelet",
   },
   {
-    image: "/images/model-emerald-jewelry.png",
+    image: "/images/model-emerald-jewelry.avif",
     tagline: "Wedding",
     heading: "The Emerald Baguette Ring",
     buttonText: "Shop now",
