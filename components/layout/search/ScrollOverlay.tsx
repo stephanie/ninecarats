@@ -31,7 +31,7 @@ export default function ScrollOverlay({
 
   return (
     <div
-      className={`fixed bottom-18 left-1/2 z-10 mx-auto flex min-w-max items-center justify-center gap-15 bg-white opacity-90 border border-black px-4 transition-all duration-500 ease-in-out md:bottom-15 md:mx-0 md:w-fit ${
+      className={`fixed bottom-6 left-1/2 z-10 mx-auto flex min-w-max items-center justify-center gap-15 bg-white opacity-90 border border-black px-4 transition-all duration-500 ease-in-out md:bottom-15 md:mx-0 md:w-fit ${
         isVisible ? "translate-y-0" : "translate-y-full"
       }`}
       style={{

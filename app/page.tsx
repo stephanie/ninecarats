@@ -11,44 +11,7 @@ export const metadata = {
   },
 };
 
-const cards = [
-  {
-    image: "/images/engagement-rings.webp",
-    heading: "High Summer",
-    buttonText: "Shop now",
-    link: "#",
-  },
-  {
-    image: "/images/earrings.webp",
-    heading: "Earrings",
-    buttonText: "Shop now",
-    link: "#",
-  },
-  {
-    image: "/images/diamonds.avif",
-    heading: "Diamonds",
-    buttonText: "Learn more",
-    link: "#",
-  },
-];
-
-const cards2 = [
-  {
-    image: "/images/emerald-tennis-bracelet-model.avif",
-    heading: "Contact us",
-    buttonText: "Chat to our team",
-    link: "https://api.whatsapp.com/send/?phone=85298611934&text&type=phone_number&app_absent=0",
-  },
-  {
-    video: "/videos/diamond-rotating.mp4",
-    heading: "Our diamonds",
-    videoClassName: "bg-black",
-    buttonText: "Why we only use the highest grade diamonds",
-    link: "/our-diamonds",
-  },
-];
-
-const cards3 = [
+const multiImageCards = [
   {
     image: "/images/tennis-bracelet-branch2.png",
     imageClassName: "object-cover object-center",
@@ -60,8 +23,8 @@ const cards3 = [
   {
     image: "/images/model-emerald-jewelry.png",
     tagline: "Wedding",
-    heading: "Engagement Rings",
-    buttonText: "Shop our collection",
+    heading: "The Emerald Baguette Ring",
+    buttonText: "Shop now",
     link: "/search/rings",
   },
 ];
@@ -85,7 +48,7 @@ export default function HomePage() {
           rightImageAlt="Model wearing jewelry"
         />
       </div> */}
-      <MultiImageSection cards={cards3} columns={2} />
+      <MultiImageSection cards={multiImageCards} columns={2} />
       <ShopifyProductSlider collectionHandle="earrings" tagline="Jewelry" />
       {/* <StickyTextImageSection
         tagline="Wedding"

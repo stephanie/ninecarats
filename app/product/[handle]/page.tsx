@@ -1,5 +1,6 @@
 import { AddToCart } from "components/cart/add-to-cart";
 import { GridTileImage } from "components/grid/tile";
+import ProductMetafields from "components/home/ProductMetafields";
 import Price from "components/price";
 import { Gallery } from "components/product/gallery";
 import { MobileVariantSelector } from "components/product/MobileVariantSelector";
@@ -133,6 +134,10 @@ export default async function ProductPage(props: {
                   <Suspense fallback={null}>
                     <h2 className="text-xl text-black mb-2 font-header">
                       {product.title}
+                      <ProductMetafields
+                        metafields={product.metafields}
+                        className="mt-2"
+                      />
                     </h2>
                     <div className="text-sm text-neutral-500">
                       <Price

@@ -80,11 +80,7 @@ export function GridTileImage({
         <div
           className="w-full aspect-square border border-neutral-200 relative group transition-colors duration-300"
           style={{
-            borderRightWidth: isLast
-              ? 1
-              : (isMobile && index % 2 === 0) || (!isMobile && index % 3 !== 2)
-                ? 0
-                : 1, // Keep right border for last item in each row
+            borderRightWidth: isLast ? 1 : !isMobile && index % 3 !== 2 ? 0 : 1, // Keep right border for last item in each row
           }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -110,12 +106,13 @@ export function GridTileImage({
           )}
         </div>
       </div>
-      <div className="text-center flex flex-col pt-8 pl-1 pr-1">
+      <div className="text-center flex flex-col pt-4 sm:pt-6 pl-1 pr-1">
         <div className="text-lg text-black font-header">
           <AnimatedText direction="up" staggerDelay={200}>
             {product?.title}
             <ProductMetafields
               metafields={product?.metafields}
+              showCaratWeights={false}
               className="justify-center mt-1"
             />
           </AnimatedText>

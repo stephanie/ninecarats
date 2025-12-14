@@ -65,7 +65,20 @@ export function MobileVariantSelector({
               )}
               onClick={() => setOpenSheet(option.name)}
             >
-              Select {option.name.toLowerCase()}
+              <span className="flex items-center gap-2">
+                Select {option.name.toLowerCase()}
+                {isSizeGuideOption && showSizeGuide && (
+                  <span
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openSizeGuide();
+                    }}
+                    className="text-sm underline text-neutral-600 hover:text-neutral-900 cursor-pointer"
+                  >
+                    Size guide
+                  </span>
+                )}
+              </span>
               <span className="font-semibold">{selectedValue || "-"}</span>
             </button>
             <Transition
@@ -173,15 +186,6 @@ export function MobileVariantSelector({
                           );
                         })}
                       </ul>
-                      {isSizeGuideOption && showSizeGuide && (
-                        <button
-                          type="button"
-                          onClick={openSizeGuide}
-                          className="pt-4 text-sm underline text-neutral-600 hover:text-neutral-900"
-                        >
-                          Size guide
-                        </button>
-                      )}
                     </div>
                   </DialogPanel>
                 </TransitionChild>

@@ -267,6 +267,7 @@ export default function FullWidthProductSlider({
                   </div>
                   <ProductMetafields
                     metafields={product.metafields}
+                    showCaratWeights={false}
                     className="justify-center mt-1"
                   />
                   <div className="text-xs text-neutral-500 mt-4">
@@ -367,6 +368,7 @@ export default function FullWidthProductSlider({
                       {product.title}
                       <ProductMetafields
                         metafields={product.metafields}
+                        showCaratWeights={false}
                         className="justify-center mt-1"
                       />
                     </AnimatedText>

@@ -39,49 +39,49 @@ export function SizeGuideSidebar({
       usaSize: "3 1/4",
       ukSize: "G",
       japanSize: "5",
-      diameterMm: "14.3",
+      diameterMm: "14.3mm",
     },
     {
       ringSize: "46",
       usaSize: "3 1/2",
       ukSize: "G 1/2",
       japanSize: "6",
-      diameterMm: "14.6",
+      diameterMm: "14.6mm",
     },
     {
       ringSize: "47",
       usaSize: "4",
       ukSize: "H 1/2",
       japanSize: "7",
-      diameterMm: "15.0",
+      diameterMm: "15.0mm",
     },
     {
       ringSize: "48",
       usaSize: "4 1/4",
       ukSize: "I",
       japanSize: "8",
-      diameterMm: "15.3",
+      diameterMm: "15.3mm",
     },
     {
       ringSize: "49",
       usaSize: "4 1/2",
       ukSize: "I 1/2",
       japanSize: "9",
-      diameterMm: "15.6",
+      diameterMm: "15.6mm",
     },
     {
       ringSize: "50",
       usaSize: "4 3/4",
       ukSize: "J",
       japanSize: "10",
-      diameterMm: "15.9",
+      diameterMm: "15.9mm",
     },
     {
       ringSize: "51",
       usaSize: "5",
       ukSize: "J 1/2",
       japanSize: "11",
-      diameterMm: "16.2",
+      diameterMm: "16.2mm",
       circumferenceMm: "51.0",
     },
     {
@@ -89,21 +89,21 @@ export function SizeGuideSidebar({
       usaSize: "5 1/4",
       ukSize: "K",
       japanSize: "12",
-      diameterMm: "16.6",
+      diameterMm: "16.6mm",
     },
     {
       ringSize: "53",
       usaSize: "5 1/2",
       ukSize: "K 1/2",
       japanSize: "13",
-      diameterMm: "16.9",
+      diameterMm: "16.9mm",
     },
     {
       ringSize: "54",
       usaSize: "5 3/4",
       ukSize: "L",
       japanSize: "14",
-      diameterMm: "17.2",
+      diameterMm: "17.2mm",
       circumferenceMm: "54.0",
     },
     {
@@ -111,42 +111,42 @@ export function SizeGuideSidebar({
       usaSize: "6",
       ukSize: "L 1/2",
       japanSize: "15",
-      diameterMm: "17.5",
+      diameterMm: "17.5mm",
     },
     {
       ringSize: "56",
       usaSize: "6 1/4",
       ukSize: "M",
       japanSize: "16",
-      diameterMm: "17.8",
+      diameterMm: "17.8mm",
     },
     {
       ringSize: "57",
       usaSize: "6 1/2",
       ukSize: "M 1/2",
       japanSize: "17",
-      diameterMm: "18.1",
+      diameterMm: "18.1mm",
     },
     {
       ringSize: "58",
       usaSize: "6 3/4",
       ukSize: "N",
       japanSize: "18",
-      diameterMm: "18.5",
+      diameterMm: "18.5mm",
     },
     {
       ringSize: "59",
       usaSize: "7",
       ukSize: "N 1/2",
       japanSize: "19",
-      diameterMm: "18.8",
+      diameterMm: "18.8mm",
     },
     {
       ringSize: "60",
       usaSize: "7 1/4",
       ukSize: "O",
       japanSize: "20",
-      diameterMm: "19.1",
+      diameterMm: "19.1mm",
     },
   ];
 
@@ -239,10 +239,10 @@ export function SizeGuideSidebar({
                 <tr className="border-b border-neutral-200">
                   <th className="py-3"></th>
                   <th className="text-left py-3 text-xs font-normal text-neutral-500">
-                    Ring size (mm)
+                    Ring size
                   </th>
                   <th className="text-left py-3 text-xs font-normal text-neutral-500">
-                    Diameter (mm)
+                    Diameter
                   </th>
                   <th className="text-left py-3 text-xs font-normal text-neutral-500">
                     USA

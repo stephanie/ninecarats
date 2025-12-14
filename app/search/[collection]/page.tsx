@@ -8,8 +8,6 @@ import { getSubCollections } from "lib/shopify/sub-collections";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import Grid from "components/grid";
-import ProductGridItems from "components/layout/product-grid-items";
 import FilterSortWrapper from "components/layout/search/FilterSortWrapper";
 import SubCollectionCarousel from "components/layout/search/SubCollectionCarousel";
 import TextHeaderFull from "components/text/TextHeaderFull";
@@ -86,10 +84,12 @@ export default async function CategoryPage(props: {
       searchValue={searchValue || ""}
       resultsText={resultsText}
       collections={subCollections}
+      currentCollectionHandle={params.collection}
+      currentCollectionTitle={collection.title}
     >
       <div className="w-full max-w-[100vw] mx-auto pt-48 lg:pt-64">
         {/* Sub-collection carousel - shown above the header */}
-        <div className="px-4 sm:px-8">
+        <div className="px-4">
           <SubCollectionCarousel
             mainCollectionHandle={params.collection}
             collections={allCollections}
@@ -97,9 +97,9 @@ export default async function CategoryPage(props: {
         </div>
 
         {collection && (
-          <div className="flex items-center sm:items-end justify-between p-8 px-4 flex-col sm:flex-row gap-2">
+          <div className="flex items-end justify-between p-4 sm:p-6 flex-row gap-2">
             <div className="flex-1"></div>
-            <div className="flex-1 text-center">
+            <div className="flex-1 text-left sm:text-center">
               <TextHeaderFull className="text-black">
                 {collection.title}
               </TextHeaderFull>
@@ -109,18 +109,44 @@ export default async function CategoryPage(props: {
                 id="filter-sort-button"
                 className="flex items-center text-base text-gray-900 hover:text-gray-700 transition-colors duration-200 cursor-pointer font-header"
               >
-                Filter & Sort
+                <span className="hidden sm:block">Filter & Sort</span>
+                <span className="sm:hidden">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 30 30"
+                    fill="none"
+                  >
+                    <line
+                      x1="3"
+                      y1="7.25"
+                      x2="27"
+                      y2="7.25"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    />
+                    <line
+                      x1="9"
+                      y1="14.25"
+                      x2="21"
+                      y2="14.25"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    />
+                    <line
+                      x1="12"
+                      y1="21.25"
+                      x2="18"
+                      y2="21.25"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    />
+                  </svg>
+                </span>
               </button>
             </div>
           </div>
-        )}
-
-        {products.length === 0 ? (
-          <p className="py-3 text-md">{`No products found in this collection`}</p>
-        ) : (
-          <Grid className="grid grid-cols-2 md:grid-cols-3 w-full transition-all duration-500 ease-in-out opacity-100 scale-100">
-            <ProductGridItems products={products} />
-          </Grid>
         )}
       </div>
     </FilterSortWrapper>

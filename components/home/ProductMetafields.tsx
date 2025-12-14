@@ -5,19 +5,23 @@ import { Metafield } from "lib/shopify/types";
 
 interface ProductMetafieldsProps {
   metafields?: Metafield[];
+  showCaratWeights?: boolean;
+  showJewelryMaterial?: boolean;
   className?: string;
 }
 
 export default function ProductMetafields({
   metafields = [],
   className,
+  showCaratWeights = true,
+  showJewelryMaterial = true,
 }: ProductMetafieldsProps) {
-  const caratWeightsMetafield = metafields.find(
-    (m) => m?.key === "carat_weights"
-  );
-  const jewelryMaterialMetafield = metafields.find(
-    (m) => m?.key === "jewelry_material"
-  );
+  const caratWeightsMetafield = showCaratWeights
+    ? metafields.find((m) => m?.key === "carat_weights")
+    : null;
+  const jewelryMaterialMetafield = showJewelryMaterial
+    ? metafields.find((m) => m?.key === "jewelry_material")
+    : null;
 
   // Parse list metafield values (they come as JSON strings)
   const parseListValue = (value: string | null | undefined): string[] => {

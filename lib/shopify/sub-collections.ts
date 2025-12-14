@@ -12,20 +12,76 @@ export const SUB_COLLECTION_MAPPING: Record<string, SubCollectionConfig[]> = {
   necklaces: [
     {
       handle: "yellow-gold",
-      imagePath: "/images/collections/necklaces-yellow-gold.png",
+      imagePath: "/images/collections/necklaces-yellow-gold.avif",
       imageAlt: "Yellow Gold Necklaces",
     },
     {
       handle: "platinum",
-      imagePath: "/images/collections/necklaces-platinum.png",
+      imagePath: "/images/collections/necklaces-platinum.avif",
       imageAlt: "Platinum Necklaces",
     },
     {
       handle: "signature",
-      imagePath: "/images/collections/necklaces-signature.png",
+      imagePath: "/images/collections/necklaces-signature.avif",
       imageAlt: "Signature Necklaces",
     },
   ],
+  // rings: [
+  //   {
+  //     handle: "engagement-rings",
+  //     imagePath: "/images/collections/necklaces-yellow-gold.avif",
+  //     imageAlt: "Engagement Rings",
+  //   },
+  //   {
+  //     handle: "bands",
+  //     imagePath: "/images/collections/necklaces-yellow-gold.avif",
+  //     imageAlt: "Bands",
+  //   },
+  //   {
+  //     handle: "yellow-gold",
+  //     imagePath: "/images/collections/necklaces-yellow-gold.avif",
+  //     imageAlt: "Yellow Gold Rings",
+  //   },
+  //   {
+  //     handle: "white-gold",
+  //     imagePath: "/images/collections/necklaces-yellow-gold.avif",
+  //     imageAlt: "White Gold Rings",
+  //   },
+  //   {
+  //     handle: "platinum",
+  //     imagePath: "/images/collections/necklaces-yellow-gold.avif",
+  //     imageAlt: "Platinum Rings",
+  //   },
+  // ],
+  // bracelets: [
+  //   {
+  //     handle: "yellow-gold",
+  //     imagePath: "/images/collections/necklaces-yellow-gold.avif",
+  //     imageAlt: "Yellow Gold Bracelets",
+  //   },
+  //   {
+  //     handle: "platinum",
+  //     imagePath: "/images/collections/necklaces-yellow-gold.avif",
+  //     imageAlt: "Platinum Bracelets",
+  //   },
+  //   {
+  //     handle: "signature",
+  //     imagePath: "/images/collections/necklaces-signature.avif",
+  //     imageAlt: "Signature Bracelets",
+  //   },
+  // ],
+  // earrings: [
+  //   {
+  //     handle: "signature",
+  //     imagePath: "/images/collections/necklaces-signature.avif",
+  //     imageAlt: "Signature Earrings",
+  //   },
+  //   {
+  //     handle: "emerald",
+  //     imagePath: "/images/collections/necklaces-signature.avif",
+  //     imageAlt: "Emerald Cut Earrings",
+  //   },
+  // ],
 };
 
 // Get sub-collections for a given main collection handle

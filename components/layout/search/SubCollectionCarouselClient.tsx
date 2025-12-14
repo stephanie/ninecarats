@@ -27,12 +27,22 @@ export default function SubCollectionCarouselClient({
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => {
       if (isMobile && containerRef.current) {
-        containerRef.current.scrollBy({ left: 300, behavior: "smooth" });
+        const container = containerRef.current;
+        const { scrollLeft, scrollWidth, clientWidth } = container;
+        // Only scroll if there's more content to the right
+        if (scrollLeft + clientWidth < scrollWidth) {
+          container.scrollBy({ left: 300, behavior: "smooth" });
+        }
       }
     },
     onSwipedRight: () => {
       if (isMobile && containerRef.current) {
-        containerRef.current.scrollBy({ left: -300, behavior: "smooth" });
+        const container = containerRef.current;
+        const { scrollLeft } = container;
+        // Only scroll if there's content to the left
+        if (scrollLeft > 0) {
+          container.scrollBy({ left: -300, behavior: "smooth" });
+        }
       }
     },
     trackMouse: true,
@@ -59,10 +69,10 @@ export default function SubCollectionCarouselClient({
             className={`${
               isMobile
                 ? "flex-shrink-0 w-[200px] scroll-snap-align-start"
-                : "w-[278px]"
+                : "w-[15vw]"
             } group`}
           >
-            <div className="relative aspect-square w-full overflow-hidden bg-primary">
+            <div className="relative aspect-square w-full overflow-hidden">
               {collection.imageUrl ? (
                 <Image
                   src={collection.imageUrl}

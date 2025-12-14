@@ -1,25 +1,33 @@
 "use client";
 
+import { SortFilterItem, defaultSort } from "lib/constants";
+import { Product } from "lib/shopify/types";
 import { useEffect, useState } from "react";
 import FilterSortSidebar from "./FilterSortSidebar";
 import ScrollOverlay from "./ScrollOverlay";
+import SortedProductGrid from "./SortedProductGrid";
 
 interface FilterSortWrapperProps {
   children: React.ReactNode;
-  products: any[];
+  products: Product[];
   searchValue: string;
   resultsText: string;
   collections?: any[]; // Add collections prop
+  currentCollectionHandle?: string;
+  currentCollectionTitle?: string;
 }
 
 export default function FilterSortWrapper({
   children,
-  products,
+  products: initialProducts,
   searchValue,
   resultsText,
   collections = [], // Default to empty array
+  currentCollectionHandle,
+  currentCollectionTitle,
 }: FilterSortWrapperProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [currentSort, setCurrentSort] = useState<SortFilterItem>(defaultSort);
 
   const handleFilterSortClick = () => {
     setIsSidebarOpen(true);
@@ -38,15 +46,27 @@ export default function FilterSortWrapper({
     }
   }, []);
 
+  const handleSortChange = (sortItem: SortFilterItem) => {
+    setCurrentSort(sortItem);
+    handleCloseSidebar();
+  };
+
   return (
     <>
       {children}
+
+      {/* Render sorted products */}
+      <SortedProductGrid products={initialProducts} currentSort={currentSort} />
 
       {/* Filter & Sort Sidebar */}
       <FilterSortSidebar
         isOpen={isSidebarOpen}
         onClose={handleCloseSidebar}
         collections={collections}
+        currentCollectionHandle={currentCollectionHandle}
+        currentCollectionTitle={currentCollectionTitle}
+        currentSort={currentSort}
+        onSortChange={handleSortChange}
       />
 
       {/* Scroll Overlay */}
