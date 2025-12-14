@@ -267,7 +267,7 @@ export default function FullWidthProductSlider({
                   </div>
                   <ProductMetafields
                     metafields={product.metafields}
-                    className="font-body text-xs justify-center mt-1"
+                    className="justify-center mt-1"
                   />
                   <div className="text-xs text-neutral-500 mt-4">
                     {getPrice(product)}
@@ -367,7 +367,7 @@ export default function FullWidthProductSlider({
                       {product.title}
                       <ProductMetafields
                         metafields={product.metafields}
-                        className="font-body text-xs justify-center mt-1"
+                        className="justify-center mt-1"
                       />
                     </AnimatedText>
                   </div>

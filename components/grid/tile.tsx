@@ -116,7 +116,7 @@ export function GridTileImage({
             {product?.title}
             <ProductMetafields
               metafields={product?.metafields}
-              className="font-body text-xs justify-center mt-1"
+              className="justify-center mt-1"
             />
           </AnimatedText>
         </div>

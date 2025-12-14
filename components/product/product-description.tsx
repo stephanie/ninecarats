@@ -80,10 +80,10 @@ export function ProductDescription({ product }: { product: Product }) {
 
   // Use selected variant price or fall back to max variant price
   const displayPrice =
-    selectedVariant?.price || product.priceRange.maxVariantPrice;
+    selectedVariant?.price || product.priceRange.minVariantPrice;
   const displayCurrencyCode =
     selectedVariant?.price?.currencyCode ||
-    product.priceRange.maxVariantPrice.currencyCode;
+    product.priceRange.minVariantPrice.currencyCode;
 
   const menu = useMemo(() => {
     const baseSections: MenuSection[] = [
@@ -130,10 +130,7 @@ export function ProductDescription({ product }: { product: Product }) {
           {product.title}
         </h2>
         <div className="text-sm text-neutral-500 mb-8 hidden lg:block">
-          <ProductMetafields
-            metafields={product.metafields}
-            className="font-body text-xs mb-4"
-          />
+          <ProductMetafields metafields={product.metafields} className="mb-4" />
           <Price
             amount={displayPrice.amount}
             currencyCode={displayCurrencyCode}

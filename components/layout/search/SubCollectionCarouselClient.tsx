@@ -59,7 +59,7 @@ export default function SubCollectionCarouselClient({
             className={`${
               isMobile
                 ? "flex-shrink-0 w-[200px] scroll-snap-align-start"
-                : "w-[200px]"
+                : "w-[278px]"
             } group`}
           >
             <div className="relative aspect-square w-full overflow-hidden bg-primary">
@@ -76,7 +76,7 @@ export default function SubCollectionCarouselClient({
               )}
             </div>
             <div className="mt-6 text-center">
-              <h3 className="text-xs font-body text-black uppercase tracking-wide">
+              <h3 className="text-sm font-body text-black uppercase tracking-wide">
                 {collection.title}
               </h3>
             </div>

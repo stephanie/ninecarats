@@ -46,7 +46,7 @@ export default function ProductMetafields({
   return (
     <div
       className={clsx(
-        "text-sm text-neutral-500 flex items-center gap-1 flex-wrap",
+        "text-sm font-body text-neutral-500 flex items-center gap-1 flex-wrap",
         className
       )}
     >
