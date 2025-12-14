@@ -77,6 +77,15 @@ export default async function CategoryPage(props: {
   const subCollections = allCollections.filter((collection) =>
     subCollectionHandles.includes(collection.handle.toLowerCase())
   );
+  const mapCollectionTitle = (title: string) => {
+    if (title.toLowerCase() in { emerald: true, signature: true }) {
+      return {
+        emerald: "The Emerald Collection",
+        signature: "The Signature Collection",
+      }[title.toLowerCase()];
+    }
+    return title;
+  };
 
   return (
     <FilterSortWrapper
@@ -101,7 +110,7 @@ export default async function CategoryPage(props: {
             <div className="flex-1"></div>
             <div className="flex-1 text-left sm:text-center">
               <TextHeaderFull className="text-black">
-                {collection.title}
+                {mapCollectionTitle(collection.title)}
               </TextHeaderFull>
             </div>
             <div className="flex-1 flex justify-end">
