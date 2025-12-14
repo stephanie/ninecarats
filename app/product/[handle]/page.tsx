@@ -109,7 +109,7 @@ export default async function ProductPage(props: {
           __html: JSON.stringify(productJsonLd),
         }}
       />
-      <Suspense fallback={<div className="w-full flex flex-col gap-4" />}>
+      <Suspense fallback={null}>
         <ProductProvider>
           <div className="w-full flex flex-col gap-4">
             {/* Full width gallery section */}
