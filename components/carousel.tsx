@@ -26,7 +26,6 @@ export async function Carousel() {
               className="relative h-full w-full"
             >
               <GridTileImage
-                index={i}
                 alt={product.title}
                 product={{
                   title: product.title,
@@ -36,7 +35,6 @@ export async function Carousel() {
                 }}
                 src={product.featuredImage?.url}
                 fill
-                isLast={i === carouselProducts.length - 1}
                 sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
               />
             </Link>

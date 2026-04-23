@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 interface UseScrollAnimationOptions {
   threshold?: number;
@@ -21,26 +21,37 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
   const [hasAnimated, setHasAnimated] = useState(false);
   const elementRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const element = elementRef.current;
     if (!element) return;
+
+    let cancelled = false;
+    let delayTimeoutId: ReturnType<typeof setTimeout> | undefined;
+
+    const applyVisible = () => {
+      if (cancelled) return;
+      setIsVisible(true);
+      if (triggerOnce) {
+        setHasAnimated(true);
+      }
+    };
+
+    const scheduleVisible = () => {
+      if (delayTimeoutId !== undefined) {
+        clearTimeout(delayTimeoutId);
+        delayTimeoutId = undefined;
+      }
+      if (delay > 0) {
+        delayTimeoutId = setTimeout(applyVisible, delay);
+      } else {
+        applyVisible();
+      }
+    };
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry?.isIntersecting) {
-          if (delay > 0) {
-            setTimeout(() => {
-              setIsVisible(true);
-              if (triggerOnce) {
-                setHasAnimated(true);
-              }
-            }, delay);
-          } else {
-            setIsVisible(true);
-            if (triggerOnce) {
-              setHasAnimated(true);
-            }
-          }
+          scheduleVisible();
         } else if (!triggerOnce) {
           setIsVisible(false);
         }
@@ -53,8 +64,36 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
 
     observer.observe(element);
 
+    // After client-side navigation (e.g. logo → home), some browsers omit the
+    // initial IntersectionObserver callback. Drain records + fall back to a
+    // layout-time bounds check so content is not stuck at opacity 0.
+    const rafId = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (cancelled) return;
+        for (const entry of observer.takeRecords()) {
+          if (entry.isIntersecting) {
+            scheduleVisible();
+            return;
+          }
+        }
+        const rect = element.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const vw = window.innerWidth;
+        const intersects =
+          rect.top < vh && rect.bottom > 0 && rect.left < vw && rect.right > 0;
+        if (intersects) {
+          scheduleVisible();
+        }
+      });
+    });
+
     return () => {
-      observer.unobserve(element);
+      cancelled = true;
+      if (delayTimeoutId !== undefined) {
+        clearTimeout(delayTimeoutId);
+      }
+      cancelAnimationFrame(rafId);
+      observer.disconnect();
     };
   }, [threshold, rootMargin, triggerOnce, delay]);
 

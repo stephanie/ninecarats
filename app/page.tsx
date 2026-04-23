@@ -25,7 +25,7 @@ const multiImageCards = [
     tagline: "Wedding",
     heading: "The Emerald Baguette Ring",
     buttonText: "Shop now",
-    link: "/search/rings",
+    link: "/product/the-emerald-baguette-ring",
   },
 ];
 

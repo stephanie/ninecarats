@@ -10,7 +10,7 @@ export default function ProductGridItems({
 }) {
   return (
     <>
-      {products.map((product, index) => (
+      {products.map((product) => (
         <Grid.Item key={product.handle} className="animate-fadeIn">
           <Link href={`/product/${product.handle}`} prefetch={true}>
             <GridTileImage
@@ -22,9 +22,7 @@ export default function ProductGridItems({
                 metafields: product.metafields,
               }}
               src={product.featuredImage?.url}
-              index={index}
               productHandle={product.handle}
-              isLast={index === products.length - 1}
             />
           </Link>
         </Grid.Item>

@@ -24,15 +24,21 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const pathname = usePathname();
   const { customer, logout } = useCustomer();
 
-  const startWithLargeNav = pathname === "/" || pathname.includes("/search");
+  // usePathname() can be null on first render in production (router not ready / static pre-render).
+  // Treat null as root so the home page shows the large nav instead of flashing the small one.
+  const startWithLargeNav =
+    pathname === "/" ||
+    (pathname != null && pathname.includes("/search")) ||
+    pathname === null;
 
   const [forceSmall, setForceSmall] = useState(false);
   const [textColor, setTextColor] = useState("text-white");
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const pageTextColor =
     pathname === "/" ||
-    pathname.includes("/about") ||
-    pathname.includes("/our-diamonds")
+    pathname === null ||
+    (pathname != null &&
+      (pathname.includes("/about") || pathname.includes("/our-diamonds")))
       ? "text-white"
       : "text-black";
 
@@ -41,20 +47,42 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   }, [startWithLargeNav]);
 
   useEffect(() => {
-    function handleScroll() {
+    function updateScrolled() {
       setScrolled(window.scrollY > 0);
     }
-    if (typeof window !== "undefined") {
-      // Check initial scroll position
-      handleScroll();
 
-      // Add scroll listener
-      window.addEventListener("scroll", handleScroll);
+    if (typeof window === "undefined") return;
 
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
+    // Initial read
+    updateScrolled();
+
+    // Re-check after load/layout: PageLoader removes body.loading and restores scroll,
+    // and mobile viewport can change (e.g. URL bar). Without this, we can miss the
+    // correct scroll state on first load on mobile.
+    const afterLoad = () => {
+      updateScrolled();
+      setTimeout(updateScrolled, 100);
+      setTimeout(updateScrolled, 400);
+    };
+    if (document.readyState === "complete") {
+      afterLoad();
+    } else {
+      window.addEventListener("load", afterLoad);
     }
+
+    // Passive so mobile browsers don't throttle scroll (e.g. iOS Safari)
+    window.addEventListener("scroll", updateScrolled, { passive: true });
+
+    // Re-check when viewport changes (mobile browser chrome, orientation)
+    window.visualViewport?.addEventListener("resize", updateScrolled);
+    window.addEventListener("resize", updateScrolled);
+
+    return () => {
+      window.removeEventListener("scroll", updateScrolled);
+      window.visualViewport?.removeEventListener("resize", updateScrolled);
+      window.removeEventListener("resize", updateScrolled);
+      window.removeEventListener("load", afterLoad);
+    };
   }, []);
 
   // Update text color when pathname changes

@@ -40,7 +40,7 @@ export default function Loading() {
               <Grid.Item key={index} className="animate-fadeIn">
                 <div className="flex-shrink-0 w-full flex flex-col pb-8">
                   <div className="flex flex-col items-center">
-                    <div className="w-full aspect-square bg-gray-200 animate-pulse border border-neutral-200"></div>
+                    <div className="w-full aspect-square bg-gray-200 animate-pulse"></div>
                   </div>
                   <div className="text-center flex flex-col pt-8 pl-1 pr-1">
                     <div className="h-5 w-3/4 mx-auto bg-gray-200 rounded animate-pulse mb-2"></div>

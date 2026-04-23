@@ -7,14 +7,10 @@ function ThreeItemGridItem({
   item,
   size,
   priority,
-  key,
-  isLast,
 }: {
   item: Product;
   size: "full" | "half";
   priority?: boolean;
-  key: number;
-  isLast?: boolean;
 }) {
   return (
     <div
@@ -30,7 +26,6 @@ function ThreeItemGridItem({
         prefetch={true}
       >
         <GridTileImage
-          index={key}
           src={item.featuredImage.url}
           fill
           sizes={
@@ -40,7 +35,6 @@ function ThreeItemGridItem({
           }
           priority={priority}
           alt={item.title}
-          isLast={isLast}
           product={{
             title: item.title as string,
             amount: item.priceRange.maxVariantPrice.amount,
@@ -69,7 +63,6 @@ export async function ThreeItemGrid() {
           size="full"
           item={item}
           priority={true}
-          isLast={idx === homepageItems.length - 1}
         />
       ))}
     </section>

@@ -29,7 +29,7 @@ export const SUB_COLLECTION_MAPPING: Record<string, SubCollectionConfig[]> = {
   rings: [
     {
       handle: "engagement-rings",
-      imagePath: "/images/collections/rings-oval-gold.avif",
+      imagePath: "/images/collections/rings-yellow-gold.avif",
       imageAlt: "Engagement Rings",
     },
     {
@@ -81,8 +81,7 @@ export const SUB_COLLECTION_MAPPING: Record<string, SubCollectionConfig[]> = {
 
 // Get sub-collections for a given main collection handle
 export function getSubCollections(
-  mainCollectionHandle: string
+  mainCollectionHandle: string,
 ): SubCollectionConfig[] {
   return SUB_COLLECTION_MAPPING[mainCollectionHandle.toLowerCase()] || [];
 }
-

@@ -186,10 +186,10 @@ export function SizeGuideSidebar({
                     SIZE
                   </th>
                   <th className="text-left py-3 text-xs font-normal text-neutral-500">
-                    WRIST DIAMETER (IN)
+                    WRIST DIAMETER
                   </th>
                   <th className="text-left py-3 text-xs font-normal text-neutral-500">
-                    WRIST DIAMETER (CM)
+                    WRIST DIAMETER
                   </th>
                 </tr>
               </thead>

@@ -10,7 +10,8 @@ import { Media, Product, Video } from "lib/shopify/types";
 import { formatPrice } from "lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import ProductMetafields from "./ProductMetafields";
 
@@ -38,7 +39,7 @@ export default function FullWidthProductSlider({
   const [visibleProducts, setVisibleProducts] = useState<Set<string>>(
     new Set()
   );
-  const hasFetchedMedia = useRef(false);
+  const pathname = usePathname();
 
   // Filter out products without proper data
   const validProducts = useMemo(() => {
@@ -54,22 +55,26 @@ export default function FullWidthProductSlider({
 
   const productsPerPage = isMobile ? 1 : 3;
   const totalPages = Math.ceil(validProducts.length / productsPerPage);
+  /** Mobile slide width: smaller than viewport so the next product always peeks in. */
+  const mobileSlideVw = 65;
 
-  // Reset hasFetchedMedia when products change
+  // Reset carousel page when returning via client navigation (same product IDs → stable key).
   useEffect(() => {
-    hasFetchedMedia.current = false;
+    setCurrentPage(0);
+  }, [pathname, validProducts, isMobile]);
+
+  // Clear and refetch product media in one effect so we never leave hasFetchedMedia stuck
+  // true while productMedia is empty (can happen when effects run in awkward orders).
+  useEffect(() => {
     setProductMedia({});
-  }, [products]);
 
-  // Fetch media data for products
-  useEffect(() => {
-    if (hasFetchedMedia.current || validProducts.length === 0) {
+    if (validProducts.length === 0) {
       return;
     }
 
-    const fetchMediaForProducts = async () => {
-      hasFetchedMedia.current = true;
+    let cancelled = false;
 
+    const fetchMediaForProducts = async () => {
       const mediaPromises = validProducts.map(async (product) => {
         try {
           const media = await getProductMedia(product.handle);
@@ -84,6 +89,8 @@ export default function FullWidthProductSlider({
       });
 
       const results = await Promise.all(mediaPromises);
+      if (cancelled) return;
+
       const mediaMap: Record<string, Media[]> = {};
       results.forEach(({ productId, media }) => {
         mediaMap[productId] = media;
@@ -93,6 +100,10 @@ export default function FullWidthProductSlider({
     };
 
     fetchMediaForProducts();
+
+    return () => {
+      cancelled = true;
+    };
   }, [validProducts]);
 
   // Scroll detection for mobile video autoplay
@@ -205,25 +216,23 @@ export default function FullWidthProductSlider({
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{
-            transform: `translateX(calc(-${currentPage * 80}vw + calc((100vw - 80vw) / 2)))`,
+            transform: `translateX(calc(-${currentPage * mobileSlideVw}vw + calc((100vw - ${mobileSlideVw}vw) / 2)))`,
           }}
         >
           {validProducts.map((product, idx) => (
             <Link href={`/product/${product.handle}`} key={product.id}>
               <div
                 key={product.id}
-                className="flex-shrink-0 w-[80vw] max-w-[80vw] flex flex-col mb-8"
+                className="flex-shrink-0 flex flex-col mb-8"
+                style={{
+                  width: `${mobileSlideVw}vw`,
+                  maxWidth: `${mobileSlideVw}vw`,
+                }}
                 data-product-id={product.id}
               >
                 <div className="flex flex-col items-center">
                   <div
-                    className={`w-full aspect-square h-[80vw] relative mb-6 group transition-colors duration-500 border border-neutral-200 ${
-                      validProducts.length > 1 && idx === 0
-                        ? "border-r-0"
-                        : validProducts.length > 1 && idx % 2 === 0
-                          ? "border-l-0"
-                          : ""
-                    } ${
+                    className={`w-full aspect-square relative mb-6 group transition-colors duration-500 ${
                       hoveredProduct === product.id
                         ? "bg-white"
                         : "bg-neutral-100"
@@ -238,7 +247,7 @@ export default function FullWidthProductSlider({
                       alt={product.featuredImage?.altText || product.title}
                       fill
                       className="object-cover"
-                      sizes="80vw"
+                      sizes={`${mobileSlideVw}vw`}
                       priority={idx === 0}
                     />
                     {getMp4VideoUrl(product.id) &&
@@ -273,7 +282,6 @@ export default function FullWidthProductSlider({
                   </div>
                   <ProductMetafields
                     metafields={product.metafields}
-                    showCaratWeights={false}
                     className="justify-center mt-1"
                   />
                   <div className="text-xs text-neutral-500 mt-4">
@@ -325,14 +333,7 @@ export default function FullWidthProductSlider({
                 className="flex flex-col items-center"
               >
                 <div
-                  className={`w-full aspect-square max-h-[50vh] relative mb-8 group transition-colors duration-300 ${
-                    // Old border logic if we want to bring it back on desktop - removed border border-neutral-200
-                    productCount === 3 && idx === 0
-                      ? "border-r-0"
-                      : productCount === 3 && idx === 2
-                        ? "border-l-0"
-                        : ""
-                  }`}
+                  className="w-full aspect-square max-h-[50vh] relative mb-8 group transition-colors duration-300"
                   onMouseEnter={() => setHoveredProduct(product.id)}
                   onMouseLeave={() => setHoveredProduct(null)}
                 >
@@ -374,7 +375,6 @@ export default function FullWidthProductSlider({
                       {product.title}
                       <ProductMetafields
                         metafields={product.metafields}
-                        showCaratWeights={false}
                         className="justify-center mt-1"
                       />
                     </AnimatedText>

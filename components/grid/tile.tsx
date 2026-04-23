@@ -1,7 +1,6 @@
 "use client";
 
 import { AnimatedText } from "components/animations";
-import { useIsMobile } from "hooks/useIsMobile";
 import { getProductMedia } from "lib/shopify";
 import { Media, Metafield, Video } from "lib/shopify/types";
 import { formatPrice } from "lib/utils";
@@ -15,9 +14,7 @@ export function GridTileImage({
   isInteractive = true,
   active,
   product,
-  index,
   productHandle,
-  isLast,
   ...props
 }: {
   src: string;
@@ -31,13 +28,10 @@ export function GridTileImage({
     metafields?: Metafield[];
   };
   key?: string;
-  index: number;
   productHandle?: string;
-  isLast?: boolean;
 } & React.ComponentProps<typeof Image>) {
   const [productMedia, setProductMedia] = useState<Media[]>([]);
   const [isHovered, setIsHovered] = useState(false);
-  const isMobile = useIsMobile();
 
   // Fetch media data for the product
   useEffect(() => {
@@ -50,7 +44,7 @@ export function GridTileImage({
       } catch (error) {
         console.error(
           `Failed to fetch media for product ${productHandle}:`,
-          error
+          error,
         );
       }
     };
@@ -78,10 +72,7 @@ export function GridTileImage({
     >
       <div className="flex flex-col items-center">
         <div
-          className="w-full aspect-square border border-neutral-200 relative group transition-colors duration-300"
-          style={{
-            borderRightWidth: isLast ? 1 : !isMobile && index % 3 !== 2 ? 0 : 1, // Keep right border for last item in each row
-          }}
+          className="w-full aspect-square relative group transition-colors duration-300"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -112,7 +103,6 @@ export function GridTileImage({
             {product?.title}
             <ProductMetafields
               metafields={product?.metafields}
-              showCaratWeights={false}
               className="justify-center mt-1"
             />
           </AnimatedText>

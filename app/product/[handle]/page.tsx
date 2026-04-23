@@ -26,9 +26,13 @@ export async function generateMetadata(props: {
   const { url, width, height, altText: alt } = product.featuredImage || {};
   const indexable = !product.tags.includes(HIDDEN_PRODUCT_TAG);
 
+  const pageUrl = `${baseUrl}/product/${params.handle}`;
+  const shareTitle = product.seo.title || product.title;
+  const shareDescription = product.seo.description || product.description;
+
   return {
-    title: product.seo.title || product.title,
-    description: product.seo.description || product.description,
+    title: shareTitle,
+    description: shareDescription,
     robots: {
       index: indexable,
       follow: indexable,
@@ -39,7 +43,10 @@ export async function generateMetadata(props: {
     },
     openGraph: url
       ? {
-          url: `${baseUrl}/product/${params.handle}`,
+          type: "website",
+          url: pageUrl,
+          title: shareTitle,
+          description: shareDescription,
           images: [
             {
               url,
@@ -50,8 +57,19 @@ export async function generateMetadata(props: {
           ],
         }
       : {
-          url: `${baseUrl}/product/${params.handle}`,
+          type: "website",
+          url: pageUrl,
+          title: shareTitle,
+          description: shareDescription,
         },
+    ...(url && {
+      twitter: {
+        card: "summary_large_image",
+        title: shareTitle,
+        description: shareDescription,
+        images: [url],
+      },
+    }),
   };
 }
 
