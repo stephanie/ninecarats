@@ -29,11 +29,11 @@ export const variantLinkConfig: Record<string, VariantLinkGroup[]> = {
       options: [
         { label: "5 Carats", handle: "the-signature-tennis-bracelet-5-carats" },
         {
-          label: "8.6 Carats",
+          label: "8 Carats",
           handle: "the-signature-tennis-bracelet-8-carats",
         },
         {
-          label: "9.3 Carats",
+          label: "9 Carats",
           handle: "the-signature-tennis-bracelet",
         },
       ],
@@ -61,11 +61,11 @@ export const variantLinkConfig: Record<string, VariantLinkGroup[]> = {
           handle: "the-signature-tennis-bracelet-yellow-gold-5-carats",
         },
         {
-          label: "8.6 Carats",
+          label: "8 Carats",
           handle: "the-signature-tennis-bracelet-yellow-gold-8-carats",
         },
         {
-          label: "9.3 Carats",
+          label: "9 Carats",
           handle: "the-signature-tennis-bracelet-yellow-gold",
         },
       ],
@@ -93,11 +93,11 @@ export const variantLinkConfig: Record<string, VariantLinkGroup[]> = {
           handle: "the-signature-tennis-bracelet-5-carats",
         },
         {
-          label: "8.6 Carats",
+          label: "8 Carats",
           handle: "the-signature-tennis-bracelet-8-carats",
         },
         {
-          label: "9.3 Carats",
+          label: "9 Carats",
           handle: "the-signature-tennis-bracelet",
         },
       ],
@@ -125,11 +125,11 @@ export const variantLinkConfig: Record<string, VariantLinkGroup[]> = {
           handle: "the-signature-tennis-bracelet-yellow-gold-5-carats",
         },
         {
-          label: "8.6 Carats",
+          label: "8 Carats",
           handle: "the-signature-tennis-bracelet-yellow-gold-8-carats",
         },
         {
-          label: "9.3 Carats",
+          label: "9 Carats",
           handle: "the-signature-tennis-bracelet-yellow-gold",
         },
       ],
@@ -157,11 +157,11 @@ export const variantLinkConfig: Record<string, VariantLinkGroup[]> = {
           handle: "the-signature-tennis-bracelet-5-carats",
         },
         {
-          label: "8.6 Carats",
+          label: "8 Carats",
           handle: "the-signature-tennis-bracelet-8-carats",
         },
         {
-          label: "9.3 Carats",
+          label: "9 Carats",
           handle: "the-signature-tennis-bracelet",
         },
       ],
@@ -189,11 +189,11 @@ export const variantLinkConfig: Record<string, VariantLinkGroup[]> = {
           handle: "the-signature-tennis-bracelet-yellow-gold-5-carats",
         },
         {
-          label: "8.6 Carats",
+          label: "8 Carats",
           handle: "the-signature-tennis-bracelet-yellow-gold-8-carats",
         },
         {
-          label: "9.3 Carats",
+          label: "9 Carats",
           handle: "the-signature-tennis-bracelet-yellow-gold",
         },
       ],

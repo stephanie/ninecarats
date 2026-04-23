@@ -1,6 +1,7 @@
 "use client";
 import CartSidebar from "components/cart/cart-sidebar";
 import { useCustomer } from "components/customer/CustomerContext";
+import { DiamondExpertSidebar } from "components/product/DiamondExpertSidebar";
 import { useIsMobile } from "hooks/useIsMobile";
 import { Menu } from "lib/shopify/types";
 import Link from "next/link";
@@ -8,7 +9,6 @@ import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
 import CartIcon from "./CartIcon";
 import CategoriesSidebar from "./CategoriesSidebar";
-import ContactSidebar from "./ContactSidebar";
 import CustomerLoginSidebar from "./CustomerLoginSidebar";
 import MobileMenu from "./mobile-menu";
 import Search, { SearchSkeleton } from "./search";
@@ -18,7 +18,8 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
   const [topBarClosed, setTopBarClosed] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
   const [isLoginSidebarOpen, setIsLoginSidebarOpen] = useState(false);
-  const [isContactSidebarOpen, setIsContactSidebarOpen] = useState(false);
+  const [isDiamondExpertSidebarOpen, setDiamondExpertSidebarOpen] =
+    useState(false);
   const [isCategoriesSidebarOpen, setIsCategoriesSidebarOpen] = useState(false);
   const isMobile = useIsMobile();
   const pathname = usePathname();
@@ -143,8 +144,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
         >
           <div className="w-full flex items-center justify-start sm:justify-center">
             <p className="opacity-90">
-              Enjoy complimentary shipping and gift wrapping on all orders in
-              Hong Kong.{" "}
+              Enjoy free global shipping to eligible countries on all orders.{" "}
               <Link href="/search/all-products" className="underline">
                 Shop now
               </Link>
@@ -194,7 +194,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
                 <MobileMenu
                   menu={menu}
                   textColor={getTextColor(scrolled)}
-                  onContactClick={() => setIsContactSidebarOpen(true)}
+                  onContactClick={() => setDiamondExpertSidebarOpen(true)}
                   onCategoriesClick={() => setIsCategoriesSidebarOpen(true)}
                 />
               </Suspense>
@@ -383,7 +383,7 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
               {/* Phone Icon */}
               <button
                 aria-label="Phone"
-                onClick={() => setIsContactSidebarOpen(true)}
+                onClick={() => setDiamondExpertSidebarOpen(true)}
                 className={`transition-colors duration-100 hidden sm:flex ${getTextColor(scrolled)}`}
               >
                 <svg
@@ -562,16 +562,16 @@ export default function LargeNavHeader({ menu }: { menu: Menu[] }) {
         />
 
         {/* Contact Sidebar */}
-        <ContactSidebar
-          isOpen={isContactSidebarOpen}
-          onClose={() => setIsContactSidebarOpen(false)}
+        <DiamondExpertSidebar
+          isOpen={isDiamondExpertSidebarOpen}
+          onClose={() => setDiamondExpertSidebarOpen(false)}
         />
 
         {/* Categories Sidebar */}
         <CategoriesSidebar
           isOpen={isCategoriesSidebarOpen}
           onClose={() => setIsCategoriesSidebarOpen(false)}
-          onContactClick={() => setIsContactSidebarOpen(true)}
+          onContactClick={() => setDiamondExpertSidebarOpen(true)}
         />
       </div>
     </header>

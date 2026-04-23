@@ -22,22 +22,38 @@ export default function PageLoader() {
     // Make body visible once React has hydrated
     document.documentElement.removeAttribute("data-loading");
 
-    const handleLoad = () => {
-      // Small delay to ensure smooth transition
-      setTimeout(() => {
-        setIsLoading(false);
-        // Remove loading class to restore scrolling
-        document.body.classList.remove("loading");
-      }, 300);
+    const restoreScroll = () => {
+      setIsLoading(false);
+      document.body.classList.remove("loading");
     };
 
-    // If page is already loaded
+    const handleLoad = () => {
+      setTimeout(restoreScroll, 300);
+    };
+
+    // Hard cap: always restore scroll within 3 s so a missing load event
+    // (service worker, flaky mobile network) never leaves the page locked.
+    const fallback = setTimeout(restoreScroll, 3000);
+
+    // Also restore immediately on first scroll attempt — the user is ready.
+    const onFirstScroll = () => restoreScroll();
+    window.addEventListener("scroll", onFirstScroll, { once: true, passive: true });
+
     if (document.readyState === "complete") {
       handleLoad();
     } else {
       window.addEventListener("load", handleLoad);
-      return () => window.removeEventListener("load", handleLoad);
+      return () => {
+        window.removeEventListener("load", handleLoad);
+        window.removeEventListener("scroll", onFirstScroll);
+        clearTimeout(fallback);
+      };
     }
+
+    return () => {
+      window.removeEventListener("scroll", onFirstScroll);
+      clearTimeout(fallback);
+    };
   }, []);
 
   if (!isLoading || !animationData) return null;

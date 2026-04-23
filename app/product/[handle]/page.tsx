@@ -1,4 +1,5 @@
 import { AddToCart } from "components/cart/add-to-cart";
+import { ContactDiamondExpertButton } from "components/product/DiamondExpertSidebar";
 import ProductMetafields from "components/home/ProductMetafields";
 import { Gallery } from "components/product/gallery";
 import { MobileCrossProductVariantSelector } from "components/product/MobileCrossProductVariantSelector";
@@ -158,6 +159,7 @@ export default async function ProductPage(props: {
                     </div>
                   </div>
                   <AddToCart product={product} />
+                  <ContactDiamondExpertButton />
                   <div className="flex flex-col">
                     <MobileCrossProductVariantSelector handle={params.handle} />
                     <MobileVariantSelector

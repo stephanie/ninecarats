@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import { AddToCart } from "../cart/add-to-cart";
 import ProductMetafields from "../home/ProductMetafields";
 import { CrossProductVariantSelector } from "./CrossProductVariantSelector";
+import { ContactDiamondExpertButton } from "./DiamondExpertSidebar";
 import { ProductPrice } from "./product-price";
 import { VariantSelector } from "./variant-selector";
 
@@ -192,74 +193,159 @@ export function ProductDescription({ product }: { product: Product }) {
       </div>
 
       {/* Right Column - Add to Cart */}
-      <div className="space-y-4 justify-end hidden lg:flex">
-        <div className="flex flex-col gap-4">
+      <div className="justify-end hidden lg:flex">
+        <div className="flex flex-col gap-4 w-lg">
           <AddToCart product={product} />
+          <ContactDiamondExpertButton />
 
-          {/* Delivery info */}
-          <div className="space-y-4 text-sm">
-            <div className="flex items-center gap-2">
-              <svg
-                className="w-4 h-4"
-                strokeWidth="1.2"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                color="#000000"
-              >
-                <path
-                  d="M8 19C9.10457 19 10 18.1046 10 17C10 15.8954 9.10457 15 8 15C6.89543 15 6 15.8954 6 17C6 18.1046 6.89543 19 8 19Z"
-                  stroke="#000000"
-                  strokeWidth="1.2"
-                  strokeMiterlimit="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-                <path
-                  d="M18 19C19.1046 19 20 18.1046 20 17C20 15.8954 19.1046 15 18 15C16.8954 15 16 15.8954 16 17C16 18.1046 16.8954 19 18 19Z"
-                  stroke="#000000"
-                  strokeWidth="1.2"
-                  strokeMiterlimit="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-                <path
-                  d="M10.05 17H15V6.6C15 6.26863 14.7314 6 14.4 6H1"
-                  stroke="#000000"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                ></path>
-                <path
-                  d="M5.65 17H3.6C3.26863 17 3 16.7314 3 16.4V11.5"
-                  stroke="#000000"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                ></path>
-                <path
-                  d="M2 9L6 9"
-                  stroke="#000000"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-                <path
-                  d="M15 9H20.6101C20.8472 9 21.0621 9.13964 21.1584 9.35632L22.9483 13.3836C22.9824 13.4604 23 13.5434 23 13.6273V16.4C23 16.7314 22.7314 17 22.4 17H20.5"
-                  stroke="#000000"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                ></path>
-                <path
-                  d="M15 17H16"
-                  stroke="#000000"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                ></path>
-              </svg>
-              <span>
-                Note that all our pieces are handcrafted to order and delivery
-                may take up to 2-3 weeks.
-              </span>
-            </div>
+          {/* Product highlights */}
+          <div className="space-y-3 text-sm pt-1">
+            {[
+              {
+                label: "DEF Colorless",
+                detail: "Top 3% of all diamonds",
+                icon: (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-4 h-4 shrink-0"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M6 3h12l4 6-10 13L2 9z" />
+                    <path d="M11 3L8 9l4 13 4-13-3-6" />
+                    <path d="M2 9h20" />
+                  </svg>
+                ),
+              },
+              {
+                label: "Made to order",
+                detail: "Handcrafted in 2-3 weeks for you",
+                icon: (
+                  /* Iconoir: calendar */
+                  <svg
+                    width="16"
+                    height="16"
+                    strokeWidth="1.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15 4V2M15 4V6M15 4H10.5M3 10V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V10H3Z"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M3 10V6C3 4.89543 3.89543 4 5 4H7"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M7 2V6"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M21 10V6C21 4.89543 20.1046 4 19 4H18.5"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                ),
+              },
+              {
+                label: "Free global shipping",
+                detail: "",
+                icon: (
+                  /* Iconoir: globe */
+                  <svg
+                    width="16"
+                    height="16"
+                    strokeWidth="1.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M2.5 12.5L8 14.5L7 18L8 21"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M17 20.5L16.5 18L14 17V13.5L17 12.5L21.5 13"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M19 5.5L18.5 7L15 7.5V10.5L17.5 9.5H19.5L21.5 10.5"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M2.5 10.5L5 8.5L7.5 8L9.5 5L8.5 3"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                ),
+              },
+              // {
+              //   label: "Return policy",
+              //   detail: "",
+              //   icon: (
+              //     /* Iconoir: refresh */
+              //     <svg
+              //       width="16"
+              //       height="16"
+              //       strokeWidth="1.5"
+              //       viewBox="0 0 24 24"
+              //       fill="none"
+              //       xmlns="http://www.w3.org/2000/svg"
+              //     >
+              //       <path
+              //         d="M21.8883 13.5C21.1645 18.3113 17.013 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C16.1006 2 19.6248 4.46819 21.1679 8"
+              //         stroke="currentColor"
+              //         strokeLinecap="round"
+              //         strokeLinejoin="round"
+              //       />
+              //       <path
+              //         d="M17 8H21.4C21.7314 8 22 7.73137 22 7.4V3"
+              //         stroke="currentColor"
+              //         strokeLinecap="round"
+              //         strokeLinejoin="round"
+              //       />
+              //     </svg>
+              //   ),
+              // },
+            ].map(({ label, detail, icon }) => (
+              <div key={label} className="flex items-start gap-3">
+                <span className="mt-0.5 text-neutral-500 shrink-0">{icon}</span>
+                <span className="text-neutral-700">
+                  <span className="font-medium text-neutral-900">{label}</span>
+                  {detail && (
+                    <span className="text-neutral-500"> {detail}</span>
+                  )}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
