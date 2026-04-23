@@ -37,7 +37,7 @@ export default function FullWidthProductSlider({
   const [productMedia, setProductMedia] = useState<Record<string, Media[]>>({});
   const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
   const [visibleProducts, setVisibleProducts] = useState<Set<string>>(
-    new Set()
+    new Set(),
   );
   const pathname = usePathname();
 
@@ -49,7 +49,7 @@ export default function FullWidthProductSlider({
         product.id &&
         product.title &&
         (product.priceRange?.maxVariantPrice?.amount ||
-          product.priceRange?.minVariantPrice?.amount)
+          product.priceRange?.minVariantPrice?.amount),
     );
   }, [products]);
 
@@ -82,7 +82,7 @@ export default function FullWidthProductSlider({
         } catch (error) {
           console.error(
             `Failed to fetch media for product ${product.handle}:`,
-            error
+            error,
           );
           return { productId: product.id, media: [] };
         }
@@ -198,12 +198,12 @@ export default function FullWidthProductSlider({
     return product.priceRange?.minVariantPrice?.amount
       ? formatPrice(
           Number(product.priceRange.minVariantPrice.amount),
-          product.priceRange.minVariantPrice.currencyCode
+          product.priceRange.minVariantPrice.currencyCode,
         )
       : product.priceRange?.maxVariantPrice?.amount
         ? formatPrice(
             Number(product.priceRange.maxVariantPrice.amount),
-            product.priceRange.maxVariantPrice.currencyCode
+            product.priceRange.maxVariantPrice.currencyCode,
           )
         : "Price unavailable";
   };
@@ -232,11 +232,7 @@ export default function FullWidthProductSlider({
               >
                 <div className="flex flex-col items-center">
                   <div
-                    className={`w-full aspect-square relative mb-6 group transition-colors duration-500 ${
-                      hoveredProduct === product.id
-                        ? "bg-white"
-                        : "bg-neutral-100"
-                    }`}
+                    className="w-full aspect-square relative mb-6 group duration-500 bg-white"
                     onMouseEnter={() => setHoveredProduct(product.id)}
                     onMouseLeave={() => setHoveredProduct(null)}
                   >
@@ -297,7 +293,7 @@ export default function FullWidthProductSlider({
   } else {
     const currentPageProducts = validProducts.slice(
       currentPage * productsPerPage,
-      currentPage * productsPerPage + productsPerPage
+      currentPage * productsPerPage + productsPerPage,
     );
     const productCount = currentPageProducts.length;
 
