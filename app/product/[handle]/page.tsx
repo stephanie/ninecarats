@@ -1,5 +1,6 @@
 import { AddToCart } from "components/cart/add-to-cart";
 import ProductMetafields from "components/home/ProductMetafields";
+import { MobileCrossProductVariantSelector } from "components/product/MobileCrossProductVariantSelector";
 import { Gallery } from "components/product/gallery";
 import { MobileVariantSelector } from "components/product/MobileVariantSelector";
 import { ProductProvider } from "components/product/product-context";
@@ -158,6 +159,7 @@ export default async function ProductPage(props: {
                   </div>
                   <AddToCart product={product} />
                   <div className="flex flex-col">
+                    <MobileCrossProductVariantSelector handle={params.handle} />
                     <MobileVariantSelector
                       options={product.options}
                       variants={product.variants}

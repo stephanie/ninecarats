@@ -300,7 +300,7 @@ export default function FullWidthProductSlider({
         {canLoop ? (
           <SliderProgressBar
             progress={scrollProgress}
-            className="mb-8 mt-8 w-full max-w-xs px-6 md:max-w-md"
+            className="md:mb-8 md:mt-8 mb-4 mt-4 w-full max-w-xs px-6 md:max-w-md"
             trackHeightClass="1.5"
             thumbHeightClass="1.5"
           />

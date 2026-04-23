@@ -44,7 +44,7 @@ export function MobileVariantSelector({
     availableForSale: variant.availableForSale,
     ...variant.selectedOptions.reduce(
       (acc, option) => ({ ...acc, [option.name.toLowerCase()]: option.value }),
-      {}
+      {},
     ),
   }));
 
@@ -61,11 +61,11 @@ export function MobileVariantSelector({
             <button
               className={clsx(
                 "w-full text-left px-4 py-4 border-t border-neutral-200 text-sm tracking-wide flex justify-between",
-                "bg-white active:bg-neutral-100"
+                "bg-white active:bg-neutral-100",
               )}
               onClick={() => setOpenSheet(option.name)}
             >
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2 text-neutral-500">
                 Select {option.name.toLowerCase()}
                 {isSizeGuideOption && showSizeGuide && (
                   <span
@@ -79,7 +79,7 @@ export function MobileVariantSelector({
                   </span>
                 )}
               </span>
-              <span className="font-semibold">{selectedValue || "-"}</span>
+              <span className="text-black">{selectedValue || "-"}</span>
             </button>
             <Transition
               show={openSheet === option.name}
@@ -140,16 +140,16 @@ export function MobileVariantSelector({
                               options.find(
                                 (option) =>
                                   option.name.toLowerCase() === key &&
-                                  option.values.includes(value)
-                              )
+                                  option.values.includes(value),
+                              ),
                           );
                           const isAvailableForSale = combinations.find(
                             (combination: Combination) =>
                               filtered.every(
                                 ([key, value]) =>
                                   combination[key] === value &&
-                                  combination.availableForSale
-                              )
+                                  combination.availableForSale,
+                              ),
                           );
                           const isActive = selectedValue === value;
                           return (
@@ -159,7 +159,7 @@ export function MobileVariantSelector({
                                   if (!isAvailableForSale) return;
                                   const newState = updateOption(
                                     optionNameLowerCase,
-                                    value
+                                    value,
                                   );
                                   updateURL(newState);
                                   setOpenSheet(null);
@@ -174,7 +174,7 @@ export function MobileVariantSelector({
                                       : "font-normal",
                                     isAvailableForSale
                                       ? "text-black"
-                                      : "text-neutral-400 cursor-not-allowed"
+                                      : "text-neutral-500 cursor-not-allowed",
                                   )}
                                   disabled={!isAvailableForSale}
                                   aria-disabled={!isAvailableForSale}

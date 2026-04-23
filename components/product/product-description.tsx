@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import { AddToCart } from "../cart/add-to-cart";
 import ProductMetafields from "../home/ProductMetafields";
 import { ProductPrice } from "./product-price";
+import { CrossProductVariantSelector } from "./CrossProductVariantSelector";
 import { VariantSelector } from "./variant-selector";
 
 type MenuSection = {
@@ -118,6 +119,7 @@ export function ProductDescription({ product }: { product: Product }) {
           <ProductPrice product={product} />
         </div>
         <div className="mb-10 hidden lg:block">
+          <CrossProductVariantSelector handle={product.handle} />
           <VariantSelector
             options={product.options}
             variants={product.variants}
