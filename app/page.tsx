@@ -49,7 +49,7 @@ export default function HomePage() {
         />
       </div> */}
       <MultiImageSection cards={multiImageCards} columns={2} />
-      <ShopifyProductSlider collectionHandle="earrings" tagline="Jewelry" />
+      <ShopifyProductSlider collectionHandle="signature" tagline="Collection" />
       {/* <StickyTextImageSection
         tagline="Wedding"
         heading="Our Engagement Rings"
@@ -78,7 +78,7 @@ export default function HomePage() {
           </ButtonLink>
         }
       /> */}
-      <ShopifyProductSlider collectionHandle="necklaces" tagline="Jewelry" />
+      <ShopifyProductSlider collectionHandle="emerald" tagline="Collection" />
     </>
   );
 }

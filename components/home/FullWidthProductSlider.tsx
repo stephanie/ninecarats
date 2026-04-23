@@ -1,8 +1,8 @@
 "use client";
 
-import { AnimatedText } from "components/animations";
-import SliderDots from "components/slider/SliderDots";
+import SliderProgressBar from "components/slider/SliderProgressBar";
 import TextHeaderFull from "components/text/TextHeaderFull";
+import useEmblaCarousel from "embla-carousel-react";
 import { useIsMobile } from "hooks/useIsMobile";
 import { useLowPowerMode } from "hooks/useLowPowerMode";
 import { getProductMedia } from "lib/shopify";
@@ -10,9 +10,7 @@ import { Media, Product, Video } from "lib/shopify/types";
 import { formatPrice } from "lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
-import { useSwipeable } from "react-swipeable";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import ProductMetafields from "./ProductMetafields";
 
 interface FullWidthProductSliderProps {
@@ -27,21 +25,17 @@ export default function FullWidthProductSlider({
   products,
   tagline,
   heading,
-  sectionDescription,
+  sectionDescription: _sectionDescription,
   button,
 }: FullWidthProductSliderProps) {
   const isMobile = useIsMobile();
   const { lowPowerMode } = useLowPowerMode();
-  const [currentPage, setCurrentPage] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const [productMedia, setProductMedia] = useState<Record<string, Media[]>>({});
   const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
   const [visibleProducts, setVisibleProducts] = useState<Set<string>>(
     new Set(),
   );
-  const pathname = usePathname();
 
-  // Filter out products without proper data
   const validProducts = useMemo(() => {
     return products.filter(
       (product) =>
@@ -53,18 +47,55 @@ export default function FullWidthProductSlider({
     );
   }, [products]);
 
-  const productsPerPage = isMobile ? 1 : 3;
-  const totalPages = Math.ceil(validProducts.length / productsPerPage);
-  /** Mobile slide width: smaller than viewport so the next product always peeks in. */
-  const mobileSlideVw = 65;
+  const slideIds = useMemo(
+    () => validProducts.map((p) => p.id).join(","),
+    [validProducts],
+  );
+  const canLoop = validProducts.length > 1;
 
-  // Reset carousel page when returning via client navigation (same product IDs → stable key).
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: canLoop,
+    align: "center",
+    containScroll: false,
+    dragFree: false,
+    duration: 35,
+  });
+
   useEffect(() => {
-    setCurrentPage(0);
-  }, [pathname, validProducts, isMobile]);
+    if (!emblaApi) return;
+    emblaApi.reInit({
+      loop: canLoop,
+      align: "center",
+      containScroll: false,
+      dragFree: false,
+      duration: 35,
+    });
+  }, [emblaApi, canLoop, slideIds]);
 
-  // Clear and refetch product media in one effect so we never leave hasFetchedMedia stuck
-  // true while productMedia is empty (can happen when effects run in awkward orders).
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const updateScrollProgress = useCallback(() => {
+    if (!emblaApi) return;
+    setScrollProgress(emblaApi.scrollProgress());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    updateScrollProgress();
+    emblaApi.on("scroll", updateScrollProgress);
+    emblaApi.on("reInit", updateScrollProgress);
+    emblaApi.on("select", updateScrollProgress);
+    emblaApi.on("settle", updateScrollProgress);
+
+    return () => {
+      emblaApi.off("scroll", updateScrollProgress);
+      emblaApi.off("reInit", updateScrollProgress);
+      emblaApi.off("select", updateScrollProgress);
+      emblaApi.off("settle", updateScrollProgress);
+    };
+  }, [emblaApi, updateScrollProgress]);
+
   useEffect(() => {
     setProductMedia({});
 
@@ -106,43 +137,44 @@ export default function FullWidthProductSlider({
     };
   }, [validProducts]);
 
-  // Scroll detection for mobile video autoplay
   useEffect(() => {
     if (!isMobile) return;
 
-    const handleScroll = () => {
+    const updateVisible = () => {
       const productElements = document.querySelectorAll("[data-product-id]");
       const newVisibleProducts = new Set<string>();
 
       productElements.forEach((element) => {
         const rect = element.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        const inView =
+          rect.top < window.innerHeight &&
+          rect.bottom > 0 &&
+          rect.left < window.innerWidth &&
+          rect.right > 0;
 
-        if (isVisible) {
+        if (inView) {
           const productId = element.getAttribute("data-product-id");
-          if (productId) {
-            newVisibleProducts.add(productId);
-          }
+          if (productId) newVisibleProducts.add(productId);
         }
       });
 
       setVisibleProducts(newVisibleProducts);
     };
 
-    // Initial check
-    handleScroll();
-
-    // Add scroll listener
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll);
+    updateVisible();
+    window.addEventListener("scroll", updateVisible);
+    window.addEventListener("resize", updateVisible);
+    emblaApi?.on("scroll", updateVisible);
+    emblaApi?.on("settle", updateVisible);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("scroll", updateVisible);
+      window.removeEventListener("resize", updateVisible);
+      emblaApi?.off("scroll", updateVisible);
+      emblaApi?.off("settle", updateVisible);
     };
-  }, [isMobile]);
+  }, [isMobile, emblaApi]);
 
-  // Helper function to find MP4 video from media
   const getMp4VideoUrl = (productId: string): string | null => {
     const media = productMedia[productId];
     if (!media) return null;
@@ -159,41 +191,6 @@ export default function FullWidthProductSlider({
     );
   };
 
-  // Return early if no valid products
-  if (validProducts.length === 0) {
-    return null;
-  }
-
-  const handleDotClick = (pageIndex: number) => {
-    if (pageIndex === currentPage || isTransitioning) return;
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentPage(pageIndex);
-      setIsTransitioning(false);
-    }, 300);
-  };
-
-  const nextPage = () => {
-    if (isTransitioning) return;
-    if (currentPage < totalPages - 1) {
-      handleDotClick(currentPage + 1);
-    }
-  };
-
-  const prevPage = () => {
-    if (isTransitioning) return;
-    if (currentPage > 0) {
-      handleDotClick(currentPage - 1);
-    }
-  };
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: nextPage,
-    onSwipedRight: prevPage,
-    trackMouse: false,
-    preventScrollOnSwipe: true,
-  });
-
   const getPrice = (product: Product) => {
     return product.priceRange?.minVariantPrice?.amount
       ? formatPrice(
@@ -208,195 +205,15 @@ export default function FullWidthProductSlider({
         : "Price unavailable";
   };
 
-  // For mobile, show one product per page, with the next product peeking in
-  let sliderContent;
-  if (isMobile) {
-    sliderContent = (
-      <div className="relative w-full overflow-x-hidden">
-        <div
-          className="flex transition-transform duration-500 ease-in-out"
-          style={{
-            transform: `translateX(calc(-${currentPage * mobileSlideVw}vw + calc((100vw - ${mobileSlideVw}vw) / 2)))`,
-          }}
-        >
-          {validProducts.map((product, idx) => (
-            <Link href={`/product/${product.handle}`} key={product.id}>
-              <div
-                key={product.id}
-                className="flex-shrink-0 flex flex-col mb-8"
-                style={{
-                  width: `${mobileSlideVw}vw`,
-                  maxWidth: `${mobileSlideVw}vw`,
-                }}
-                data-product-id={product.id}
-              >
-                <div className="flex flex-col items-center">
-                  <div
-                    className="w-full aspect-square relative mb-6 group duration-500 bg-white"
-                    onMouseEnter={() => setHoveredProduct(product.id)}
-                    onMouseLeave={() => setHoveredProduct(null)}
-                  >
-                    <Image
-                      src={
-                        product.featuredImage?.url || "/images/placeholder.webp"
-                      }
-                      alt={product.featuredImage?.altText || product.title}
-                      fill
-                      className="object-cover"
-                      sizes={`${mobileSlideVw}vw`}
-                      priority={idx === 0}
-                    />
-                    {getMp4VideoUrl(product.id) &&
-                      (isMobile
-                        ? !lowPowerMode && visibleProducts.has(product.id)
-                        : hoveredProduct === product.id) && (
-                        <video
-                          className="absolute inset-0 w-full h-full object-cover"
-                          autoPlay
-                          muted
-                          loop
-                          playsInline
-                          style={{
-                            display: "block",
-                            margin: 0,
-                            padding: 0,
-                            outline: "none",
-                            border: "none",
-                          }}
-                        >
-                          <source
-                            src={getMp4VideoUrl(product.id)!}
-                            type="video/mp4"
-                          />
-                        </video>
-                      )}
-                  </div>
-                </div>
-                <div className="text-center flex flex-col">
-                  <div className="text-lg text-black font-header">
-                    {product.title}
-                  </div>
-                  <ProductMetafields
-                    metafields={product.metafields}
-                    className="justify-center mt-1"
-                  />
-                  <div className="text-xs text-neutral-500 mt-4">
-                    {getPrice(product)}
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    );
-  } else {
-    const currentPageProducts = validProducts.slice(
-      currentPage * productsPerPage,
-      currentPage * productsPerPage + productsPerPage,
-    );
-    const productCount = currentPageProducts.length;
-
-    sliderContent = (
-      <div className="relative w-full overflow-hidden px-4 mb-8">
-        <div
-          className={`${
-            productCount < 3 ? "flex justify-center gap-4" : "grid grid-cols-3"
-          } w-full transition-all duration-500 ease-in-out ${
-            isTransitioning ? "opacity-50 scale-95" : "opacity-100 scale-100"
-          }`}
-        >
-          {currentPageProducts.map((product, idx) => (
-            <div
-              key={`${currentPage}-${product.id}`}
-              className={`flex flex-col mb-2 transform transition-all duration-500 ease-out ${
-                productCount === 1
-                  ? "w-full max-w-[33.333%]"
-                  : productCount === 2
-                    ? "w-full max-w-[33.333%]"
-                    : "w-full"
-              }`}
-              style={{
-                animationDelay: `${idx * 100}ms`,
-                transform: isTransitioning
-                  ? "translateY(20px)"
-                  : "translateY(0)",
-                opacity: isTransitioning ? 0 : 1,
-              }}
-            >
-              <Link
-                href={`/product/${product.handle}`}
-                className="flex flex-col items-center"
-              >
-                <div
-                  className="w-full aspect-square max-h-[50vh] relative mb-8 group transition-colors duration-300"
-                  onMouseEnter={() => setHoveredProduct(product.id)}
-                  onMouseLeave={() => setHoveredProduct(null)}
-                >
-                  <Image
-                    src={
-                      product.featuredImage?.url || "/images/placeholder.webp"
-                    }
-                    alt={product.featuredImage?.altText || product.title}
-                    fill
-                    className="object-cover"
-                    priority={idx === 0}
-                  />
-                  {getMp4VideoUrl(product.id) &&
-                    hoveredProduct === product.id && (
-                      <video
-                        className="absolute inset-0 w-full h-full object-cover"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        style={{
-                          display: "block",
-                          margin: 0,
-                          padding: 0,
-                          outline: "none",
-                          border: "none",
-                        }}
-                      >
-                        <source
-                          src={getMp4VideoUrl(product.id)!}
-                          type="video/mp4"
-                        />
-                      </video>
-                    )}
-                </div>
-                <div className="text-center flex flex-col">
-                  <div className="text-lg text-black font-header">
-                    <AnimatedText direction="up" staggerDelay={200}>
-                      {product.title}
-                      <ProductMetafields
-                        metafields={product.metafields}
-                        className="justify-center mt-1"
-                      />
-                    </AnimatedText>
-                  </div>
-                  <div className="text-xs text-neutral-500 mt-4">
-                    <AnimatedText direction="up" staggerDelay={300}>
-                      {getPrice(product)}
-                    </AnimatedText>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
+  if (validProducts.length === 0) {
+    return null;
   }
 
   return (
-    <section className="w-full mb-8 sm:mb-16 bg-white">
-      <div
-        className="max-w-[100vw] mx-auto flex flex-col items-center"
-        {...swipeHandlers}
-      >
+    <section className="mb-8 w-full bg-white sm:mb-16">
+      <div className="mx-auto flex max-w-[100vw] flex-col items-center">
         {heading && (
-          <div className="text-center p-16">
+          <div className="p-16 text-center">
             <TextHeaderFull
               tagline={tagline}
               button={button}
@@ -406,14 +223,88 @@ export default function FullWidthProductSlider({
             </TextHeaderFull>
           </div>
         )}
-        {sliderContent}
-        <SliderDots
-          total={totalPages}
-          selected={currentPage}
-          onSelect={handleDotClick}
-          disabled={isTransitioning}
-          className="mb-2 md:mb-4"
-        />
+        <div className="relative mb-8 w-full">
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex items-stretch">
+              {validProducts.map((product, idx) => (
+                <div
+                  key={product.id}
+                  className="min-w-0 flex-[0_0_65%] px-2 md:flex-[0_0_28%] md:px-3"
+                  data-product-id={product.id}
+                >
+                  <Link
+                    href={`/product/${product.handle}`}
+                    className="flex flex-col"
+                  >
+                    <div className="flex flex-col items-center">
+                      <div
+                        className="group relative mb-6 aspect-square w-full max-md:bg-white md:max-h-[50vh] md:transition-colors md:duration-300"
+                        onMouseEnter={() => setHoveredProduct(product.id)}
+                        onMouseLeave={() => setHoveredProduct(null)}
+                      >
+                        <Image
+                          src={
+                            product.featuredImage?.url ||
+                            "/images/placeholder.webp"
+                          }
+                          alt={product.featuredImage?.altText || product.title}
+                          fill
+                          className="object-cover"
+                          sizes="(min-width: 768px) 28vw, 65vw"
+                          priority={idx === 0}
+                        />
+                        {getMp4VideoUrl(product.id) &&
+                          (isMobile
+                            ? !lowPowerMode && visibleProducts.has(product.id)
+                            : hoveredProduct === product.id) && (
+                            <video
+                              className="absolute inset-0 h-full w-full object-cover"
+                              autoPlay
+                              muted
+                              loop
+                              playsInline
+                              style={{
+                                display: "block",
+                                margin: 0,
+                                padding: 0,
+                                outline: "none",
+                                border: "none",
+                              }}
+                            >
+                              <source
+                                src={getMp4VideoUrl(product.id)!}
+                                type="video/mp4"
+                              />
+                            </video>
+                          )}
+                      </div>
+                    </div>
+                    <div className="flex flex-col text-center">
+                      <div className="font-header text-lg text-black">
+                        {product.title}
+                      </div>
+                      <ProductMetafields
+                        metafields={product.metafields}
+                        className="mt-1 justify-center"
+                      />
+                      <div className="mt-4 text-xs text-neutral-500">
+                        {getPrice(product)}
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        {canLoop ? (
+          <SliderProgressBar
+            progress={scrollProgress}
+            className="mb-8 mt-8 w-full max-w-xs px-6 md:max-w-md"
+            trackHeightClass="1.5"
+            thumbHeightClass="1.5"
+          />
+        ) : null}
       </div>
     </section>
   );
