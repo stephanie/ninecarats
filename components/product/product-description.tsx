@@ -5,8 +5,8 @@ import { Product } from "lib/shopify/types";
 import { useMemo, useState } from "react";
 import { AddToCart } from "../cart/add-to-cart";
 import ProductMetafields from "../home/ProductMetafields";
-import { ProductPrice } from "./product-price";
 import { CrossProductVariantSelector } from "./CrossProductVariantSelector";
+import { ProductPrice } from "./product-price";
 import { VariantSelector } from "./variant-selector";
 
 type MenuSection = {
@@ -51,7 +51,7 @@ export function ProductDescription({ product }: { product: Product }) {
 
       // Get the content after the end marker
       const afterEnd = product.descriptionHtml.substring(
-        endIndex + endMatch[0].length
+        endIndex + endMatch[0].length,
       );
 
       // Combine to create the main description without the item details section
@@ -115,7 +115,7 @@ export function ProductDescription({ product }: { product: Product }) {
           {product.title}
         </h2>
         <div className="text-sm text-neutral-500 mb-8 hidden lg:block">
-          <ProductMetafields metafields={product.metafields} className="mb-4" />
+          <ProductMetafields metafields={product.metafields} className="mb-2" />
           <ProductPrice product={product} />
         </div>
         <div className="mb-10 hidden lg:block">

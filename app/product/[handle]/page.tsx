@@ -1,7 +1,7 @@
 import { AddToCart } from "components/cart/add-to-cart";
 import ProductMetafields from "components/home/ProductMetafields";
-import { MobileCrossProductVariantSelector } from "components/product/MobileCrossProductVariantSelector";
 import { Gallery } from "components/product/gallery";
+import { MobileCrossProductVariantSelector } from "components/product/MobileCrossProductVariantSelector";
 import { MobileVariantSelector } from "components/product/MobileVariantSelector";
 import { ProductProvider } from "components/product/product-context";
 import { ProductDescription } from "components/product/product-description";
