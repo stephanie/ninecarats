@@ -61,7 +61,7 @@ export const variantLinkConfig: Record<string, VariantLinkGroup[]> = {
           handle: "the-signature-tennis-bracelet-yellow-gold-5-carats",
         },
         {
-          label: "8 Carats",
+          label: "8.6 Carats",
           handle: "the-signature-tennis-bracelet-yellow-gold-8-carats",
         },
         {
@@ -125,7 +125,7 @@ export const variantLinkConfig: Record<string, VariantLinkGroup[]> = {
           handle: "the-signature-tennis-bracelet-yellow-gold-5-carats",
         },
         {
-          label: "8 Carats",
+          label: "8.6 Carats",
           handle: "the-signature-tennis-bracelet-yellow-gold-8-carats",
         },
         {
